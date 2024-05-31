@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+  pre_build:
+    commands:
+    # install yarn
+      - yarn 
+  build:
+    commands:
+      - yarn build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'dist'

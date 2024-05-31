@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: ['development']
+  pull_request:
+    branches: ['development']
+jobs:
+  release:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build package
+        run: yarn run build

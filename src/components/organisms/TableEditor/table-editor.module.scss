@@ -1,0 +1,11 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.enum-input {
+  flex: 1; /* Take up remaining vertical space */
+  height: 100%; /* Ensure full height */
+  max-height: 500px; /* Limit maximum height */
+  overflow-y: auto; /* Add vertical scrollbar if needed */
+}

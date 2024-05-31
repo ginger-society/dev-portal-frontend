@@ -1,0 +1,16 @@
+{
+    "eslint.options": {
+        "overrideConfigFile": "./.eslintrc.cjs"
+    },
+    "editor.tabSize": 2,
+    "editor.foldingStrategy": "indentation",
+    "editor.wordWrap": "on",
+    "editor.suggestSelection": "first",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "typescript.suggest.autoImports": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "liveServer.settings.port": 5503
+}

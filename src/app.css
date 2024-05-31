@@ -1,0 +1,334 @@
+.canvas-container {
+  position: relative;
+  min-height: 200vh;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.enum-row-renderer-container {
+  display: flex;
+  flex-direction: column;
+}
+.text-error {
+  color: red;
+}
+.block-header {
+  color: white;
+  min-width: 300px;
+  padding: 10px 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-header {
+  background-color: #131314;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.options-header {
+  background-color: #028391;
+  border-top: 1px solid #028391;
+  border-bottom: 1px solid #028391;
+}
+
+.block-card {
+  /* border: solid 1px; */
+  width: fit-content;
+  cursor: pointer;
+  position: absolute;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.editIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.editIcon.black {
+  fill: black;
+}
+
+.editIcon.inverted {
+  fill: white;
+}
+
+.row-content {
+  border-top: 1px solid #c6c6c6;
+  padding: 10px 20px;
+  width: 300px;
+}
+.row-content.hoverable:hover {
+  background: #eaeaea;
+}
+.svg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: black;
+  color: white;
+  padding: 18px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.header .brand-name {
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.header .icon {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-image: url("/ginger_icon.png");
+  background-position: center;
+}
+
+.header .user-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+#sliderDialog {
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  z-index: 4;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  top: 0;
+  margin-right: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+/* Legend related  */
+.legend {
+  padding: 10px;
+  background-color: #f9f9f9;
+  position: fixed;
+  bottom: 0px;
+  width: 250px;
+  border: solid 1px;
+  z-index: 2;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+}
+
+.legend li span {
+  margin-left: 5px;
+}
+
+.legend svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Context Menu */
+
+.context-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-menu button {
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.context-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+.column-repr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-primary {
+  color: blue;
+}
+
+/* Dialog box */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  border: none;
+  padding: 1em;
+  background: white;
+  border-radius: 5px;
+  min-width: 400px;
+}
+
+/* Schema list view related */
+
+.schema-list-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Fit exactly 5 items per row */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.schema-item-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.edit-cta {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.schema-item {
+  /* Adjust the width to be dynamic, fitting 5 items in a row */
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 1200px) {
+  .schema-list-container {
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* Adjust to 4 items per row for medium screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .schema-list-container {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* Adjust to 3 items per row for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .schema-list-container {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Adjust to 2 items per row for tablet screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .schema-list-container {
+    grid-template-columns: 1fr; /* Adjust to 1 item per row for mobile screens */
+  }
+}
+
+/* Login page */
+
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5; /* Optional: add a background color for better visual */
+}
+
+.login-form-container {
+  width: 500px;
+  padding: 20px;
+  background-color: white; /* Optional: add a background color for the form */
+  border-radius: 8px; /* Optional: add some border radius for better visual */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for better visual */
+}
+
+.app-details-container {
+  display: flex;
+  align-items: center;
+}
+
+.app-details-container h1 {
+  font-size: 30px;
+}
+
+.editor-save-btn {
+  margin-left: 20px;
+}
+
+.schema-item {
+  height: 200px;
+}
+.schema-item h1 {
+  font-size: 18px;
+  font-weight: 700;
+}

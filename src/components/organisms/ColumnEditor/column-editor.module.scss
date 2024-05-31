@@ -1,0 +1,33 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-select-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(33.33% - 10px); /* 33.33% width for each option minus the gap */
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-direction: column; /* Align items vertically */
+}
+
+.option:hover {
+  background-color: #007bff; /* Change background color on hover */
+  color: #fff; /* Text color on hover */
+}
+
+.selected {
+  background-color: #007bff; /* Inverted color for selected option */
+  color: #fff; /* Text color for selected option */
+}
