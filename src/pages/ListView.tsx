@@ -60,6 +60,7 @@ export const DocumentsList: React.FC = () => {
 
   useEffect(() => {
     fetchSchemas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const insertOrUpdateDocument = async (event: React.FormEvent) => {

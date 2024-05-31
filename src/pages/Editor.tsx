@@ -79,6 +79,7 @@ const Editor = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [docId]);
 
   const handleSave = async () => {
@@ -188,6 +189,7 @@ const UMLEditorWrapper = () => {
 
   useEffect(() => {
     updateConnections();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
   const createNewBlock = (
