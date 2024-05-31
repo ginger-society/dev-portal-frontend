@@ -11,12 +11,12 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user } = useContext(AuthContext);
-
+  const [error, setError] = useState<string>();
   const signUp = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setError(err.message.split(":"));
     }
   };
 
@@ -29,8 +29,8 @@ export const Login = () => {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setError(err.message.split(":"));
     }
   };
 
@@ -42,7 +42,7 @@ export const Login = () => {
           <h1>GingerDB Studio</h1>
         </div>
         <div className="form-group">
-          <label>Email / Username</label>
+          <label>Email</label>
           <input
             className="base-input"
             onChange={(e) => setEmail(e.target.value)}
@@ -57,6 +57,7 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <span className="text-error">{error}</span>
         <div className="btn-group">
           <button className="base-button primary" onClick={signIn}>
             Sign In
