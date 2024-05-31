@@ -16,7 +16,7 @@ export const Login = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
-      setError(err.message.split(":"));
+      setError(err.message.split(":")[1]);
     }
   };
 
@@ -30,7 +30,7 @@ export const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
-      setError(err.message.split(":"));
+      setError(err.message.split(":")[1]);
     }
   };
 
