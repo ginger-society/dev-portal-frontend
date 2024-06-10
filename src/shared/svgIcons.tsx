@@ -158,13 +158,13 @@ export const tableIcon = (
       width="18"
       height="18"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       fill="none"
     />
-    <line x1="3" y1="9" x2="21" y2="9" stroke="white" stroke-width="2" />
-    <line x1="3" y1="15" x2="21" y2="15" stroke="white" stroke-width="2" />
-    <line x1="9" y1="3" x2="9" y2="21" stroke="white" stroke-width="2" />
-    <line x1="15" y1="3" x2="15" y2="21" stroke="white" stroke-width="2" />
+    <line x1="3" y1="9" x2="21" y2="9" stroke="white" strokeWidth="2" />
+    <line x1="3" y1="15" x2="21" y2="15" stroke="white" strokeWidth="2" />
+    <line x1="9" y1="3" x2="9" y2="21" stroke="white" strokeWidth="2" />
+    <line x1="15" y1="3" x2="15" y2="21" stroke="white" strokeWidth="2" />
   </svg>
 );
 

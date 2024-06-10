@@ -130,6 +130,7 @@ const ColumnEditor = ({ close }: EditorProps) => {
         data.type === ColumnType.ForeignKey ||
         data.type === ColumnType.PositiveIntegerField ||
         data.type === ColumnType.DateField ||
+        data.type === ColumnType.DateTimeField ||
         data.type === ColumnType.Boolean ||
         data.type === ColumnType.FloatField) && (
         <div className="form-group">
@@ -145,7 +146,8 @@ const ColumnEditor = ({ close }: EditorProps) => {
         </div>
       )}
 
-      {data.type === ColumnType.DateField && (
+      {(data.type === ColumnType.DateField ||
+        data.type === ColumnType.DateTimeField) && (
         <>
           {!data.auto_now && (
             <div className="form-group">
@@ -239,6 +241,18 @@ const ColumnEditor = ({ close }: EditorProps) => {
               }}
             />
           )}
+          <div className="form-group">
+            <label>Max Length</label>
+            <input
+              className="base-input"
+              type="number"
+              onChange={({ target: { value } }) => {
+                updateRow({ max_length: value });
+              }}
+              step={1}
+              value={data.max_length || 0}
+            />
+          </div>
         </>
       )}
 

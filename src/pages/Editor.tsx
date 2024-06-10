@@ -93,6 +93,7 @@ const Editor = () => {
         type: block.type,
       };
     });
+    console.log(blocksStr);
     if (docId) {
       await setDoc(doc(db, "schemaDefs", docId), {
         blocks: blocksStr,

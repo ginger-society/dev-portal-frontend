@@ -2,6 +2,7 @@ export enum ColumnType {
   String = 'CharField',
   Boolean = 'BooleanField',
   DateField = 'DateField',
+  DateTimeField = 'DateTimeField',
   ForeignKey = 'ForeignKey',
   PK = 'BigAutoField',
   PositiveIntegerField = 'PositiveIntegerField',
