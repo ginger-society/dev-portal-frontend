@@ -47,6 +47,8 @@ const Editor = () => {
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const { docId } = useParams<{ docId: string }>();
 
+  const [copiedToClipboard, setCopiedToClipboard] = useState<boolean>();
+
   const fetchData = async () => {
     if (!docId) {
       // Fetch document data with docId
@@ -82,9 +84,8 @@ const Editor = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [docId]);
 
-  const handleSave = async () => {
-    setSaveLoading(true);
-    const blocksStr = Object.values(blocks).map((block) => {
+  const transformDataToSave = () => {
+    return Object.values(blocks).map((block) => {
       return {
         id: block.id,
         position: block.position,
@@ -93,7 +94,11 @@ const Editor = () => {
         type: block.type,
       };
     });
-    console.log(blocksStr);
+  };
+
+  const handleSave = async () => {
+    setSaveLoading(true);
+    const blocksStr = transformDataToSave();
     if (docId) {
       await setDoc(doc(db, "schemaDefs", docId), {
         blocks: blocksStr,
@@ -103,6 +108,26 @@ const Editor = () => {
     }
 
     // localStorage.setItem("data", JSON.stringify(blocksStr));
+  };
+
+  function copyToClipboard(text: string) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedToClipboard(true);
+        setTimeout(() => {
+          setCopiedToClipboard(false);
+        }, 2500);
+      })
+      .catch((err) => {
+        console.error("Unable to copy to clipboard:", err);
+        // Handle error, such as showing an error message to the user
+      });
+  }
+
+  const handleSchemaCopy = () => {
+    const blocksStr = transformDataToSave();
+    copyToClipboard(JSON.stringify(blocksStr));
   };
 
   return (
@@ -123,6 +148,13 @@ const Editor = () => {
             onClick={handleSave}
           >
             {saveLoading ? "Saving..." : "Save"}
+          </button>
+
+          <button
+            className="base-button primary editor-save-btn"
+            onClick={handleSchemaCopy}
+          >
+            {copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
           </button>
         </Header>
         <UMLEditorWrapper />
