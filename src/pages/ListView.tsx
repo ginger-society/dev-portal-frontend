@@ -15,6 +15,7 @@ import { pencilIcon } from "@/shared/svgIcons";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/shared/AuthContext";
 import Header from "@/components/atoms/Header";
+import { Button } from "@ginger-society/ginger-ui";
 
 interface Document {
   id: string;
@@ -149,6 +150,7 @@ export const DocumentsList: React.FC = () => {
           >
             Create Schema
           </button>
+
           <ul className="schema-list-container">
             {documents.map((doc) => (
               <li

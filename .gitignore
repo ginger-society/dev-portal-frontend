@@ -5,6 +5,3 @@ dist-ssr
 *.local
 coverage
 tsconfig.tsbuildinfo
-
-*storybook.log
-storybook-static
