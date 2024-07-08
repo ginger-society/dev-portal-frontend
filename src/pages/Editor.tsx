@@ -33,7 +33,7 @@ const legendConfigs: LegendConfigs = {
   },
   [MarkerType.Hexagon]: {
     label: "Foreign Key",
-    color: "#5E1675",
+    color: "#89439f",
   },
   [MarkerType.Triangle]: {
     label: "One to One",

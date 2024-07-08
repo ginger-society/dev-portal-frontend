@@ -10,12 +10,6 @@
   background-color: var(--primary-bg-color);
 }
 
-.card {
-  /* Add shadows to create the "card" effect */
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-  box-shadow: var(--box-shadow);
-}
-
 .enum-row-renderer-container {
   display: flex;
   flex-direction: column;
@@ -216,17 +210,26 @@
 /* Schema list view related */
 
 .schema-list-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Fit exactly 5 items per row */
+  display: flex;
   gap: 10px;
   margin-top: 20px;
+  flex-direction: column;
 }
 
 .schema-item-container {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  height: 200px;
 }
+
+.schema-item-container:hover {
+  background-color: var(--primary-accent-color);
+}
+
 .edit-cta {
   margin-left: auto;
   cursor: pointer;
@@ -235,42 +238,13 @@
 .schema-item {
   /* Adjust the width to be dynamic, fitting 5 items in a row */
   width: 100%;
-  border-radius: 10px;
 }
 
-@media (max-width: 1200px) {
-  .schema-list-container {
-    grid-template-columns: repeat(
-      4,
-      1fr
-    ); /* Adjust to 4 items per row for medium screens */
-  }
+.schema-list {
+  width: 80%;
+  padding-left: 20%;
+  padding-top: 50px;
 }
-
-@media (max-width: 992px) {
-  .schema-list-container {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* Adjust to 3 items per row for smaller screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .schema-list-container {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Adjust to 2 items per row for tablet screens */
-  }
-}
-
-@media (max-width: 576px) {
-  .schema-list-container {
-    grid-template-columns: 1fr; /* Adjust to 1 item per row for mobile screens */
-  }
-}
-
 /* Login page */
 
 .login-page-container {
@@ -303,7 +277,6 @@
 }
 
 .schema-item {
-  height: 200px;
 }
 .schema-item h1 {
   font-size: 18px;

@@ -17,6 +17,7 @@ import { AuthContext } from "@/shared/AuthContext";
 
 import styles from "./listview.module.scss";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
+import { Button, ButtonType, Text, TextSize } from "@ginger-society/ginger-ui";
 
 interface Document {
   id: string;
@@ -131,23 +132,22 @@ export const DocumentsList: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles["container"]}>
       <HeaderContainer />
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div style={{ marginTop: "80px", padding: "20px" }}>
-          <button
-            className="base-button primary"
+        <div className="schema-list">
+          <Button
             onClick={() => {
               setName("");
               setDescription("");
               setEditingDocId(null);
               setDialogOpen(true);
             }}
-          >
-            Create Schema
-          </button>
+            type={ButtonType.Primary}
+            label="Create Schema"
+          />
 
           <ul className="schema-list-container">
             {documents.map((doc) => (
@@ -167,8 +167,8 @@ export const DocumentsList: React.FC = () => {
                     {pencilIcon("black")}
                   </span>
                   <div className="schema-item">
-                    <h1>{doc.name}</h1>
-                    <p>{doc.description}</p>
+                    <Text size={TextSize.Large}>{doc.name}</Text>
+                    <Text tag="p">{doc.description}</Text>
                   </div>
                 </div>
               </li>
