@@ -37,21 +37,28 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   };
 
   return (
-    <Header
-      brandName={
-        <span>
-          <span onClick={navigateToHome} className={styles["home-link"]}>
-            <strong>Ginger Society</strong> &gt; DB Designer Home
-          </span>
-          {schemaIdInView && <> &gt; Editing : {docName}</>}
-        </span>
-      }
-      user={{ name: "Jane Doe", email: "jane.doe@example.com" }}
-      icon={<img className={styles["icon"]} src="/ginger_icon.png"></img>}
-      onLogout={() => alert("Logout clicked")}
-      showThemeSwitcher={true}
-      arbitaryContent={children}
-    />
+    <>
+      {auth.currentUser?.email && (
+        <Header
+          brandName={
+            <span>
+              <span onClick={navigateToHome} className={styles["home-link"]}>
+                <strong>Ginger Society</strong> &gt; DB Designer Home
+              </span>
+              {schemaIdInView && <> &gt; Editing : {docName}</>}
+            </span>
+          }
+          user={{
+            name: auth.currentUser?.email.split("@")[0],
+            email: auth.currentUser?.email,
+          }}
+          icon={<img className={styles["icon"]} src="/ginger_icon.png"></img>}
+          onLogout={() => alert("Logout clicked")}
+          showThemeSwitcher={true}
+          arbitaryContent={children}
+        />
+      )}
+    </>
   );
 };
 

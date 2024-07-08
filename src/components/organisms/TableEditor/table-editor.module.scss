@@ -9,3 +9,9 @@
   max-height: 500px; /* Limit maximum height */
   overflow-y: auto; /* Add vertical scrollbar if needed */
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

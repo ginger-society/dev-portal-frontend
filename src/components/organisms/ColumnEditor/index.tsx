@@ -7,13 +7,23 @@ import CustomSelect from "./typeSelector";
 import { ColumnType, OnDeleteOptions } from "./types";
 import EnumSelector from "./enumSelector";
 import TableSelector from "./blockSelector";
+import {
+  Input,
+  TextArea,
+  Text,
+  Checkbox,
+  Select,
+  Button,
+  ButtonType,
+  Option,
+} from "@ginger-society/ginger-ui";
 
 const ColumnEditor = ({ close }: EditorProps) => {
   const { blocks, setBlocks, editorData } = useUMLEditor();
 
   const updateRow = (
     data: Record<string, any>,
-    rowLevelData?: Record<string, any>,
+    rowLevelData?: Record<string, any>
   ) => {
     if (!editorData?.blockId || editorData?.rowIndex === undefined) {
       return;
@@ -55,7 +65,7 @@ const ColumnEditor = ({ close }: EditorProps) => {
       [editorData.blockId]: {
         ...prevBlocks[editorData.blockId],
         rows: prevBlocks[editorData.blockId].rows.filter(
-          (_, index) => index !== editorData.rowIndex,
+          (_, index) => index !== editorData.rowIndex
         ),
       },
     }));
@@ -82,47 +92,37 @@ const ColumnEditor = ({ close }: EditorProps) => {
   }
 
   return (
-    <>
+    <div className={styles["container"]}>
       <div className={styles["header-container"]}>
-        <h3>
+        <Text>
           Column Editor :<strong>{data?.name || row.id}</strong>
-        </h3>
-        <button className="base-button secondary" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          id="name"
-          className="base-input"
-          placeholder="Enter name"
-          value={data?.name || ""}
-          onChange={handleNameChange}
+        </Text>
+        <Button
+          onClick={handleDelete}
+          type={ButtonType.Tertiary}
+          label="Delete"
         />
       </div>
-      <strong>Field name :{data?.field_name}</strong>
+      <Input
+        type="text"
+        id="name"
+        label="Name"
+        placeholder="Enter name"
+        value={data?.name || ""}
+        onChange={handleNameChange}
+      />
+      <Text>Field name :{data?.field_name}</Text>
 
-      <div className="form-group">
-        <label>Field Type</label>
-        <CustomSelect value={data.type} onChange={handleTypeChange} />
-      </div>
+      <CustomSelect value={data.type} onChange={handleTypeChange} />
 
       {data.type === ColumnType.Boolean && (
-        <>
-          <div className="form-group">
-            <label>Default Value</label>
-            <input
-              className="base-checkbox"
-              type="checkbox"
-              onChange={({ target: { checked } }) => {
-                updateRow({ default: checked });
-              }}
-              checked={data.default}
-            />
-          </div>
-        </>
+        <Checkbox
+          label="True by default ?"
+          onChange={(checked) => {
+            updateRow({ default: checked });
+          }}
+          checked={data.default}
+        />
       )}
 
       {(data.type === ColumnType.String ||
@@ -133,106 +133,85 @@ const ColumnEditor = ({ close }: EditorProps) => {
         data.type === ColumnType.DateTimeField ||
         data.type === ColumnType.Boolean ||
         data.type === ColumnType.FloatField) && (
-        <div className="form-group">
-          <label>Can be null ?</label>
-          <input
-            className="base-checkbox"
-            type="checkbox"
-            onChange={({ target: { checked } }) => {
-              updateRow({ null: checked });
-            }}
-            checked={data.null}
-          />
-        </div>
+        <Checkbox
+          label="Can be null ?"
+          onChange={(checked) => {
+            updateRow({ null: checked });
+          }}
+          checked={data.null}
+        />
       )}
 
       {(data.type === ColumnType.DateField ||
         data.type === ColumnType.DateTimeField) && (
         <>
           {!data.auto_now && (
-            <div className="form-group">
-              <label>Auto now add</label>
-              <input
-                className="base-checkbox"
-                type="checkbox"
-                onChange={({ target: { checked } }) => {
-                  updateRow({ auto_now_add: checked });
-                }}
-                checked={data.auto_now_add}
-              />
-            </div>
+            <Checkbox
+              label="Auto now add"
+              onChange={(checked) => {
+                updateRow({ auto_now_add: checked });
+              }}
+              checked={data.auto_now_add}
+            />
           )}
           {!data.auto_now_add && (
-            <div className="form-group">
-              <label>Auto now</label>
-              <input
-                className="base-checkbox"
-                type="checkbox"
-                onChange={({ target: { checked } }) => {
-                  updateRow({ auto_now: checked });
-                }}
-                checked={data.auto_now}
-              />
-            </div>
+            <Checkbox
+              label="Auto now"
+              onChange={(checked) => {
+                updateRow({ auto_now: checked });
+              }}
+              checked={data.auto_now}
+            />
           )}
         </>
       )}
 
       {data.type === ColumnType.PositiveIntegerField && (
-        <div className="form-group">
-          <label>Default</label>
-          <input
-            className="base-input"
-            type="number"
-            onChange={({ target: { value } }) => {
-              updateRow({ default: value });
-            }}
-            value={data.default}
-          />
-        </div>
+        <Input
+          type="number"
+          label="Default"
+          onChange={({ target: { value } }) => {
+            updateRow({ default: value });
+          }}
+          value={data.default}
+        />
       )}
 
       {data.type === ColumnType.FloatField && (
-        <div className="form-group">
-          <label>Default</label>
-          <input
-            className="base-input"
-            type="number"
-            onChange={({ target: { value } }) => {
-              updateRow({ default: value });
-            }}
-            step={0.01}
-            value={data.default}
-          />
-        </div>
+        <Input
+          type="number"
+          label="Default"
+          onChange={({ target: { value } }) => {
+            updateRow({ default: value });
+          }}
+          step={0.01}
+          value={data.default}
+        />
       )}
 
       {(data.type === ColumnType.TextField ||
         data.type === ColumnType.String) && (
         <>
-          <div className="form-group">
-            <label>Default</label>
-            {data.type === ColumnType.String && (
-              <input
-                className="base-input"
-                type="text"
-                onChange={({ target: { value } }) => {
-                  updateRow({ default: value });
-                }}
-                value={data.default}
-              />
-            )}
-            {data.type === ColumnType.TextField && (
-              <textarea
-                className="base-input"
-                onChange={({ target: { value } }) => {
-                  updateRow({ default: value });
-                }}
-                rows={10}
-                value={data.default}
-              />
-            )}
-          </div>
+          {data.type === ColumnType.String && (
+            <Input
+              label="Default"
+              type="text"
+              onChange={({ target: { value } }) => {
+                updateRow({ default: value });
+              }}
+              value={data.default}
+            />
+          )}
+          {data.type === ColumnType.TextField && (
+            <TextArea
+              label="Default"
+              onChange={({ target: { value } }) => {
+                updateRow({ default: value });
+              }}
+              rows={10}
+              value={data.default}
+            />
+          )}
           {data.type === ColumnType.String && (
             <EnumSelector
               value={data.options_target}
@@ -241,18 +220,17 @@ const ColumnEditor = ({ close }: EditorProps) => {
               }}
             />
           )}
-          <div className="form-group">
-            <label>Max Length</label>
-            <input
-              className="base-input"
-              type="number"
-              onChange={({ target: { value } }) => {
-                updateRow({ max_length: value });
-              }}
-              step={1}
-              value={data.max_length || 0}
-            />
-          </div>
+          <Input
+            type="number"
+            label="Max Length"
+            onChange={({ target: { value } }) => {
+              const strippedValue =
+                value === "" ? "" : parseInt(value, 10).toString();
+              updateRow({ max_length: strippedValue });
+            }}
+            step={1}
+            value={data.max_length || 0}
+          />
         </>
       )}
 
@@ -266,38 +244,38 @@ const ColumnEditor = ({ close }: EditorProps) => {
               updateRow({ target });
             }}
           />
-          <div className="form-group">
-            <label>Related Name</label>
-            <input
-              type="text"
-              id="name"
-              className="base-input"
-              value={data?.related_name || ""}
-              onChange={({ target: { value } }) => {
-                updateRow({ related_name: value });
-              }}
-            />
-          </div>
+          <Input
+            label="Related Name"
+            type="text"
+            id="name"
+            value={data?.related_name || ""}
+            onChange={({ target: { value } }) => {
+              updateRow({ related_name: value });
+            }}
+          />
         </>
       )}
       {data.type === ColumnType.ForeignKey && (
-        <div className="form-group">
-          <label>What should happen when deleted</label>
-          <select
-            className="base-select"
-            value={data.on_delete}
-            onChange={({ target: { value } }) => {
-              updateRow({ on_delete: value });
-            }}
-          >
-            <option value={undefined}>Not selected</option>
-            {Object.values(OnDeleteOptions).map((opt) => {
-              return <option value={opt}>{opt}</option>;
-            })}
-          </select>
-        </div>
+        <Select
+          label="What should happen when deleted"
+          value={{ label: data.on_delete, value: data.on_delete }}
+          options={[
+            { value: "", label: "Not selected" },
+            ...Object.values(OnDeleteOptions).map((v) => {
+              return { label: v, value: v };
+            }),
+          ]}
+          renderer={(option) => (
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              {option.label}
+            </div>
+          )}
+          onChange={({ value }) => {
+            updateRow({ on_delete: value });
+          }}
+        />
       )}
-    </>
+    </div>
   );
 };
 

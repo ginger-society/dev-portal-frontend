@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useUMLEditor } from "../UMLEditor/context";
 import { BlockType, Block } from "../UMLEditor/types";
+import { Select } from "@ginger-society/ginger-ui";
 
 interface TableSelectorProps {
   value: string;
@@ -12,26 +13,29 @@ const TableSelector: React.FC<TableSelectorProps> = ({ value, onChange }) => {
 
   const tableBlocks = useMemo(() => {
     return Object.values(blocks).filter(
-      (block: Block) => block.type === BlockType.Table,
+      (block: Block) => block.type === BlockType.Table
     );
   }, [blocks]);
 
   return (
-    <div className="form-group">
-      <label>Relates to</label>
-      <select
-        className="base-select"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        <option value={undefined}>Not selected</option>
-        {tableBlocks.map((block) => (
-          <option key={block.id} value={block.id}>
-            {block.data.name || block.id}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Select
+      label="Relates to"
+      value={{ value, label: value || "Not selected" }}
+      options={tableBlocks.map((block) => {
+        return {
+          value: block.id,
+          label: block.data.name,
+        };
+      })}
+      renderer={(option) => (
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          {option.label}
+        </div>
+      )}
+      onChange={({ value }) => {
+        onChange(value);
+      }}
+    />
   );
 };
 

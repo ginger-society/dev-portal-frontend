@@ -11,6 +11,7 @@ import {
   ManyToManyFieldIcon,
   TextFieldIcon,
 } from "@/shared/svgIcons"; // Import the icons for each column type
+import { Text, TextWeight } from "@ginger-society/ginger-ui";
 
 interface CustomSelectProps {
   value: ColumnType;
@@ -24,19 +25,22 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ value, onChange }) => {
   };
 
   return (
-    <div className={styles["custom-select-container"]}>
-      {options.map((option) => (
-        <div
-          key={option}
-          className={`${styles["option"]} ${
-            option === value ? styles["selected"] : ""
-          }`}
-          onClick={() => handleOptionClick(option)}
-        >
-          {getOptionIcon(option)} {/* Render the icon based on the option */}
-          <span>{option}</span>
-        </div>
-      ))}
+    <div className={styles["type-selector-container"]}>
+      <Text weight={TextWeight.Bold}>Field Type</Text>
+      <div className={styles["custom-select-container"]}>
+        {options.map((option) => (
+          <div
+            key={option}
+            className={`${styles["option"]} ${
+              option === value ? styles["selected"] : ""
+            }`}
+            onClick={() => handleOptionClick(option)}
+          >
+            {getOptionIcon(option)} {/* Render the icon based on the option */}
+            <span className={styles["label"]}>{option}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

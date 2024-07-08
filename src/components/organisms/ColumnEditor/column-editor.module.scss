@@ -16,10 +16,11 @@
   width: calc(33.33% - 10px); /* 33.33% width for each option minus the gap */
   padding: 10px;
   border-radius: 8px;
-  background-color: #f0f0f0;
+  background-color: var(--primary-accent-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
   flex-direction: column; /* Align items vertically */
+  color: var(--primary-color);
 }
 
 .option:hover {
@@ -30,4 +31,31 @@
 .selected {
   background-color: #007bff; /* Inverted color for selected option */
   color: #fff; /* Text color for selected option */
+}
+
+html[data-theme="dark"] {
+  .option {
+    background-color: #4a4a4a;
+    color: white;
+  }
+  .option:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-bg-color);
+  }
+
+  .selected {
+    background-color: var(--primary-color);
+    color: var(--primary-bg-color);
+  }
+}
+
+.type-selector-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

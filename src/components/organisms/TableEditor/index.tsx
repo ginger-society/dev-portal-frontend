@@ -6,6 +6,14 @@ import { ChangeEventHandler } from "react";
 import { slugGenerator } from "@/shared/utils";
 import EnumEditor, { Option } from "@/components/atoms/EnumEditor";
 import { ColumnType } from "../ColumnEditor/types";
+import {
+  Button,
+  ButtonType,
+  Input,
+  Text,
+  TextArea,
+  TextWeight,
+} from "@ginger-society/ginger-ui";
 
 const TableEditor = ({ close }: EditorProps) => {
   const {
@@ -18,7 +26,7 @@ const TableEditor = ({ close }: EditorProps) => {
 
   const updateBlock = (
     data: Record<string, any>,
-    blockLevelData?: Record<string, any>,
+    blockLevelData?: Record<string, any>
   ) => {
     setBlocks((v) => {
       return {
@@ -67,42 +75,38 @@ const TableEditor = ({ close }: EditorProps) => {
   };
 
   return (
-    <>
+    <div className={styles["container"]}>
       <div className={styles["header-container"]}>
-        <h3>
+        <Text>
           {block?.type === BlockType.Table ? "Table" : "Enum"} Editor :
           <strong>{data?.name}</strong>
-        </h3>
-        <button className="base-button secondary" onClick={handleDelete}>
-          Delete
-        </button>
+        </Text>
+        <Button
+          onClick={handleDelete}
+          type={ButtonType.Tertiary}
+          label="Delete"
+        ></Button>
       </div>
       {/* {JSON.stringify(blocks[editorData?.blockId]?.data)} */}
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          id="name"
-          className="base-input"
-          placeholder="Enter name"
-          value={data?.name || ""}
-          onChange={handleNameChange}
-        />
-      </div>
-      <strong>
+      <Input
+        type="text"
+        id="name"
+        label="Name"
+        placeholder="Enter name"
+        value={data?.name || ""}
+        onChange={handleNameChange}
+      />
+      <Text weight={TextWeight.Bold}>
         {block?.type === BlockType.Table ? "Table" : "Enum"} name :{" "}
         {data?.table_name}
-      </strong>
-      <div className="form-group">
-        <label>Doc String</label>
-        <textarea
-          id="name"
-          className="base-input"
-          placeholder="Enter name"
-          value={data?.docs || ""}
-          onChange={handleDocChange}
-        />
-      </div>
+      </Text>
+      <TextArea
+        id="name"
+        label="Doc String"
+        placeholder="Enter name"
+        value={data?.docs || ""}
+        onChange={handleDocChange}
+      />
 
       {block?.type === BlockType.Enum && (
         <EnumEditor
@@ -111,7 +115,7 @@ const TableEditor = ({ close }: EditorProps) => {
           value={data.options || []}
         />
       )}
-    </>
+    </div>
   );
 };
 
