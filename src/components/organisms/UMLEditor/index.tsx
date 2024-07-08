@@ -19,7 +19,7 @@ import {
   UMLEditorProps,
 } from "./types";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import Aside from "@/components/organisms/Aside";
+import { Aside } from "@ginger-society/ginger-ui";
 import { NEW_BLOCK_ID_PREFIX } from "./constants";
 import { ColumnType } from "../ColumnEditor/types";
 
@@ -56,7 +56,7 @@ const UMLEditor = ({
   const toggleSlider = (
     type: EditorTypeEnum,
     blockId: string,
-    rowIndex?: number,
+    rowIndex?: number
   ) => {
     setIsSliderOpen((isOpen) => !isOpen);
     setEditorType(type);
@@ -78,7 +78,7 @@ const UMLEditor = ({
           }
           return accum;
         },
-        {},
+        {}
       );
 
       keysToDelete.forEach((k) => {
@@ -106,10 +106,10 @@ const UMLEditor = ({
           fromRow,
           toRow,
           blocks[block1Id]?.rows.length || 0,
-          blocks[block2Id]?.rows.length || 0,
+          blocks[block2Id]?.rows.length || 0
         );
         return { path: d, midX, midY };
-      },
+      }
     );
 
     setPaths(newPaths);
@@ -197,7 +197,11 @@ const UMLEditor = ({
             <div className="card block-card" ref={block.ref}>
               {/* Header row */}
               <div
-                className={`${block.type === BlockType.Enum ? "options-header" : "table-header"} block-header handle`}
+                className={`${
+                  block.type === BlockType.Enum
+                    ? "options-header"
+                    : "table-header"
+                } block-header handle`}
               >
                 <HeadingRenderer blockData={block} />
                 <span
@@ -246,7 +250,7 @@ const UMLEditor = ({
         <svg ref={svgRef} className="svg-container">
           {paths.map(({ path, midX, midY }, index) => (
             <g key={index}>
-              <path d={path} stroke="black" fill="transparent" />
+              <path d={path} stroke="var(--primary-color)" fill="transparent" />
               {connections[index]?.marker && (
                 <g transform={`translate(${midX - 13}, ${midY})`}>
                   {(() => {
@@ -275,7 +279,7 @@ const UMLEditor = ({
                       y="-10"
                       fontSize="15"
                       textAnchor="middle"
-                      fill="black"
+                      fill="var(--primary-color)"
                     >
                       {connections[index].label}
                     </text>

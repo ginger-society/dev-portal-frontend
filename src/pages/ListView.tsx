@@ -14,8 +14,9 @@ import { db } from "@/shared/firebase";
 import { pencilIcon } from "@/shared/svgIcons";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/shared/AuthContext";
-import Header from "@/components/atoms/Header";
-import { Button } from "@ginger-society/ginger-ui";
+
+import styles from "./listview.module.scss";
+import HeaderContainer from "@/components/atoms/HeaderContainer";
 
 interface Document {
   id: string;
@@ -41,7 +42,7 @@ export const DocumentsList: React.FC = () => {
     try {
       const userId = user.uid;
       const querySnapshot = await getDocs(
-        query(collection(db, "databaseSchema"), where("userId", "==", userId)),
+        query(collection(db, "databaseSchema"), where("userId", "==", userId))
       );
       const docs: Document[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
@@ -79,8 +80,8 @@ export const DocumentsList: React.FC = () => {
         // Update local state
         setDocuments((prevDocs) =>
           prevDocs.map((doc) =>
-            doc.id === editingDocId ? { ...doc, name, description } : doc,
-          ),
+            doc.id === editingDocId ? { ...doc, name, description } : doc
+          )
         );
       } else {
         // Insert new document
@@ -93,10 +94,7 @@ export const DocumentsList: React.FC = () => {
 
         // Fetch documents again to update the list
         const querySnapshot = await getDocs(
-          query(
-            collection(db, "databaseSchema"),
-            where("userId", "==", userId),
-          ),
+          query(collection(db, "databaseSchema"), where("userId", "==", userId))
         );
         const docs: Document[] = querySnapshot.docs.map((doc) => {
           const data = doc.data() as DocumentData;
@@ -129,12 +127,12 @@ export const DocumentsList: React.FC = () => {
 
   const openDesigner = (doc: Document) => {
     console.log(doc);
-    navigate(`/editor/${doc.id}`);
+    navigate(`/editor/${doc.id}/${doc.name}`);
   };
 
   return (
     <div>
-      <Header />
+      <HeaderContainer />
       {loading ? (
         <p>Loading...</p>
       ) : (

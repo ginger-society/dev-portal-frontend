@@ -13,7 +13,7 @@ const router = createHashRouter([
     element: <AuthenticatedListView />,
   },
   {
-    path: "/editor/:docId",
+    path: "/editor/:docId/:docName",
     element: <AuthenticatedHome />,
   },
   {

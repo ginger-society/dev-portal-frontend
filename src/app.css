@@ -2,12 +2,18 @@
   position: relative;
   min-height: 200vh;
   background-size: 40px 40px;
-  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+  background-image: radial-gradient(
+    circle,
+    var(--muted-color) 1px,
+    rgba(0, 0, 0, 0) 1px
+  );
+  background-color: var(--primary-bg-color);
 }
 
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  box-shadow: var(--box-shadow);
 }
 
 .enum-row-renderer-container {
@@ -64,12 +70,15 @@
 }
 
 .row-content {
-  border-top: 1px solid #c6c6c6;
+  border-top: 0.1px solid #c6c6c6;
   padding: 10px 20px;
   width: 300px;
+  background-color: var(--primary-accent-color);
+  color: var(--primary-color);
+  font-size: var(--medium-font-size);
 }
 .row-content.hoverable:hover {
-  background: #eaeaea;
+  background: var(--primary-bg-color);
 }
 .svg-container {
   position: absolute;
@@ -78,40 +87,6 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  background: black;
-  color: white;
-  padding: 18px;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.header .brand-name {
-  margin-left: 20px;
-  font-size: 18px;
-}
-
-.header .icon {
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  background-image: url("/ginger_icon.png");
-  background-position: center;
-}
-
-.header .user-details {
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  align-items: flex-end;
 }
 
 #sliderDialog {
@@ -144,11 +119,13 @@
 /* Legend related  */
 .legend {
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-color);
   position: fixed;
   bottom: 0px;
   width: 250px;
-  border: solid 1px;
+  border-top: solid 1px;
+  border-right: solid 1px;
   z-index: 2;
 }
 
@@ -211,7 +188,7 @@
 }
 
 .text-primary {
-  color: blue;
+  color: var(--info-color);
 }
 
 /* Dialog box */
@@ -331,4 +308,10 @@
 .schema-item h1 {
   font-size: 18px;
   font-weight: 700;
+}
+
+.heading-txt {
+  font-size: var(--medium-font-size);
+  display: inline-flex;
+  gap: 10px;
 }

@@ -1,4 +1,4 @@
-import Header from "@/components/atoms/Header";
+import HeaderContainer from "@/components/atoms/HeaderContainer";
 import { LegendConfigs } from "@/components/atoms/Legend/types";
 import ColumnEditor from "@/components/organisms/ColumnEditor";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
@@ -23,6 +23,8 @@ import { enumIcon, tableIcon } from "@/shared/svgIcons";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button, ButtonType } from "@ginger-society/ginger-ui";
+import styles from "./editor.module.scss";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -45,7 +47,7 @@ const Editor = () => {
   const [editorData, setEditorData] = useState<EditorData>();
   const { user } = useContext(AuthContext);
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
-  const { docId } = useParams<{ docId: string }>();
+  const { docId } = useParams<{ docId: string; docName: string }>();
 
   const [copiedToClipboard, setCopiedToClipboard] = useState<boolean>();
 
@@ -60,7 +62,7 @@ const Editor = () => {
     if (docSnap.exists()) {
       const mockBlocks2 = docSnap.data().blocks as BlockData[];
       const blockData: { [key: string]: Block } = Object.values(
-        mockBlocks2,
+        mockBlocks2
       ).reduce((accum, block) => {
         return {
           ...accum,
@@ -142,21 +144,22 @@ const Editor = () => {
       }}
     >
       <>
-        <Header>
-          <button
-            className="base-button secondary editor-save-btn"
-            onClick={handleSave}
-          >
-            {saveLoading ? "Saving..." : "Save"}
-          </button>
+        <HeaderContainer>
+          <div className={styles["actions-container"]}>
+            <Button
+              onClick={handleSave}
+              label={saveLoading ? "Saving..." : "Save"}
+              loading={saveLoading}
+              type={ButtonType.Primary}
+            ></Button>
 
-          <button
-            className="base-button primary editor-save-btn"
-            onClick={handleSchemaCopy}
-          >
-            {copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
-          </button>
-        </Header>
+            <Button
+              onClick={handleSchemaCopy}
+              label={copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
+              type={ButtonType.Tertiary}
+            ></Button>
+          </div>
+        </HeaderContainer>
         <UMLEditorWrapper />
       </>
     </UMLEditorProvider>
@@ -229,7 +232,7 @@ const UMLEditorWrapper = () => {
     type: BlockType,
     x: number,
     y: number,
-    id: string,
+    id: string
   ): Block => {
     const rows: Row[] = [];
     if (type === BlockType.Table) {
@@ -292,15 +295,15 @@ const UMLEditorWrapper = () => {
       HeadingRenderer={({ blockData }) => (
         <>
           {blockData.type === BlockType.Table && (
-            <>
+            <span className="heading-txt">
               {tableIcon}
-              <strong>{(blockData.data.name || "") + " : Table"}</strong>
-            </>
+              {(blockData.data.name || "") + " : Table"}
+            </span>
           )}
           {blockData.type === BlockType.Enum && (
             <>
               {enumIcon}
-              <strong>{(blockData.data.name || "") + " : Enums"}</strong>
+              {(blockData.data.name || "") + " : Enums"}
             </>
           )}
         </>
