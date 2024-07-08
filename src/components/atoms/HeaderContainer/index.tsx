@@ -53,7 +53,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
             email: auth.currentUser?.email,
           }}
           icon={<img className={styles["icon"]} src="/ginger_icon.png"></img>}
-          onLogout={() => alert("Logout clicked")}
+          onLogout={logOut}
           showThemeSwitcher={true}
           arbitaryContent={children}
         />
