@@ -1,0 +1,11 @@
+references = []
+
+[version]
+channel = "Nightly"
+major = 0
+minor = 0
+patch = 0
+revision = 0
+
+[settings]
+git_url_prefix = ""
