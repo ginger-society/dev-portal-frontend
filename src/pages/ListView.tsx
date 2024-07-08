@@ -17,7 +17,18 @@ import { AuthContext } from "@/shared/AuthContext";
 
 import styles from "./listview.module.scss";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
-import { Button, ButtonType, Text, TextSize } from "@ginger-society/ginger-ui";
+import {
+  Button,
+  ButtonType,
+  Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalSize,
+  Text,
+  TextArea,
+  TextSize,
+} from "@ginger-society/ginger-ui";
 
 interface Document {
   id: string;
@@ -177,51 +188,39 @@ export const DocumentsList: React.FC = () => {
         </div>
       )}
 
-      {dialogOpen && (
-        <div className="modal-overlay" onClick={() => setDialogOpen(false)}>
-          <dialog
-            open={dialogOpen}
-            className="modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <form onSubmit={insertOrUpdateDocument}>
-              <div className="form-group">
-                <label>Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="base-input"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Description</label>
-                <textarea
-                  id="description"
-                  className="base-input"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="btn-group">
-                <button type="submit" className="base-button primary">
-                  {editingDocId ? "Update" : "Create"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDialogOpen(false)}
-                  className="base-button secondary"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </dialog>
-        </div>
-      )}
+      <Modal
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        size={ModalSize.Large}
+      >
+        <ModalHeader>Create new schema</ModalHeader>
+        <ModalBody>
+          <form onSubmit={insertOrUpdateDocument}>
+            <Input
+              label="Name"
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <TextArea
+              label="Description"
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <div className="btn-group">
+              <Button
+                label={editingDocId ? "Update" : "Create"}
+                type={ButtonType.Primary}
+              />
+              <Button onClick={() => setDialogOpen(false)} label="Cancel" />
+            </div>
+          </form>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
