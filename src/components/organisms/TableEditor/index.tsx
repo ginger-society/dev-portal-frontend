@@ -1,6 +1,5 @@
 import { useUMLEditor } from "../UMLEditor/context";
 import { BlockType, EditorProps } from "../UMLEditor/types";
-import "@/shared/form-control.css";
 import styles from "./table-editor.module.scss";
 import { ChangeEventHandler } from "react";
 import { slugGenerator } from "@/shared/utils";

@@ -1,6 +1,7 @@
 import { AuthContext } from "@/shared/AuthContext";
 import { auth } from "@/shared/firebase";
 import router from "@/shared/router";
+import { Button, ButtonType, Input } from "@ginger-society/ginger-ui";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -41,30 +42,17 @@ export const Login = () => {
           <img width={200} src="/ginger_icon.png" />
           <h1>GingerDB Studio</h1>
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            className="base-input"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            className="base-input"
-            type="password"
-            placeholder="Password.."
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          label="Password"
+          type="password"
+          placeholder="Password.."
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <span className="text-error">{error}</span>
         <div className="btn-group">
-          <button className="base-button primary" onClick={signIn}>
-            Sign In
-          </button>
-          <button className="base-button secondary" onClick={signUp}>
-            Sign Up
-          </button>
+          <Button label="Sign in" type={ButtonType.Primary} onClick={signIn} />
+          <Button label="Sign Up" onClick={signUp} />
         </div>
       </div>
     </div>
