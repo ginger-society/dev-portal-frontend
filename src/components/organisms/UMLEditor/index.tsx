@@ -160,7 +160,7 @@ const UMLEditor = ({
     e.preventDefault();
     setContextMenu({
       x: e.clientX + window.scrollX,
-      y: e.clientY + window.scrollY,
+      y: e.clientY + window.scrollY - 50,
     });
   };
 

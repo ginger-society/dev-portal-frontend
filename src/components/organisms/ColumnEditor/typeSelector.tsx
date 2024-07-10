@@ -1,17 +1,18 @@
 import React from "react";
 import { ColumnType } from "./types";
 import styles from "./column-editor.module.scss";
-import {
-  CharFieldIcon,
-  BooleanFieldIcon,
-  DateFieldIcon,
-  BigAutoFieldIcon,
-  ForeignKeyIcon,
-  PositiveIntegerFieldIcon,
-  ManyToManyFieldIcon,
-  TextFieldIcon,
-} from "@/shared/svgIcons"; // Import the icons for each column type
 import { Text, TextWeight } from "@ginger-society/ginger-ui";
+
+import {
+  FaTextHeight,
+  FaCheckSquare,
+  FaCalendarAlt,
+  FaLevelUpAlt,
+  FaClock,
+  FaClipboard,
+  FaCompressArrowsAlt,
+  FaCompressAlt,
+} from "react-icons/fa";
 
 interface CustomSelectProps {
   value: ColumnType;
@@ -51,19 +52,25 @@ export default CustomSelect;
 const getOptionIcon = (option: ColumnType) => {
   switch (option) {
     case ColumnType.String:
-      return CharFieldIcon;
+      return <FaTextHeight />;
     case ColumnType.Boolean:
-      return BooleanFieldIcon;
+      return <FaCheckSquare />;
     case ColumnType.DateField:
-      return DateFieldIcon;
+      return <FaCalendarAlt />;
+    case ColumnType.DateTimeField:
+      return <FaClock />;
     case ColumnType.ForeignKey:
-      return ForeignKeyIcon;
+      return <FaLevelUpAlt />;
     case ColumnType.PositiveIntegerField:
-      return PositiveIntegerFieldIcon;
+      return <span>123</span>;
+    case ColumnType.FloatField:
+      return <span>1.23</span>;
     case ColumnType.ManyToManyField:
-      return ManyToManyFieldIcon;
+      return <FaCompressArrowsAlt />;
     case ColumnType.TextField:
-      return TextFieldIcon;
+      return <FaClipboard />;
+    case ColumnType.OneToOneField:
+      return <FaCompressAlt />;
     default:
       return null;
   }

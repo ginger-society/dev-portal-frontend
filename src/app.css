@@ -48,7 +48,7 @@
   border-radius: 15px;
   overflow: hidden;
   z-index: 1;
-  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
+  box-shadow: 0 8px 24px #959da533;
 }
 
 .editIcon {
