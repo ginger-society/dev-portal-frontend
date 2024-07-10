@@ -9,6 +9,7 @@ export function withAuthHOC(WrappedComponent: React.FC): React.FC {
       return <>Loading....</>;
     } else {
       return <WrappedComponent {...props} />;
+      return <>Loading....</>;
     }
   }
   WithAuth.displayName = `withAuthHOC(${

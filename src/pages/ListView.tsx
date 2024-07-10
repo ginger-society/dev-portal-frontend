@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import { db } from "@/shared/firebase";
 
-import { pencilIcon } from "@/shared/svgIcons";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/shared/AuthContext";
 
@@ -29,6 +28,7 @@ import {
   TextArea,
   TextSize,
 } from "@ginger-society/ginger-ui";
+import { FaPencilAlt } from "react-icons/fa";
 
 interface Document {
   id: string;
@@ -175,7 +175,7 @@ export const DocumentsList: React.FC = () => {
                       e.stopPropagation();
                     }}
                   >
-                    {pencilIcon("black")}
+                    <FaPencilAlt />
                   </span>
                   <div className="schema-item">
                     <Text size={TextSize.Large}>{doc.name}</Text>

@@ -19,13 +19,12 @@ import {
 } from "@/components/organisms/UMLEditor/types";
 import { AuthContext } from "@/shared/AuthContext";
 import { db } from "@/shared/firebase";
-import { enumIcon, tableIcon } from "@/shared/svgIcons";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, ButtonType } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
-import { FaLock } from "react-icons/fa";
+import { FaList, FaLock, FaTable } from "react-icons/fa";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -298,13 +297,13 @@ const UMLEditorWrapper = () => {
         <>
           {blockData.type === BlockType.Table && (
             <span className="heading-txt">
-              {tableIcon}
+              <FaTable />
               {(blockData.data.name || "") + " : Table"}
             </span>
           )}
           {blockData.type === BlockType.Enum && (
             <>
-              {enumIcon}
+              <FaList />
               {(blockData.data.name || "") + " : Enums"}
             </>
           )}

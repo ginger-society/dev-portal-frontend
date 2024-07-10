@@ -1,6 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import styles from "./enum-editor.module.scss";
-import { deleteIcon } from "@/shared/svgIcons";
 import { slugGenerator } from "@/shared/utils";
 import { Input, Text } from "@ginger-society/ginger-ui";
 import { FaRegTrashAlt } from "react-icons/fa";

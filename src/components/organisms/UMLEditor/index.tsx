@@ -2,7 +2,6 @@ import Draggable from "react-draggable";
 import Legend from "@/components/atoms/Legend";
 import { calculatePath } from "@/shared/canvas.utils";
 import {
-  pencilIcon,
   triangleIcon,
   rectangleIcon,
   circleIcon,
@@ -22,6 +21,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Aside } from "@ginger-society/ginger-ui";
 import { NEW_BLOCK_ID_PREFIX } from "./constants";
 import { ColumnType } from "../ColumnEditor/types";
+import { FaPencilAlt } from "react-icons/fa";
 
 const UMLEditor = ({
   setBlocks,
@@ -210,7 +210,7 @@ const UMLEditor = ({
                     toggleSlider(EditorTypeEnum.BLOCK, block.id);
                   }}
                 >
-                  {pencilIcon("inverted")}
+                  <FaPencilAlt />
                 </span>
               </div>
               {/* Render dynamic number of rows */}
