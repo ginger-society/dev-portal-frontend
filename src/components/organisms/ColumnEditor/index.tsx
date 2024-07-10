@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useUMLEditor } from "../UMLEditor/context";
 import { EditorProps, Row } from "../UMLEditor/types";
 import styles from "./column-editor.module.scss";
@@ -16,9 +16,10 @@ import {
   Button,
   ButtonType,
   Option,
+  LoadingPage,
 } from "@ginger-society/ginger-ui";
 
-const ColumnEditor = ({ close }: EditorProps) => {
+const ColumnEditor = ({ close }: EditorProps): ReactNode => {
   const { blocks, setBlocks, editorData } = useUMLEditor();
 
   const updateRow = (
@@ -74,7 +75,7 @@ const ColumnEditor = ({ close }: EditorProps) => {
 
   if (!editorData?.blockId || editorData?.rowIndex === undefined) {
     console.log(editorData);
-    return <>Loading...</>;
+    return <LoadingPage />;
   }
 
   const row = blocks[editorData?.blockId].rows[editorData?.rowIndex];

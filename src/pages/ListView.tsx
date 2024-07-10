@@ -27,6 +27,7 @@ import {
   Text,
   TextArea,
   TextSize,
+  LoadingPage,
 } from "@ginger-society/ginger-ui";
 import { FaPencilAlt } from "react-icons/fa";
 
@@ -46,6 +47,7 @@ export const DocumentsList: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [searchTxt, setSearchTxt] = useState<string>("");
 
   const fetchSchemas = async () => {
     if (!user) {
@@ -53,8 +55,20 @@ export const DocumentsList: React.FC = () => {
     }
     try {
       const userId = user.uid;
+      const collectionRef = collection(db, "databaseSchema");
+      const queryConstraints = [where("userId", "==", userId)];
+
+      if (searchTxt) {
+        // queryConstraints.push(where("name", "==", searchTxt));
+        // Or use this for partial matches:
+        queryConstraints.push(
+          where("name", ">=", searchTxt),
+          where("name", "<=", searchTxt + "\uf8ff")
+        );
+      }
+
       const querySnapshot = await getDocs(
-        query(collection(db, "databaseSchema"), where("userId", "==", userId))
+        query(collectionRef, ...queryConstraints)
       );
       const docs: Document[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
@@ -75,7 +89,7 @@ export const DocumentsList: React.FC = () => {
   useEffect(() => {
     fetchSchemas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, searchTxt]);
 
   const insertOrUpdateDocument = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -146,19 +160,29 @@ export const DocumentsList: React.FC = () => {
     <div className={styles["container"]}>
       <HeaderContainer />
       {loading ? (
-        <p>Loading...</p>
+        <LoadingPage />
       ) : (
         <div className="schema-list">
-          <Button
-            onClick={() => {
-              setName("");
-              setDescription("");
-              setEditingDocId(null);
-              setDialogOpen(true);
-            }}
-            type={ButtonType.Primary}
-            label="Create Schema"
-          />
+          <div className="list-hedaer-actions-panel">
+            <Button
+              onClick={() => {
+                setName("");
+                setDescription("");
+                setEditingDocId(null);
+                setDialogOpen(true);
+              }}
+              type={ButtonType.Primary}
+              label="Create Schema"
+            />
+
+            <Input
+              placeholder="Search..."
+              onChange={({ target: { value } }) => {
+                setSearchTxt(value);
+              }}
+              value={searchTxt}
+            />
+          </div>
 
           <ul className="schema-list-container">
             {documents.map((doc) => (
