@@ -1,11 +1,14 @@
-references = []
-
 [version]
 channel = "Nightly"
 major = 0
-minor = 3
+minor = 4
 patch = 0
 revision = 0
+
+[[references]]
+file_name = "package.json"
+output_type = "String"
+variable = "version"
 
 [settings]
 git_url_prefix = ""
