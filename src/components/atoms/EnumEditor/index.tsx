@@ -2,6 +2,8 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import styles from "./enum-editor.module.scss";
 import { deleteIcon } from "@/shared/svgIcons";
 import { slugGenerator } from "@/shared/utils";
+import { Input, Text } from "@ginger-society/ginger-ui";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export interface Option {
   label: string;
@@ -46,7 +48,7 @@ const EnumEditor: React.FC<EnumEditorProps> = ({
     const updatedOptions = value.map((option, i) =>
       i === index
         ? { ...option, label: editedLabel, value: slugGenerator(editedLabel) }
-        : option,
+        : option
     );
 
     // Remove the option if the edited label is empty
@@ -59,10 +61,9 @@ const EnumEditor: React.FC<EnumEditorProps> = ({
   };
 
   return (
-    <div className="form-group">
-      <label>Options</label>
-      <input
-        className="base-input"
+    <div>
+      <Input
+        label="Options"
         type="text"
         value={inputValue}
         onChange={handleInputChange}
@@ -78,10 +79,10 @@ const EnumEditor: React.FC<EnumEditorProps> = ({
                 handleOptionEdit(index, e.currentTarget.textContent || "")
               }
             >
-              {option.label}
+              <Text>{option.label}</Text>
             </span>
             <button onClick={() => handleDeleteOption(index)}>
-              {deleteIcon}
+              <FaRegTrashAlt />
             </button>
           </li>
         ))}
