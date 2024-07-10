@@ -25,6 +25,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, ButtonType } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
+import { FaLock } from "react-icons/fa";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -285,10 +286,11 @@ const UMLEditorWrapper = () => {
             <strong className={hasError ? "text-error" : ""}>
               {rowData.data.field_name}
             </strong>
+            {rowData.data.type === ColumnType.PK && <FaLock />}
+            <small>{rowData.data.type || ""}</small>
             {!rowData.data.field_name && !rowData.data.type && (
               <span className="text-primary">New Row - Click to define</span>
             )}
-            <small>{rowData.data.type || ""}</small>
           </div>
         );
       }}

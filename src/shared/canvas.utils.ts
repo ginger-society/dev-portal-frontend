@@ -9,7 +9,7 @@ export function calculatePath(
 ) {
   if (!rect1 || !rect2) return { d: "", midX: 0, midY: 0 };
 
-  const headerRowHeight = 80; // Assuming header row height is 80px
+  const headerRowHeight = 50; // Assuming header row height is 80px
   const rowHeight1 = (rect1.height - headerRowHeight) / rows1;
   const rowHeight2 = (rect2.height - headerRowHeight) / rows2;
 
@@ -32,7 +32,7 @@ export function calculatePath(
 
   const midX = (x1 + x2) / 2;
   const midY = (y1 + y2) / 2;
-  const d = `M ${x1} ${y1} H ${midX} V ${y2} H ${x2}`;
+  const d = `M ${x1} ${y1} H ${midX} V ${y2 - 60} H ${x2}`;
 
   return { d, midX, midY };
 }

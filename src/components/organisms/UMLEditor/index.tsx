@@ -220,7 +220,9 @@ const UMLEditor = ({
                     toggleSlider(EditorTypeEnum.ROW, block.id, index)
                   }
                   key={index}
-                  className="row-content hoverable"
+                  className={`row-content ${
+                    row.data.type !== ColumnType.PK ? "hoverable" : ""
+                  }`}
                 >
                   <RowRenderer rowData={row} />
                 </div>

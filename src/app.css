@@ -48,6 +48,7 @@
   border-radius: 15px;
   overflow: hidden;
   z-index: 1;
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
 }
 
 .editIcon {
@@ -224,6 +225,7 @@
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   height: 200px;
+  background-color: white;
 }
 
 .schema-item-container:hover {
@@ -271,6 +273,9 @@ html[data-theme="dark"] {
     background-color: var(
       --secondary-bg-color
     ); /* Optional: add a background color for the form */
+  }
+  .schema-item-container {
+    background-color: var(--primary-bg-color);
   }
 }
 
