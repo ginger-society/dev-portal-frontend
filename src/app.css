@@ -252,7 +252,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5; /* Optional: add a background color for better visual */
+  background-color: var(--primary-bg-color);
 }
 
 .login-form-container {
