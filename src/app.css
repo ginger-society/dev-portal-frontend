@@ -258,9 +258,20 @@
 .login-form-container {
   width: 500px;
   padding: 20px;
-  background-color: white; /* Optional: add a background color for the form */
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  gap: 10px;
   border-radius: 8px; /* Optional: add some border radius for better visual */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for better visual */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+  .login-form-container {
+    background-color: var(
+      --secondary-bg-color
+    ); /* Optional: add a background color for the form */
+  }
 }
 
 .app-details-container {
@@ -286,5 +297,11 @@
 .heading-txt {
   font-size: var(--medium-font-size);
   display: inline-flex;
+  gap: 10px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
   gap: 10px;
 }
