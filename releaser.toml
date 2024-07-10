@@ -3,7 +3,7 @@ references = []
 [version]
 channel = "Nightly"
 major = 0
-minor = 2
+minor = 3
 patch = 0
 revision = 0
 

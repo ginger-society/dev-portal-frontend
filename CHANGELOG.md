@@ -1,24 +1,17 @@
+## 0.3.0-nightly.0 - 2024-07-10
+fix:
+ - [c74494cc0b](c74494cc0b9da538aafe2d9088edbd038a7a0fe9) (Ginger Society Admin) fix: dark and light theme for login page
+	
+feat:
+ - [951c148cf8](951c148cf8cef65b2588bf046769578fc694722c) (Ginger Society Admin) feat: updated login page to use ginger-ui and removed form control classes
+	
 ## 0.2.0-nightly.0 - 2024-07-08
 chore:
+ - [8c7ef2f74d](8c7ef2f74db088b2ba518ad00b74ca96a329c7f4) (Ginger Society Admin) chore: version bump to 0.2.0-nightly.0
+	
  - [0973d65703](0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
-fix:
- - [3c36444e32](3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
-	
- - [ca64399aed](ca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
-	
- - [d7700cd1b5](d7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
-	
- - [f9d8110f78](f9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
-	
-chore:
- - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
-	
- - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
-	
- - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
-	
 feat:
  - [3f63f4983e](3f63f4983e70ea21f152ed1299fad8e3482569f9) (Ginger Society Admin) feat: added releaser support
 	
@@ -37,4 +30,20 @@ feat:
  - [e73dba3f18](e73dba3f1853b731f1388054eae51981defc3d86) (Ginger Society Admin) feat: added erorr message in login page
 	
  - [a4b5a9a038](a4b5a9a038c776a808a38bc0d6aa5d8442f2e183) (Ginger Society Admin) feat: updated seo title
+	
+fix:
+ - [3c36444e32](3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
+	
+ - [ca64399aed](ca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
+	
+ - [d7700cd1b5](d7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
+	
+ - [f9d8110f78](f9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
+	
+chore:
+ - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
+	
+ - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
+	
+ - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
 	
