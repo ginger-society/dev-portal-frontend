@@ -1,7 +1,13 @@
 import { AuthContext } from "@/shared/AuthContext";
 import { auth } from "@/shared/firebase";
 import router from "@/shared/router";
-import { Button, ButtonType, Input, Text } from "@ginger-society/ginger-ui";
+import {
+  Button,
+  ButtonType,
+  Input,
+  Text,
+  TextSize,
+} from "@ginger-society/ginger-ui";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -39,8 +45,8 @@ export const Login = () => {
     <div className="login-page-container">
       <div className="login-form-container">
         <div className="app-details-container">
-          <img width={200} src="/ginger_icon.png" />
-          <Text>GingerDB Studio</Text>
+          <img width={200} src="/ginger-db.png" />
+          <Text size={TextSize.Large}>GingerDB Studio</Text>
         </div>
         <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input

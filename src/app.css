@@ -7,7 +7,7 @@
     var(--muted-color) 1px,
     rgba(0, 0, 0, 0) 1px
   );
-  background-color: var(--primary-bg-color);
+  background-color: var(--primary-accent-color);
 }
 
 .enum-row-renderer-container {
@@ -68,12 +68,12 @@
   border-top: 0.1px solid #c6c6c6;
   padding: 10px 20px;
   width: 300px;
-  background-color: var(--primary-accent-color);
+  background-color: var(--primary-bg-color);
   color: var(--primary-color);
   font-size: var(--medium-font-size);
 }
 .row-content.hoverable:hover {
-  background: var(--primary-bg-color);
+  background: var(--primary-accent-color);
 }
 .svg-container {
   position: absolute;
@@ -254,7 +254,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--primary-bg-color);
+  background-color: var(--primary-accent-color);
 }
 
 .login-form-container {

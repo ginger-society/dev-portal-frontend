@@ -52,7 +52,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
             name: auth.currentUser?.email.split("@")[0],
             email: auth.currentUser?.email,
           }}
-          icon={<img className={styles["icon"]} src="/ginger_icon.png"></img>}
+          icon={<img className={styles["icon"]} src="/ginger-db.png"></img>}
           onLogout={logOut}
           showThemeSwitcher={true}
           arbitaryContent={children}
