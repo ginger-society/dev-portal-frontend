@@ -91,8 +91,7 @@ export const DocumentsList: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, searchTxt]);
 
-  const insertOrUpdateDocument = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const insertOrUpdateDocument = async () => {
     if (!user) return;
     const userId = user.uid;
     try {
@@ -165,6 +164,7 @@ export const DocumentsList: React.FC = () => {
         <div className="schema-list">
           <div className="list-hedaer-actions-panel">
             <Button
+              fullWidth
               onClick={() => {
                 setName("");
                 setDescription("");
@@ -219,30 +219,27 @@ export const DocumentsList: React.FC = () => {
       >
         <ModalHeader>Create new schema</ModalHeader>
         <ModalBody>
-          <form onSubmit={insertOrUpdateDocument}>
-            <Input
-              label="Name"
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+          <Input
+            label="Name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <TextArea
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <div className="btn-group">
+            <Button
+              label={editingDocId ? "Update" : "Create"}
+              type={ButtonType.Primary}
+              onClick={insertOrUpdateDocument}
             />
-            <TextArea
-              label="Description"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-            <div className="btn-group">
-              <Button
-                label={editingDocId ? "Update" : "Create"}
-                type={ButtonType.Primary}
-              />
-              <Button onClick={() => setDialogOpen(false)} label="Cancel" />
-            </div>
-          </form>
+            <Button onClick={() => setDialogOpen(false)} label="Cancel" />
+          </div>
         </ModalBody>
       </Modal>
     </div>

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ginger-society/ginger-ui':
-        specifier: 0.22.0
-        version: 0.22.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.26.0
+        version: 0.26.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.2.0(@types/node@20.14.2)(sass@1.77.5))
@@ -744,8 +744,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@ginger-society/ginger-ui@0.22.0':
-    resolution: {integrity: sha512-Eb3RZdJlEa2G3AthbEuyuUtJT1vFsjIa2Y8HEhAq/0ZqZIY7+IGOIQs+Cc0AbeAf8w7RaCvKXAXbVGcfHiicRw==}
+  '@ginger-society/ginger-ui@0.26.0':
+    resolution: {integrity: sha512-+1EfK78EXmVTQdZwhsClkOF2wrIrNEqAGuslB8aaudxw2zC/36nq6VoLRl0gOTy+rKqezG0i3WhY/OLB4YPm8w==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -5401,7 +5401,7 @@ snapshots:
       - terser
       - typescript
 
-  '@ginger-society/ginger-ui@0.22.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui@0.26.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

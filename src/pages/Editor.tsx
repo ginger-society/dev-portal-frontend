@@ -22,7 +22,7 @@ import { db } from "@/shared/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Tooltip } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaList, FaLock, FaTable } from "react-icons/fa";
 
@@ -282,13 +282,25 @@ const UMLEditorWrapper = () => {
               }
             }}
           >
-            <strong className={hasError ? "text-error" : ""}>
+            <strong
+              className={hasError || !rowData.data.type ? "text-error" : ""}
+            >
               {rowData.data.field_name}
             </strong>
-            {rowData.data.type === ColumnType.PK && <FaLock />}
+            {rowData.data.type === ColumnType.PK && (
+              <Tooltip label={<FaLock />} position="bottom">
+                Locked field
+              </Tooltip>
+            )}
+
+            {rowData.data.null && (
+              <Tooltip label={"?"} position="left">
+                Optional Field
+              </Tooltip>
+            )}
             <small>{rowData.data.type || ""}</small>
             {!rowData.data.field_name && !rowData.data.type && (
-              <span className="text-primary">New Row - Click to define</span>
+              <span className="text-danger">New Row - Click to define</span>
             )}
           </div>
         );

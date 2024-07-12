@@ -17,6 +17,7 @@ import {
   ButtonType,
   Option,
   LoadingPage,
+  TextColor,
 } from "@ginger-society/ginger-ui";
 
 const ColumnEditor = ({ close }: EditorProps): ReactNode => {
@@ -74,7 +75,6 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
   };
 
   if (!editorData?.blockId || editorData?.rowIndex === undefined) {
-    console.log(editorData);
     return <LoadingPage />;
   }
 
@@ -101,7 +101,13 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
         <Button
           onClick={handleDelete}
           type={ButtonType.Tertiary}
-          label="Delete"
+          label={<Text color={TextColor.Danger}>Delete</Text>}
+          confirmConfig={{
+            title: "Are you sure ?",
+            description: "This is not reversible",
+            confirmButtonLabel: "Yes, I am sure",
+            okBtnType: ButtonType.Danger,
+          }}
         />
       </div>
       <Input

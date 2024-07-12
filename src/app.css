@@ -119,8 +119,6 @@
   position: fixed;
   bottom: 0px;
   width: 250px;
-  border-top: solid 1px;
-  border-right: solid 1px;
   z-index: 2;
 }
 
@@ -184,6 +182,10 @@
 
 .text-primary {
   color: var(--info-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
 }
 
 /* Schema list view related */
@@ -290,11 +292,8 @@ html[data-theme="dark"] {
 }
 
 .list-hedaer-actions-panel {
-  display: flex;
-  flex-direction: "row";
-  gap: 30px;
   display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 10px;
+  grid-template-columns: 30% calc(70% - 20px);
   align-items: center;
+  grid-gap: 20px;
 }
