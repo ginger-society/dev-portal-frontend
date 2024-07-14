@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "./app.css";
-import "./index.css";
 import "../node_modules/@ginger-society/ginger-ui/dist/esm/index.css";
 
 import { AuthProvider } from "./shared/AuthContext";
@@ -20,5 +19,5 @@ root.render(
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
 );
