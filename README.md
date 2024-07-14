@@ -1,55 +1,53 @@
+# IAM (Identity and Access Management System)
 
-## Main configurations
+IAM is a comprehensive Identity and Access Management system implemented in Rust using Rocket.rs, integrating MongoDB and PostgreSQL with the Diesel ORM.
 
-- React.js 18+ with TypeScript;
-  - You can import "svgs" with `import { ReactComponent as MyIcon } from './icon-path.svg'`;
-  - You can import any other media (images, videos, etc) that is located inside `src` directory;
-  - You can use absolute imports, using `@` as `src` directory;
-- Eslint:
-  - [Standard](https://standardjs.com/) with some modifications;
-  - React Hooks and other React configurations with [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app) (same used in Create React App);
-- Automatic lint and type-checking with Husky before every commit.
+## 🚀 Features
 
-## Usage
+- **MongoDB Integration:** Establish MongoDB connection using Rocket Adhoc fairing.
+- **PostgreSQL with Diesel ORM:** Utilize PostgreSQL with the Diesel ORM for robust data management.
+- **Prometheus Integration:** Monitor and collect metrics using Prometheus.
+- **Custom Error Handling:** Implement custom error handling with Rocket Responder and okapi OpenApiGenerator.
+- **CORS Fairing and Counter Fairing:** Showcase fairing functionality for CORS and custom functionality.
+- **Model Examples:** Define example models like Customer to illustrate Rust structs interacting with MongoDB.
+- **Request Guard:** Implement APIKey as a request guard.
+- **RESTful API Endpoints:** Develop CRUD operations using the Customer model.
+- **OpenAPI Documentation:** Generate comprehensive API documentation using okapi.
+- **Unit Testing:** Includes unit tests for API endpoints.
 
-Install the dependencies:
+## 🔧 Building and Testing
 
-```sh
-yarn install
+### Debug Mode
+
+```bash
+cargo run
 ```
 
-Run dev server:
+### Release Mode
 
-```sh
-yarn dev
+```bash
+cargo build --release && cargo run --release
 ```
 
-You can run type-checking in watch mode in another terminal, if you may:
+### Unit Testing
 
-```sh
-yarn type-check --watch
+```bash
+cargo test
 ```
 
-## Run tests
+## 📋 Project Structure
 
-```sh
-yarn test
-```
+### Functions and Tables
 
-## Production version
+- **Endpoints:**
+  - `POST /change-password`: Allows users to change their password securely.
+  - `POST /register`: Registers new users securely storing hashed passwords.
+  - `POST /login`: Handles user authentication and token generation.
+  - `POST /refresh-token`: Refreshes access tokens using a valid refresh token.
+  - `GET /validate`: Validates JWT tokens and returns user details.
+  - `POST /update-profile`: Updates user profile information (first name, last name, middle name, mobile number).
 
-To generate the production version, you can run:
-
-```sh
-yarn build
-```
-
-All files you have to deploy will be located at the `dist` directory.
-
-### Run production version locally
-
-To check if everything will be ok in production before the deployment, you can run this command after `yarn build`:
-
-```sh
-yarn preview
-```
+- **Tables Used:**
+  - `users`: Stores user information including hashed passwords.
+  - `tokens`: Manages authentication tokens for session management.
+  - Additional tables for group memberships and permissions (if applicable).
