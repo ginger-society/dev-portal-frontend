@@ -201,7 +201,7 @@ const UMLEditorWrapper = () => {
             fromRow,
             toRow,
             marker: MarkerType.Rectangle,
-            label: `Via table ${block.id}_${row.data.target}`,
+            label: `Via table ${block.id}_${row.data.field_name}`,
           });
         } else if (row.data.type === ColumnType.OneToOneField) {
           const block1Id = row.data.target;
