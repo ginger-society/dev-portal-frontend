@@ -30,56 +30,65 @@ import {
   LoadingPage,
 } from "@ginger-society/ginger-ui";
 import { FaPencilAlt } from "react-icons/fa";
-
-interface Document {
-  id: string;
-  name: string;
-  description: string;
-  userId: string;
-}
+import { IAMService, MetadataService } from "@/services";
+import {
+  Dbschema,
+  GetDbschemaResponse,
+} from "@/services/MetadataService_client";
 
 export const DocumentsList: React.FC = () => {
-  const [documents, setDocuments] = useState<Document[]>([]);
+  const [documents, setDocuments] = useState<GetDbschemaResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [editingDocId, setEditingDocId] = useState<string | null>(null);
+  const [description, setDescription] = useState<string>();
+  const [editingDocId, setEditingDocId] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [searchTxt, setSearchTxt] = useState<string>("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await IAMService.routesIndex();
+    };
+    fetchData();
+  }, []);
 
   const fetchSchemas = async () => {
     if (!user) {
       return;
     }
     try {
-      const userId = user.uid;
-      const collectionRef = collection(db, "databaseSchema");
-      const queryConstraints = [where("userId", "==", userId)];
+      // const userId = user.uid;
+      // const collectionRef = collection(db, "databaseSchema");
+      // const queryConstraints = [where("userId", "==", userId)];
 
       if (searchTxt) {
         // queryConstraints.push(where("name", "==", searchTxt));
         // Or use this for partial matches:
-        queryConstraints.push(
-          where("name", ">=", searchTxt),
-          where("name", "<=", searchTxt + "\uf8ff")
-        );
+        // queryConstraints.push(
+        //   where("name", ">=", searchTxt),
+        //   where("name", "<=", searchTxt + "\uf8ff")
+        // );
       }
 
-      const querySnapshot = await getDocs(
-        query(collectionRef, ...queryConstraints)
-      );
-      const docs: Document[] = querySnapshot.docs.map((doc) => {
-        const data = doc.data() as DocumentData;
-        return {
-          id: doc.id,
-          name: data.name || "",
-          description: data.description || "",
-          userId: data.userId || "",
-        };
+      const data = await MetadataService.metadataGetDbschemas({
+        search: searchTxt,
       });
-      setDocuments(docs);
+
+      // const querySnapshot = await getDocs(
+      //   query(collectionRef, ...queryConstraints)
+      // );
+      // const docs: Document[] = querySnapshot.docs.map((doc) => {
+      //   const data = doc.data() as DocumentData;
+      //   return {
+      //     id: doc.id,
+      //     name: data.name || "",
+      //     description: data.description || "",
+      //     userId: data.userId || "",
+      //   };
+      // });
+      setDocuments(data);
       setLoading(false);
     } catch (err: any) {
       console.error("Error fetching documents: ", err);
@@ -98,39 +107,17 @@ export const DocumentsList: React.FC = () => {
       if (!userId) throw new Error("User not authenticated");
 
       if (editingDocId) {
-        // Update existing document
-        const docRef = doc(db, "databaseSchema", editingDocId);
-        await updateDoc(docRef, { name, description });
-
-        // Update local state
-        setDocuments((prevDocs) =>
-          prevDocs.map((doc) =>
-            doc.id === editingDocId ? { ...doc, name, description } : doc
-          )
-        );
-      } else {
-        // Insert new document
-        const docData: Omit<Document, "id"> = {
-          name,
-          description,
-          userId,
-        };
-        await addDoc(collection(db, "databaseSchema"), docData);
-
-        // Fetch documents again to update the list
-        const querySnapshot = await getDocs(
-          query(collection(db, "databaseSchema"), where("userId", "==", userId))
-        );
-        const docs: Document[] = querySnapshot.docs.map((doc) => {
-          const data = doc.data() as DocumentData;
-          return {
-            id: doc.id,
-            name: data.name || "",
-            description: data.description || "",
-            userId: data.userId || "",
-          };
+        await MetadataService.metadataUpdateDbschema({
+          schemaId: editingDocId,
+          updateDbschemaRequest: {
+            name,
+            description,
+          },
         });
-        setDocuments(docs);
+      } else {
+        await MetadataService.metadataCreateDbschema({
+          createDbschemaRequest: { name, description },
+        });
       }
 
       // Reset form
@@ -143,16 +130,16 @@ export const DocumentsList: React.FC = () => {
     }
   };
 
-  const handleEdit = (doc: Document) => {
+  const handleEdit = (doc: GetDbschemaResponse) => {
     setName(doc.name);
     setDescription(doc.description);
     setEditingDocId(doc.id);
     setDialogOpen(true); // Open dialog for editing
   };
 
-  const openDesigner = (doc: Document) => {
+  const openDesigner = (doc: GetDbschemaResponse) => {
     console.log(doc);
-    navigate(`/editor/${doc.id}/${doc.name}`);
+    navigate(`/editor/${doc.id}/main`);
   };
 
   return (

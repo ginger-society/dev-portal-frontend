@@ -18,13 +18,13 @@ import {
   Row,
 } from "@/components/organisms/UMLEditor/types";
 import { AuthContext } from "@/shared/AuthContext";
-import { db } from "@/shared/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, ButtonType, Tooltip } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaList, FaLock, FaTable } from "react-icons/fa";
+import { MetadataService } from "@/services";
+import { GetDbschemaByIdResponse } from "@/services/MetadataService_client";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -47,7 +47,8 @@ const Editor = () => {
   const [editorData, setEditorData] = useState<EditorData>();
   const { user } = useContext(AuthContext);
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
-  const { docId } = useParams<{ docId: string; docName: string }>();
+  const { docId, branch } = useParams<{ docId: string; branch: string }>();
+  const [branchData, setBranchData] = useState<GetDbschemaByIdResponse>();
 
   const [copiedToClipboard, setCopiedToClipboard] = useState<boolean>();
 
@@ -56,29 +57,35 @@ const Editor = () => {
       // Fetch document data with docId
       return;
     }
-    const docRef = doc(db, "schemaDefs", docId);
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const mockBlocks2 = docSnap.data().blocks as BlockData[];
-      const blockData: { [key: string]: Block } = Object.values(
-        mockBlocks2
-      ).reduce((accum, block) => {
-        return {
-          ...accum,
-          [block.id]: {
-            ...block,
-            rows: block.rows || [],
-            ref: React.createRef(),
-            data: block.data || {},
-            type: block.type || BlockType.Table,
-          },
-        };
-      }, {});
-      setBlocks(blockData);
-    } else {
-      console.log("No such document!");
+    const dbschema = await MetadataService.metadataGetDbschemaById({
+      schemaId: parseInt(docId),
+      branch,
+    });
+
+    setBranchData(dbschema);
+
+    if (!dbschema.data) {
+      return;
     }
+
+    const mockBlocks2 = JSON.parse(dbschema.data) as BlockData[];
+
+    const blockData: { [key: string]: Block } = Object.values(
+      mockBlocks2
+    ).reduce((accum, block) => {
+      return {
+        ...accum,
+        [block.id]: {
+          ...block,
+          rows: block.rows || [],
+          ref: React.createRef(),
+          data: block.data || {},
+          type: block.type || BlockType.Table,
+        },
+      };
+    }, {});
+    setBlocks(blockData);
   };
 
   useEffect(() => {
@@ -100,16 +107,19 @@ const Editor = () => {
 
   const handleSave = async () => {
     setSaveLoading(true);
-    const blocksStr = transformDataToSave();
-    if (docId) {
-      await setDoc(doc(db, "schemaDefs", docId), {
-        blocks: blocksStr,
-        userId: user?.uid,
+    const blocksStr = JSON.stringify(transformDataToSave());
+    if (docId && branch && branchData?.id && branchData?.branchId) {
+      await MetadataService.metadataUpdateDbschemaBranch({
+        schemaId: parseInt(docId),
+        updateDbschemaBranchRequest: {
+          branchName: branch,
+          data: blocksStr,
+        },
+        branchId: branchData?.branchId,
       });
+
       setSaveLoading(false);
     }
-
-    // localStorage.setItem("data", JSON.stringify(blocksStr));
   };
 
   function copyToClipboard(text: string) {
@@ -146,13 +156,13 @@ const Editor = () => {
       <>
         <HeaderContainer>
           <div className={styles["actions-container"]}>
+            Editing : {branchData?.name}
             <Button
               onClick={handleSave}
               label={saveLoading ? "Saving..." : "Save"}
               loading={saveLoading}
               type={ButtonType.Primary}
             ></Button>
-
             <Button
               onClick={handleSchemaCopy}
               label={copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
