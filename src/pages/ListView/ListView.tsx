@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/shared/AuthContext";
+import { debounce } from "@/shared/debounce"; // Import the debounce function
 
-import styles from "./listview.module.scss";
-import HeaderContainer from "@/components/atoms/HeaderContainer";
 import {
   Button,
   ButtonType,
@@ -20,12 +19,10 @@ import {
   Pagination,
 } from "@ginger-society/ginger-ui";
 import { FaPencilAlt } from "react-icons/fa";
-import { IAMService, MetadataService } from "@/services";
-import {
-  Dbschema,
-  GetDbschemaResponse,
-} from "@/services/MetadataService_client";
-import { sideMenuOptions } from "./sideMenuConfig";
+import { MetadataService } from "@/services";
+import { GetDbschemaResponse } from "@/services/MetadataService_client";
+import ListViewSkeleton from "./ListView.skeleton";
+import { PageLayout } from "@/shared/PageLayout";
 
 export const DocumentsList: React.FC = () => {
   const [documents, setDocuments] = useState<GetDbschemaResponse[]>([]);
@@ -38,18 +35,12 @@ export const DocumentsList: React.FC = () => {
   const { user } = useContext(AuthContext);
   const [searchTxt, setSearchTxt] = useState<string>("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await IAMService.routesIndex();
-    };
-    fetchData();
-  }, []);
-
   const fetchSchemas = async () => {
     if (!user) {
       return;
     }
     try {
+      // setLoading(true);
       const data = await MetadataService.metadataGetDbschemas({
         search: searchTxt,
       });
@@ -61,8 +52,12 @@ export const DocumentsList: React.FC = () => {
     }
   };
 
-  useEffect(() => {
+  const debouncedFetchSchemas = debounce(() => {
     fetchSchemas();
+  }, 1200);
+
+  useEffect(() => {
+    debouncedFetchSchemas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, searchTxt]);
 
@@ -109,12 +104,6 @@ export const DocumentsList: React.FC = () => {
     navigate(`/editor/${doc.id}/main`);
   };
 
-  const [activeItem, setActiveItem] = useState("home");
-
-  const handleMenuChange = (newId: string) => {
-    setActiveItem(newId);
-  };
-
   const [pagination, setPagination] = useState<{
     offset: number;
     limit: number;
@@ -128,76 +117,68 @@ export const DocumentsList: React.FC = () => {
   };
 
   return (
-    <div className={styles["container"]}>
-      <HeaderContainer />
-
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        <div className={styles["list-page-layout"]}>
-          <SideMenu
-            options={sideMenuOptions}
-            active={activeItem}
-            onChange={handleMenuChange}
+    <PageLayout>
+      <div className="schema-list">
+        <div className="list-hedaer-actions-panel">
+          <Button
+            fullWidth
+            onClick={() => {
+              setName("");
+              setDescription("");
+              setEditingDocId(null);
+              setDialogOpen(true);
+            }}
+            type={ButtonType.Primary}
+            label="Create Schema"
           />
-          <div className="schema-list">
-            <div className="list-hedaer-actions-panel">
-              <Button
-                fullWidth
-                onClick={() => {
-                  setName("");
-                  setDescription("");
-                  setEditingDocId(null);
-                  setDialogOpen(true);
-                }}
-                type={ButtonType.Primary}
-                label="Create Schema"
-              />
 
-              <Input
-                placeholder="Search..."
-                onChange={({ target: { value } }) => {
-                  setSearchTxt(value);
-                }}
-                value={searchTxt}
-              />
-            </div>
-
-            <ul className="schema-list-container">
-              {documents.map((doc) => (
-                <li
-                  key={doc.id}
-                  className="card schema-item"
-                  onClick={() => openDesigner(doc)}
-                >
-                  <div className="schema-item-container">
-                    <span
-                      className="edit-cta"
-                      onClick={(e) => {
-                        handleEdit(doc);
-                        e.stopPropagation();
-                      }}
-                    >
-                      <FaPencilAlt />
-                    </span>
-                    <div className="schema-item">
-                      <Text size={TextSize.Large}>{doc.name}</Text>
-                      <Text tag="p">{doc.description}</Text>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <Pagination
-              totalRows={1100}
-              initialRowsPerPage={pagination.limit}
-              initialOffset={pagination.offset}
-              onChange={handlePaginationOnChange}
-            />
-          </div>
+          <Input
+            placeholder="Search..."
+            onChange={({ target: { value } }) => {
+              setSearchTxt(value);
+            }}
+            value={searchTxt}
+            clearable
+          />
         </div>
-      )}
+
+        {loading ? (
+          <ListViewSkeleton />
+        ) : (
+          <ul className="schema-list-container">
+            {documents.map((doc) => (
+              <li
+                key={doc.id}
+                className="card schema-item"
+                onClick={() => openDesigner(doc)}
+              >
+                <div className="schema-item-container">
+                  <span
+                    className="edit-cta"
+                    onClick={(e) => {
+                      handleEdit(doc);
+                      e.stopPropagation();
+                    }}
+                  >
+                    <FaPencilAlt />
+                  </span>
+                  <div className="schema-item">
+                    <Text size={TextSize.Large}>{doc.name}</Text>
+                    <Text tag="p">{doc.description}</Text>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <Pagination
+          totalRows={1100}
+          initialRowsPerPage={pagination.limit}
+          initialOffset={pagination.offset}
+          onChange={handlePaginationOnChange}
+        />
+      </div>
 
       <Modal
         isOpen={dialogOpen}
@@ -229,6 +210,8 @@ export const DocumentsList: React.FC = () => {
           </div>
         </ModalBody>
       </Modal>
-    </div>
+    </PageLayout>
   );
 };
+
+export default DocumentsList;

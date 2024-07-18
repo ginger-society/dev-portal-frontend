@@ -58,7 +58,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
           <Header
             brandName={
               <span onClick={navigateToHome} className={styles["home-link"]}>
-                <strong>Ginger Society</strong> &gt; DB Designer Home
+                <strong>Ginger Society</strong> &gt; Metadata Service
               </span>
             }
             user={{

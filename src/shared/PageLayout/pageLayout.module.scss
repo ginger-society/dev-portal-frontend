@@ -5,5 +5,9 @@
 
 .list-page-layout {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 51px);
+}
+
+.children-container {
+  width: 100%;
 }
