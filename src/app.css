@@ -222,7 +222,6 @@ code {
   cursor: pointer;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
-  height: 200px;
   background-color: white;
 }
 
@@ -241,9 +240,10 @@ code {
 }
 
 .schema-list {
-  width: 80%;
-  padding-left: 5%;
+  width: 100%;
+  padding-left: 100px;
   padding-top: 50px;
+  padding-right: 100px;
 }
 /* Login page */
 

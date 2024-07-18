@@ -1,10 +1,9 @@
-import { auth } from "@/shared/firebase";
-import { signOut } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Header, AuthHeartBeat } from "@ginger-society/ginger-ui";
 import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
+import { AuthContext } from "@/shared/AuthContext";
 interface HeaderContainerProps {
   children?: React.ReactNode;
 }
@@ -13,6 +12,8 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   const [schemaIdInView, setSchemaIdInView] = useState<string | null>();
   const navigate = useNavigate();
   const { docId, docName } = useParams<{ docId: string; docName?: string }>();
+
+  const { user } = useContext(AuthContext);
 
   const router = useLocation();
 
@@ -26,7 +27,13 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
 
   const logOut = async () => {
     try {
-      await signOut(auth);
+      const refreshToken = localStorage.getItem("refresh_token");
+      if (refreshToken) {
+        await IAMService.identityLogout({ logoutRequest: { refreshToken } });
+      }
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("access_token");
+      location.href = "http://localhost:3001#random-id/login";
     } catch (err) {
       console.error(err);
     }
@@ -45,7 +52,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
 
   return (
     <>
-      {auth.currentUser?.email && (
+      {user && (
         <>
           <AuthHeartBeat refreshTokenFn={refreshTokenFn} />
           <Header
@@ -55,8 +62,8 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
               </span>
             }
             user={{
-              name: auth.currentUser?.email.split("@")[0],
-              email: auth.currentUser?.email,
+              name: user?.firstName || user.sub.split("@")[0],
+              email: user?.sub,
             }}
             icon={<img className={styles["icon"]} src="/ginger-db.png"></img>}
             onLogout={logOut}

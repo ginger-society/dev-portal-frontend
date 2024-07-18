@@ -1,7 +1,7 @@
-import { User, onAuthStateChanged } from "firebase/auth";
 import { createContext, useState, useEffect } from "react";
-import { auth } from "@/shared/firebase";
 import router from "./router";
+import { IAMService } from "@/services";
+import { ValidateTokenResponse } from "@/services/IAMService_client";
 
 const initialState = {
   isAuthenticated: null,
@@ -14,7 +14,7 @@ interface AppContextInterface {
   loading: boolean;
   setIsAuthenticated?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
-  user: User | null;
+  user: ValidateTokenResponse | null;
 }
 
 export const AuthContext = createContext<AppContextInterface>(initialState);
@@ -24,23 +24,34 @@ interface AuthProviderI {
 
 export const AuthProvider = ({ children }: AuthProviderI) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // null represents the initial loading state
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ValidateTokenResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const checkSession = async () => {
+      try {
+        const userData = await IAMService.identityValidateToken();
         setIsAuthenticated(true);
-        setUser(user);
+        setUser(userData);
         setLoading(false);
-      } else {
-        console.log({ user });
+      } catch (e) {
         setUser(null);
-        router.navigate("/login");
+        location.href = "http://localhost:3001#random-id/login";
         setIsAuthenticated(false);
       }
-    });
-    return () => unsubscribe();
+    };
+
+    checkSession();
+
+    // const unsubscribe = onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     setIsAuthenticated(true);
+    //     setUser(user);
+    //     setLoading(false);
+    //   } else {
+
+    //   }
+    // });
   }, []);
 
   const value = {

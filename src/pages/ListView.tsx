@@ -1,16 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  DocumentData,
-  query,
-  where,
-  doc,
-} from "firebase/firestore";
-import { db } from "@/shared/firebase";
-
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/shared/AuthContext";
 
@@ -29,6 +17,7 @@ import {
   TextSize,
   LoadingPage,
   SideMenu,
+  Pagination,
 } from "@ginger-society/ginger-ui";
 import { FaPencilAlt } from "react-icons/fa";
 import { IAMService, MetadataService } from "@/services";
@@ -61,35 +50,10 @@ export const DocumentsList: React.FC = () => {
       return;
     }
     try {
-      // const userId = user.uid;
-      // const collectionRef = collection(db, "databaseSchema");
-      // const queryConstraints = [where("userId", "==", userId)];
-
-      if (searchTxt) {
-        // queryConstraints.push(where("name", "==", searchTxt));
-        // Or use this for partial matches:
-        // queryConstraints.push(
-        //   where("name", ">=", searchTxt),
-        //   where("name", "<=", searchTxt + "\uf8ff")
-        // );
-      }
-
       const data = await MetadataService.metadataGetDbschemas({
         search: searchTxt,
       });
 
-      // const querySnapshot = await getDocs(
-      //   query(collectionRef, ...queryConstraints)
-      // );
-      // const docs: Document[] = querySnapshot.docs.map((doc) => {
-      //   const data = doc.data() as DocumentData;
-      //   return {
-      //     id: doc.id,
-      //     name: data.name || "",
-      //     description: data.description || "",
-      //     userId: data.userId || "",
-      //   };
-      // });
       setDocuments(data);
       setLoading(false);
     } catch (err: any) {
@@ -104,7 +68,7 @@ export const DocumentsList: React.FC = () => {
 
   const insertOrUpdateDocument = async () => {
     if (!user) return;
-    const userId = user.uid;
+    const userId = user.userId;
     try {
       if (!userId) throw new Error("User not authenticated");
 
@@ -127,6 +91,7 @@ export const DocumentsList: React.FC = () => {
       setDescription("");
       setEditingDocId(null);
       setDialogOpen(false); // Close dialog
+      fetchSchemas();
     } catch (err: any) {
       console.error("Error adding or updating document: ", err);
     }
@@ -148,6 +113,18 @@ export const DocumentsList: React.FC = () => {
 
   const handleMenuChange = (newId: string) => {
     setActiveItem(newId);
+  };
+
+  const [pagination, setPagination] = useState<{
+    offset: number;
+    limit: number;
+  }>({
+    offset: 19,
+    limit: 10,
+  });
+
+  const handlePaginationOnChange = (limit: number, offset: number) => {
+    setPagination({ offset, limit });
   };
 
   return (
@@ -211,6 +188,13 @@ export const DocumentsList: React.FC = () => {
                 </li>
               ))}
             </ul>
+
+            <Pagination
+              totalRows={1100}
+              initialRowsPerPage={pagination.limit}
+              initialOffset={pagination.offset}
+              onChange={handlePaginationOnChange}
+            />
           </div>
         </div>
       )}
