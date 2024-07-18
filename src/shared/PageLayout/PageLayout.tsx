@@ -5,6 +5,7 @@ import { ROUTES, sideMenuOptions } from "./sideMenuConfig";
 import { ReactNode, useEffect, useState } from "react";
 import router from "../router";
 import { useLocation } from "react-router-dom";
+import BreadcrumContainer from "@/components/atoms/BreadcrumbContainer";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -14,8 +15,6 @@ const PageLayout = ({ children }: PageLayoutProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location);
-
     Object.keys(ROUTES).forEach((key) => {
       if (ROUTES[key].url === location.pathname) {
         setActiveItem(key);
@@ -39,7 +38,10 @@ const PageLayout = ({ children }: PageLayoutProps) => {
           active={activeItem}
           onChange={handleMenuChange}
         />
-        <div className={styles["children-container"]}>{children}</div>
+        <div className={styles["children-container"]}>
+          <BreadcrumContainer />
+          {children}
+        </div>
       </div>
     </div>
   );

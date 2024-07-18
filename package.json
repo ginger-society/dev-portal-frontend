@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@ginger-society/ginger-ui": "0.32.0",
+    "@ginger-society/ginger-ui": "0.34.0",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "^10.4.18",
     "babel-eslint": "10.1.0",

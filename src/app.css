@@ -213,6 +213,7 @@ code {
   gap: 10px;
   margin-top: 20px;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .schema-item-container {
@@ -240,9 +241,7 @@ code {
 }
 
 .schema-list {
-  padding-left: 100px;
   padding-top: 50px;
-  padding-right: 100px;
 }
 /* Login page */
 

@@ -18,7 +18,7 @@ import {
   SideMenu,
   Pagination,
 } from "@ginger-society/ginger-ui";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { MetadataService } from "@/services";
 import { GetDbschemaResponse } from "@/services/MetadataService_client";
 import ListViewSkeleton from "./ListView.skeleton";
@@ -130,6 +130,7 @@ export const DocumentsList: React.FC = () => {
             }}
             type={ButtonType.Primary}
             label="Create Schema"
+            endEnhancer={<FaPlus />}
           />
 
           <Input
