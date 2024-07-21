@@ -59,7 +59,7 @@ const Editor = () => {
     }
 
     const dbschema = await MetadataService.metadataGetDbschemaById({
-      schemaId: parseInt(docId),
+      schemaId: docId,
       branch,
     });
 
@@ -110,7 +110,7 @@ const Editor = () => {
     const blocksStr = JSON.stringify(transformDataToSave());
     if (docId && branch && branchData?.id && branchData?.branchId) {
       await MetadataService.metadataUpdateDbschemaBranch({
-        schemaId: parseInt(docId),
+        schemaId: docId,
         updateDbschemaBranchRequest: {
           branchName: branch,
           data: blocksStr,

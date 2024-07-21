@@ -289,10 +289,16 @@ html[data-theme="dark"] {
 }
 
 .schema-item {
+  display: flex;
+  flex-direction: column;
 }
 .schema-item h1 {
   font-size: 18px;
   font-weight: 700;
+}
+.card-info-section {
+  display: flex;
+  justify-content: space-around;
 }
 
 .heading-txt {

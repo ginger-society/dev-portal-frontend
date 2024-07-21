@@ -17,6 +17,8 @@ import {
   LoadingPage,
   SideMenu,
   Pagination,
+  useSnackbar,
+  SnackbarTimer,
 } from "@ginger-society/ginger-ui";
 import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { MetadataService } from "@/services";
@@ -34,6 +36,8 @@ export const DocumentsList: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [searchTxt, setSearchTxt] = useState<string>("");
+
+  const { show } = useSnackbar();
 
   const fetchSchemas = async () => {
     if (!user) {
@@ -101,7 +105,7 @@ export const DocumentsList: React.FC = () => {
 
   const openDesigner = (doc: GetDbschemaResponse) => {
     console.log(doc);
-    navigate(`/editor/${doc.id}/main`);
+    navigate(`/editor/${doc.identifier}/main`);
   };
 
   const [pagination, setPagination] = useState<{
@@ -114,6 +118,18 @@ export const DocumentsList: React.FC = () => {
 
   const handlePaginationOnChange = (limit: number, offset: number) => {
     setPagination({ offset, limit });
+  };
+
+  const copyIdentifier = (id: string) => {
+    navigator.clipboard
+      .writeText(`db-compose init --repo ${id}/main`)
+      .then(() => {
+        console.log("Text copied to clipboard");
+        show("ID copied to clipboard", SnackbarTimer.Medium);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
   };
 
   return (
@@ -165,6 +181,18 @@ export const DocumentsList: React.FC = () => {
                   </span>
                   <div className="schema-item">
                     <Text size={TextSize.Large}>{doc.name}</Text>
+                    <Text size={TextSize.Large}>
+                      {
+                        <span
+                          onClick={(e) => {
+                            doc.identifier && copyIdentifier(doc.identifier);
+                            e.stopPropagation();
+                          }}
+                        >
+                          {doc.identifier}
+                        </span>
+                      }
+                    </Text>
                     <Text tag="p">{doc.description}</Text>
                   </div>
                 </div>
