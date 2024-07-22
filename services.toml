@@ -6,3 +6,8 @@ dev = "http://localhost:8080"
 
 [services.MetadataService]
 dev = "http://localhost:8081"
+
+[urls]
+dev = "http://localhost:3000"
+prod = "http://localhost:8081"
+stage = "http://localhost:8081"
