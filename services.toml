@@ -1,5 +1,6 @@
 dir = "src/services"
 lang = "TS"
+service_type = "Portal"
 
 [services.IAMService]
 dev = "http://localhost:8080"
