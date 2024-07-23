@@ -74,23 +74,46 @@ const ServicesListView = () => {
               >
                 <>
                   <ul className="card schema-item ">
-                    <Text size={TextSize.Large}>{service.identifier}</Text>
+                    <Text size={TextSize.Large}>
+                      {service.identifier} - {service.serviceType}
+                    </Text>
                     <div className="card-info-section">
                       <div>
                         <Text color={TextColor.Muted}>Environments</Text>
                         {service.envs.map((env) => {
                           return (
                             <li
-                              onClick={() =>
-                                openSwagger(service.identifier, env)
-                              }
+                              onClick={() => {
+                                if (service.serviceType !== "Portal") {
+                                  openSwagger(service.identifier, env);
+                                }
+                              }}
                             >
                               <div className="">
-                                <Text>{env.envKey}</Text>(
-                                <Text>
-                                  Last updated :{env.updatedAt?.toDateString()}
+                                <Text weight={TextWeight.Bold}>
+                                  {env.envKey}
                                 </Text>
-                                )
+                                <br />
+                                <ul>
+                                  <li>
+                                    <Text>
+                                      <strong>Last updated</strong> :
+                                      {env.updatedAt?.toDateString()}
+                                    </Text>
+                                  </li>
+                                  <li>
+                                    <Text>
+                                      <strong>Env Url :</strong>
+                                      {env.baseUrl}
+                                    </Text>
+                                  </li>
+                                  <li>
+                                    <Text>
+                                      <strong>Version :</strong>
+                                      {env.version}
+                                    </Text>
+                                  </li>
+                                </ul>
                               </div>
                             </li>
                           );

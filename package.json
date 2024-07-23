@@ -63,6 +63,7 @@
     ]
   },
   "name": "@ginger-society/db-designer",
+  "description": "Metadata service portal",
   "overrides": {
     "graphql": "16.7.1"
   },
