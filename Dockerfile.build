@@ -34,8 +34,6 @@ RUN openapi-generator-cli version
 
 COPY . .
 
-RUN rm -r dist
-
 # Set environment variables using build arguments
 ARG GINGER_TOKEN
 ARG AWS_ACCESS_KEY_ID
