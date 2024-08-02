@@ -25,6 +25,7 @@ import { MetadataService } from "@/services";
 import { GetDbschemaResponse } from "@/services/MetadataService_client";
 import ListViewSkeleton from "./ListView.skeleton";
 import { PageLayout } from "@/shared/PageLayout";
+import BreadcrumContainer from "@/components/atoms/BreadcrumbContainer";
 
 export const DocumentsList: React.FC = () => {
   const [documents, setDocuments] = useState<GetDbschemaResponse[]>([]);
@@ -134,6 +135,8 @@ export const DocumentsList: React.FC = () => {
 
   return (
     <PageLayout>
+      <BreadcrumContainer />
+
       <div className="schema-list">
         <div className="list-hedaer-actions-panel">
           <Button

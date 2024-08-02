@@ -17,6 +17,8 @@ import {
   ServicesTrimmedResponse,
 } from "@/services/MetadataService_client";
 import router from "@/shared/router";
+import BreadcrumContainer from "@/components/atoms/BreadcrumbContainer";
+import { FaJs, FaPython, FaRust } from "react-icons/fa";
 
 const ServicesListView = () => {
   const [searchTxt, setSearchTxt] = useState<string>("");
@@ -50,6 +52,8 @@ const ServicesListView = () => {
 
   return (
     <PageLayout>
+      <BreadcrumContainer />
+
       <div className="schema-list">
         <div className="list-hedaer-actions-panel">
           <Input
@@ -74,9 +78,16 @@ const ServicesListView = () => {
               >
                 <>
                   <ul className="card schema-item ">
-                    <Text size={TextSize.Large}>
-                      {service.identifier} - {service.serviceType}
-                    </Text>
+                    <div className="flex-column">
+                      <Text size={TextSize.Large}>{service.identifier}</Text>
+                      <Text> {service.serviceType}</Text>
+                      <Text size={TextSize.XLarge}>
+                        {service.lang === "rust" && <FaRust />}
+                        {service.lang === "typescript" && <FaJs />}
+                        {service.lang === "python" && <FaPython />}
+                      </Text>
+                    </div>
+
                     <div className="card-info-section">
                       <div>
                         <Text color={TextColor.Muted}>Environments</Text>

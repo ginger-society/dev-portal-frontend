@@ -319,3 +319,14 @@ html[data-theme="dark"] {
   align-items: center;
   grid-gap: 20px;
 }
+
+.flex {
+  display: flex;
+  gap: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
