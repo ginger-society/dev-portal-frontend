@@ -1,0 +1,15 @@
+{
+  "name": "jslib1",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "jslib",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "unifiedjs.vscode-mdx",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
