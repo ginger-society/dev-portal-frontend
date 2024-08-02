@@ -17,9 +17,13 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build Docker image
-        run: docker build . -t db-designer-builder -f Dockerfile.build \
-             --build-arg GINGER_TOKEN=${{ secrets.GINGER_TOKEN }} \
-             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
-             --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }}
+        run: |
+          docker buildx build . \
+            -t db-designer-builder \
+            -f Dockerfile.build \
+            --build-arg GINGER_TOKEN=${{ secrets.GINGER_TOKEN }} \
+            --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+            --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+            --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
+            --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }} \
+            --load
