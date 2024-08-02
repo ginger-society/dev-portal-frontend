@@ -1,0 +1,64 @@
+FROM debian:bullseye-slim
+
+# Install bash
+RUN apt update && apt install -y bash curl unzip
+
+# Use bash as the default shell
+SHELL ["/bin/bash", "-c"]
+
+WORKDIR /app
+
+# Install necessary packages
+RUN apt update && apt install -y curl nano make gcc wget build-essential procps
+
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
+RUN apt install -y nodejs
+
+# Install yarn globally
+RUN npm install -g yarn
+
+# Install Java
+RUN apt install -y default-jdk
+
+# Install OpenAPI Generator CLI globally
+RUN npm install @openapitools/openapi-generator-cli -g
+
+# Install AWS CLI
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
+
+# Verify OpenAPI Generator installation
+RUN openapi-generator-cli version
+
+COPY . .
+
+RUN rm -r dist
+
+# Set environment variables using build arguments
+ARG GINGER_TOKEN
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_DEFAULT_REGION
+ARG DISTRIBUTION_ID
+
+ENV GINGER_TOKEN=$GINGER_TOKEN
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+ENV DISTRIBUTION_ID=$DISTRIBUTION_ID
+
+# Run the ginger-connector.debian commands
+RUN ./ginger-connector.debian refer stage
+RUN ./ginger-connector.debian connect stage
+
+# Install dependencies
+RUN yarn
+
+# Build the project
+RUN yarn build
+
+RUN aws s3 cp dist/ s3://dev-portal-fe-staging/ --recursive
+
+RUN aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"

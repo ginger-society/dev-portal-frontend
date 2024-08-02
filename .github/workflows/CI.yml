@@ -5,22 +5,21 @@ on:
   pull_request:
     branches: ['main']
 jobs:
-  test:
+  build:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: yarn install
-      - name: Test package
-        run: yarn test
-      - name: Test lint
-        run: yarn lint
-      - name: Build package
-        run: yarn build
-      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build . -t db-designer-builder -f Dockerfile.build \
+             --build-arg GINGER_TOKEN=${{ secrets.GINGER_TOKEN }} \
+             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
+             --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }}

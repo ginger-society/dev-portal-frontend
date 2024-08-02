@@ -1,7 +1,7 @@
 {
-  "name": "jslib1",
+  "name": "db-designer",
   "dockerComposeFile": "../docker-compose.yml",
-  "service": "jslib",
+  "service": "db-designer",
   "workspaceFolder": "/workspace",
   "customizations": {
     "vscode": {

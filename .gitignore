@@ -9,3 +9,4 @@ src/services/IAMService_client
 src/services/MetadataService_client
 .ginger.tmp
 src/shared/references.ts
+*.lock

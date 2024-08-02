@@ -18,8 +18,11 @@ RUN echo "zsh" >> ~/.bashrc
 RUN sh -c "$(curl -fsSL https://deb.nodesource.com/setup_current.x)" -y
 RUN apt install nodejs -y
 
-# Install pnpm globally
-RUN npm install -g pnpm
+# Install yarn globally
+RUN npm install -g yarn
+
+# Install Java
+RUN apt install default-jdk -y
 
 # Install OpenAPI Generator
 RUN wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.2.0/openapi-generator-cli-6.2.0.jar -O /usr/local/bin/openapi-generator-cli.jar
@@ -29,3 +32,6 @@ RUN echo 'alias openapi-generator="java -jar /usr/local/bin/openapi-generator-cl
 # Make sure aliases are available in the current session
 RUN zsh -c "source ~/.zshrc"
 RUN bash -c "source ~/.bashrc"
+
+ 
+

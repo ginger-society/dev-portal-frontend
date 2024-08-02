@@ -99,7 +99,7 @@ export const DocumentsList: React.FC = () => {
 
   const handleEdit = (doc: GetDbschemaResponse) => {
     setName(doc.name);
-    setDescription(doc.description);
+    setDescription(doc.description || "");
     setEditingDocId(doc.id);
     setDialogOpen(true); // Open dialog for editing
   };

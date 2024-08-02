@@ -4,6 +4,7 @@ import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
 import { AuthContext } from "@/shared/AuthContext";
+import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 interface HeaderContainerProps {
   children?: React.ReactNode;
 }
@@ -33,7 +34,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
       }
       localStorage.removeItem("refresh_token");
       localStorage.removeItem("access_token");
-      location.href = "http://localhost:3001#random-id/login";
+      location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#random-id/login`;
     } catch (err) {
       console.error(err);
     }
