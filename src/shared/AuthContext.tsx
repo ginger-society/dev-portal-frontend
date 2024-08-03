@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: AuthProviderI) => {
         setLoading(false);
       } catch (e) {
         setUser(null);
-        location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#random-id/login`;
+        location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login`;
         setIsAuthenticated(false);
       }
     };
