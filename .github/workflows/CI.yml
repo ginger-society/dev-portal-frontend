@@ -19,7 +19,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker buildx build . \
-            -t db-designer-builder \
+            -t deb-portal-builder \
             -f Dockerfile.build \
             --build-arg GINGER_TOKEN=${{ secrets.GINGER_TOKEN }} \
             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \

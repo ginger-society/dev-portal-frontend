@@ -4,12 +4,14 @@ import Editor from "@/pages/Editor";
 import HandleNavigation from "@/pages/HandleAuth";
 import { ListViewPage } from "@/pages/ListView";
 import { ServicesListViewPage } from "@/pages/ServicesListView";
+import { PackagesListViewPage } from "@/pages/PackagesListView";
 import { SwaggerViewPage } from "@/pages/SwaggerView";
 
 const AuthenticatedHome = withAuthHOC(Editor);
 const AuthenticatedListView = withAuthHOC(ListViewPage);
 const AuthenticatedServicesListView = withAuthHOC(ServicesListViewPage);
 const AuthenticatedSwaggerViewPage = withAuthHOC(SwaggerViewPage);
+const AuthenticatedPackagesListView = withAuthHOC(PackagesListViewPage);
 
 const router = createHashRouter([
   {
@@ -23,6 +25,10 @@ const router = createHashRouter([
   {
     path: "/services",
     element: <AuthenticatedServicesListView />,
+  },
+  {
+    path: "/packages",
+    element: <AuthenticatedPackagesListView />,
   },
   {
     path: "/services/swagger/:service_identifier/:env_id",

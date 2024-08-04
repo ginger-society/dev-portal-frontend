@@ -62,12 +62,8 @@
       "public"
     ]
   },
-  "name": "@ginger-society/db-designer",
-  "description": "Metadata service portal",
-  "overrides": {
-    "graphql": "16.7.1"
-  },
-  "private": true,
+  "name": "@ginger-society/dev-portal",
+  "description": "Dev portal frontend",
   "scripts": {
     "book": "ginger-book serve",
     "build": "tsc && vite build",

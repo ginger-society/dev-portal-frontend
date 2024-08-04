@@ -1,7 +1,7 @@
 {
-  "name": "db-designer",
+  "name": "dev-portal",
   "dockerComposeFile": "../docker-compose.yml",
-  "service": "db-designer",
+  "service": "dev-portal",
   "workspaceFolder": "/workspace",
   "customizations": {
     "vscode": {
