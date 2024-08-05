@@ -219,7 +219,9 @@ export const DocumentsList: React.FC = () => {
         onClose={() => setDialogOpen(false)}
         size={ModalSize.Large}
       >
-        <ModalHeader>Create new schema</ModalHeader>
+        <ModalHeader>
+          {editingDocId ? "Create new schema" : `Update : ${editingDocId}`}
+        </ModalHeader>
         <ModalBody>
           <Input
             label="Organization ID"
