@@ -299,6 +299,7 @@ html[data-theme="dark"] {
 .card-info-section {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 .heading-txt {

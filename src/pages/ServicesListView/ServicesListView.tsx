@@ -79,8 +79,14 @@ const ServicesListView = () => {
                 <>
                   <ul className="card schema-item ">
                     <div className="flex-column">
-                      <Text size={TextSize.Large}>{service.identifier}</Text>
+                      <Text size={TextSize.Large}>
+                        @{service.organizationId}/{service.identifier}
+                      </Text>
                       <Text> {service.serviceType}</Text>
+                      <Text>
+                        {" "}
+                        <strong>Description</strong> {service.description}
+                      </Text>
                       <Text size={TextSize.XLarge}>
                         {service.lang === "rust" && <FaRust />}
                         {service.lang === "typescript" && <FaJs />}
@@ -89,8 +95,8 @@ const ServicesListView = () => {
                     </div>
 
                     <div className="card-info-section">
-                      <div>
-                        <Text color={TextColor.Muted}>Environments</Text>
+                      <Text color={TextColor.Muted}>Environments</Text>
+                      <div style={{ display: "flex", gap: "20px" }}>
                         {service.envs.map((env) => {
                           return (
                             <li
@@ -100,26 +106,34 @@ const ServicesListView = () => {
                                 }
                               }}
                             >
-                              <div className="">
-                                <Text weight={TextWeight.Bold}>
+                              <div
+                                className=""
+                                style={{
+                                  background:
+                                    "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(193,110,110,1) 50%, rgba(252,176,69,1) 100%)",
+                                  borderRadius: "20px",
+                                  padding: "20px",
+                                }}
+                              >
+                                <Text invertTheme weight={TextWeight.Bold}>
                                   {env.envKey}
                                 </Text>
                                 <br />
                                 <ul>
                                   <li>
-                                    <Text>
+                                    <Text invertTheme>
                                       <strong>Last updated</strong> :
                                       {env.updatedAt?.toDateString()}
                                     </Text>
                                   </li>
                                   <li>
-                                    <Text>
+                                    <Text invertTheme>
                                       <strong>Env Url :</strong>
                                       {env.baseUrl}
                                     </Text>
                                   </li>
                                   <li>
-                                    <Text>
+                                    <Text invertTheme>
                                       <strong>Version :</strong>
                                       {env.version}
                                     </Text>

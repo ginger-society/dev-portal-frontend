@@ -37,6 +37,7 @@ export const DocumentsList: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [searchTxt, setSearchTxt] = useState<string>("");
+  const [orgId, setOrgId] = useState<string>("");
 
   const { show } = useSnackbar();
 
@@ -78,11 +79,12 @@ export const DocumentsList: React.FC = () => {
           updateDbschemaRequest: {
             name,
             description,
+            organisationId: orgId,
           },
         });
       } else {
         await MetadataService.metadataCreateDbschema({
-          createDbschemaRequest: { name, description },
+          createDbschemaRequest: { name, description, organisationId: orgId },
         });
       }
 
@@ -219,6 +221,13 @@ export const DocumentsList: React.FC = () => {
       >
         <ModalHeader>Create new schema</ModalHeader>
         <ModalBody>
+          <Input
+            label="Organization ID"
+            type="text"
+            value={orgId}
+            onChange={(e) => setOrgId(e.target.value)}
+            required
+          />
           <Input
             label="Name"
             type="text"

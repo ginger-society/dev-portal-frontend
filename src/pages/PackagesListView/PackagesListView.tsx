@@ -80,10 +80,13 @@ const PackagesListView = () => {
                 <>
                   <ul className="card schema-item ">
                     <div className="flex-column">
-                      <Text size={TextSize.Large}>{service.identifier}</Text>
-                      <Text> {service.identifier}</Text>
+                      <Text size={TextSize.Large}>
+                        @{service.organizationId}/{service.identifier}
+                      </Text>
                       <Text>
-                        {" "}
+                        <strong>Description</strong> {service.description}
+                      </Text>
+                      <Text>
                         <strong>Type:</strong> {service.packageType}
                       </Text>
                       <Text size={TextSize.XLarge}>
