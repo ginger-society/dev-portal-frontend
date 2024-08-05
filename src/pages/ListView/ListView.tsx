@@ -185,7 +185,9 @@ export const DocumentsList: React.FC = () => {
                     <FaPencilAlt />
                   </span>
                   <div className="schema-item">
-                    <Text size={TextSize.Large}>{doc.name}</Text>
+                    <Text size={TextSize.Large}>
+                      @{doc.organizationId}/{doc.name}
+                    </Text>
                     <Text size={TextSize.Large}>
                       {
                         <span
