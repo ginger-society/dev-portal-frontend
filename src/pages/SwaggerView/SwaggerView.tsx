@@ -50,7 +50,7 @@ const SwaggerViewPage = () => {
       }
     };
     fetchData();
-  }, [service_identifier, env_id]);
+  }, [service_identifier, env_id, org_id]);
 
   const token = useMemo(() => {
     return localStorage.getItem("access_token");
