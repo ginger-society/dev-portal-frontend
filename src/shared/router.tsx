@@ -31,7 +31,7 @@ const router = createHashRouter([
     element: <AuthenticatedPackagesListView />,
   },
   {
-    path: "/services/swagger/:service_identifier/:env_id",
+    path: "/services/swagger/:org_id/:service_identifier/:env_id",
     element: <AuthenticatedSwaggerViewPage />,
   },
   {

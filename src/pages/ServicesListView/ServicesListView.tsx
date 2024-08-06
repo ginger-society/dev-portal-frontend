@@ -46,8 +46,12 @@ const ServicesListView = () => {
     setPagination({ offset, limit });
   };
 
-  const openSwagger = (identifier: string, env: ServicesEnvTrimmedResponse) => {
-    router.navigate(`/services/swagger/${identifier}/${env.envKey}`);
+  const openSwagger = (
+    org_id: string,
+    identifier: string,
+    env: ServicesEnvTrimmedResponse
+  ) => {
+    router.navigate(`/services/swagger/${org_id}/${identifier}/${env.envKey}`);
   };
 
   return (
@@ -102,7 +106,11 @@ const ServicesListView = () => {
                             <li
                               onClick={() => {
                                 if (service.serviceType !== "Portal") {
-                                  openSwagger(service.identifier, env);
+                                  openSwagger(
+                                    service.organizationId,
+                                    service.identifier,
+                                    env
+                                  );
                                 }
                               }}
                             >

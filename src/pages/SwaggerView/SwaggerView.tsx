@@ -5,9 +5,24 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
-
+// Helper function to recursively remove the `security` key
+const removeSecurityKey = (obj: any): any => {
+  if (Array.isArray(obj)) {
+    return obj.map(removeSecurityKey);
+  } else if (obj !== null && typeof obj === "object") {
+    const newObj: any = {};
+    for (const [key, value] of Object.entries(obj)) {
+      if (key !== "security") {
+        newObj[key] = removeSecurityKey(value);
+      }
+    }
+    return newObj;
+  }
+  return obj;
+};
 const SwaggerViewPage = () => {
-  const { service_identifier, env_id } = useParams<{
+  const { service_identifier, env_id, org_id } = useParams<{
+    org_id: string;
     service_identifier: string;
     env_id: string;
   }>();
@@ -16,14 +31,15 @@ const SwaggerViewPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (service_identifier && env_id) {
+      if (service_identifier && env_id && org_id) {
         const data = await MetadataService.metadataGetServiceAndEnvById({
           serviceIdentifier: service_identifier,
           env: env_id,
+          orgId: org_id,
         });
         console.log(data);
         setSpec({
-          ...JSON.parse(data.spec),
+          ...removeSecurityKey(JSON.parse(data.spec)),
           servers: [
             {
               url: data.baseUrl,
