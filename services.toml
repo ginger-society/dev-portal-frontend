@@ -3,18 +3,19 @@ dir = "src/services"
 portal_refs_file = "src/shared/references.ts"
 service_type = "Portal"
 
-[services."@ginger-society/MetadataService"]
-stage = "https://api-staging.gingersociety.org/metadata"
-dev = "http://localhost:8081/metadata"
-stage_k8 = "http://metadata-service-api-service/metadata"
-
 [services."@ginger-society/IAMService"]
 stage = "https://api-staging.gingersociety.org/iam"
 stage_k8 = "http://iam-service-api-service/iam"
 
-[portals_refs]
+[services."@ginger-society/MetadataService"]
+stage_k8 = "http://metadata-service-api-service/metadata"
+dev = "http://localhost:8081/metadata"
+stage = "https://api-staging.gingersociety.org/metadata"
+
+[portals_refs."@ginger-society/iam-frontend-users"]
+stage = "https://iam-staging.gingersociety.org"
 
 [urls]
+prod = "http://localhost:8081"
 stage = "https://dev-portal-staging.gingersociety.org"
 dev = "http://localhost:3000"
-prod = "http://localhost:8081"
