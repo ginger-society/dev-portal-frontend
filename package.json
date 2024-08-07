@@ -1,10 +1,12 @@
 {
   "dependencies": {
     "@ginger-society/ginger-ui": "0.34.0",
+    "@types/dagre": "^0.7.52",
     "@types/swagger-ui-react": "^4.18.3",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "^10.4.18",
     "babel-eslint": "10.1.0",
+    "dagre": "^0.8.5",
     "eslint": "^8.0.1",
     "eslint-config-standard": "17.1.0",
     "eslint-config-standard-jsx": "11.0.0",
@@ -20,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.6",
+    "react-flow-renderer": "^10.3.17",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.22.3",
     "react-test-renderer": "18.2.0",
@@ -32,7 +35,8 @@
     "vite": "5.2.0",
     "vite-plugin-linter": "2.1.1",
     "vite-plugin-svgr": "4.2.0",
-    "vite-tsconfig-paths": "4.3.2"
+    "vite-tsconfig-paths": "4.3.2",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",

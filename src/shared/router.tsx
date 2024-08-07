@@ -6,6 +6,7 @@ import { ListViewPage } from "@/pages/ListView";
 import { ServicesListViewPage } from "@/pages/ServicesListView";
 import { PackagesListViewPage } from "@/pages/PackagesListView";
 import { SwaggerViewPage } from "@/pages/SwaggerView";
+import { SysDesignView } from "@/pages/SysDesignView";
 
 const AuthenticatedHome = withAuthHOC(Editor);
 const AuthenticatedListView = withAuthHOC(ListViewPage);
@@ -37,6 +38,10 @@ const router = createHashRouter([
   {
     path: "/handle-auth/:access_token/:refresh_token",
     element: <HandleNavigation />,
+  },
+  {
+    path: "/sys-design",
+    element: <SysDesignView />,
   },
 ]);
 

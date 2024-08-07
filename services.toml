@@ -8,14 +8,15 @@ stage = "https://api-staging.gingersociety.org/iam"
 stage_k8 = "http://iam-service-api-service/iam"
 
 [services."@ginger-society/MetadataService"]
-stage_k8 = "http://metadata-service-api-service/metadata"
 dev = "http://localhost:8081/metadata"
 stage = "https://api-staging.gingersociety.org/metadata"
+stage_k8 = "http://metadata-service-api-service/metadata"
 
 [portals_refs."@ginger-society/iam-frontend-users"]
 stage = "https://iam-staging.gingersociety.org"
+dev = "http://localhost:3001"
 
 [urls]
+dev = "http://localhost:3000"
 prod = "http://localhost:8081"
 stage = "https://dev-portal-staging.gingersociety.org"
-dev = "http://localhost:3000"
