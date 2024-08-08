@@ -331,3 +331,7 @@ html[data-theme="dark"] {
   flex-direction: column;
   gap: 20px;
 }
+
+.padded-page {
+  padding: 30px;
+}

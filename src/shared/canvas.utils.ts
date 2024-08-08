@@ -1,4 +1,3 @@
-
 export function calculatePath(
   rect1: DOMRect | undefined,
   rect2: DOMRect | undefined,
@@ -9,7 +8,7 @@ export function calculatePath(
 ) {
   if (!rect1 || !rect2) return { d: "", midX: 0, midY: 0 };
 
-  const headerRowHeight = 50; // Assuming header row height is 80px
+  const headerRowHeight = 50; // Assuming header row height is 50px
   const rowHeight1 = (rect1.height - headerRowHeight) / rows1;
   const rowHeight2 = (rect2.height - headerRowHeight) / rows2;
 
@@ -30,10 +29,15 @@ export function calculatePath(
     y2 = rect2.top + headerRowHeight + rowHeight2 * toRow + window.scrollY;
   }
 
+  const controlPointOffset = Math.abs(x2 - x1) / 2; // Distance of control points from the start and end points
   const midX = (x1 + x2) / 2;
   const midY = (y1 + y2) / 2;
-  const d = `M ${x1} ${y1} H ${midX} V ${y2 - 60} H ${x2}`;
+  const controlX1 = x1 + controlPointOffset;
+  const controlY1 = y1;
+  const controlX2 = x2 - controlPointOffset;
+  const controlY2 = y2;
+
+  const d = `M ${x1} ${y1} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x2} ${y2}`;
 
   return { d, midX, midY };
 }
-

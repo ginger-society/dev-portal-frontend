@@ -137,124 +137,126 @@ export const DocumentsList: React.FC = () => {
 
   return (
     <PageLayout>
-      <BreadcrumContainer />
+      <div className="padded-page">
+        <BreadcrumContainer />
 
-      <div className="schema-list">
-        <div className="list-hedaer-actions-panel">
-          <Button
-            fullWidth
-            onClick={() => {
-              setName("");
-              setDescription("");
-              setEditingDocId(null);
-              setDialogOpen(true);
-            }}
-            type={ButtonType.Primary}
-            label="Create Schema"
-            endEnhancer={<FaPlus />}
-          />
+        <div className="schema-list">
+          <div className="list-hedaer-actions-panel">
+            <Button
+              fullWidth
+              onClick={() => {
+                setName("");
+                setDescription("");
+                setEditingDocId(null);
+                setDialogOpen(true);
+              }}
+              type={ButtonType.Primary}
+              label="Create Schema"
+              endEnhancer={<FaPlus />}
+            />
 
-          <Input
-            placeholder="Search..."
-            onChange={({ target: { value } }) => {
-              setSearchTxt(value);
-            }}
-            value={searchTxt}
-            clearable
+            <Input
+              placeholder="Search..."
+              onChange={({ target: { value } }) => {
+                setSearchTxt(value);
+              }}
+              value={searchTxt}
+              clearable
+            />
+          </div>
+
+          {loading ? (
+            <ListViewSkeleton />
+          ) : (
+            <ul className="schema-list-container">
+              {documents.map((doc) => (
+                <li
+                  key={doc.id}
+                  className="card schema-item"
+                  onClick={() => openDesigner(doc)}
+                >
+                  <div className="schema-item-container">
+                    <span
+                      className="edit-cta"
+                      onClick={(e) => {
+                        handleEdit(doc);
+                        e.stopPropagation();
+                      }}
+                    >
+                      <FaPencilAlt />
+                    </span>
+                    <div className="schema-item">
+                      <Text size={TextSize.Large}>
+                        @{doc.organizationId}/{doc.name}
+                      </Text>
+                      <Text size={TextSize.Large}>
+                        {
+                          <span
+                            onClick={(e) => {
+                              doc.identifier && copyIdentifier(doc.identifier);
+                              e.stopPropagation();
+                            }}
+                          >
+                            {doc.identifier}
+                          </span>
+                        }
+                      </Text>
+                      <Text tag="p">{doc.description}</Text>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <Pagination
+            totalRows={1100}
+            initialRowsPerPage={pagination.limit}
+            initialOffset={pagination.offset}
+            onChange={handlePaginationOnChange}
           />
         </div>
 
-        {loading ? (
-          <ListViewSkeleton />
-        ) : (
-          <ul className="schema-list-container">
-            {documents.map((doc) => (
-              <li
-                key={doc.id}
-                className="card schema-item"
-                onClick={() => openDesigner(doc)}
-              >
-                <div className="schema-item-container">
-                  <span
-                    className="edit-cta"
-                    onClick={(e) => {
-                      handleEdit(doc);
-                      e.stopPropagation();
-                    }}
-                  >
-                    <FaPencilAlt />
-                  </span>
-                  <div className="schema-item">
-                    <Text size={TextSize.Large}>
-                      @{doc.organizationId}/{doc.name}
-                    </Text>
-                    <Text size={TextSize.Large}>
-                      {
-                        <span
-                          onClick={(e) => {
-                            doc.identifier && copyIdentifier(doc.identifier);
-                            e.stopPropagation();
-                          }}
-                        >
-                          {doc.identifier}
-                        </span>
-                      }
-                    </Text>
-                    <Text tag="p">{doc.description}</Text>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <Pagination
-          totalRows={1100}
-          initialRowsPerPage={pagination.limit}
-          initialOffset={pagination.offset}
-          onChange={handlePaginationOnChange}
-        />
-      </div>
-
-      <Modal
-        isOpen={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        size={ModalSize.Large}
-      >
-        <ModalHeader>
-          {editingDocId ? "Create new schema" : `Update : ${editingDocId}`}
-        </ModalHeader>
-        <ModalBody>
-          <Input
-            label="Organization ID"
-            type="text"
-            value={orgId}
-            onChange={(e) => setOrgId(e.target.value)}
-            required
-          />
-          <Input
-            label="Name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <TextArea
-            label="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-          <div className="btn-group">
-            <Button
-              label={editingDocId ? "Update" : "Create"}
-              type={ButtonType.Primary}
-              onClick={insertOrUpdateDocument}
+        <Modal
+          isOpen={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          size={ModalSize.Large}
+        >
+          <ModalHeader>
+            {editingDocId ? "Create new schema" : `Update : ${editingDocId}`}
+          </ModalHeader>
+          <ModalBody>
+            <Input
+              label="Organization ID"
+              type="text"
+              value={orgId}
+              onChange={(e) => setOrgId(e.target.value)}
+              required
             />
-            <Button onClick={() => setDialogOpen(false)} label="Cancel" />
-          </div>
-        </ModalBody>
-      </Modal>
+            <Input
+              label="Name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <TextArea
+              label="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <div className="btn-group">
+              <Button
+                label={editingDocId ? "Update" : "Create"}
+                type={ButtonType.Primary}
+                onClick={insertOrUpdateDocument}
+              />
+              <Button onClick={() => setDialogOpen(false)} label="Cancel" />
+            </div>
+          </ModalBody>
+        </Modal>
+      </div>
     </PageLayout>
   );
 };

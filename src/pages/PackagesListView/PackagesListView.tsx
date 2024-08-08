@@ -53,61 +53,63 @@ const PackagesListView = () => {
 
   return (
     <PageLayout>
-      <BreadcrumContainer />
+      <div className="padded-page">
+        <BreadcrumContainer />
 
-      <div className="schema-list">
-        <div className="list-hedaer-actions-panel">
-          <Input
-            placeholder="Search..."
-            onChange={({ target: { value } }) => {
-              setSearchTxt(value);
-            }}
-            value={searchTxt}
-            clearable
+        <div className="schema-list">
+          <div className="list-hedaer-actions-panel">
+            <Input
+              placeholder="Search..."
+              onChange={({ target: { value } }) => {
+                setSearchTxt(value);
+              }}
+              value={searchTxt}
+              clearable
+            />
+          </div>
+
+          {loading ? (
+            <ListViewSkeleton />
+          ) : (
+            <ul className="schema-list-container">
+              {data.map((service) => (
+                <li
+                  key={service.identifier}
+                  className="schema-item-container"
+                  onClick={() => {}}
+                >
+                  <>
+                    <ul className="card schema-item ">
+                      <div className="flex-column">
+                        <Text size={TextSize.Large}>
+                          @{service.organizationId}/{service.identifier}
+                        </Text>
+                        <Text>
+                          <strong>Description</strong> {service.description}
+                        </Text>
+                        <Text>
+                          <strong>Type:</strong> {service.packageType}
+                        </Text>
+                        <Text size={TextSize.XLarge}>
+                          {service.lang === "rust" && <FaRust />}
+                          {service.lang === "typescript" && <FaJs />}
+                          {service.lang === "python" && <FaPython />}
+                        </Text>
+                      </div>
+                    </ul>
+                  </>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <Pagination
+            totalRows={1100}
+            initialRowsPerPage={pagination.limit}
+            initialOffset={pagination.offset}
+            onChange={handlePaginationOnChange}
           />
         </div>
-
-        {loading ? (
-          <ListViewSkeleton />
-        ) : (
-          <ul className="schema-list-container">
-            {data.map((service) => (
-              <li
-                key={service.identifier}
-                className="schema-item-container"
-                onClick={() => {}}
-              >
-                <>
-                  <ul className="card schema-item ">
-                    <div className="flex-column">
-                      <Text size={TextSize.Large}>
-                        @{service.organizationId}/{service.identifier}
-                      </Text>
-                      <Text>
-                        <strong>Description</strong> {service.description}
-                      </Text>
-                      <Text>
-                        <strong>Type:</strong> {service.packageType}
-                      </Text>
-                      <Text size={TextSize.XLarge}>
-                        {service.lang === "rust" && <FaRust />}
-                        {service.lang === "typescript" && <FaJs />}
-                        {service.lang === "python" && <FaPython />}
-                      </Text>
-                    </div>
-                  </ul>
-                </>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <Pagination
-          totalRows={1100}
-          initialRowsPerPage={pagination.limit}
-          initialOffset={pagination.offset}
-          onChange={handlePaginationOnChange}
-        />
       </div>
     </PageLayout>
   );
