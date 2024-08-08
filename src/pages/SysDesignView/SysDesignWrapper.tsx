@@ -69,6 +69,7 @@ const SysDesignWrapper = () => {
 
   useEffect(() => {
     updateConnections();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
   const createNewBlock = (
