@@ -1,3 +1,4 @@
+import { LegendConfigs } from "@/components/atoms/Legend/types";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import { useUMLEditor } from "@/components/organisms/UMLEditor/context";
@@ -9,6 +10,33 @@ import {
   Row,
 } from "@/components/organisms/UMLEditor/types";
 import React, { useEffect } from "react";
+import { Text, TextWeight } from "@ginger-society/ginger-ui";
+import {
+  FaBoxOpen,
+  FaDatabase,
+  FaDesktop,
+  FaServer,
+  FaTerminal,
+} from "react-icons/fa";
+
+const legendConfigs: LegendConfigs = {
+  [MarkerType.Rectangle]: {
+    label: "Depends on",
+    color: "#4793AF",
+  },
+  [MarkerType.Hexagon]: {
+    label: "Database",
+    color: "#89439f",
+  },
+  [MarkerType.Triangle]: {
+    label: "RPCEndpoint",
+    color: "#799351",
+  },
+  [MarkerType.Circle]: {
+    label: "Portal",
+    color: "#000",
+  },
+};
 
 const SysDesignWrapper = () => {
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
@@ -18,50 +46,77 @@ const SysDesignWrapper = () => {
     const connections: Connection[] = [];
     Object.keys(blocks).forEach((key) => {
       const block = blocks[key];
-      block.rows.forEach((row, index) => {
-        if (row.data.type === ColumnType.ForeignKey) {
-          const block1Id = row.data.target;
-          const block2Id = block.id;
-          const toRow = index;
-          const fromRow = 0;
-
-          connections.push({
-            block1Id,
-            block2Id,
-            fromRow,
-            toRow,
-            marker: MarkerType.Hexagon,
-            label: `column : ${row.data.field_name}_id`,
-          });
-        } else if (row.data.type === ColumnType.ManyToManyField) {
-          const block1Id = row.data.target;
-          const block2Id = block.id;
-          const toRow = index;
-          const fromRow = 0;
-
-          connections.push({
-            block1Id,
-            block2Id,
-            fromRow,
-            toRow,
-            marker: MarkerType.Rectangle,
-            label: `Via table ${block.id}_${row.data.field_name}`,
-          });
-        } else if (row.data.type === ColumnType.OneToOneField) {
-          const block1Id = row.data.target;
-          const block2Id = block.id;
-          const toRow = index;
-          const fromRow = 0;
-
-          connections.push({
-            block1Id,
-            block2Id,
-            fromRow,
-            toRow,
-            marker: MarkerType.Triangle,
-            label: `Uniquly via ${row.data.field_name}_id`,
-          });
-        }
+      connections.push({
+        block1Id: "IAMService",
+        block2Id: "MetadataService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "dev-portal",
+        block2Id: "MetadataService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "dev-portal",
+        block2Id: "IAMService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "dev-portal",
+        block2Id: "ginger-ui",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "iam-frontend-users",
+        block2Id: "IAMService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "ginger-ui",
+        block2Id: "ginger-book",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "db-compose",
+        block2Id: "MetadataService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "ginger-connector",
+        block2Id: "MetadataService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
+      });
+      connections.push({
+        block1Id: "ginger-scaffolder",
+        block2Id: "MetadataService",
+        fromRow: 0,
+        toRow: 0,
+        marker: MarkerType.Rectangle,
+        label: ``,
       });
     });
     setConnections(connections);
@@ -79,22 +134,12 @@ const SysDesignWrapper = () => {
     id: string
   ): Block => {
     const rows: Row[] = [];
-    if (type === BlockType.Table) {
-      rows.push({
-        id: "pk",
-        data: {
-          type: "BigAutoField",
-          name: "pk",
-          field_name: "pk",
-        },
-      });
-    }
     const newBlock = {
       id,
       rows: [...rows],
       ref: React.createRef<HTMLDivElement>(),
       position: { top: y, left: x },
-      data: {},
+      data: { name: "IAM DB" },
       type: type,
     };
     return newBlock;
@@ -107,21 +152,45 @@ const SysDesignWrapper = () => {
         blocks={blocks}
         connections={connections}
         RowRenderer={({ rowData }) => (
-          <div className="column-repr">
-            <strong>{rowData.data.field_name}</strong>
-            <small>{rowData.data.type}</small>
+          <div>
+            <Text weight={TextWeight.Bold}>{rowData.data.heading}</Text>
+            <br />
+            {rowData.data.list.map((listItem: string) => {
+              return (
+                <>
+                  <Text> &#x2192; {listItem}</Text>
+                  <br />
+                </>
+              );
+            })}
           </div>
         )}
+        allowEdit={false}
         HeadingRenderer={({ blockData }) => (
           <>
-            {blockData.type === BlockType.Table && (
-              <span>{blockData.data.name} : Table</span>
+            {blockData.type === BlockType.SystemBlock && (
+              <div style={{ width: "250px" }}>
+                <span
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  {blockData.data.type === "database" && <FaDatabase />}
+                  {blockData.data.type === "RPCEndpoint" && <FaServer />}
+                  {blockData.data.type === "package" && <FaBoxOpen />}
+                  {blockData.data.type === "executable" && <FaTerminal />}
+                  {blockData.data.type === "portal" && <FaDesktop />}
+                  {blockData.data.name}
+                </span>
+                {blockData.data.description && <hr />}
+                <span style={{ fontWeight: "normal" }}>
+                  {blockData.data.description}
+                </span>
+              </div>
             )}
           </>
         )}
         setEditorData={setEditorData}
         createNewBlock={createNewBlock}
-        legendConfigs={{}}
+        legendConfigs={legendConfigs}
         RowEditor={() => <></>}
         BlockEditor={() => <></>}
         updateConnections={function (): void {

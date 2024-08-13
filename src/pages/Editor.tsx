@@ -25,6 +25,7 @@ import styles from "./editor.module.scss";
 import { FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";
 import { GetDbschemaByIdResponse } from "@/services/MetadataService_client";
+import router from "@/shared/router";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -142,6 +143,10 @@ const Editor = () => {
     copyToClipboard(JSON.stringify(blocksStr));
   };
 
+  const goHome = () => {
+    router.navigate("/");
+  };
+
   return (
     <UMLEditorProvider
       value={{
@@ -157,6 +162,11 @@ const Editor = () => {
         <HeaderContainer>
           <div className={styles["actions-container"]}>
             Editing : {branchData?.name}
+            <Button
+              onClick={goHome}
+              label={"Go home"}
+              type={ButtonType.Secondary}
+            ></Button>
             <Button
               onClick={handleSave}
               label={saveLoading ? "Saving..." : "Save"}

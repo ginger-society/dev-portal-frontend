@@ -35,6 +35,7 @@ const UMLEditor = ({
   HeadingRenderer = ({ blockData }) => {
     return blockData.id;
   },
+  allowEdit = true,
   RowRenderer = ({ rowData }) => {
     return rowData.id;
   },
@@ -105,8 +106,8 @@ const UMLEditor = ({
           rect2,
           fromRow,
           toRow,
-          blocks[block1Id]?.rows.length || 0,
-          blocks[block2Id]?.rows.length || 0
+          blocks[block1Id]?.rows.length || 1,
+          blocks[block2Id]?.rows.length || 1
         );
         return { path: d, midX, midY };
       }
@@ -202,21 +203,29 @@ const UMLEditor = ({
                     ? "options-header"
                     : "table-header"
                 } block-header handle`}
+                style={{
+                  backgroundColor: block.data.color,
+                  borderTop: `solid 1px ${block.data.color}`,
+                  borderBottom: `solid 1px ${block.data.color}`,
+                }}
               >
                 <HeadingRenderer blockData={block} />
-                <span
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleSlider(EditorTypeEnum.BLOCK, block.id);
-                  }}
-                >
-                  <FaPencilAlt />
-                </span>
+                {allowEdit && (
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSlider(EditorTypeEnum.BLOCK, block.id);
+                    }}
+                  >
+                    <FaPencilAlt />
+                  </span>
+                )}
               </div>
               {/* Render dynamic number of rows */}
               {block.rows.map((row, index) => (
                 <div
                   onClick={() =>
+                    allowEdit &&
                     toggleSlider(EditorTypeEnum.ROW, block.id, index)
                   }
                   key={index}

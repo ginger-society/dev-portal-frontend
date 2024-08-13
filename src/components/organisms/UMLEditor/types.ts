@@ -15,7 +15,8 @@ export interface Row {
 
 export enum BlockType {
   Enum = 'enum',
-  Table = 'table'
+  Table = 'table',
+  SystemBlock = 'system-block'
 }
 
 export interface Block {
@@ -79,6 +80,7 @@ export interface UMLEditorProps {
   BlockEditor: FunctionComponent<EditorProps>
   RowRenderer?: FunctionComponent<{ rowData: Row }>
   HeadingRenderer?: FunctionComponent<{ blockData: Block }>
+  allowEdit?: boolean
   EnumRowRenderer?: FunctionComponent<{ blockData: Block }>
   setEditorData: React.Dispatch<React.SetStateAction<EditorData | undefined>>
   updateConnections: () => void
