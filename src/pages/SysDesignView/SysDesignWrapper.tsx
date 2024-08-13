@@ -34,7 +34,7 @@ const legendConfigs: LegendConfigs = {
   },
   [MarkerType.Circle]: {
     label: "Portal",
-    color: "#000",
+    color: "#1A4870",
   },
 };
 
@@ -127,23 +127,6 @@ const SysDesignWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
-  const createNewBlock = (
-    type: BlockType,
-    x: number,
-    y: number,
-    id: string
-  ): Block => {
-    const rows: Row[] = [];
-    const newBlock = {
-      id,
-      rows: [...rows],
-      ref: React.createRef<HTMLDivElement>(),
-      position: { top: y, left: x },
-      data: { name: "IAM DB" },
-      type: type,
-    };
-    return newBlock;
-  };
   return (
     <>
       <UMLEditor
@@ -175,9 +158,9 @@ const SysDesignWrapper = () => {
                 >
                   {blockData.data.type === "database" && <FaDatabase />}
                   {blockData.data.type === "RPCEndpoint" && <FaServer />}
-                  {blockData.data.type === "package" && <FaBoxOpen />}
+                  {blockData.data.type === "library" && <FaBoxOpen />}
                   {blockData.data.type === "executable" && <FaTerminal />}
-                  {blockData.data.type === "portal" && <FaDesktop />}
+                  {blockData.data.type === "Portal" && <FaDesktop />}
                   {blockData.data.name}
                 </span>
                 {blockData.data.description && <hr />}
@@ -189,7 +172,6 @@ const SysDesignWrapper = () => {
           </>
         )}
         setEditorData={setEditorData}
-        createNewBlock={createNewBlock}
         legendConfigs={legendConfigs}
         RowEditor={() => <></>}
         BlockEditor={() => <></>}

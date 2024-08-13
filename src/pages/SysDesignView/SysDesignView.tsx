@@ -19,6 +19,14 @@ import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import SysDesignWrapper from "./SysDesignWrapper";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
 import { Button, SnackbarTimer, useSnackbar } from "@ginger-society/ginger-ui";
+import { MetadataService } from "@/services";
+
+const blockColorMap = {
+  database: "#89439f",
+  RPCEndpoint: "#799351",
+  Portal: "#1A4870",
+  library: "#1A4870",
+};
 
 const initialBlocks: { [key: string]: Block } = {
   "iam-db": {
@@ -34,7 +42,7 @@ const initialBlocks: { [key: string]: Block } = {
     data: {
       name: "IAM Database",
       type: "database",
-      description: "Identity and Access management DB",
+      description: "Identity and Access management database",
       color: "#89439f",
     },
     type: BlockType.SystemBlock,
@@ -59,7 +67,7 @@ const initialBlocks: { [key: string]: Block } = {
     data: {
       name: "ginger-releaser",
       type: "executable",
-      description: "Release management utility cli",
+      description: "command line utility for Release management",
     },
     type: BlockType.SystemBlock,
   },
@@ -168,20 +176,17 @@ const initialBlocks: { [key: string]: Block } = {
 };
 
 const SysDesignView = () => {
-  const [blocks, setBlocks] = useState<{ [key: string]: Block }>(initialBlocks);
+  const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
 
   const transformDataToSave = () => {
-    return Object.values(blocks).map((block) => {
+    return Object.values(blocks).reduce((accum, block) => {
       return {
-        id: block.id,
-        position: block.position,
-        rows: block.rows,
-        data: block.data,
-        type: block.type,
+        ...accum,
+        [block.id]: { position: block.position },
       };
-    });
+    }, {});
   };
 
   const { show } = useSnackbar();
@@ -191,30 +196,111 @@ const SysDesignView = () => {
     show(<>Saved in local storage</>, SnackbarTimer.Medium);
   };
 
-  const loadLayout = () => {
-    const layoutData = localStorage.getItem("sys-design");
+  const fetchAndProcessSystemDesign = async (): Promise<{
+    [key: string]: Block;
+  }> => {
+    const blocks: { [key: string]: Block } = {};
 
+    const packages = await MetadataService.metadataGetUserPackages();
+
+    packages.forEach((pkg) => {
+      blocks[pkg.identifier] = {
+        id: pkg.identifier,
+        position: { top: 100, left: 100 },
+        type: BlockType.SystemBlock,
+        ref: React.createRef(),
+        data: {
+          name: pkg.identifier,
+          description: pkg.description,
+          type: pkg.packageType,
+        },
+        rows: [],
+      };
+    });
+
+    const services = await MetadataService.metadataGetServicesAndEnvs();
+    services.forEach((service) => {
+      blocks[service.identifier] = {
+        id: service.identifier,
+        ref: React.createRef(),
+        data: {
+          name: service.identifier,
+          type: service.serviceType,
+          description: service.description,
+          color:
+            service.serviceType && (blockColorMap as any)[service.serviceType],
+        },
+        rows: [
+          {
+            id: `${service.identifier}-dependencies`,
+            data: { heading: "Uses", list: service.dependencies },
+          },
+          {
+            id: `${service.dbSchemaId}-tables`,
+            data: { heading: "Tables in use", list: service.tables },
+          },
+        ],
+        type: BlockType.SystemBlock,
+        position: { top: 100, left: 100 },
+      };
+    });
+
+    const dbSchemas = await MetadataService.metadataGetDbschemasAndTables();
+    console.log(dbSchemas);
+    dbSchemas.forEach((schema) => {
+      if (schema.identifier) {
+        blocks[schema.identifier] = {
+          id: schema.identifier,
+          ref: React.createRef(),
+          data: {
+            name: schema.name,
+            type: "database",
+            description: schema.description,
+            color: blockColorMap.database,
+          },
+          rows: [
+            {
+              id: `${schema.identifier}-tables`,
+              data: { heading: "Tables", list: schema.tables },
+            },
+          ],
+          type: BlockType.SystemBlock,
+          position: { top: 100, left: 100 },
+        };
+      }
+    });
+    return blocks;
+  };
+
+  const loadLayout = async () => {
+    const layoutData = localStorage.getItem("sys-design");
+    const sysBlockData = await fetchAndProcessSystemDesign();
     if (layoutData) {
-      const layoutJson = Object.values(
-        JSON.parse(layoutData) as BlockData[]
-      ).reduce((accum, block) => {
+      const layoutJson = JSON.parse(layoutData) as {
+        [key: string]: { position: { top: number; left: number } };
+      };
+
+      const data = Object.values(sysBlockData).reduce((accum, block) => {
+        console.log(block);
         return {
           ...accum,
           [block.id]: {
             ...block,
-            rows: block.rows || [],
-            ref: React.createRef(),
-            data: block.data || {},
-            type: block.type || BlockType.Table,
+            position: (layoutJson[block.id] &&
+              layoutJson[block.id].position) || { top: 100, left: 100 },
           },
         };
       }, {});
-      setBlocks(layoutJson);
+      console.log(data);
+      setBlocks(data);
+    } else {
+      setBlocks(sysBlockData);
     }
   };
 
   useEffect(() => {
     loadLayout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

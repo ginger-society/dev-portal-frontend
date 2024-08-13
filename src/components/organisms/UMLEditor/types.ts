@@ -84,5 +84,5 @@ export interface UMLEditorProps {
   EnumRowRenderer?: FunctionComponent<{ blockData: Block }>
   setEditorData: React.Dispatch<React.SetStateAction<EditorData | undefined>>
   updateConnections: () => void
-  createNewBlock: (type: BlockType, x: number, y: number, id: string) => Block
+  createNewBlock?: (type: BlockType, x: number, y: number, id: string) => Block
 }

@@ -137,6 +137,9 @@ const UMLEditor = ({
     }
 
     setBlocks((v) => {
+      if (!createNewBlock) {
+        return v;
+      }
       const id = `${NEW_BLOCK_ID_PREFIX}-${type}`;
       return {
         ...v,
@@ -300,7 +303,7 @@ const UMLEditor = ({
             </g>
           ))}
         </svg>
-        {contextMenu && (
+        {contextMenu && allowEdit && (
           <div
             ref={contextMenuRef}
             className="context-menu"
