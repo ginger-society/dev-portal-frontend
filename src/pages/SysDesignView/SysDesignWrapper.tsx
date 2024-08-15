@@ -46,78 +46,98 @@ const SysDesignWrapper = () => {
     const connections: Connection[] = [];
     Object.keys(blocks).forEach((key) => {
       const block = blocks[key];
-      connections.push({
-        block1Id: "IAMService",
-        block2Id: "MetadataService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "dev-portal",
-        block2Id: "MetadataService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "dev-portal",
-        block2Id: "IAMService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "dev-portal",
-        block2Id: "ginger-ui",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "iam-frontend-users",
-        block2Id: "IAMService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "ginger-ui",
-        block2Id: "ginger-book",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "db-compose",
-        block2Id: "MetadataService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "ginger-connector",
-        block2Id: "MetadataService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
-      connections.push({
-        block1Id: "ginger-scaffolder",
-        block2Id: "MetadataService",
-        fromRow: 0,
-        toRow: 0,
-        marker: MarkerType.Rectangle,
-        label: ``,
-      });
+      // console.log({ key, block });
+    });
+
+    console.log(blocks);
+
+    connections.push({
+      block1Id: "IAMService",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "dev-portal",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "dev-portal",
+      block2Id: "IAMService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    // connections.push({
+    //   block1Id: "dev-portal",
+    //   block2Id: "ginger-ui",
+    //   fromRow: 0,
+    //   toRow: 0,
+    //   marker: MarkerType.Rectangle,
+    //   label: ``,
+    // });
+    connections.push({
+      block1Id: "iam-frontend-users",
+      block2Id: "IAMService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    // connections.push({
+    //   block1Id: "ginger-ui",
+    //   block2Id: "ginger-book",
+    //   fromRow: 0,
+    //   toRow: 0,
+    //   marker: MarkerType.Rectangle,
+    //   label: ``,
+    // });
+    connections.push({
+      block1Id: "db-compose",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "ginger-connector",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "ginger-scaffolder",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "66bbad42-200f-4b2f-ba0d-9feb1f3edbfa",
+      block2Id: "MetadataService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
+    });
+    connections.push({
+      block1Id: "a56e44a9-cfc6-4f69-9b7f-510789b6fa80",
+      block2Id: "IAMService",
+      fromRow: 0,
+      toRow: 0,
+      marker: MarkerType.Rectangle,
+      label: ``,
     });
     setConnections(connections);
   };
@@ -135,14 +155,13 @@ const SysDesignWrapper = () => {
         blocks={blocks}
         connections={connections}
         RowRenderer={({ rowData }) => (
-          <div>
-            <Text weight={TextWeight.Bold}>{rowData.data.heading}</Text>
-            <br />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Text>{rowData.data.heading}</Text>
+            <Text>{rowData.data.description}</Text>
             {rowData.data.list.map((listItem: string) => {
               return (
                 <>
                   <Text> &#x2192; {listItem}</Text>
-                  <br />
                 </>
               );
             })}

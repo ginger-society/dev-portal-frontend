@@ -137,6 +137,7 @@ code {
   position: fixed;
   bottom: 0px;
   width: 250px;
+  right: 0;
   z-index: 2;
 }
 

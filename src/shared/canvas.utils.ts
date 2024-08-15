@@ -7,7 +7,6 @@ export function calculatePath(
   rows2: number,
 ) {
   if (!rect1 || !rect2) return { d: "", midX: 0, midY: 0 };
-
   const distanceRightLeft = Math.abs(rect1.right - rect2.left);
   const distanceLeftRight = Math.abs(rect1.left - rect2.right);
 
