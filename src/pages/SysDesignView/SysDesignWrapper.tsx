@@ -15,9 +15,11 @@ import {
   FaBoxOpen,
   FaDatabase,
   FaDesktop,
+  FaPencilAlt,
   FaServer,
   FaTerminal,
 } from "react-icons/fa";
+import router from "@/shared/router";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Circle]: {
@@ -46,7 +48,6 @@ const SysDesignWrapper = () => {
     const connections: Connection[] = [];
     Object.keys(blocks).forEach((key) => {
       const block = blocks[key];
-      console.log({ key, data: block.data });
       if (block.data.dependencies) {
         block.data.dependencies.forEach((dependency: string) => {
           connections.push({
@@ -79,6 +80,14 @@ const SysDesignWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
+  const navigateToDBEditor = (id: string) => {
+    router.navigate(`/editor/${id}/main`);
+  };
+
+  const navigateToSwagger = (id: string, org_id: string) => {
+    router.navigate(`/services/swagger/${org_id}/${id}/stage`);
+  };
+
   return (
     <>
       <UMLEditor
@@ -108,20 +117,38 @@ const SysDesignWrapper = () => {
         HeadingRenderer={({ blockData }) => (
           <>
             {blockData.type === BlockType.SystemBlock && (
-              <div style={{ width: "250px" }}>
-                <span
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
-                >
-                  {blockData.data.type === "database" && <FaDatabase />}
-                  {blockData.data.type === "RPCEndpoint" && <FaServer />}
-                  {blockData.data.type === "library" && <FaBoxOpen />}
-                  {blockData.data.type === "executable" && <FaTerminal />}
-                  {blockData.data.type === "Portal" && <FaDesktop />}
-                  {blockData.data.name}
-                </span>
-                <span style={{ fontWeight: "normal", fontSize: "12px" }}>
-                  {blockData.data.description}
-                </span>
+              <div style={{ display: "flex" }}>
+                <div style={{ width: "250px" }}>
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    {blockData.data.type === "database" && <FaDatabase />}
+                    {blockData.data.type === "RPCEndpoint" && <FaServer />}
+                    {blockData.data.type === "library" && <FaBoxOpen />}
+                    {blockData.data.type === "executable" && <FaTerminal />}
+                    {blockData.data.type === "Portal" && <FaDesktop />}
+                    {blockData.data.name}
+                  </span>
+                  <span style={{ fontWeight: "normal", fontSize: "12px" }}>
+                    {blockData.data.description}
+                  </span>
+                </div>
+                {blockData.data.type === "database" && (
+                  <FaPencilAlt
+                    onClick={() => navigateToDBEditor(blockData.id)}
+                  />
+                )}
+                {blockData.data.type === "RPCEndpoint" && (
+                  <FaPencilAlt
+                    onClick={() =>
+                      navigateToSwagger(blockData.id, blockData.data.org_id)
+                    }
+                  />
+                )}
               </div>
             )}
           </>

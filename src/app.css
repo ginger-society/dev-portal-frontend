@@ -66,7 +66,8 @@ code {
   border-radius: 15px;
   overflow: hidden;
   z-index: 1;
-  box-shadow: 0 8px 24px #959da533;
+  box-shadow: 0 8px 10px #959da533;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .editIcon {
@@ -85,7 +86,7 @@ code {
 .row-content {
   border-top: 0.1px solid #c6c6c6;
   padding: 10px 20px;
-  width: 300px;
+  width: 100%;
   background-color: var(--primary-bg-color);
   color: var(--primary-color);
   font-size: var(--medium-font-size);

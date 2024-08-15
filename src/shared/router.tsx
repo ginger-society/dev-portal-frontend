@@ -17,19 +17,11 @@ const AuthenticatedPackagesListView = withAuthHOC(PackagesListViewPage);
 const router = createHashRouter([
   {
     path: "/",
-    element: <AuthenticatedListView />,
+    element: <SysDesignView />,
   },
   {
     path: "/editor/:docId/:branch",
     element: <AuthenticatedHome />,
-  },
-  {
-    path: "/services",
-    element: <AuthenticatedServicesListView />,
-  },
-  {
-    path: "/packages",
-    element: <AuthenticatedPackagesListView />,
   },
   {
     path: "/services/swagger/:org_id/:service_identifier/:env_id",
@@ -38,10 +30,6 @@ const router = createHashRouter([
   {
     path: "/handle-auth/:access_token/:refresh_token",
     element: <HandleNavigation />,
-  },
-  {
-    path: "/sys-design",
-    element: <SysDesignView />,
   },
 ]);
 

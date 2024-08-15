@@ -1,6 +1,8 @@
 import BreadcrumContainer from "@/components/atoms/BreadcrumbContainer";
+import HeaderContainer from "@/components/atoms/HeaderContainer";
 import { MetadataService } from "@/services";
 import { PageLayout } from "@/shared/PageLayout";
+import { Button } from "@ginger-society/ginger-ui";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import SwaggerUI from "swagger-ui-react";
@@ -57,20 +59,18 @@ const SwaggerViewPage = () => {
   }, []); // Retrieve the token from localStorage
 
   return (
-    <PageLayout>
-      <BreadcrumContainer />
-      <div style={{ background: "white" }}>
-        <SwaggerUI
-          spec={spec}
-          requestInterceptor={(req) => {
-            if (token) {
-              req.headers["Authorization"] = token;
-            }
-            return req;
-          }}
-        />
-      </div>
-    </PageLayout>
+    <>
+      <HeaderContainer></HeaderContainer>
+      <SwaggerUI
+        spec={spec}
+        requestInterceptor={(req) => {
+          if (token) {
+            req.headers["Authorization"] = token;
+          }
+          return req;
+        }}
+      />
+    </>
   );
 };
 

@@ -47,6 +47,7 @@ const UMLEditor = ({
 }: UMLEditorProps) => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [editorType, setEditorType] = useState<EditorTypeEnum>();
+  const [highlighted, setHighlighted] = useState<string>();
 
   const [contextMenu, setContextMenu] = useState<{
     x: number;
@@ -211,18 +212,22 @@ const UMLEditor = ({
                   borderTop: `solid 1px ${block.data.color}`,
                   borderBottom: `solid 1px ${block.data.color}`,
                 }}
+                onClick={() => {
+                  setHighlighted(block.id);
+                }}
               >
                 <HeadingRenderer blockData={block} />
-                {allowEdit && (
-                  <span
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleSlider(EditorTypeEnum.BLOCK, block.id);
-                    }}
-                  >
-                    <FaPencilAlt />
-                  </span>
-                )}
+                {allowEdit ||
+                  (block.data.allowEdit && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSlider(EditorTypeEnum.BLOCK, block.id);
+                      }}
+                    >
+                      <FaPencilAlt />
+                    </span>
+                  ))}
               </div>
               {/* Render dynamic number of rows */}
               {block.rows.map((row, index) => (
@@ -262,17 +267,58 @@ const UMLEditor = ({
         ))}
         {/* Render connections */}
         <svg ref={svgRef} className="svg-container">
+          <defs>
+            <filter
+              id="highlight-shadow"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="0"
+                stdDeviation="3"
+                floodColor="rgb(234 95 32)"
+              />
+            </filter>
+          </defs>
           {paths.map(({ path, midX, midY }, index) => (
             <g key={index}>
-              <path d={path} stroke="var(--primary-color)" fill="transparent" />
+              <path
+                d={path}
+                stroke={
+                  highlighted === connections[index].block1Id ||
+                  highlighted === connections[index].block2Id
+                    ? "rgb(234 95 32)"
+                    : "var(--primary-color)"
+                }
+                fill="transparent"
+                strokeWidth={
+                  highlighted === connections[index].block1Id ||
+                  highlighted === connections[index].block2Id
+                    ? "3px"
+                    : "1px"
+                }
+                filter={
+                  highlighted === connections[index].block1Id ||
+                  highlighted === connections[index].block2Id
+                    ? "url(#highlight-shadow)"
+                    : "none"
+                }
+              />
               {connections[index]?.marker && (
-                <g transform={`translate(${midX - 13}, ${midY})`}>
+                <g transform={`translate(${midX - 13}, ${midY - 13})`}>
                   {(() => {
                     const marker = connections[index].marker;
                     if (!marker) {
                       return null;
                     }
-                    const color = legendConfigs[marker]?.color || "#000";
+                    const color =
+                      highlighted === connections[index].block1Id ||
+                      highlighted === connections[index].block2Id
+                        ? "rgb(234 95 32)"
+                        : legendConfigs[marker]?.color || "#000";
 
                     switch (connections[index].marker) {
                       case MarkerType.Triangle:
@@ -293,7 +339,12 @@ const UMLEditor = ({
                       y="-10"
                       fontSize="15"
                       textAnchor="middle"
-                      fill="var(--primary-color)"
+                      fill={
+                        highlighted === connections[index].block1Id ||
+                        highlighted === connections[index].block2Id
+                          ? "var(--secondary-color)"
+                          : "var(--primary-color)"
+                      }
                     >
                       {connections[index].label}
                     </text>

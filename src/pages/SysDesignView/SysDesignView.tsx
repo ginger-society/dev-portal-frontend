@@ -156,6 +156,7 @@ const SysDesignView = () => {
           description: service.description,
           dependencies: service.dependencies,
           dbSchemaId: service.dbSchemaId,
+          org_id: service.organizationId,
           color:
             service.serviceType && (blockColorMap as any)[service.serviceType],
         },
