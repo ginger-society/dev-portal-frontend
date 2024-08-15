@@ -74,6 +74,7 @@ const SysDesignView = () => {
           description: pkg.description,
           type: pkg.packageType,
           dependencies: pkg.dependencies,
+          version: pkg.version,
         },
         rows,
       };

@@ -136,6 +136,7 @@ const SysDesignWrapper = () => {
                   <span style={{ fontWeight: "normal", fontSize: "12px" }}>
                     {blockData.data.description}
                   </span>
+                  <Text size={TextSize.Small}>{blockData.data.version}</Text>
                 </div>
                 {blockData.data.type === "database" && (
                   <FaPencilAlt
