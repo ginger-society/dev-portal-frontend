@@ -1,3 +1,7 @@
+## 0.9.0-nightly.0 - 2024-08-15
+chore:
+ - [3170872fa8](3170872fa8d09bfc86f24de5a0131377980743ed) (Ginger Society Admin) chore: cleanup
+	
 ## 0.8.0-nightly.0 - 2024-08-15
 feat:
  - [4a06c74c3b](4a06c74c3bb4b0999bb9ca871b2ca66c50d4a51d) (Ginger Society Admin) feat: cleanup
@@ -57,6 +61,8 @@ feat:
  - [efdb6ee10c](efdb6ee10c5107b2eb5ce7b231b60eceed3b4954) (Ginger Society Admin) feat: icons change
 	
 chore:
+ - [0bad136f8b](0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
+	
  - [562bbb7bc7](562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
 	
  - [e5ed93702a](e5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
@@ -91,6 +97,11 @@ fix:
  - [e6ea2148a5](e6ea2148a5e3101000a4571136b78c7f25e212d3) (Ginger Society Admin) fix: minor css fixes
 	
 ## 0.7.0-nightly.0 - 2024-07-10
+chore:
+ - [57ee5255ae](57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
+	
+ - [a432fe66f5](a432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
+	
 feat:
  - [f8d08db5e1](f8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
 	
@@ -103,29 +114,24 @@ fix:
 	
  - [067f1ca9bf](067f1ca9bf30a3fdf4a0770cc2c915b4ac3ea713) (Ginger Society Admin) fix: CI script
 	
-chore:
- - [57ee5255ae](57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
-	
- - [a432fe66f5](a432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
-	
 ## 0.6.0-nightly.0 - 2024-07-10
+feat:
+ - [54a9646870](54a9646870d64f9ef869ebb6578da772f60af5a1) (Ginger Society Admin) feat: basic css fixex
+	
+ - [58ce52c989](58ce52c989b89d65c21183270e8bfd5f49078102) (Ginger Society Admin) feat: code cleanup
+	
 fix:
  - [444ace41d0](444ace41d0e78c360937f19c731837b443307a3a) (Ginger Society Admin) fix: ci branch name change
 	
 chore:
  - [683a41e68b](683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
 	
-feat:
- - [54a9646870](54a9646870d64f9ef869ebb6578da772f60af5a1) (Ginger Society Admin) feat: basic css fixex
-	
- - [58ce52c989](58ce52c989b89d65c21183270e8bfd5f49078102) (Ginger Society Admin) feat: code cleanup
-	
 ## 0.5.0-nightly.0 - 2024-07-10
-chore:
- - [b914ca46db](b914ca46dbb38acfaec8fb1f168db155dfae8467) (Ginger Society Admin) chore: version bump to 0.5.0-nightly.0
-	
 fix:
  - [f1ae27a659](f1ae27a65958f9ab5b2f9c33a15319df81006118) (Ginger Society Admin) fix: login page bg color
+	
+chore:
+ - [b914ca46db](b914ca46dbb38acfaec8fb1f168db155dfae8467) (Ginger Society Admin) chore: version bump to 0.5.0-nightly.0
 	
 ## 0.4.0-nightly.0 - 2024-07-10
 chore:
@@ -148,13 +154,6 @@ chore:
  - [0973d65703](0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
-chore:
- - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
-	
- - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
-	
- - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
-	
 fix:
  - [3c36444e32](3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
 	
@@ -182,4 +181,11 @@ feat:
  - [e73dba3f18](e73dba3f1853b731f1388054eae51981defc3d86) (Ginger Society Admin) feat: added erorr message in login page
 	
  - [a4b5a9a038](a4b5a9a038c776a808a38bc0d6aa5d8442f2e183) (Ginger Society Admin) feat: updated seo title
+	
+chore:
+ - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
+	
+ - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
+	
+ - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
 	
