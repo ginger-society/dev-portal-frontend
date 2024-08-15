@@ -61,7 +61,7 @@ const SysDesignView = () => {
       if (pkg.dependencies.length > 0) {
         rows.push({
           id: `${pkg.identifier}-dependencies`,
-          data: { heading: "Uses", list: pkg.dependencies },
+          data: { heading: "Dependns on", list: pkg.dependencies },
         });
       }
       blocks[pkg.identifier] = {
@@ -73,6 +73,7 @@ const SysDesignView = () => {
           name: pkg.identifier,
           description: pkg.description,
           type: pkg.packageType,
+          dependencies: pkg.dependencies,
         },
         rows,
       };
@@ -110,7 +111,7 @@ const SysDesignView = () => {
         rows.push({
           id: `${service.identifier}-dependencies`,
           data: {
-            heading: "Uses the following services",
+            heading: "Depends on",
             list: service.dependencies,
           },
         });
@@ -153,6 +154,8 @@ const SysDesignView = () => {
           name: service.identifier,
           type: service.serviceType,
           description: service.description,
+          dependencies: service.dependencies,
+          dbSchemaId: service.dbSchemaId,
           color:
             service.serviceType && (blockColorMap as any)[service.serviceType],
         },

@@ -5,6 +5,7 @@ import {
 } from "@/components/organisms/UMLEditor/types";
 import React from "react";
 import { LegendItemT } from "./types";
+import { Text, TextSize } from "@ginger-society/ginger-ui";
 
 const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
   const getMarker = () => {
@@ -35,7 +36,7 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
       >
         {getMarker()}
       </svg>
-      <span>{item.label}</span>
+      <Text size={TextSize.Small}>{item.label}</Text>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   Row,
 } from "@/components/organisms/UMLEditor/types";
 import React, { useEffect } from "react";
-import { Text, TextWeight } from "@ginger-society/ginger-ui";
+import { Text, TextSize, TextWeight } from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
   FaDatabase,
@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 
 const legendConfigs: LegendConfigs = {
-  [MarkerType.Rectangle]: {
+  [MarkerType.Circle]: {
     label: "Depends on",
     color: "#4793AF",
   },
@@ -32,7 +32,7 @@ const legendConfigs: LegendConfigs = {
     label: "RPCEndpoint",
     color: "#799351",
   },
-  [MarkerType.Circle]: {
+  [MarkerType.Rectangle]: {
     label: "Portal",
     color: "#1A4870",
   },
@@ -46,99 +46,31 @@ const SysDesignWrapper = () => {
     const connections: Connection[] = [];
     Object.keys(blocks).forEach((key) => {
       const block = blocks[key];
-      // console.log({ key, block });
+      console.log({ key, data: block.data });
+      if (block.data.dependencies) {
+        block.data.dependencies.forEach((dependency: string) => {
+          connections.push({
+            block1Id: key,
+            block2Id: dependency.split("/")[1],
+            fromRow: 0,
+            toRow: 0,
+            marker: MarkerType.Circle,
+            label: ``,
+          });
+        });
+      }
+      if (block.data.dbSchemaId) {
+        connections.push({
+          block1Id: key,
+          block2Id: block.data.dbSchemaId,
+          fromRow: 0,
+          toRow: 0,
+          marker: MarkerType.Circle,
+          label: ``,
+        });
+      }
     });
 
-    console.log(blocks);
-
-    connections.push({
-      block1Id: "IAMService",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "dev-portal",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "dev-portal",
-      block2Id: "IAMService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    // connections.push({
-    //   block1Id: "dev-portal",
-    //   block2Id: "ginger-ui",
-    //   fromRow: 0,
-    //   toRow: 0,
-    //   marker: MarkerType.Rectangle,
-    //   label: ``,
-    // });
-    connections.push({
-      block1Id: "iam-frontend-users",
-      block2Id: "IAMService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    // connections.push({
-    //   block1Id: "ginger-ui",
-    //   block2Id: "ginger-book",
-    //   fromRow: 0,
-    //   toRow: 0,
-    //   marker: MarkerType.Rectangle,
-    //   label: ``,
-    // });
-    connections.push({
-      block1Id: "db-compose",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "ginger-connector",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "ginger-scaffolder",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "66bbad42-200f-4b2f-ba0d-9feb1f3edbfa",
-      block2Id: "MetadataService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
-    connections.push({
-      block1Id: "a56e44a9-cfc6-4f69-9b7f-510789b6fa80",
-      block2Id: "IAMService",
-      fromRow: 0,
-      toRow: 0,
-      marker: MarkerType.Rectangle,
-      label: ``,
-    });
     setConnections(connections);
   };
 
@@ -155,13 +87,18 @@ const SysDesignWrapper = () => {
         blocks={blocks}
         connections={connections}
         RowRenderer={({ rowData }) => (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Text>{rowData.data.heading}</Text>
-            <Text>{rowData.data.description}</Text>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Text size={TextSize.Small}>{rowData.data.heading}</Text>
+            <Text size={TextSize.Small}>{rowData.data.description}</Text>
             {rowData.data.list.map((listItem: string) => {
               return (
                 <>
-                  <Text> &#x2192; {listItem}</Text>
+                  <Text size={TextSize.Small}> &#x2192; {listItem}</Text>
                 </>
               );
             })}
@@ -182,8 +119,7 @@ const SysDesignWrapper = () => {
                   {blockData.data.type === "Portal" && <FaDesktop />}
                   {blockData.data.name}
                 </span>
-                {blockData.data.description && <hr />}
-                <span style={{ fontWeight: "normal" }}>
+                <span style={{ fontWeight: "normal", fontSize: "12px" }}>
                   {blockData.data.description}
                 </span>
               </div>
