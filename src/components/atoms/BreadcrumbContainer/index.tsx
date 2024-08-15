@@ -7,7 +7,7 @@ const paths = [
 ];
 
 const handleBreadcrumbClick = (path: string) => {
-  console.log("Breadcrumb clicked:", path);
+  // console.log("Breadcrumb clicked:", path);
   // Implement navigation or any other logic here
 };
 
