@@ -187,6 +187,17 @@ const SysDesignWrapper = () => {
                       </span>
                     </button>
                   </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span style={{ fontWeight: "normal", fontSize: "13px" }}>
+                      Pipeline: {blockData.data.pipeline_status}
+                    </span>
+                  </div>
                 </div>
               </div>
             )}

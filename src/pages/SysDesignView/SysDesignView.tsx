@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, version } from "react";
 import { FaBox, FaServer, FaDatabase, FaCogs } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -79,12 +79,15 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
+          pipeline_status: pkg.pipelineStatus,
         },
         rows,
       };
     });
 
-    const dbSchemas = await MetadataService.metadataGetDbschemasAndTables();
+    const dbSchemas = await MetadataService.metadataGetDbschemasAndTables({
+      env,
+    });
     // console.log(dbSchemas);
     dbSchemas.forEach((schema) => {
       if (schema.identifier) {
@@ -96,6 +99,8 @@ const SysDesignView = () => {
             type: "database",
             description: schema.description,
             color: blockColorMap.database,
+            version: schema.version,
+            pipeline_status: schema.pipelineStatus,
           },
           rows: [
             {
@@ -165,6 +170,8 @@ const SysDesignView = () => {
           color:
             service.serviceType && (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
+          pipeline_status: service.envs.find((s) => s.envKey === env)
+            ?.pipelineStatus,
         },
         rows: rows,
         type: BlockType.SystemBlock,
