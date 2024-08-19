@@ -19,7 +19,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   const router = useLocation();
 
   useEffect(() => {
-    if (router.pathname === "/") {
+    if (router.pathname === "/stage") {
       setSchemaIdInView(null);
     } else if (router.pathname.startsWith("/editor")) {
       setSchemaIdInView(router.pathname.split("/editor/")[1]);
@@ -41,7 +41,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   };
 
   const navigateToHome = () => {
-    navigate("/");
+    navigate("/stage");
   };
 
   const refreshTokenFn = async (refreshToken: string) => {

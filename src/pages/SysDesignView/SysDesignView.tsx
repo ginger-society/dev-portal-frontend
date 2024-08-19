@@ -20,6 +20,7 @@ import SysDesignWrapper from "./SysDesignWrapper";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
 import { Button, SnackbarTimer, useSnackbar } from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
+import { useParams } from "react-router-dom";
 
 const blockColorMap = {
   database: "#89439f",
@@ -32,6 +33,7 @@ const SysDesignView = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
+  const { env } = useParams<{ env: string }>();
 
   const transformDataToSave = () => {
     return Object.values(blocks).reduce((accum, block) => {
@@ -53,8 +55,10 @@ const SysDesignView = () => {
     [key: string]: Block;
   }> => {
     const blocks: { [key: string]: Block } = {};
-
-    const packages = await MetadataService.metadataGetUserPackages();
+    if (!env) {
+      return {};
+    }
+    const packages = await MetadataService.metadataGetUserPackages({ env });
 
     packages.forEach((pkg) => {
       const rows = [];
@@ -141,7 +145,7 @@ const SysDesignView = () => {
                     )?.name
                   }
                 </strong>{" "}
-                Uses the following tables
+                uses the following tables
               </>
             ),
           },
@@ -160,6 +164,7 @@ const SysDesignView = () => {
           org_id: service.organizationId,
           color:
             service.serviceType && (blockColorMap as any)[service.serviceType],
+          version: service.envs.find((s) => s.envKey === env)?.version,
         },
         rows: rows,
         type: BlockType.SystemBlock,
@@ -197,7 +202,7 @@ const SysDesignView = () => {
   useEffect(() => {
     loadLayout();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [env]);
 
   return (
     <UMLEditorProvider

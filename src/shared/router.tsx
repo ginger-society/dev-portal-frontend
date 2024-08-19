@@ -11,7 +11,7 @@ const AuthenticatedSysDesignView = withAuthHOC(SysDesignView);
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: "/:env",
     element: <AuthenticatedSysDesignView />,
   },
   {

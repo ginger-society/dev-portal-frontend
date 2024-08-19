@@ -217,17 +217,16 @@ const UMLEditor = ({
                 }}
               >
                 <HeadingRenderer blockData={block} />
-                {allowEdit ||
-                  (block.data.allowEdit && (
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleSlider(EditorTypeEnum.BLOCK, block.id);
-                      }}
-                    >
-                      <FaPencilAlt />
-                    </span>
-                  ))}
+                {(allowEdit || block.data.allowEdit) && (
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSlider(EditorTypeEnum.BLOCK, block.id);
+                    }}
+                  >
+                    <FaPencilAlt />
+                  </span>
+                )}
               </div>
               {/* Render dynamic number of rows */}
               {block.rows.map((row, index) => (

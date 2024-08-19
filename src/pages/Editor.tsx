@@ -144,7 +144,7 @@ const Editor = () => {
   };
 
   const goHome = () => {
-    router.navigate("/");
+    router.navigate("/stage");
   };
 
   return (
@@ -380,6 +380,7 @@ const UMLEditorWrapper = () => {
       setEditorData={setEditorData}
       updateConnections={updateConnections}
       createNewBlock={createNewBlock}
+      allowEdit={true}
     />
   );
 };

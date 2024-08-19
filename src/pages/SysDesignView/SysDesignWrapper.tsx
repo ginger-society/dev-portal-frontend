@@ -9,17 +9,28 @@ import {
   MarkerType,
   Row,
 } from "@/components/organisms/UMLEditor/types";
-import React, { useEffect } from "react";
-import { Text, TextSize, TextWeight } from "@ginger-society/ginger-ui";
+import React, { useEffect, useState } from "react";
+import {
+  Aside,
+  Button,
+  ButtonType,
+  Text,
+  TextSize,
+  TextWeight,
+} from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
   FaDatabase,
   FaDesktop,
+  FaInfoCircle,
   FaPencilAlt,
   FaServer,
   FaTerminal,
 } from "react-icons/fa";
 import router from "@/shared/router";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import styles from "./sysDesignWrapper.module.scss";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Circle]: {
@@ -43,6 +54,9 @@ const legendConfigs: LegendConfigs = {
 const SysDesignWrapper = () => {
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
+
+  const [isChangelogOpen, setIsChangelogOpen] = useState<boolean>(false);
+  const [changelogMd, setChangelogMd] = useState<string>();
 
   const updateConnections = () => {
     const connections: Connection[] = [];
@@ -81,11 +95,20 @@ const SysDesignWrapper = () => {
   }, [blocks]);
 
   const navigateToDBEditor = (id: string) => {
-    router.navigate(`/editor/${id}/main`);
+    router.navigate(`/editor/${id}/stage`);
   };
 
   const navigateToSwagger = (id: string, org_id: string) => {
     router.navigate(`/services/swagger/${org_id}/${id}/stage`);
+  };
+
+  const openChangelog = async () => {
+    setIsChangelogOpen(true);
+    const response = await fetch(
+      "https://raw.githubusercontent.com/ginger-society/dev-portal-frontend/main/CHANGELOG.md"
+    );
+    const changelogTxt = await response.text();
+    setChangelogMd(changelogTxt);
   };
 
   return (
@@ -117,8 +140,8 @@ const SysDesignWrapper = () => {
         HeadingRenderer={({ blockData }) => (
           <>
             {blockData.type === BlockType.SystemBlock && (
-              <div style={{ display: "flex" }}>
-                <div style={{ width: "250px" }}>
+              <div style={{ display: "flex", width: "100%" }}>
+                <div style={{ width: "300px" }}>
                   <span
                     style={{
                       display: "flex",
@@ -132,24 +155,39 @@ const SysDesignWrapper = () => {
                     {blockData.data.type === "executable" && <FaTerminal />}
                     {blockData.data.type === "Portal" && <FaDesktop />}
                     {blockData.data.name}
+                    {blockData.data.type === "database" && (
+                      <FaPencilAlt
+                        onClick={() => navigateToDBEditor(blockData.id)}
+                      />
+                    )}
+                    {blockData.data.type === "RPCEndpoint" && (
+                      <FaInfoCircle
+                        onClick={() =>
+                          navigateToSwagger(blockData.id, blockData.data.org_id)
+                        }
+                      />
+                    )}
                   </span>
                   <span style={{ fontWeight: "normal", fontSize: "12px" }}>
                     {blockData.data.description}
                   </span>
-                  <Text size={TextSize.Small}>{blockData.data.version}</Text>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span style={{ fontWeight: "normal", fontSize: "13px" }}>
+                      Version: {blockData.data.version}
+                    </span>
+                    <button onClick={openChangelog}>
+                      <span style={{ fontWeight: "normal", fontSize: "13px" }}>
+                        View changelog
+                      </span>
+                    </button>
+                  </div>
                 </div>
-                {blockData.data.type === "database" && (
-                  <FaPencilAlt
-                    onClick={() => navigateToDBEditor(blockData.id)}
-                  />
-                )}
-                {blockData.data.type === "RPCEndpoint" && (
-                  <FaPencilAlt
-                    onClick={() =>
-                      navigateToSwagger(blockData.id, blockData.data.org_id)
-                    }
-                  />
-                )}
               </div>
             )}
           </>
@@ -162,6 +200,14 @@ const SysDesignWrapper = () => {
           throw new Error("Function not implemented.");
         }}
       />
+      <Aside isOpen={isChangelogOpen} onClose={() => setIsChangelogOpen(false)}>
+        <Text tag="h1" size={TextSize.Large}>
+          Changelog
+        </Text>
+        <div className={styles["md-wrapper"]}>
+          <Markdown remarkPlugins={[remarkGfm]}>{changelogMd}</Markdown>
+        </div>
+      </Aside>
     </>
   );
 };

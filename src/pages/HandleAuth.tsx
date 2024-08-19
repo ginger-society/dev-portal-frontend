@@ -3,7 +3,7 @@ import { HandleLoginRedirect } from "@ginger-society/ginger-ui";
 
 export const HandleNavigation = () => {
   const navigateToHome = () => {
-    router.navigate("/");
+    router.navigate("/stage");
   };
   return <HandleLoginRedirect handleNavigation={navigateToHome} />;
 };
