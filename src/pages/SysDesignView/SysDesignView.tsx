@@ -79,6 +79,8 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
+          color:
+            pkg.pipelineStatus === "failed" ? "red" : blockColorMap.library,
           pipeline_status: pkg.pipelineStatus,
         },
         rows,
@@ -98,7 +100,10 @@ const SysDesignView = () => {
             name: schema.name,
             type: "database",
             description: schema.description,
-            color: blockColorMap.database,
+            color:
+              schema.pipelineStatus === "failed"
+                ? "red"
+                : blockColorMap.database,
             version: schema.version,
             pipeline_status: schema.pipelineStatus,
           },
@@ -157,6 +162,10 @@ const SysDesignView = () => {
         });
       }
 
+      const pipeline_status = service.envs.find(
+        (s) => s.envKey === env
+      )?.pipelineStatus;
+
       blocks[service.identifier] = {
         id: service.identifier,
         ref: React.createRef(),
@@ -168,10 +177,12 @@ const SysDesignView = () => {
           dbSchemaId: service.dbSchemaId,
           org_id: service.organizationId,
           color:
-            service.serviceType && (blockColorMap as any)[service.serviceType],
+            pipeline_status === "failed"
+              ? "red"
+              : service.serviceType &&
+                (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
-          pipeline_status: service.envs.find((s) => s.envKey === env)
-            ?.pipelineStatus,
+          pipeline_status,
         },
         rows: rows,
         type: BlockType.SystemBlock,

@@ -20,6 +20,7 @@ import {
 } from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
+  FaCheckDouble,
   FaDatabase,
   FaDesktop,
   FaInfoCircle,
@@ -194,9 +195,20 @@ const SysDesignWrapper = () => {
                       alignItems: "center",
                     }}
                   >
-                    <span style={{ fontWeight: "normal", fontSize: "13px" }}>
-                      Pipeline: {blockData.data.pipeline_status}
-                    </span>
+                    <div
+                      style={{
+                        fontWeight: "normal",
+                        fontSize: "13px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      Pipeline: {blockData.data.pipeline_status}{" "}
+                      {blockData.data.pipeline_status === "passing" && (
+                        <FaCheckDouble />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
