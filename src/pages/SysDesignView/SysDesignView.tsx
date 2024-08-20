@@ -79,8 +79,7 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          color:
-            pkg.pipelineStatus === "failed" ? "red" : blockColorMap.library,
+          color: pkg.pipelineStatus === "failed" ? "red" : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
         },
@@ -142,21 +141,20 @@ const SysDesignView = () => {
               <div
                 style={{ display: "flex", alignItems: "center", gap: "10px" }}
               >
-                {" "}
                 <FaDatabase /> Database
               </div>
             ),
             list: service.tables,
             description: (
               <>
-                From{" "}
+                From
                 <strong>
                   {
                     dbSchemas.find(
                       (schema) => schema.identifier === service.dbSchemaId
                     )?.name
                   }
-                </strong>{" "}
+                </strong>
                 uses the following tables
               </>
             ),
