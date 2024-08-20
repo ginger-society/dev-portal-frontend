@@ -14,9 +14,12 @@ import {
   Aside,
   Button,
   ButtonType,
+  Loader,
+  SnackbarTimer,
   Text,
   TextSize,
   TextWeight,
+  useSnackbar,
 } from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
@@ -58,6 +61,8 @@ const SysDesignWrapper = () => {
 
   const [isChangelogOpen, setIsChangelogOpen] = useState<boolean>(false);
   const [changelogMd, setChangelogMd] = useState<string>();
+
+  const { show } = useSnackbar();
 
   const updateConnections = () => {
     const connections: Connection[] = [];
@@ -103,10 +108,22 @@ const SysDesignWrapper = () => {
     router.navigate(`/services/swagger/${org_id}/${id}/stage`);
   };
 
-  const openChangelog = async () => {
+  const openChangelog = async (repo_origin: string) => {
+    if (!repo_origin) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
     setIsChangelogOpen(true);
+    setChangelogMd(undefined);
+    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
     const response = await fetch(
-      "https://raw.githubusercontent.com/ginger-society/dev-portal-frontend/main/CHANGELOG.md"
+      `${repo_origin.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/CHANGELOG.md`
     );
     const changelogTxt = await response.text();
     setChangelogMd(changelogTxt);
@@ -182,7 +199,9 @@ const SysDesignWrapper = () => {
                     <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                       Version: {blockData.data.version}
                     </span>
-                    <button onClick={openChangelog}>
+                    <button
+                      onClick={() => openChangelog(blockData.data.repo_origin)}
+                    >
                       <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                         View changelog
                       </span>
@@ -204,10 +223,21 @@ const SysDesignWrapper = () => {
                         gap: "10px",
                       }}
                     >
-                      Pipeline: {blockData.data.pipeline_status}{" "}
-                      {blockData.data.pipeline_status === "passing" && (
-                        <FaCheckDouble />
-                      )}
+                      Pipeline:{" "}
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "700",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                        }}
+                      >
+                        {blockData.data.pipeline_status || "Not available"}{" "}
+                        {blockData.data.pipeline_status === "passing" && (
+                          <FaCheckDouble />
+                        )}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -228,7 +258,11 @@ const SysDesignWrapper = () => {
           Changelog
         </Text>
         <div className={styles["md-wrapper"]}>
-          <Markdown remarkPlugins={[remarkGfm]}>{changelogMd}</Markdown>
+          {changelogMd ? (
+            <Markdown remarkPlugins={[remarkGfm]}>{changelogMd}</Markdown>
+          ) : (
+            <Loader />
+          )}
         </div>
       </Aside>
     </>

@@ -1,8 +1,29 @@
+## 0.10.0-nightly.0 - 2024-08-20
+feat:
+ - [887ca4953f](887ca4953fa2a4117e9eb48f1b3d3da4a45ceff9) (Ginger Society Admin) feat: danger color for the failed pipeline block
+	
+ - [431f208cb5](431f208cb57623c75acf5cf316e2959fae910b9c) (Ginger Society Admin) feat: added pipeline status
+	
+ - [88144add68](88144add6810ed75f9907958cdaa5cfde83725cd) (Ginger Society Admin) feat: added pkg_version model changes and sample changelog
+	
 ## 0.9.0-nightly.0 - 2024-08-15
 chore:
+ - [66c026f9f7](66c026f9f7cc375b914a1345529da90ad3128ee2) (Ginger Society Admin) chore: version bump to 0.9.0-nightly.0
+	
  - [3170872fa8](3170872fa8d09bfc86f24de5a0131377980743ed) (Ginger Society Admin) chore: cleanup
 	
 ## 0.8.0-nightly.0 - 2024-08-15
+chore:
+ - [0bad136f8b](0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
+	
+ - [562bbb7bc7](562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
+	
+ - [e5ed93702a](e5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
+	
+ - [f169156d18](f169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
+	
+ - [b0464ac2c1](b0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
+	
 feat:
  - [4a06c74c3b](4a06c74c3bb4b0999bb9ca871b2ca66c50d4a51d) (Ginger Society Admin) feat: cleanup
 	
@@ -60,17 +81,6 @@ feat:
 	
  - [efdb6ee10c](efdb6ee10c5107b2eb5ce7b231b60eceed3b4954) (Ginger Society Admin) feat: icons change
 	
-chore:
- - [0bad136f8b](0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
-	
- - [562bbb7bc7](562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
-	
- - [e5ed93702a](e5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
-	
- - [f169156d18](f169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
-	
- - [b0464ac2c1](b0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
-	
 fix:
  - [0648d5a120](0648d5a120d9008ea641115dd0943b337b29c4a4) (Ginger Society Admin) fix: build fixes
 	
@@ -97,22 +107,22 @@ fix:
  - [e6ea2148a5](e6ea2148a5e3101000a4571136b78c7f25e212d3) (Ginger Society Admin) fix: minor css fixes
 	
 ## 0.7.0-nightly.0 - 2024-07-10
-chore:
- - [57ee5255ae](57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
-	
- - [a432fe66f5](a432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
-	
-feat:
- - [f8d08db5e1](f8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
-	
- - [530cab5177](530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
-	
 fix:
  - [d3448bfbe0](d3448bfbe0a16bb0e4424ce73505a35e14a68593) (Ginger Society Admin) fix: CI script
 	
  - [f41c870d9e](f41c870d9e9eab13cf2f7a36da6ff0d0aa03ae8e) (Ginger Society Admin) fix: CI pipeline
 	
  - [067f1ca9bf](067f1ca9bf30a3fdf4a0770cc2c915b4ac3ea713) (Ginger Society Admin) fix: CI script
+	
+feat:
+ - [f8d08db5e1](f8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
+	
+ - [530cab5177](530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
+	
+chore:
+ - [57ee5255ae](57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
+	
+ - [a432fe66f5](a432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
 	
 ## 0.6.0-nightly.0 - 2024-07-10
 feat:
@@ -154,15 +164,6 @@ chore:
  - [0973d65703](0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
-fix:
- - [3c36444e32](3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
-	
- - [ca64399aed](ca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
-	
- - [d7700cd1b5](d7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
-	
- - [f9d8110f78](f9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
-	
 feat:
  - [3f63f4983e](3f63f4983e70ea21f152ed1299fad8e3482569f9) (Ginger Society Admin) feat: added releaser support
 	
@@ -181,6 +182,15 @@ feat:
  - [e73dba3f18](e73dba3f1853b731f1388054eae51981defc3d86) (Ginger Society Admin) feat: added erorr message in login page
 	
  - [a4b5a9a038](a4b5a9a038c776a808a38bc0d6aa5d8442f2e183) (Ginger Society Admin) feat: updated seo title
+	
+fix:
+ - [3c36444e32](3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
+	
+ - [ca64399aed](ca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
+	
+ - [d7700cd1b5](d7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
+	
+ - [f9d8110f78](f9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
 	
 chore:
  - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0

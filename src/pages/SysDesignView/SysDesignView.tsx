@@ -82,6 +82,7 @@ const SysDesignView = () => {
           color:
             pkg.pipelineStatus === "failed" ? "red" : blockColorMap.library,
           pipeline_status: pkg.pipelineStatus,
+          repo_origin: pkg.repoOrigin,
         },
         rows,
       };
@@ -106,6 +107,7 @@ const SysDesignView = () => {
                 : blockColorMap.database,
             version: schema.version,
             pipeline_status: schema.pipelineStatus,
+            repo_origin: schema.repoOrigin,
           },
           rows: [
             {
@@ -176,6 +178,7 @@ const SysDesignView = () => {
           dependencies: service.dependencies,
           dbSchemaId: service.dbSchemaId,
           org_id: service.organizationId,
+          repo_origin: service.repoOrigin,
           color:
             pipeline_status === "failed"
               ? "red"

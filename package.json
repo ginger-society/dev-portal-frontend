@@ -81,5 +81,5 @@
     "update-deps": "node ./src/config/update-deps.mjs"
   },
   "type": "module",
-  "version": "0.9.0-nightly.0"
+  "version": "0.10.0-nightly.0"
 }
