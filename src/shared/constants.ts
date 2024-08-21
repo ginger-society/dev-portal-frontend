@@ -10,3 +10,5 @@ export const ROUTES = {
   SIGN_IN: "/auth/sign-in",
   HOME: "/home",
 };
+
+export const VERSION = "0.0.0"

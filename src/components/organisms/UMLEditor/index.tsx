@@ -36,6 +36,7 @@ const UMLEditor = ({
     return blockData.id;
   },
   allowEdit = true,
+  allowDrag = true,
   RowRenderer = ({ rowData }) => {
     return rowData.id;
   },
@@ -206,7 +207,7 @@ const UMLEditor = ({
                   block.type === BlockType.Enum
                     ? "options-header"
                     : "table-header"
-                } block-header handle`}
+                } block-header ${allowDrag ? "handle" : ""}`}
                 style={{
                   backgroundColor: block.data.color,
                   borderTop: `solid 1px ${block.data.color}`,

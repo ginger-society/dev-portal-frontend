@@ -1,5 +1,13 @@
 import React, { useEffect, useState, version } from "react";
-import { FaBox, FaServer, FaDatabase, FaCogs } from "react-icons/fa";
+import {
+  FaBox,
+  FaServer,
+  FaDatabase,
+  FaCogs,
+  FaBuilding,
+  FaLock,
+  FaLockOpen,
+} from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
   UMLEditorProvider,
@@ -18,9 +26,23 @@ import { PageLayout } from "@/shared/PageLayout";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import SysDesignWrapper from "./SysDesignWrapper";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
-import { Button, SnackbarTimer, useSnackbar } from "@ginger-society/ginger-ui";
+import {
+  Button,
+  Dropdown,
+  Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalSize,
+  SnackbarTimer,
+  useSnackbar,
+  Text,
+  TextColor,
+} from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
+import styles from "./sysDesignView.module.scss";
+import router from "@/shared/router";
 
 const blockColorMap = {
   database: "#89439f",
@@ -34,6 +56,20 @@ const SysDesignView = () => {
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
   const { env } = useParams<{ env: string }>();
+  const [isLocked, setIsLocked] = useState<boolean>(true);
+  const [pipeline_status, setPipeline_status] = useState<string>("checking...");
+  const [pipeline_status_color, setPipeline_status_color] = useState<TextColor>(
+    TextColor.Primary
+  );
+
+  const toggleLock = () => {
+    setIsLocked((l) => {
+      if (!l) {
+        saveLayout();
+      }
+      return !l;
+    });
+  };
 
   const transformDataToSave = () => {
     return Object.values(blocks).reduce((accum, block) => {
@@ -191,6 +227,24 @@ const SysDesignView = () => {
       };
     });
 
+    const statuses = Object.keys(blocks).reduce(
+      (allStatuses: string[], key) => {
+        return [...allStatuses, blocks[key].data.pipeline_status];
+      },
+      []
+    );
+
+    if (statuses.includes("failed")) {
+      setPipeline_status("failed");
+      setPipeline_status_color(TextColor.Danger);
+    } else if (statuses.includes("running")) {
+      setPipeline_status("running...");
+      setPipeline_status_color(TextColor.Warning);
+    } else {
+      setPipeline_status("Passing");
+      setPipeline_status_color(TextColor.Success);
+    }
+
     return blocks;
   };
 
@@ -223,6 +277,10 @@ const SysDesignView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [env]);
 
+  const navigateToManageWorkspace = () => {
+    router.navigate("/manage-workspaces");
+  };
+
   return (
     <UMLEditorProvider
       value={{
@@ -235,9 +293,54 @@ const SysDesignView = () => {
       }}
     >
       <HeaderContainer>
-        <Button label={"Save"} onClick={saveLayout}></Button>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <Dropdown
+            label={
+              <Button
+                label={
+                  <>
+                    <FaBuilding />
+                    Ginger Society
+                  </>
+                }
+              ></Button>
+            }
+            align="left"
+          >
+            <ul>
+              <li className={styles["org-item"]}>
+                <FaBuilding />
+                Ginger Society
+              </li>
+              <li className={styles["org-item"]}>
+                <FaBuilding />
+                Hora services
+              </li>
+              <button
+                className={styles["new-org-btn"]}
+                onClick={navigateToManageWorkspace}
+              >
+                Manage workspaces
+              </button>
+            </ul>
+          </Dropdown>
+          <Text color={pipeline_status_color}>
+            Pipeline Status : {pipeline_status}
+          </Text>
+        </div>
       </HeaderContainer>
-      <SysDesignWrapper />
+      <button className={styles["save-layout-btn"]} onClick={toggleLock}>
+        {isLocked ? (
+          <>
+            <FaLock /> Locked
+          </>
+        ) : (
+          <>
+            <FaLockOpen /> Lock to save
+          </>
+        )}
+      </button>
+      <SysDesignWrapper allowDrag={!isLocked} />
     </UMLEditorProvider>
   );
 };

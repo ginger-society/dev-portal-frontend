@@ -81,6 +81,7 @@ export interface UMLEditorProps {
   RowRenderer?: FunctionComponent<{ rowData: Row }>
   HeadingRenderer?: FunctionComponent<{ blockData: Block }>
   allowEdit?: boolean
+  allowDrag?: boolean
   EnumRowRenderer?: FunctionComponent<{ blockData: Block }>
   setEditorData: React.Dispatch<React.SetStateAction<EditorData | undefined>>
   updateConnections: () => void

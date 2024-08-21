@@ -1,3 +1,7 @@
+## 0.11.0-nightly.0 - 2024-08-21
+feat:
+ - [bb15f965af](bb15f965af815ffc14ef4f0d3d2e2473d5e51efe) (Ginger Society Admin) feat: updated pipeline to use builder image
+	
 ## 0.10.0-nightly.0 - 2024-08-20
 feat:
  - [887ca4953f](887ca4953fa2a4117e9eb48f1b3d3da4a45ceff9) (Ginger Society Admin) feat: danger color for the failed pipeline block
@@ -6,6 +10,9 @@ feat:
 	
  - [88144add68](88144add6810ed75f9907958cdaa5cfde83725cd) (Ginger Society Admin) feat: added pkg_version model changes and sample changelog
 	
+chore:
+ - [c757fe9cac](c757fe9cacdb5f047c59768b97ab86df9e4a5685) (Ginger Society Admin) chore: version bump to 0.10.0-nightly.0
+	
 ## 0.9.0-nightly.0 - 2024-08-15
 chore:
  - [66c026f9f7](66c026f9f7cc375b914a1345529da90ad3128ee2) (Ginger Society Admin) chore: version bump to 0.9.0-nightly.0
@@ -13,17 +20,6 @@ chore:
  - [3170872fa8](3170872fa8d09bfc86f24de5a0131377980743ed) (Ginger Society Admin) chore: cleanup
 	
 ## 0.8.0-nightly.0 - 2024-08-15
-chore:
- - [0bad136f8b](0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
-	
- - [562bbb7bc7](562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
-	
- - [e5ed93702a](e5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
-	
- - [f169156d18](f169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
-	
- - [b0464ac2c1](b0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
-	
 feat:
  - [4a06c74c3b](4a06c74c3bb4b0999bb9ca871b2ca66c50d4a51d) (Ginger Society Admin) feat: cleanup
 	
@@ -81,6 +77,17 @@ feat:
 	
  - [efdb6ee10c](efdb6ee10c5107b2eb5ce7b231b60eceed3b4954) (Ginger Society Admin) feat: icons change
 	
+chore:
+ - [0bad136f8b](0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
+	
+ - [562bbb7bc7](562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
+	
+ - [e5ed93702a](e5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
+	
+ - [f169156d18](f169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
+	
+ - [b0464ac2c1](b0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
+	
 fix:
  - [0648d5a120](0648d5a120d9008ea641115dd0943b337b29c4a4) (Ginger Society Admin) fix: build fixes
 	
@@ -125,6 +132,9 @@ chore:
  - [a432fe66f5](a432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
 	
 ## 0.6.0-nightly.0 - 2024-07-10
+chore:
+ - [683a41e68b](683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
+	
 feat:
  - [54a9646870](54a9646870d64f9ef869ebb6578da772f60af5a1) (Ginger Society Admin) feat: basic css fixex
 	
@@ -132,9 +142,6 @@ feat:
 	
 fix:
  - [444ace41d0](444ace41d0e78c360937f19c731837b443307a3a) (Ginger Society Admin) fix: ci branch name change
-	
-chore:
- - [683a41e68b](683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
 	
 ## 0.5.0-nightly.0 - 2024-07-10
 fix:
@@ -151,11 +158,11 @@ chore:
 chore:
  - [8ab70b9060](8ab70b906018cb09f4b6e76d879a8f1dad11f312) (Ginger Society Admin) chore: version bump to 0.3.0-nightly.0
 	
-fix:
- - [c74494cc0b](c74494cc0b9da538aafe2d9088edbd038a7a0fe9) (Ginger Society Admin) fix: dark and light theme for login page
-	
 feat:
  - [951c148cf8](951c148cf8cef65b2588bf046769578fc694722c) (Ginger Society Admin) feat: updated login page to use ginger-ui and removed form control classes
+	
+fix:
+ - [c74494cc0b](c74494cc0b9da538aafe2d9088edbd038a7a0fe9) (Ginger Society Admin) fix: dark and light theme for login page
 	
 ## 0.2.0-nightly.0 - 2024-07-08
 chore:
@@ -164,6 +171,13 @@ chore:
  - [0973d65703](0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
+chore:
+ - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
+	
+ - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
+	
+ - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
+	
 feat:
  - [3f63f4983e](3f63f4983e70ea21f152ed1299fad8e3482569f9) (Ginger Society Admin) feat: added releaser support
 	
@@ -191,11 +205,4 @@ fix:
  - [d7700cd1b5](d7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
 	
  - [f9d8110f78](f9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
-	
-chore:
- - [6b7c787df3](6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
-	
- - [e1b3c7f90e](e1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
-	
- - [d7594d12a8](d7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
 	

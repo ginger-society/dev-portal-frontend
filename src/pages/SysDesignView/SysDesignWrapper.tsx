@@ -55,7 +55,7 @@ const legendConfigs: LegendConfigs = {
   },
 };
 
-const SysDesignWrapper = () => {
+const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
 
@@ -155,6 +155,7 @@ const SysDesignWrapper = () => {
           </div>
         )}
         allowEdit={false}
+        allowDrag={allowDrag}
         HeadingRenderer={({ blockData }) => (
           <>
             {blockData.type === BlockType.SystemBlock && (
@@ -200,7 +201,10 @@ const SysDesignWrapper = () => {
                       Version: {blockData.data.version}
                     </span>
                     <button
-                      onClick={() => openChangelog(blockData.data.repo_origin)}
+                      onClick={(e) => {
+                        openChangelog(blockData.data.repo_origin);
+                        e.stopPropagation();
+                      }}
                     >
                       <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                         View changelog
