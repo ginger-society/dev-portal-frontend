@@ -1,7 +1,7 @@
 [version]
 channel = "Nightly"
 major = 0
-minor = 11
+minor = 12
 patch = 0
 revision = 0
 
@@ -11,9 +11,9 @@ output_type = "String"
 variable = "version"
 
 [[references]]
-file_name = "src/shared/constants.ts"
+file_name = "src/shared/version.json"
 output_type = "String"
-variable = "VERSION"
+variable = "version"
 
 [settings]
 git_url_prefix = ""

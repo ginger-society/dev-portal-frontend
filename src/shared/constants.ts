@@ -11,4 +11,3 @@ export const ROUTES = {
   HOME: "/home",
 };
 
-export const VERSION = "0.0.0"
