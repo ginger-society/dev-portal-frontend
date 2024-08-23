@@ -83,9 +83,19 @@ const SysDesignView = () => {
 
   const { show } = useSnackbar();
 
-  const saveLayout = () => {
-    localStorage.setItem("sys-design", JSON.stringify(transformDataToSave()));
-    show(<>Saved in local storage</>, SnackbarTimer.Medium);
+  const saveLayout = async () => {
+    if (!org_id) {
+      return;
+    }
+    try {
+      const response = await MetadataService.metadataUpdateBlockPositions({
+        orgId: org_id,
+        body: JSON.stringify(transformDataToSave()),
+      });
+      show(<>Layout Saved</>, SnackbarTimer.Medium);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchAndProcessSystemDesign = async (): Promise<{
@@ -250,26 +260,36 @@ const SysDesignView = () => {
   };
 
   const loadLayout = async () => {
-    const layoutData = localStorage.getItem("sys-design");
-    const sysBlockData = await fetchAndProcessSystemDesign();
-    if (layoutData) {
-      const layoutJson = JSON.parse(layoutData) as {
-        [key: string]: { position: { top: number; left: number } };
-      };
-
-      const data = Object.values(sysBlockData).reduce((accum, block) => {
-        return {
-          ...accum,
-          [block.id]: {
-            ...block,
-            position: (layoutJson[block.id] &&
-              layoutJson[block.id].position) || { top: 100, left: 100 },
-          },
+    if (!org_id) {
+      return;
+    }
+    try {
+      const response = await MetadataService.metadataGetWorkspace({
+        orgId: org_id,
+      });
+      const layoutData = response.blockPositions;
+      const sysBlockData = await fetchAndProcessSystemDesign();
+      if (layoutData) {
+        const layoutJson = JSON.parse(layoutData) as {
+          [key: string]: { position: { top: number; left: number } };
         };
-      }, {});
-      setBlocks(data);
-    } else {
-      setBlocks(sysBlockData);
+
+        const data = Object.values(sysBlockData).reduce((accum, block) => {
+          return {
+            ...accum,
+            [block.id]: {
+              ...block,
+              position: (layoutJson[block.id] &&
+                layoutJson[block.id].position) || { top: 100, left: 100 },
+            },
+          };
+        }, {});
+        setBlocks(data);
+      } else {
+        setBlocks(sysBlockData);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
