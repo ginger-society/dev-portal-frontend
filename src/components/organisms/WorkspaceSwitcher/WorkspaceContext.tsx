@@ -31,6 +31,10 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  useEffect(() => {
+    fetchWorkspaces();
+  }, []);
+
   return (
     <WorkspaceContext.Provider value={{ orgs, fetchWorkspaces }}>
       {children}

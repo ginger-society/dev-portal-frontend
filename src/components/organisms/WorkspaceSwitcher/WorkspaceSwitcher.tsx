@@ -19,11 +19,6 @@ const WorkspaceSwitcher = () => {
     router.navigate(`/${workspaceId}/stage`);
   };
 
-  useEffect(() => {
-    fetchWorkspaces();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Dropdown
       label={

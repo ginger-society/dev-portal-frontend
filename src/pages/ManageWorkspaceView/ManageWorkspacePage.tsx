@@ -41,6 +41,10 @@ const ManageWorkspacePage = () => {
     router.navigate(`/manage-workspaces/${org_id}/${settingsType}`);
   };
 
+  const openWorkspace = (slug: string) => {
+    router.navigate(`/${slug}/stage`);
+  };
+
   return (
     <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
       <HeaderContainer />
@@ -90,6 +94,10 @@ const ManageWorkspacePage = () => {
                     }
                   ></Button>
                 )}
+                <Button
+                  label={"open"}
+                  onClick={() => openWorkspace(org.slug)}
+                />
                 <Text>You are "an Admin"</Text>
               </div>
             </div>

@@ -23,7 +23,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
     docName?: string;
     org_id: string;
   }>();
-  const { orgs } = useWorkspaces();
+  const { orgs, fetchWorkspaces } = useWorkspaces();
 
   const { user } = useContext(AuthContext);
 
@@ -45,6 +45,8 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
     if (org_id) {
       navigate(`/${org_id}/stage`);
     } else {
+      console.log(orgs);
+
       if (orgs.length > 0) {
         const woskspaceInLocalStorage = localStorage.getItem("workspace-id");
         if (orgs.find((o) => o.slug === woskspaceInLocalStorage)) {
@@ -62,6 +64,10 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
     });
     return tokens.accessToken;
   };
+
+  useEffect(() => {
+    fetchWorkspaces();
+  });
 
   return (
     <>
