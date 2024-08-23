@@ -6,28 +6,26 @@ import { IAMService } from "@/services";
 import { AuthContext } from "@/shared/AuthContext";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 import version from "@/shared/version.json";
-import { WorkspaceProvider } from "@/components/organisms/WorkspaceSwitcher/WorkspaceContext";
+import {
+  useWorkspaces,
+  WorkspaceProvider,
+} from "@/components/organisms/WorkspaceSwitcher/WorkspaceContext";
+import router from "@/shared/router";
 
 interface HeaderContainerProps {
   children?: React.ReactNode;
 }
 
 const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
-  const [schemaIdInView, setSchemaIdInView] = useState<string | null>();
   const navigate = useNavigate();
-  const { docId, docName } = useParams<{ docId: string; docName?: string }>();
+  const { docId, docName, org_id } = useParams<{
+    docId: string;
+    docName?: string;
+    org_id: string;
+  }>();
+  const { orgs } = useWorkspaces();
 
   const { user } = useContext(AuthContext);
-
-  const router = useLocation();
-
-  useEffect(() => {
-    if (router.pathname === "/stage") {
-      setSchemaIdInView(null);
-    } else if (router.pathname.startsWith("/editor")) {
-      setSchemaIdInView(router.pathname.split("/editor/")[1]);
-    }
-  }, [router]);
 
   const logOut = async () => {
     try {
@@ -44,7 +42,18 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   };
 
   const navigateToHome = () => {
-    navigate("/stage");
+    if (org_id) {
+      navigate(`/${org_id}/stage`);
+    } else {
+      if (orgs.length > 0) {
+        const woskspaceInLocalStorage = localStorage.getItem("workspace-id");
+        if (orgs.find((o) => o.slug === woskspaceInLocalStorage)) {
+          router.navigate(`/${woskspaceInLocalStorage}/stage`);
+        } else {
+          router.navigate(`/${orgs[0].slug}/stage`);
+        }
+      }
+    }
   };
 
   const refreshTokenFn = async (refreshToken: string) => {
