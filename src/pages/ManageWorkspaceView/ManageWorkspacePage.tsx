@@ -101,7 +101,7 @@ const ManageWorkspacePage = () => {
                   label={"open"}
                   onClick={() => openWorkspace(org.slug)}
                 />
-                <Text>You are "an Admin"</Text>
+                <Text>You are {org.isAdmin ? "an Admin" : "a Member"}</Text>
               </div>
             </div>
           );

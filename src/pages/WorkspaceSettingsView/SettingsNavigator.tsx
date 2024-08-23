@@ -1,8 +1,8 @@
 import router from "@/shared/router";
 import { useParams } from "react-router-dom";
 import styles from "./seiingsNavigation.module.scss";
-import { Button, ButtonType } from "@ginger-society/ginger-ui";
-import { FaArrowLeft } from "react-icons/fa";
+import { Button, ButtonType, Text } from "@ginger-society/ginger-ui";
+import { FaArrowLeft, FaKey, FaUsersCog } from "react-icons/fa";
 
 const SettingsNavigator = ({
   width,
@@ -39,7 +39,9 @@ const SettingsNavigator = ({
           } `}
           onClick={() => navigateToWorkspaceSettings("members")}
         >
-          Members
+          <Text>
+            Members <FaUsersCog />
+          </Text>
         </li>
         <li
           className={`${styles["item"]}  ${
@@ -47,7 +49,9 @@ const SettingsNavigator = ({
           } `}
           onClick={() => navigateToWorkspaceSettings("tokens")}
         >
-          Tokens
+          <Text>
+            Tokens <FaKey />
+          </Text>
         </li>
       </ul>
     </div>
