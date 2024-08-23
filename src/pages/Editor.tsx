@@ -22,7 +22,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, ButtonType, Tooltip } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
-import { FaList, FaLock, FaTable } from "react-icons/fa";
+import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";
 import { GetDbschemaByIdResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
@@ -161,23 +161,23 @@ const Editor = () => {
       <>
         <HeaderContainer>
           <div className={styles["actions-container"]}>
-            Editing : {branchData?.name}
-            <Button
+            <FaDatabase /> {branchData?.orgId}/ {branchData?.name}
+            {/* <Button
               onClick={goHome}
               label={"Go home"}
               type={ButtonType.Secondary}
-            ></Button>
+            ></Button> */}
             <Button
               onClick={handleSave}
               label={saveLoading ? "Saving..." : "Save"}
               loading={saveLoading}
               type={ButtonType.Primary}
             ></Button>
-            <Button
+            {/* <Button
               onClick={handleSchemaCopy}
               label={copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
               type={ButtonType.Tertiary}
-            ></Button>
+            ></Button> */}
           </div>
         </HeaderContainer>
         <UMLEditorWrapper />

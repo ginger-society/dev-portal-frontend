@@ -5,20 +5,39 @@ import HandleNavigation from "@/pages/HandleAuth";
 import { SwaggerViewPage } from "@/pages/SwaggerView";
 import { SysDesignView } from "@/pages/SysDesignView";
 import ManageWorkspacePage from "@/pages/ManageWorkspaceView";
+import {
+  WorkspaceSettingsTokensPage,
+  WorkspaceSettingsMembersPage,
+} from "@/pages/WorkspaceSettingsView";
 
 const AuthenticatedHome = withAuthHOC(Editor);
 const AuthenticatedSwaggerViewPage = withAuthHOC(SwaggerViewPage);
 const AuthenticatedSysDesignView = withAuthHOC(SysDesignView);
 const AuthenticatedManageWorkspacesView = withAuthHOC(ManageWorkspacePage);
+const AuthenticatedWorkspaceSettingsTokensView = withAuthHOC(
+  WorkspaceSettingsTokensPage
+);
+
+const AuthenticatedWorkspaceSettingsMembersPage = withAuthHOC(
+  WorkspaceSettingsMembersPage
+);
 
 const router = createHashRouter([
   {
-    path: "/:env",
+    path: "/:org_id/:env",
     element: <AuthenticatedSysDesignView />,
   },
   {
     path: "/manage-workspaces",
     element: <AuthenticatedManageWorkspacesView />,
+  },
+  {
+    path: "/manage-workspaces/:org_id/tokens",
+    element: <AuthenticatedWorkspaceSettingsTokensView />,
+  },
+  {
+    path: "/manage-workspaces/:org_id/members",
+    element: <AuthenticatedWorkspaceSettingsMembersPage />,
   },
   {
     path: "/editor/:docId/:branch",

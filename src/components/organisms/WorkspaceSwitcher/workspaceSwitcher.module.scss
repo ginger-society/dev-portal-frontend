@@ -1,0 +1,20 @@
+.new-org-btn {
+  width: 300px;
+  padding: 10px;
+  background: var(--primary-bg-color);
+}
+
+.new-org-btn:hover {
+  background: var(--primary-accent-color);
+}
+
+.org-item {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.org-item:hover {
+  background: var(--primary-accent-color);
+}

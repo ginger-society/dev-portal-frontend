@@ -1,0 +1,17 @@
+.item {
+  padding: 10px;
+}
+
+.item:hover {
+  cursor: pointer;
+  background-color: var(--primary-accent-color);
+}
+
+.container {
+  padding-right: 20px;
+  border-right: solid 1px var(--primary-accent-color);
+  min-height: 300px;
+}
+.active {
+  background-color: var(--primary-accent-color);
+}

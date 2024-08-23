@@ -5,6 +5,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
 import { AuthContext } from "@/shared/AuthContext";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
+import version from "@/shared/version.json";
+
 interface HeaderContainerProps {
   children?: React.ReactNode;
 }
@@ -57,6 +59,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
         <>
           <AuthHeartBeat refreshTokenFn={refreshTokenFn} />
           <Header
+            version={version.version}
             brandName={
               <span onClick={navigateToHome} className={styles["home-link"]}>
                 <strong>Ginger Society</strong> &gt; Dev Portal

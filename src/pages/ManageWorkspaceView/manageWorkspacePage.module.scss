@@ -1,0 +1,13 @@
+.org-item-container {
+  padding: 20px;
+  border: solid 1px var(--primary-accent-color);
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.org-item-container:hover {
+  background: var(--primary-accent-color);
+}

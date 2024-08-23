@@ -43,6 +43,7 @@ import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";
 import router from "@/shared/router";
+import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
 
 const blockColorMap = {
   database: "#89439f",
@@ -55,7 +56,7 @@ const SysDesignView = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
-  const { env } = useParams<{ env: string }>();
+  const { env, org_id } = useParams<{ env: string; org_id: string }>();
   const [isLocked, setIsLocked] = useState<boolean>(true);
   const [pipeline_status, setPipeline_status] = useState<string>("checking...");
   const [pipeline_status_color, setPipeline_status_color] = useState<TextColor>(
@@ -277,10 +278,6 @@ const SysDesignView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [env]);
 
-  const navigateToManageWorkspace = () => {
-    router.navigate("/manage-workspaces");
-  };
-
   return (
     <UMLEditorProvider
       value={{
@@ -294,36 +291,7 @@ const SysDesignView = () => {
     >
       <HeaderContainer>
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <Dropdown
-            label={
-              <Button
-                label={
-                  <>
-                    <FaBuilding />
-                    Ginger Society
-                  </>
-                }
-              ></Button>
-            }
-            align="left"
-          >
-            <ul>
-              <li className={styles["org-item"]}>
-                <FaBuilding />
-                Ginger Society
-              </li>
-              <li className={styles["org-item"]}>
-                <FaBuilding />
-                Hora services
-              </li>
-              <button
-                className={styles["new-org-btn"]}
-                onClick={navigateToManageWorkspace}
-              >
-                Manage workspaces
-              </button>
-            </ul>
-          </Dropdown>
+          <WorkspaceSwitcher />
           <Text color={pipeline_status_color}>
             Pipeline Status : {pipeline_status}
           </Text>

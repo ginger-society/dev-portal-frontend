@@ -1,0 +1,19 @@
+.member-container {
+  padding: 20px;
+  border: solid 1px var(--primary-accent-color);
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pipeline-token-container {
+  padding: 20px;
+  border: solid 1px var(--primary-accent-color);
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
