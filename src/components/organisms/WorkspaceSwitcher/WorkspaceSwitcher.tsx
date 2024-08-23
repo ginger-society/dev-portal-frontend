@@ -1,34 +1,27 @@
-import { FaBuilding } from "react-icons/fa";
+import { FaBuilding, FaCheck } from "react-icons/fa";
 import styles from "./workspaceSwitcher.module.scss";
 import { Button, Dropdown } from "@ginger-society/ginger-ui";
 import router from "@/shared/router";
-import { useEffect, useState } from "react";
-import { MetadataService } from "@/services";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { useParams } from "react-router-dom";
+import { useWorkspaces } from "./WorkspaceContext";
+import { useEffect } from "react";
 
 const WorkspaceSwitcher = () => {
-  const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
+  const { org_id } = useParams<{ org_id: string }>();
+  const { orgs, fetchWorkspaces } = useWorkspaces();
 
   const navigateToManageWorkspace = () => {
     router.navigate("/manage-workspaces");
   };
 
-  const fetchWorkspaces = async () => {
-    try {
-      const response = await MetadataService.metadataGetWorkspaces();
-      setOrgs(response);
-    } catch (error) {
-      console.log(error);
-    }
+  const switchWorkspace = (workspaceId: string) => {
+    localStorage.setItem("workspace-id", workspaceId);
+    router.navigate(`/${workspaceId}/stage`);
   };
 
   useEffect(() => {
     fetchWorkspaces();
   }, []);
-
-  const switchWorkspace = (workspaceId: string) => {
-    router.navigate(`/${workspaceId}/stage`);
-  };
 
   return (
     <Dropdown
@@ -37,7 +30,7 @@ const WorkspaceSwitcher = () => {
           label={
             <>
               <FaBuilding />
-              Ginger Society
+              {orgs.find((o) => o.slug === org_id)?.name}
             </>
           }
         ></Button>
@@ -45,17 +38,20 @@ const WorkspaceSwitcher = () => {
       align="left"
     >
       <ul>
-        {orgs.map((org) => {
-          return (
-            <li
-              onClick={() => switchWorkspace(org.slug)}
-              className={styles["org-item"]}
-            >
-              <FaBuilding />
-              {org.name}
-            </li>
-          );
-        })}
+        {orgs.map((org) => (
+          <li
+            key={org.slug}
+            onClick={() => switchWorkspace(org.slug)}
+            className={`${styles["org-item"]} ${
+              org.slug === org_id ? styles["active"] : ""
+            }`}
+          >
+            <FaBuilding />
+            {org.name}
+
+            {org.slug === org_id && <FaCheck />}
+          </li>
+        ))}
         <button
           className={styles["new-org-btn"]}
           onClick={navigateToManageWorkspace}

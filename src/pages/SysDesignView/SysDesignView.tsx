@@ -296,7 +296,7 @@ const SysDesignView = () => {
   useEffect(() => {
     loadLayout();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [env]);
+  }, [env, org_id]);
 
   return (
     <UMLEditorProvider

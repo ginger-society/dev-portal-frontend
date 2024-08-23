@@ -6,6 +6,7 @@ import { IAMService } from "@/services";
 import { AuthContext } from "@/shared/AuthContext";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 import version from "@/shared/version.json";
+import { WorkspaceProvider } from "@/components/organisms/WorkspaceSwitcher/WorkspaceContext";
 
 interface HeaderContainerProps {
   children?: React.ReactNode;
