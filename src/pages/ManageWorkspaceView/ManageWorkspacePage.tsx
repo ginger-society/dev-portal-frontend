@@ -2,6 +2,7 @@ import HeaderContainer from "@/components/atoms/HeaderContainer";
 import {
   Button,
   ButtonType,
+  Loader,
   Modal,
   ModalBody,
   ModalHeader,
@@ -20,11 +21,13 @@ import { WorkspaceSummary } from "@/services/MetadataService_client";
 const ManageWorkspacePage = () => {
   const [isCreateOrgOpen, setIsCreateOrgOpen] = useState<boolean>(false);
   const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
-
+  const [loading, setIsLoading] = useState<boolean>(false);
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await MetadataService.metadataGetWorkspaces();
       setOrgs(response);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +106,7 @@ const ManageWorkspacePage = () => {
             </div>
           );
         })}
+        {loading && <Loader />}
       </div>
       <Modal
         isOpen={isCreateOrgOpen}
