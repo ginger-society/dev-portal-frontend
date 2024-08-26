@@ -51,9 +51,7 @@ const ManageWorkspacePage = () => {
   return (
     <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
       <HeaderContainer />
-      <div
-        style={{ paddingLeft: "20%", paddingRight: "20%", paddingTop: "50px" }}
-      >
+      <div className="workspace-container">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Text tag="h2" size={TextSize.Large}>
             Manage workspaces
@@ -117,6 +115,7 @@ const ManageWorkspacePage = () => {
         <ModalBody>
           <NewOrgForm
             onCancel={() => {
+              fetchData();
               setIsCreateOrgOpen(false);
             }}
           />

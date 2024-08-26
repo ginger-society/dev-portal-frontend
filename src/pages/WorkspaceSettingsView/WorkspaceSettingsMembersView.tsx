@@ -15,13 +15,14 @@ import {
   TextSize,
   useSnackbar,
 } from "@ginger-society/ginger-ui";
-import { FaRegBuilding } from "react-icons/fa";
+import { FaArrowLeft, FaRegBuilding } from "react-icons/fa";
 import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
 import { useEffect, useState } from "react";
 import { IAMService, MetadataService } from "@/services";
 import { UserInfo } from "@/services/IAMService_client";
 import { WorkspaceSummary } from "@/services/MetadataService_client";
+import router from "@/shared/router";
 
 const WorkspaceSettingsMemberPage = () => {
   const { org_id } = useParams<{ org_id: string }>();
@@ -121,14 +122,25 @@ const WorkspaceSettingsMemberPage = () => {
     fetchUsers();
   };
 
+  const navigateToWorkspaces = () => {
+    router.navigate("/manage-workspaces");
+  };
+
   return (
     <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
       <HeaderContainer />
-      <div
-        style={{ paddingLeft: "20%", paddingRight: "20%", paddingTop: "50px" }}
-      >
+      <div className="workspace-container">
         <Text tag="h2" size={TextSize.XLarge}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <Button
+              onClick={navigateToWorkspaces}
+              type={ButtonType.Tertiary}
+              label={
+                <>
+                  <FaArrowLeft /> Go back
+                </>
+              }
+            />{" "}
             <FaRegBuilding size={30} fill="var(--primary-color)" />{" "}
             {workspace?.name} - {workspace?.slug}
           </div>

@@ -8,6 +8,7 @@ import ManageWorkspacePage from "@/pages/ManageWorkspaceView";
 import {
   WorkspaceSettingsTokensPage,
   WorkspaceSettingsMembersPage,
+  WorkspaceSettingsDeletePage,
 } from "@/pages/WorkspaceSettingsView";
 
 const AuthenticatedHome = withAuthHOC(Editor);
@@ -20,6 +21,10 @@ const AuthenticatedWorkspaceSettingsTokensView = withAuthHOC(
 
 const AuthenticatedWorkspaceSettingsMembersPage = withAuthHOC(
   WorkspaceSettingsMembersPage
+);
+
+const AuthenticatedWorkspaceSettingsDeletePage = withAuthHOC(
+  WorkspaceSettingsDeletePage
 );
 
 const router = createHashRouter([
@@ -38,6 +43,10 @@ const router = createHashRouter([
   {
     path: "/manage-workspaces/:org_id/members",
     element: <AuthenticatedWorkspaceSettingsMembersPage />,
+  },
+  {
+    path: "/manage-workspaces/:org_id/delete",
+    element: <AuthenticatedWorkspaceSettingsDeletePage />,
   },
   {
     path: "/editor/:docId/:branch",

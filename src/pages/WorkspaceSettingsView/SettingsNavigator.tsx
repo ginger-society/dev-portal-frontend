@@ -2,7 +2,7 @@ import router from "@/shared/router";
 import { useParams } from "react-router-dom";
 import styles from "./seiingsNavigation.module.scss";
 import { Button, ButtonType, Text } from "@ginger-society/ginger-ui";
-import { FaArrowLeft, FaKey, FaUsersCog } from "react-icons/fa";
+import { FaArrowLeft, FaKey, FaTrash, FaUsersCog } from "react-icons/fa";
 
 const SettingsNavigator = ({
   width,
@@ -16,22 +16,8 @@ const SettingsNavigator = ({
     router.navigate(`/manage-workspaces/${org_id}/${settingsType}`);
   };
 
-  const navigateToWorkspaces = () => {
-    router.navigate("/manage-workspaces");
-  };
-
   return (
     <div style={{ width }} className={styles["container"]}>
-      <Button
-        onClick={navigateToWorkspaces}
-        type={ButtonType.Tertiary}
-        fullWidth
-        label={
-          <>
-            <FaArrowLeft /> Go back
-          </>
-        }
-      />
       <ul>
         <li
           className={`${styles["item"]}  ${
@@ -56,6 +42,26 @@ const SettingsNavigator = ({
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
               <FaKey />
               Tokens
+            </div>
+          </Text>
+        </li>
+        <li
+          className={`${styles["item"]}  ${
+            active === "delete" ? styles["active"] : ""
+          } `}
+          onClick={() => navigateToWorkspaceSettings("delete")}
+        >
+          <Text>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                color: "red",
+              }}
+            >
+              <FaTrash />
+              Delete
             </div>
           </Text>
         </li>

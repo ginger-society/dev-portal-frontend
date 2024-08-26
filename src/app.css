@@ -337,3 +337,17 @@ html[data-theme="dark"] {
 .padded-page {
   padding: 30px;
 }
+
+.workspace-container {
+  padding-top: 50px;
+  padding-right: 20%;
+  padding-left: 20%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .workspace-container {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
