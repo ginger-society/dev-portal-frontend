@@ -81,7 +81,7 @@ const ManageWorkspacePage = () => {
                   gap: "20px",
                 }}
               >
-                {true && (
+                {org.isAdmin && (
                   <Button
                     onClick={() =>
                       navigateToWorkspaceSettings(org.slug, "members")

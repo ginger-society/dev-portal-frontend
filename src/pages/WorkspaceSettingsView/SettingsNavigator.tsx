@@ -40,7 +40,10 @@ const SettingsNavigator = ({
           onClick={() => navigateToWorkspaceSettings("members")}
         >
           <Text>
-            Members <FaUsersCog />
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <FaUsersCog />
+              Members
+            </div>
           </Text>
         </li>
         <li
@@ -50,7 +53,10 @@ const SettingsNavigator = ({
           onClick={() => navigateToWorkspaceSettings("tokens")}
         >
           <Text>
-            Tokens <FaKey />
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <FaKey />
+              Tokens
+            </div>
           </Text>
         </li>
       </ul>

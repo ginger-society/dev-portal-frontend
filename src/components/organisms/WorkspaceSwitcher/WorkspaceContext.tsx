@@ -32,6 +32,8 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
+    console.log("calling");
+
     fetchWorkspaces();
   }, []);
 
