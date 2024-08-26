@@ -36,7 +36,7 @@ const WorkspaceSettingsTokensPage = () => {
 
   const { show } = useSnackbar();
 
-  const fetchUsers = async () => {
+  const fetchTokens = async () => {
     if (!org_id) {
       return;
     }
@@ -76,12 +76,11 @@ const WorkspaceSettingsTokensPage = () => {
         groupIdentifier: workspace?.groupId,
       },
     });
-    console.log(data);
     setTokenResponse(data);
   };
 
   useEffect(() => {
-    fetchUsers();
+    fetchTokens();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -103,6 +102,7 @@ const WorkspaceSettingsTokensPage = () => {
     try {
       const _ = await IAMService.identityDeactivateApiToken({ tokenId: id });
       show("Deactivated successfully", SnackbarTimer.Short);
+      fetchTokens();
     } catch (error) {
       console.log(error);
       show(
@@ -120,7 +120,8 @@ const WorkspaceSettingsTokensPage = () => {
       >
         <Text tag="h2" size={TextSize.XLarge}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <FaRegBuilding size={30} fill="var(--primary-color)" /> {org_id}
+            <FaRegBuilding size={30} fill="var(--primary-color)" />{" "}
+            {workspace?.name} - {workspace?.slug}
           </div>
         </Text>
         <br />
