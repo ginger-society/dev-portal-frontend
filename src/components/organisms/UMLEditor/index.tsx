@@ -95,7 +95,7 @@ const UMLEditor = ({
 
   const svgRef = React.createRef<SVGSVGElement>();
   const [paths, setPaths] = useState<
-    { path: string; midX: number; midY: number }[]
+    { path: string; midX: number; midY: number; angle: number }[]
   >([]);
 
   const handleDrag = useCallback(() => {
@@ -103,7 +103,7 @@ const UMLEditor = ({
       ({ block1Id, fromRow, block2Id, toRow }) => {
         const rect1 = blocks[block1Id]?.ref.current?.getBoundingClientRect();
         const rect2 = blocks[block2Id]?.ref.current?.getBoundingClientRect();
-        const { d, midX, midY } = calculatePath(
+        const { d, midX, midY, angle } = calculatePath(
           rect1,
           rect2,
           fromRow,
@@ -111,7 +111,7 @@ const UMLEditor = ({
           blocks[block1Id]?.rows.length || 1,
           blocks[block2Id]?.rows.length || 1
         );
-        return { path: d, midX, midY };
+        return { path: d, midX, midY, angle: angle || 0 };
       }
     );
 
@@ -283,7 +283,7 @@ const UMLEditor = ({
               />
             </filter>
           </defs>
-          {paths.map(({ path, midX, midY }, index) => (
+          {paths.map(({ path, midX, midY, angle }, index) => (
             <g key={index}>
               <path
                 d={path}
@@ -307,50 +307,53 @@ const UMLEditor = ({
                     : "none"
                 }
               />
-              {connections[index]?.marker && (
-                <g transform={`translate(${midX - 13}, ${midY - 13})`}>
-                  {(() => {
-                    const marker = connections[index].marker;
-                    if (!marker) {
-                      return null;
-                    }
-                    const color =
+              <g
+                transform={`translate(${midX - 13}, ${midY - 13}) rotate(${
+                  angle - 90
+                }, 13, 13)`}
+              >
+                {(() => {
+                  const marker = connections[index].marker;
+
+                  const color =
+                    highlighted === connections[index].block1Id ||
+                    highlighted === connections[index].block2Id
+                      ? "rgb(234 95 32)"
+                      : marker
+                      ? legendConfigs[marker]?.color || "#000"
+                      : "#000";
+
+                  if (!marker) {
+                    return triangleIcon(color);
+                  }
+                  switch (connections[index].marker) {
+                    case MarkerType.Triangle:
+                      return triangleIcon(color);
+                    case MarkerType.Rectangle:
+                      return rectangleIcon(color);
+                    case MarkerType.Circle:
+                      return circleIcon(color);
+                    case MarkerType.Hexagon:
+                      return hexagonIcon(color);
+                  }
+                })()}
+                {connections[index].label && (
+                  <text
+                    x="10"
+                    y="-10"
+                    fontSize="15"
+                    textAnchor="middle"
+                    fill={
                       highlighted === connections[index].block1Id ||
                       highlighted === connections[index].block2Id
-                        ? "rgb(234 95 32)"
-                        : legendConfigs[marker]?.color || "#000";
-
-                    switch (connections[index].marker) {
-                      case MarkerType.Triangle:
-                        return triangleIcon(color);
-                      case MarkerType.Rectangle:
-                        return rectangleIcon(color);
-                      case MarkerType.Circle:
-                        return circleIcon(color);
-                      case MarkerType.Hexagon:
-                        return hexagonIcon(color);
-                      default:
-                        return null;
+                        ? "var(--secondary-color)"
+                        : "var(--primary-color)"
                     }
-                  })()}
-                  {connections[index].label && (
-                    <text
-                      x="10"
-                      y="-10"
-                      fontSize="15"
-                      textAnchor="middle"
-                      fill={
-                        highlighted === connections[index].block1Id ||
-                        highlighted === connections[index].block2Id
-                          ? "var(--secondary-color)"
-                          : "var(--primary-color)"
-                      }
-                    >
-                      {connections[index].label}
-                    </text>
-                  )}
-                </g>
-              )}
+                  >
+                    {connections[index].label}
+                  </text>
+                )}
+              </g>
             </g>
           ))}
         </svg>

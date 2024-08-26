@@ -75,7 +75,6 @@ const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
             block2Id: dependency.split("/")[1],
             fromRow: 0,
             toRow: 0,
-            marker: MarkerType.Circle,
             label: ``,
           });
         });
@@ -86,7 +85,6 @@ const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
           block2Id: block.data.dbSchemaId,
           fromRow: 0,
           toRow: 0,
-          marker: MarkerType.Circle,
           label: ``,
         });
       }

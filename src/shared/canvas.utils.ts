@@ -41,5 +41,18 @@ export function calculatePath(
 
   const d = `M ${x1} ${y1} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x2} ${y2}`;
 
-  return { d, midX, midY };
+  // Calculate the derivative (dy/dx) of the Bezier curve at the midpoint
+  const t = 0.5;
+  const dx =
+    3 * (1 - t) * (1 - t) * (controlX1 - x1) +
+    6 * (1 - t) * t * (controlX2 - controlX1) +
+    3 * t * t * (x2 - controlX2);
+  const dy =
+    3 * (1 - t) * (1 - t) * (controlY1 - y1) +
+    6 * (1 - t) * t * (controlY2 - controlY1) +
+    3 * t * t * (y2 - controlY2);
+
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+  return { d, midX, midY, angle };
 }
