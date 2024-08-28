@@ -291,8 +291,10 @@ const SysDesignView = () => {
           };
         }, {});
         setBlocks(data);
+        setConnections([]);
       } else {
         setBlocks(sysBlockData);
+        setConnections([]);
       }
     } catch (error) {
       console.log(error);
