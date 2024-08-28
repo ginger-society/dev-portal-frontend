@@ -129,7 +129,12 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          color: pkg.pipelineStatus === "failed" ? "red" : null,
+          color:
+            pkg.pipelineStatus === "failed"
+              ? "red"
+              : pkg.packageType != "library"
+              ? "#4793AF"
+              : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
         },

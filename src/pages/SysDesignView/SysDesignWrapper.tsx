@@ -38,7 +38,7 @@ import styles from "./sysDesignWrapper.module.scss";
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Circle]: {
-    label: "Depends on",
+    label: "Executable",
     color: "#4793AF",
   },
   [MarkerType.Hexagon]: {
