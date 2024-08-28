@@ -102,10 +102,13 @@ const SysDesignView = () => {
     [key: string]: Block;
   }> => {
     const blocks: { [key: string]: Block } = {};
-    if (!env) {
+    if (!env || !org_id) {
       return {};
     }
-    const packages = await MetadataService.metadataGetUserPackages({ env });
+    const packages = await MetadataService.metadataGetUserPackages({
+      env,
+      orgId: org_id,
+    });
 
     packages.forEach((pkg) => {
       const rows = [];
@@ -136,6 +139,7 @@ const SysDesignView = () => {
 
     const dbSchemas = await MetadataService.metadataGetDbschemasAndTables({
       env,
+      orgId: org_id,
     });
     // console.log(dbSchemas);
     dbSchemas.forEach((schema) => {
@@ -167,7 +171,9 @@ const SysDesignView = () => {
       }
     });
 
-    const services = await MetadataService.metadataGetServicesAndEnvs();
+    const services = await MetadataService.metadataGetServicesAndEnvs({
+      orgId: org_id,
+    });
     services.forEach((service) => {
       const rows = [];
       if (service.dependencies.length > 0) {
