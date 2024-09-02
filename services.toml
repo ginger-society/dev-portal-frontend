@@ -1,23 +1,24 @@
-lang = "TS"
 dir = "src/services"
+lang = "TS"
+organization_id = "ginger-society"
 portal_refs_file = "src/shared/references.ts"
 service_type = "Portal"
 
 [services."@ginger-society/IAMService"]
-stage_k8 = "http://iam-service-api-service/iam"
 dev = "http://localhost:8080/iam"
 stage = "https://api-staging.gingersociety.org/iam"
+stage_k8 = "http://iam-service-api-service/iam"
 
 [services."@ginger-society/MetadataService"]
 dev = "http://localhost:8081/metadata"
-stage_k8 = "http://metadata-service-api-service/metadata"
 stage = "https://api-staging.gingersociety.org/metadata"
+stage_k8 = "http://metadata-service-api-service/metadata"
 
 [portals_refs."@ginger-society/iam-frontend-users"]
 dev = "http://localhost:3001"
 stage = "https://iam-staging.gingersociety.org"
 
 [urls]
-stage = "https://dev-portal-staging.gingersociety.org"
-prod = "http://localhost:8081"
 dev = "http://localhost:3000"
+prod = "http://localhost:8081"
+stage = "https://dev-portal-staging.gingersociety.org"

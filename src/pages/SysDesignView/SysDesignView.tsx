@@ -176,7 +176,7 @@ const SysDesignView = () => {
       }
     });
 
-    const services = await MetadataService.metadataGetServicesAndEnvs({
+    const services = await MetadataService.metadataGetServicesAndEnvsUserLand({
       orgId: org_id,
     });
     services.forEach((service) => {
