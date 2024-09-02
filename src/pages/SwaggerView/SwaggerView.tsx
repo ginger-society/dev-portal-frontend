@@ -34,11 +34,13 @@ const SwaggerViewPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (service_identifier && env_id && org_id) {
-        const data = await MetadataService.metadataGetServiceAndEnvById({
-          serviceIdentifier: service_identifier,
-          env: env_id,
-          orgId: org_id,
-        });
+        const data = await MetadataService.metadataGetServiceAndEnvByIdUserLand(
+          {
+            serviceIdentifier: service_identifier,
+            env: env_id,
+            orgId: org_id,
+          }
+        );
         console.log(data);
         setSpec({
           ...removeSecurityKey(JSON.parse(data.spec)),
