@@ -59,7 +59,7 @@ const Editor = () => {
       return;
     }
 
-    const dbschema = await MetadataService.metadataGetDbschemaById({
+    const dbschema = await MetadataService.metadataGetDbschemaByIdUserland({
       schemaId: docId,
       branch,
     });
