@@ -351,3 +351,7 @@ html[data-theme="dark"] {
     padding-left: 50px;
   }
 }
+
+.bring-forward {
+  box-shadow: 10px 80px 90px #959da5;
+}

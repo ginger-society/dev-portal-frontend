@@ -200,7 +200,12 @@ const UMLEditor = ({
             handle=".handle"
             position={{ x: block.position.left, y: block.position.top }}
           >
-            <div className="card block-card" ref={block.ref}>
+            <div
+              className={`card block-card ${
+                highlighted === block.id ? "bring-forward" : ""
+              }`}
+              ref={block.ref}
+            >
               {/* Header row */}
               <div
                 className={`${
