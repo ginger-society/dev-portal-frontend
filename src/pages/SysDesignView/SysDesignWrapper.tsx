@@ -27,6 +27,7 @@ import {
   FaDatabase,
   FaDesktop,
   FaInfoCircle,
+  FaLayerGroup,
   FaPencilAlt,
   FaServer,
   FaTerminal,
@@ -52,6 +53,10 @@ const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
     label: "Portal",
     color: "#1A4870",
+  },
+  [MarkerType.Pentagon]: {
+    label: "Cache",
+    color: "#6e46c0",
   },
 };
 
@@ -83,6 +88,15 @@ const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
         connections.push({
           block1Id: key,
           block2Id: block.data.dbSchemaId,
+          fromRow: 0,
+          toRow: 0,
+          label: ``,
+        });
+      }
+      if (block.data.cacheSchemaId) {
+        connections.push({
+          block1Id: key,
+          block2Id: block.data.cacheSchemaId,
           fromRow: 0,
           toRow: 0,
           label: ``,
@@ -171,6 +185,7 @@ const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
                     {blockData.data.type === "library" && <FaBoxOpen />}
                     {blockData.data.type === "executable" && <FaTerminal />}
                     {blockData.data.type === "Portal" && <FaDesktop />}
+                    {blockData.data.type === "cache" && <FaLayerGroup />}
                     {blockData.data.name}
                     {blockData.data.type === "database" && (
                       <FaPencilAlt

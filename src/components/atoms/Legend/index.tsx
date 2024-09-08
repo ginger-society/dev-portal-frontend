@@ -20,6 +20,13 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
         return (
           <polygon points="0,6 3,0 9,0 12,6 9,12 3,12" fill={item.color} />
         );
+      case MarkerType.Pentagon:
+        return (
+          <polygon
+            points="6,0 11.52,4.39 9.41,11.22 2.59,11.22 0.48,4.39"
+            fill={item.color}
+          />
+        );
       default:
         return null;
     }

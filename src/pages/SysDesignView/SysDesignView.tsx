@@ -50,6 +50,7 @@ const blockColorMap = {
   RPCEndpoint: "#799351",
   Portal: "#1A4870",
   library: "#1A4870",
+  Cache: "#6e46c0",
 };
 
 const SysDesignView = () => {
@@ -149,30 +150,52 @@ const SysDesignView = () => {
     // console.log(dbSchemas);
     dbSchemas.forEach((schema) => {
       if (schema.identifier) {
-        blocks[schema.identifier] = {
-          id: schema.identifier,
-          ref: React.createRef(),
-          data: {
-            name: schema.name,
-            type: "database",
-            description: schema.description,
-            color:
-              schema.pipelineStatus === "failed"
-                ? "red"
-                : blockColorMap.database,
-            version: schema.version,
-            pipeline_status: schema.pipelineStatus,
-            repo_origin: schema.repoOrigin,
-          },
-          rows: [
-            {
-              id: `${schema.identifier}-tables`,
-              data: { heading: "Tables", list: schema.tables },
+        if (schema.dbType === "rdbms") {
+          blocks[schema.identifier] = {
+            id: schema.identifier,
+            ref: React.createRef(),
+            data: {
+              name: schema.name,
+              type: "database",
+              description: schema.description,
+              color:
+                schema.pipelineStatus === "failed"
+                  ? "red"
+                  : blockColorMap.database,
+              version: schema.version,
+              pipeline_status: schema.pipelineStatus,
+              repo_origin: schema.repoOrigin,
             },
-          ],
-          type: BlockType.SystemBlock,
-          position: { top: 100, left: 100 },
-        };
+            rows: [
+              {
+                id: `${schema.identifier}-tables`,
+                data: { heading: "Tables", list: schema.tables },
+              },
+            ],
+            type: BlockType.SystemBlock,
+            position: { top: 100, left: 100 },
+          };
+        } else {
+          blocks[schema.identifier] = {
+            id: schema.identifier,
+            ref: React.createRef(),
+            data: {
+              name: schema.name,
+              type: "cache",
+              description: schema.description,
+              color:
+                schema.pipelineStatus === "failed"
+                  ? "red"
+                  : blockColorMap.Cache,
+              version: schema.version,
+              pipeline_status: schema.pipelineStatus,
+              repo_origin: schema.repoOrigin,
+            },
+            rows: [],
+            type: BlockType.SystemBlock,
+            position: { top: 100, left: 100 },
+          };
+        }
       }
     });
 
@@ -220,6 +243,35 @@ const SysDesignView = () => {
         });
       }
 
+      if (service.cacheSchemaId) {
+        rows.push({
+          id: `${service.cacheSchemaId}`,
+          data: {
+            heading: (
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <FaDatabase /> Cache
+              </div>
+            ),
+            list: [],
+            description: (
+              <>
+                Uses
+                <strong>
+                  {
+                    dbSchemas.find(
+                      (schema) => schema.identifier === service.cacheSchemaId
+                    )?.name
+                  }
+                </strong>
+                as Cache
+              </>
+            ),
+          },
+        });
+      }
+
       const pipeline_status = service.envs.find(
         (s) => s.envKey === env
       )?.pipelineStatus;
@@ -233,6 +285,7 @@ const SysDesignView = () => {
           description: service.description,
           dependencies: service.dependencies,
           dbSchemaId: service.dbSchemaId,
+          cacheSchemaId: service.cacheSchemaId,
           org_id: service.organizationId,
           repo_origin: service.repoOrigin,
           color:
