@@ -16,9 +16,9 @@ ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 ENV DISTRIBUTION_ID=$DISTRIBUTION_ID
 
 # Run the ginger-connector.debian commands
-RUN ./ginger-auth token-login ${GINGER_TOKEN}
-RUN ./ginger-connector refer stage
-RUN ./ginger-connector connect stage
+RUN ginger-auth token-login ${GINGER_TOKEN}
+RUN ginger-connector refer stage
+RUN ginger-connector connect stage
 
 # Install dependencies
 RUN yarn
