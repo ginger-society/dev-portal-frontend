@@ -65,7 +65,13 @@ const ManageWorkspacePage = () => {
 
         {orgs.map((org) => {
           return (
-            <div className={styles["org-item-container"]}>
+            <div
+              className={styles["org-item-container"]}
+              onClick={(e) => {
+                openWorkspace(org.slug);
+                e.stopPropagation();
+              }}
+            >
               <FaRegBuilding size={30} fill="var(--primary-color)" />
               <div>
                 <Text size={TextSize.Small}>{org.slug}</Text> <br />
@@ -95,10 +101,6 @@ const ManageWorkspacePage = () => {
                     }
                   ></Button>
                 )}
-                <Button
-                  label={"open"}
-                  onClick={() => openWorkspace(org.slug)}
-                />
                 <Text>You are {org.isAdmin ? "an Admin" : "a Member"}</Text>
               </div>
             </div>

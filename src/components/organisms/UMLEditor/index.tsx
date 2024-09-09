@@ -192,7 +192,11 @@ const UMLEditor = ({
 
   return (
     <>
-      <div className="canvas-container" onContextMenu={handleContextMenu}>
+      <div
+        className="canvas-container"
+        onContextMenu={handleContextMenu}
+        onClick={() => setHighlighted(undefined)}
+      >
         {Object.values(blocks).map((block) => (
           <Draggable
             key={block.id}
@@ -218,8 +222,9 @@ const UMLEditor = ({
                   borderTop: `solid 1px ${block.data.color}`,
                   borderBottom: `solid 1px ${block.data.color}`,
                 }}
-                onClick={() => {
+                onClick={(e) => {
                   setHighlighted(block.id);
+                  e.stopPropagation();
                 }}
               >
                 <HeadingRenderer blockData={block} />
@@ -326,8 +331,8 @@ const UMLEditor = ({
                       highlighted === connections[index].block2Id
                         ? "rgb(234 95 32)"
                         : marker
-                        ? legendConfigs[marker]?.color || "#000"
-                        : "#000";
+                        ? legendConfigs[marker]?.color || "var(--primary-color)"
+                        : "var(--primary-color)";
 
                     if (!marker) {
                       return triangleIcon(color);
