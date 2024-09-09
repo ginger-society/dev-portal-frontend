@@ -86,20 +86,20 @@ const ManageWorkspacePage = () => {
                 }}
               >
                 {org.isAdmin && (
-                  <Button
-                    onClick={() =>
-                      navigateToWorkspaceSettings(org.slug, "members")
-                    }
-                    label={
-                      <>
-                        <FaWrench
-                          style={{ cursor: "pointer" }}
-                          fill="var(--primary-color)"
-                        />{" "}
-                        Open settings
-                      </>
-                    }
-                  ></Button>
+                  <button
+                    onClick={(e) => {
+                      navigateToWorkspaceSettings(org.slug, "members");
+                      e.stopPropagation();
+                    }}
+                  >
+                    <>
+                      <FaWrench
+                        style={{ cursor: "pointer" }}
+                        fill="var(--primary-color)"
+                      />{" "}
+                      Open settings
+                    </>
+                  </button>
                 )}
                 <Text>You are {org.isAdmin ? "an Admin" : "a Member"}</Text>
               </div>

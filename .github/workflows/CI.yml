@@ -16,6 +16,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Install ginger-apps
+        run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-all-clis.sh)"
+
+      - name: Authenticate with ginger-auth
+        id: ginger-auth
+        run: ginger-auth token-login ${{ secrets.GINGER_TOKEN }}
+
+      - name: Update pipeline to running
+        run: ginger-connector update-pipeline stage running
+
       - name: Build Docker image
         run: |
           docker buildx build . \
@@ -27,3 +37,8 @@ jobs:
             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
             --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }} \
             --load
+
+      - name: Update pipeline to passing
+        run: ginger-connector update-pipeline stage passing
+
+      
