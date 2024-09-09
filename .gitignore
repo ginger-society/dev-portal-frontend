@@ -10,3 +10,4 @@ src/services/MetadataService_client
 .ginger.tmp
 src/shared/references.ts
 *.lock
+openapitools.json
