@@ -33,8 +33,10 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     console.log("calling");
-
-    fetchWorkspaces();
+    console.log(location.hash);
+    if (!location.hash.startsWith("#/public/")) {
+      fetchWorkspaces();
+    }
   }, []);
 
   return (

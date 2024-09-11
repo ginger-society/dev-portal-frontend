@@ -42,17 +42,9 @@ export const AuthProvider = ({ children }: AuthProviderI) => {
       }
     };
 
-    checkSession();
-
-    // const unsubscribe = onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     setIsAuthenticated(true);
-    //     setUser(user);
-    //     setLoading(false);
-    //   } else {
-
-    //   }
-    // });
+    if (!location.hash.startsWith("#/public")) {
+      checkSession();
+    }
   }, []);
 
   const value = {
