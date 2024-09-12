@@ -352,6 +352,18 @@ html[data-theme="dark"] {
   }
 }
 
-.bring-forward {
-  box-shadow: 34px 20px 90px #959da5;
+.blink-orange {
+  animation: animateBoxShadow 3s ease-in-out infinite;
+}
+
+@keyframes animateBoxShadow {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 34px 20px 190px #ff7e00;
+  }
+  100% {
+    box-shadow: none;
+  }
 }

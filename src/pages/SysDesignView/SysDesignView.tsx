@@ -130,12 +130,13 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          color:
-            pkg.pipelineStatus === "failed"
-              ? "red"
-              : pkg.packageType != "library"
-              ? "#4793AF"
-              : null,
+          blinkClass: pkg.pipelineStatus === "running" ? "blink-orange" : "",
+          // color:
+          //   pkg.pipelineStatus === "failed"
+          //     ? "red"
+          //     : pkg.packageType != "library"
+          //     ? "#4793AF"
+          //     : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
         },
@@ -158,10 +159,9 @@ const SysDesignView = () => {
               name: schema.name,
               type: "database",
               description: schema.description,
-              color:
-                schema.pipelineStatus === "failed"
-                  ? "red"
-                  : blockColorMap.database,
+              blinkClass:
+                schema.pipelineStatus === "running" ? "blink-orange" : "",
+              color: blockColorMap.database,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
@@ -183,10 +183,9 @@ const SysDesignView = () => {
               name: schema.name,
               type: "cache",
               description: schema.description,
-              color:
-                schema.pipelineStatus === "failed"
-                  ? "red"
-                  : blockColorMap.Cache,
+              blinkClass:
+                schema.pipelineStatus === "running" ? "blink-orange" : "",
+              color: blockColorMap.Cache,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
@@ -288,11 +287,9 @@ const SysDesignView = () => {
           cacheSchemaId: service.cacheSchemaId,
           org_id: service.organizationId,
           repo_origin: service.repoOrigin,
+          blinkClass: pipeline_status === "running" ? "blink-orange" : "",
           color:
-            pipeline_status === "failed"
-              ? "red"
-              : service.serviceType &&
-                (blockColorMap as any)[service.serviceType],
+            service.serviceType && (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
         },
