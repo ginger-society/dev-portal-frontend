@@ -22,7 +22,7 @@ const blockColorMap = {
   Cache: "#6e46c0",
 };
 
-const SysDesignView = () => {
+const SysDesignViewPublic = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
@@ -320,9 +320,9 @@ const SysDesignView = () => {
       <button className={styles["save-layout-btn"]}>
         <FaLock /> View Only
       </button>
-      <SysDesignWrapper allowDrag={false} />
+      <SysDesignWrapper isPublicView={true} allowDrag={false} />
     </UMLEditorProvider>
   );
 };
 
-export default SysDesignView;
+export default SysDesignViewPublic;

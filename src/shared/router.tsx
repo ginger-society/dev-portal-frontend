@@ -1,8 +1,8 @@
 import { createHashRouter } from "react-router-dom";
 import { withAuthHOC } from "./WithAuthHOC";
-import Editor from "@/pages/Editor";
+import { Editor, EditorPublic } from "@/pages/Editor";
 import HandleNavigation from "@/pages/HandleAuth";
-import { SwaggerViewPage } from "@/pages/SwaggerView";
+import { SwaggerViewPage, SwaggerViewPagePublic } from "@/pages/SwaggerView";
 import { SysDesignView, SysDesignViewPublic } from "@/pages/SysDesignView";
 import ManageWorkspacePage from "@/pages/ManageWorkspaceView";
 import {
@@ -46,11 +46,11 @@ const router = createHashRouter([
   },
   {
     path: "/public/services/swagger/:org_id/:service_identifier/:env_id",
-    element: <SwaggerViewPage />,
+    element: <SwaggerViewPagePublic />,
   },
   {
     path: "/public/editor/:docId/:branch",
-    element: <Editor />,
+    element: <EditorPublic />,
   },
   {
     path: "/manage-workspaces",

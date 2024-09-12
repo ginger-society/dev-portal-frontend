@@ -254,7 +254,7 @@ const UMLEditor = ({
                   <RowRenderer rowData={row} />
                 </div>
               ))}
-              {block.type === BlockType.Table && (
+              {block.type === BlockType.Table && allowEdit && (
                 <div
                   onClick={() => {
                     addNewRow(block.id);

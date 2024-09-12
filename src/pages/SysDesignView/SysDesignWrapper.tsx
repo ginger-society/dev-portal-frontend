@@ -60,7 +60,13 @@ const legendConfigs: LegendConfigs = {
   },
 };
 
-const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
+const SysDesignWrapper = ({
+  allowDrag,
+  isPublicView = false,
+}: {
+  allowDrag: boolean;
+  isPublicView?: boolean;
+}) => {
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
 
@@ -113,11 +119,19 @@ const SysDesignWrapper = ({ allowDrag }: { allowDrag: boolean }) => {
   }, [blocks]);
 
   const navigateToDBEditor = (id: string) => {
-    router.navigate(`/editor/${id}/stage`);
+    if (!isPublicView) {
+      router.navigate(`/editor/${id}/stage`);
+    } else {
+      router.navigate(`/public/editor/${id}/stage`);
+    }
   };
 
   const navigateToSwagger = (id: string, org_id: string) => {
-    router.navigate(`/services/swagger/${org_id}/${id}/stage`);
+    if (!isPublicView) {
+      router.navigate(`/services/swagger/${org_id}/${id}/stage`);
+    } else {
+      router.navigate(`/public/services/swagger/${org_id}/${id}/stage`);
+    }
   };
 
   const openChangelog = async (repo_origin: string) => {
