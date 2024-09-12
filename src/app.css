@@ -352,16 +352,36 @@ html[data-theme="dark"] {
   }
 }
 
-.blink-orange {
-  animation: animateBoxShadow 3s ease-in-out infinite;
+.bring-forward {
+  box-shadow: 34px 20px 90px grey;
 }
 
-@keyframes animateBoxShadow {
+.blink-orange {
+  animation: animateBoxShadowOrange 3s ease-in-out infinite;
+}
+
+@keyframes animateBoxShadowOrange {
   0% {
     box-shadow: none;
   }
   50% {
     box-shadow: 34px 20px 190px #ff7e00;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+.blink-red {
+  animation: animateBoxShadowRed 3s ease-in-out infinite;
+}
+
+@keyframes animateBoxShadowRed {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 34px 20px 190px red;
   }
   100% {
     box-shadow: none;

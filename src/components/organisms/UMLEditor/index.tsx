@@ -190,8 +190,6 @@ const UMLEditor = ({
     };
   }, []);
 
-  // console.log(blocks);
-
   return (
     <>
       <div
@@ -207,7 +205,9 @@ const UMLEditor = ({
             position={{ x: block.position.left, y: block.position.top }}
           >
             <div
-              className={`card block-card ${block.data.blinkClass}`}
+              className={`card block-card ${block.data.blinkClass} ${
+                highlighted === block.id ? "bring-forward" : ""
+              }`}
               ref={block.ref}
             >
               {/* Header row */}

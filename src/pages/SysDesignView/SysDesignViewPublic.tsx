@@ -24,6 +24,11 @@ const blockColorMap = {
   Cache: "#6e46c0",
 };
 
+const shadowClassMap: { [key: string]: string } = {
+  running: "blink-orange",
+  failed: "blink-red",
+};
+
 const SysDesignViewPublic = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
@@ -66,6 +71,7 @@ const SysDesignViewPublic = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
+          blinkClass: pkg.pipelineStatus && shadowClassMap[pipeline_status],
           color:
             pkg.pipelineStatus === "failed"
               ? "red"
@@ -96,6 +102,8 @@ const SysDesignViewPublic = () => {
               name: schema.name,
               type: "database",
               description: schema.description,
+              blinkClass:
+                schema.pipelineStatus && shadowClassMap[pipeline_status],
               color:
                 schema.pipelineStatus === "failed"
                   ? "red"
@@ -121,6 +129,8 @@ const SysDesignViewPublic = () => {
               name: schema.name,
               type: "cache",
               description: schema.description,
+              blinkClass:
+                schema.pipelineStatus && shadowClassMap[pipeline_status],
               color:
                 schema.pipelineStatus === "failed"
                   ? "red"
@@ -226,6 +236,7 @@ const SysDesignViewPublic = () => {
           cacheSchemaId: service.cacheSchemaId,
           org_id: service.organizationId,
           repo_origin: service.repoOrigin,
+          blinkClass: pipeline_status && shadowClassMap[pipeline_status],
           color:
             pipeline_status === "failed"
               ? "red"

@@ -53,6 +53,11 @@ const blockColorMap = {
   Cache: "#6e46c0",
 };
 
+const shadowClassMap: { [key: string]: string } = {
+  running: "blink-orange",
+  failed: "blink-red",
+};
+
 const SysDesignView = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
@@ -130,13 +135,13 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          blinkClass: pkg.pipelineStatus === "running" ? "blink-orange" : "",
-          // color:
-          //   pkg.pipelineStatus === "failed"
-          //     ? "red"
-          //     : pkg.packageType != "library"
-          //     ? "#4793AF"
-          //     : null,
+          blinkClass: pkg.pipelineStatus && shadowClassMap[pipeline_status],
+          color:
+            pkg.pipelineStatus === "failed"
+              ? "red"
+              : pkg.packageType != "library"
+              ? "#4793AF"
+              : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
         },
@@ -160,7 +165,7 @@ const SysDesignView = () => {
               type: "database",
               description: schema.description,
               blinkClass:
-                schema.pipelineStatus === "running" ? "blink-orange" : "",
+                schema.pipelineStatus && shadowClassMap[pipeline_status],
               color: blockColorMap.database,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
@@ -183,8 +188,10 @@ const SysDesignView = () => {
               name: schema.name,
               type: "cache",
               description: schema.description,
+
               blinkClass:
-                schema.pipelineStatus === "running" ? "blink-orange" : "",
+                schema.pipelineStatus && shadowClassMap[pipeline_status],
+
               color: blockColorMap.Cache,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
@@ -287,9 +294,12 @@ const SysDesignView = () => {
           cacheSchemaId: service.cacheSchemaId,
           org_id: service.organizationId,
           repo_origin: service.repoOrigin,
-          blinkClass: pipeline_status === "running" ? "blink-orange" : "",
+          blinkClass: pipeline_status && shadowClassMap[pipeline_status],
           color:
-            service.serviceType && (blockColorMap as any)[service.serviceType],
+            pipeline_status === "failed"
+              ? "red"
+              : service.serviceType &&
+                (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
         },
