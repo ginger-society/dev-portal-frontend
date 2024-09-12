@@ -9,10 +9,12 @@ import {
   EditorData,
 } from "@/components/organisms/UMLEditor/types";
 import SysDesignWrapper from "./SysDesignWrapper";
-import { Text, TextColor } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Text, TextColor } from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";
+import router from "@/shared/router";
+import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 
 const blockColorMap = {
   database: "#89439f",
@@ -295,6 +297,10 @@ const SysDesignViewPublic = () => {
     }
   };
 
+  const navigateToLogin = () => {
+    location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login`;
+  };
+
   useEffect(() => {
     loadLayout();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -311,11 +317,27 @@ const SysDesignViewPublic = () => {
         setEditorData,
       }}
     >
-      <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          padding: "10px",
+        }}
+      >
         <Text>Organization ID : {org_id}</Text>
         <Text color={pipeline_status_color}>
           Pipeline Status : {pipeline_status}
         </Text>
+        <div style={{ marginLeft: "auto" }}>
+          <Button
+            onClick={navigateToLogin}
+            type={ButtonType.Primary}
+            label={
+              "Sign in to create your own System Design out of your code base"
+            }
+          ></Button>
+        </div>
       </div>
       <button className={styles["save-layout-btn"]}>
         <FaLock /> View Only
