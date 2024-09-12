@@ -294,79 +294,85 @@ const UMLEditor = ({
             </filter>
           </defs>
           {connections.length > 0 &&
-            paths.map(({ path, midX, midY, angle }, index) => (
-              <g key={index}>
-                <path
-                  d={path}
-                  stroke={
-                    highlighted === connections[index].block1Id ||
-                    highlighted === connections[index].block2Id
-                      ? "rgb(234 95 32)"
-                      : "var(--primary-color)"
-                  }
-                  fill="transparent"
-                  strokeWidth={
-                    highlighted === connections[index].block1Id ||
-                    highlighted === connections[index].block2Id
-                      ? "3px"
-                      : "1px"
-                  }
-                  filter={
-                    highlighted === connections[index].block1Id ||
-                    highlighted === connections[index].block2Id
-                      ? "url(#highlight-shadow)"
-                      : "none"
-                  }
-                />
-                <g
-                  transform={`translate(${midX - 13}, ${midY - 13}) rotate(${
-                    angle - 90
-                  }, 13, 13)`}
-                >
-                  {(() => {
-                    const marker = connections[index].marker;
-
-                    const color =
+            paths.map(({ path, midX, midY, angle }, index) => {
+              if (!connections[index]) {
+                return;
+              }
+              return (
+                <g key={index}>
+                  <path
+                    d={path}
+                    stroke={
                       highlighted === connections[index].block1Id ||
                       highlighted === connections[index].block2Id
                         ? "rgb(234 95 32)"
-                        : marker
-                        ? legendConfigs[marker]?.color || "var(--primary-color)"
-                        : "var(--primary-color)";
+                        : "var(--primary-color)"
+                    }
+                    fill="transparent"
+                    strokeWidth={
+                      highlighted === connections[index].block1Id ||
+                      highlighted === connections[index].block2Id
+                        ? "3px"
+                        : "1px"
+                    }
+                    filter={
+                      highlighted === connections[index].block1Id ||
+                      highlighted === connections[index].block2Id
+                        ? "url(#highlight-shadow)"
+                        : "none"
+                    }
+                  />
+                  <g
+                    transform={`translate(${midX - 13}, ${midY - 13}) rotate(${
+                      angle - 90
+                    }, 13, 13)`}
+                  >
+                    {(() => {
+                      const marker = connections[index].marker;
 
-                    if (!marker) {
-                      return triangleIcon(color);
-                    }
-                    switch (connections[index].marker) {
-                      case MarkerType.Triangle:
-                        return triangleIcon(color);
-                      case MarkerType.Rectangle:
-                        return rectangleIcon(color);
-                      case MarkerType.Circle:
-                        return circleIcon(color);
-                      case MarkerType.Hexagon:
-                        return hexagonIcon(color);
-                    }
-                  })()}
-                  {connections[index].label && (
-                    <text
-                      x="10"
-                      y="-10"
-                      fontSize="15"
-                      textAnchor="middle"
-                      fill={
+                      const color =
                         highlighted === connections[index].block1Id ||
                         highlighted === connections[index].block2Id
-                          ? "var(--secondary-color)"
-                          : "var(--primary-color)"
+                          ? "rgb(234 95 32)"
+                          : marker
+                          ? legendConfigs[marker]?.color ||
+                            "var(--primary-color)"
+                          : "var(--primary-color)";
+
+                      if (!marker) {
+                        return triangleIcon(color);
                       }
-                    >
-                      {connections[index].label}
-                    </text>
-                  )}
+                      switch (connections[index].marker) {
+                        case MarkerType.Triangle:
+                          return triangleIcon(color);
+                        case MarkerType.Rectangle:
+                          return rectangleIcon(color);
+                        case MarkerType.Circle:
+                          return circleIcon(color);
+                        case MarkerType.Hexagon:
+                          return hexagonIcon(color);
+                      }
+                    })()}
+                    {connections[index].label && (
+                      <text
+                        x="10"
+                        y="-10"
+                        fontSize="15"
+                        textAnchor="middle"
+                        fill={
+                          highlighted === connections[index].block1Id ||
+                          highlighted === connections[index].block2Id
+                            ? "var(--secondary-color)"
+                            : "var(--primary-color)"
+                        }
+                      >
+                        {connections[index].label}
+                      </text>
+                    )}
+                  </g>
                 </g>
-              </g>
-            ))}
+              );
+            })}
         </svg>
         {contextMenu && allowEdit && (
           <div
