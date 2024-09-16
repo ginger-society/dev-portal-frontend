@@ -71,7 +71,7 @@ const SysDesignViewPublic = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          blinkClass: pkg.pipelineStatus && shadowClassMap[pipeline_status],
+          blinkClass: pkg.pipelineStatus && shadowClassMap[pkg.pipelineStatus],
           color:
             pkg.pipelineStatus === "failed"
               ? "red"
@@ -103,7 +103,7 @@ const SysDesignViewPublic = () => {
               type: "database",
               description: schema.description,
               blinkClass:
-                schema.pipelineStatus && shadowClassMap[pipeline_status],
+                schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
               color:
                 schema.pipelineStatus === "failed"
                   ? "red"
@@ -130,7 +130,7 @@ const SysDesignViewPublic = () => {
               type: "cache",
               description: schema.description,
               blinkClass:
-                schema.pipelineStatus && shadowClassMap[pipeline_status],
+                schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
               color:
                 schema.pipelineStatus === "failed"
                   ? "red"

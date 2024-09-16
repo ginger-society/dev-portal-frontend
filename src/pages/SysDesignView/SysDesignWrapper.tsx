@@ -70,8 +70,10 @@ const SysDesignWrapper = ({
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
 
-  const [isChangelogOpen, setIsChangelogOpen] = useState<boolean>(false);
-  const [changelogMd, setChangelogMd] = useState<string>();
+  const [isMarkdownViewertOpen, setIsMarkdownViewerOpen] =
+    useState<boolean>(false);
+  const [markdownViewerTitle, setMarkdownViewerTitle] = useState<string>();
+  const [markdownContent, setMarkdownContent] = useState<string>();
 
   const { show } = useSnackbar();
 
@@ -142,8 +144,8 @@ const SysDesignWrapper = ({
       );
       return;
     }
-    setIsChangelogOpen(true);
-    setChangelogMd(undefined);
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
     // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
     const response = await fetch(
       `${repo_origin.replace(
@@ -152,7 +154,28 @@ const SysDesignWrapper = ({
       )}/main/CHANGELOG.md`
     );
     const changelogTxt = await response.text();
-    setChangelogMd(changelogTxt);
+    setMarkdownContent(changelogTxt);
+  };
+
+  const openReadme = async (repo_origin: string) => {
+    if (!repo_origin) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
+    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
+    const response = await fetch(
+      `${repo_origin.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/README.md`
+    );
+    const changelogTxt = await response.text();
+    setMarkdownContent(changelogTxt);
   };
 
   return (
@@ -200,7 +223,11 @@ const SysDesignWrapper = ({
                     {blockData.data.type === "executable" && <FaTerminal />}
                     {blockData.data.type === "Portal" && <FaDesktop />}
                     {blockData.data.type === "cache" && <FaLayerGroup />}
-                    {blockData.data.name}
+                    <button
+                      onClick={() => openReadme(blockData.data.repo_origin)}
+                    >
+                      {blockData.data.name}
+                    </button>
                     {blockData.data.type === "database" && (
                       <FaPencilAlt
                         onClick={() => navigateToDBEditor(blockData.id)}
@@ -284,13 +311,16 @@ const SysDesignWrapper = ({
           throw new Error("Function not implemented.");
         }}
       />
-      <Aside isOpen={isChangelogOpen} onClose={() => setIsChangelogOpen(false)}>
+      <Aside
+        isOpen={isMarkdownViewertOpen}
+        onClose={() => setIsMarkdownViewerOpen(false)}
+      >
         <Text tag="h1" size={TextSize.Large}>
-          Changelog
+          {markdownViewerTitle}
         </Text>
         <div className={styles["md-wrapper"]}>
-          {changelogMd ? (
-            <Markdown remarkPlugins={[remarkGfm]}>{changelogMd}</Markdown>
+          {markdownContent ? (
+            <Markdown remarkPlugins={[remarkGfm]}>{markdownContent}</Markdown>
           ) : (
             <Loader />
           )}

@@ -124,6 +124,7 @@ const SysDesignView = () => {
           data: { heading: "Dependns on", list: pkg.dependencies },
         });
       }
+
       blocks[pkg.identifier] = {
         id: pkg.identifier,
         position: { top: 100, left: 100 },
@@ -135,7 +136,7 @@ const SysDesignView = () => {
           type: pkg.packageType,
           dependencies: pkg.dependencies,
           version: pkg.version,
-          blinkClass: pkg.pipelineStatus && shadowClassMap[pipeline_status],
+          blinkClass: pkg.pipelineStatus && shadowClassMap[pkg.pipelineStatus],
           color:
             pkg.pipelineStatus === "failed"
               ? "red"
@@ -165,7 +166,7 @@ const SysDesignView = () => {
               type: "database",
               description: schema.description,
               blinkClass:
-                schema.pipelineStatus && shadowClassMap[pipeline_status],
+                schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
               color: blockColorMap.database,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
@@ -190,7 +191,7 @@ const SysDesignView = () => {
               description: schema.description,
 
               blinkClass:
-                schema.pipelineStatus && shadowClassMap[pipeline_status],
+                schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
 
               color: blockColorMap.Cache,
               version: schema.version,
