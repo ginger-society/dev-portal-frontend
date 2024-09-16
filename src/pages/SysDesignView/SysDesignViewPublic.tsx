@@ -204,7 +204,7 @@ const SysDesignViewPublic = () => {
             ),
             list: [],
             description: (
-              <>
+              <div style={{ display: "flex", gap: "5px" }}>
                 Uses
                 <strong>
                   {
@@ -214,7 +214,7 @@ const SysDesignViewPublic = () => {
                   }
                 </strong>
                 as Cache
-              </>
+              </div>
             ),
           },
         });

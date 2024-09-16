@@ -262,7 +262,7 @@ const SysDesignView = () => {
             ),
             list: [],
             description: (
-              <>
+              <div style={{ display: "flex", gap: "5px" }}>
                 Uses
                 <strong>
                   {
@@ -272,7 +272,7 @@ const SysDesignView = () => {
                   }
                 </strong>
                 as Cache
-              </>
+              </div>
             ),
           },
         });
