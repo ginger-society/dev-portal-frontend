@@ -7,6 +7,8 @@ export enum MarkerType {
   Circle = 'circle',
   Hexagon = 'hexagon',
   Pentagon = 'pentagon',
+  Rectangle2 = 'rectangle2',
+  Rectangle3 = 'rectangle3',
 }
 
 export interface Row {
@@ -49,6 +51,7 @@ export interface Connection {
 
 export interface LegendProps {
   items: LegendConfigs;
+  onClick?: (item: LegendItemT) => void
 }
 
 export interface LegendItemProps {
@@ -86,5 +89,6 @@ export interface UMLEditorProps {
   EnumRowRenderer?: FunctionComponent<{ blockData: Block }>
   setEditorData: React.Dispatch<React.SetStateAction<EditorData | undefined>>
   updateConnections: () => void
-  createNewBlock?: (type: BlockType, x: number, y: number, id: string) => Block
+  createNewBlock?: (type: BlockType, x: number, y: number, id: string) => Block,
+  handleLegendClick?: (item?: LegendItemT) => void
 }

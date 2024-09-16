@@ -45,6 +45,7 @@ const UMLEditor = ({
   EnumRowRenderer = ({ blockData }) => {
     return blockData.id;
   },
+  handleLegendClick,
 }: UMLEditorProps) => {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [editorType, setEditorType] = useState<EditorTypeEnum>();
@@ -195,7 +196,10 @@ const UMLEditor = ({
       <div
         className="canvas-container"
         onContextMenu={handleContextMenu}
-        onClick={() => setHighlighted(undefined)}
+        onClick={() => {
+          setHighlighted(undefined);
+          handleLegendClick && handleLegendClick(undefined);
+        }}
       >
         {Object.values(blocks).map((block) => (
           <Draggable
@@ -225,6 +229,7 @@ const UMLEditor = ({
                 onClick={(e) => {
                   setHighlighted(block.id);
                   e.stopPropagation();
+                  handleLegendClick && handleLegendClick(undefined);
                 }}
               >
                 <HeadingRenderer blockData={block} />
@@ -395,7 +400,7 @@ const UMLEditor = ({
           <BlockEditor close={closeSlider} />
         )}
       </Aside>
-      <Legend items={legendConfigs} />
+      <Legend items={legendConfigs} onClick={handleLegendClick} />
     </>
   );
 };

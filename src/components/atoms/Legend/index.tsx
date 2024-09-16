@@ -27,6 +27,10 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
             fill={item.color}
           />
         );
+      case MarkerType.Rectangle2:
+        return <rect x="0" y="0" width="12" height="12" fill={item.color} />;
+      case MarkerType.Rectangle3:
+        return <rect x="0" y="0" width="12" height="12" fill={item.color} />;
       default:
         return null;
     }
@@ -48,7 +52,7 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
   );
 };
 
-const Legend: React.FC<LegendProps> = ({ items }) => {
+const Legend: React.FC<LegendProps> = ({ items, onClick }) => {
   return (
     <div className="legend">
       <ul>
@@ -56,7 +60,11 @@ const Legend: React.FC<LegendProps> = ({ items }) => {
           const typedKey = key as MarkerType;
           const item = items[typedKey];
           return (
-            <li key={index}>
+            <li
+              key={index}
+              onClick={() => item && onClick && onClick(item)}
+              style={onClick && { cursor: "pointer" }}
+            >
               {item && <LegendItem item={item} marker={typedKey} />}
             </li>
           );

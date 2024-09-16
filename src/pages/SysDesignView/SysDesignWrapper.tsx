@@ -1,4 +1,4 @@
-import { LegendConfigs } from "@/components/atoms/Legend/types";
+import { LegendConfigs, LegendItemT } from "@/components/atoms/Legend/types";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import { useUMLEditor } from "@/components/organisms/UMLEditor/context";
@@ -57,6 +57,10 @@ const legendConfigs: LegendConfigs = {
   [MarkerType.Pentagon]: {
     label: "Cache",
     color: "#6e46c0",
+  },
+  [MarkerType.Rectangle2]: {
+    label: "Library",
+    color: "#000",
   },
 };
 
@@ -178,9 +182,38 @@ const SysDesignWrapper = ({
     setMarkdownContent(changelogTxt);
   };
 
+  const handleLegendClick = (item?: LegendItemT) => {
+    setBlocks((existingBlocks) => {
+      return Object.keys(existingBlocks).reduce((accum, blockKey) => {
+        const block = existingBlocks[blockKey];
+        let blinkClass;
+
+        if (item) {
+          if (
+            block.data.type === item.label.toLowerCase() ||
+            block.data.type === item.label
+          ) {
+            blinkClass = "bring-forward";
+          } else {
+            blinkClass = "no-shaddow ";
+          }
+        } else {
+          blinkClass = "";
+        }
+
+        (accum as any)[blockKey] = {
+          ...block,
+          data: { ...block.data, blinkClass },
+        };
+        return accum;
+      }, {});
+    });
+  };
+
   return (
     <>
       <UMLEditor
+        handleLegendClick={handleLegendClick}
         setBlocks={setBlocks}
         setConnections={setConnections}
         blocks={blocks}

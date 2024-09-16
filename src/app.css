@@ -57,6 +57,10 @@ code {
   border-bottom: 1px solid #028391;
 }
 
+.no-shaddow {
+  box-shadow: initial !important;
+}
+
 .block-card {
   /* border: solid 1px; */
   width: fit-content;
@@ -354,6 +358,7 @@ html[data-theme="dark"] {
 
 .bring-forward {
   box-shadow: 34px 20px 90px grey;
+  zoom: 1.005;
 }
 
 .blink-orange {
