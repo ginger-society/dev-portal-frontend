@@ -18,10 +18,10 @@ import {
   UMLEditorProps,
 } from "./types";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Aside } from "@ginger-society/ginger-ui";
+import { Aside, Dropdown } from "@ginger-society/ginger-ui";
 import { NEW_BLOCK_ID_PREFIX } from "./constants";
 import { ColumnType } from "../ColumnEditor/types";
-import { FaPencilAlt } from "react-icons/fa";
+import { Fa500Px, FaEllipsisV, FaPencilAlt } from "react-icons/fa";
 
 const UMLEditor = ({
   setBlocks,
@@ -131,6 +131,8 @@ const UMLEditor = ({
         position: { top: data.y, left: data.x },
       },
     }));
+
+    // console.log(blocks[id]?.ref.current?.getBoundingClientRect());
     handleDrag(); // Update paths after dragging
   };
 
@@ -277,6 +279,49 @@ const UMLEditor = ({
                   <EnumRowRenderer blockData={block} />
                 </div>
               )}
+              <div className="row-content block-footer-container">
+                <div className="block-footer-action">
+                  <Fa500Px />
+                  Pull Requests
+                </div>
+                <div className="block-footer-action">
+                  <Fa500Px />
+                  Pipelines
+                </div>
+                <div className="block-footer-action">
+                  <Fa500Px />
+                  Jira board
+                </div>
+                <div className="block-footer-action">
+                  <Dropdown
+                    label={
+                      <button
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <FaEllipsisV />
+                        More
+                      </button>
+                    }
+                    align="left"
+                  >
+                    <ul>
+                      <li className="block-footer-additional-menu-item">
+                        <Fa500Px /> Option 1
+                      </li>
+                      <li className="block-footer-additional-menu-item">
+                        <Fa500Px /> Option 2
+                      </li>
+                      <li className="block-footer-additional-menu-item">
+                        <Fa500Px /> Option 3
+                      </li>
+                    </ul>
+                  </Dropdown>
+                </div>
+              </div>
             </div>
           </Draggable>
         ))}
@@ -400,7 +445,11 @@ const UMLEditor = ({
           <BlockEditor close={closeSlider} />
         )}
       </Aside>
-      <Legend items={legendConfigs} onClick={handleLegendClick} />
+      <Legend
+        title={handleLegendClick ? "Click to filter" : ""}
+        items={legendConfigs}
+        onClick={handleLegendClick}
+      />
     </>
   );
 };

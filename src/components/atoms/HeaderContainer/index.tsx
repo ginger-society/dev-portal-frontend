@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Header, AuthHeartBeat } from "@ginger-society/ginger-ui";
+import {
+  Header,
+  AuthHeartBeat,
+  HeaderPositionEnum,
+} from "@ginger-society/ginger-ui";
 import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
@@ -76,6 +80,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
         <>
           <AuthHeartBeat refreshTokenFn={refreshTokenFn} />
           <Header
+            position={HeaderPositionEnum.Fixed}
             version={version.version}
             brandName={
               <span onClick={navigateToHome} className={styles["home-link"]}>

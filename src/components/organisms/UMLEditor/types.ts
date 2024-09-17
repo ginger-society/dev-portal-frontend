@@ -51,7 +51,8 @@ export interface Connection {
 
 export interface LegendProps {
   items: LegendConfigs;
-  onClick?: (item: LegendItemT) => void
+  onClick?: (item: LegendItemT) => void,
+  title?: string
 }
 
 export interface LegendItemProps {

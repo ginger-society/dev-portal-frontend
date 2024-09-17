@@ -7,6 +7,7 @@ export function calculatePath(
   rows2: number,
 ) {
   if (!rect1 || !rect2) return { d: "", midX: 0, midY: 0 };
+
   const distanceRightLeft = Math.abs(rect1.right - rect2.left);
   const distanceLeftRight = Math.abs(rect1.left - rect2.right);
 
@@ -16,21 +17,21 @@ export function calculatePath(
     const headerRowHeight = 0;
     const rowHeight1 = (rect1.height - headerRowHeight) / rows1;
     const rowHeight2 = (rect2.height - headerRowHeight) / rows2;
-    x1 = rect1.right;
+    x1 = rect1.right + window.scrollX; // Added scrollX
     y1 = rect1.top + headerRowHeight + rowHeight1 * fromRow + window.scrollY;
-    x2 = rect2.left;
+    x2 = rect2.left + window.scrollX; // Added scrollX
     y2 = rect2.top + headerRowHeight + rowHeight2 * toRow + window.scrollY;
   } else {
     const headerRowHeight = 10;
     const rowHeight1 = (rect1.height - headerRowHeight) / rows1;
     const rowHeight2 = (rect2.height - headerRowHeight) / rows2;
-    x1 = rect1.left;
+    x1 = rect1.left + window.scrollX; // Added scrollX
     y1 = rect1.top + headerRowHeight + rowHeight1 * fromRow + window.scrollY;
-    x2 = rect2.right;
+    x2 = rect2.right + window.scrollX; // Added scrollX
     y2 = rect2.top + headerRowHeight + rowHeight2 * toRow + window.scrollY;
   }
 
-  const controlPointOffset = Math.abs(x2 - x1) / 2; // Distance of control points from the start and end points
+  const controlPointOffset = Math.abs(x2 - x1) / 2;
   const midX = (x1 + x2) / 2;
   const midY = (y1 + y2) / 2;
 

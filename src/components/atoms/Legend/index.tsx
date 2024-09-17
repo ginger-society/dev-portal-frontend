@@ -5,7 +5,7 @@ import {
 } from "@/components/organisms/UMLEditor/types";
 import React from "react";
 import { LegendItemT } from "./types";
-import { Text, TextSize } from "@ginger-society/ginger-ui";
+import { Text, TextSize, TextWeight } from "@ginger-society/ginger-ui";
 
 const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
   const getMarker = () => {
@@ -52,9 +52,10 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
   );
 };
 
-const Legend: React.FC<LegendProps> = ({ items, onClick }) => {
+const Legend: React.FC<LegendProps> = ({ items, onClick, title }) => {
   return (
     <div className="legend">
+      <Text weight={TextWeight.Bold}>{title}</Text>
       <ul>
         {Object.keys(items).map((key, index) => {
           const typedKey = key as MarkerType;
