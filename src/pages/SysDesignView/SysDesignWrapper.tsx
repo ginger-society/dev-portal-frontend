@@ -68,10 +68,16 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
       <div className="row-content block-footer-container">
         {/* Render the first 3 options */}
         {firstThreeOptions.map((option, index) => (
-          <div key={index} className="block-footer-action">
+          <a
+            key={index}
+            className="block-footer-action"
+            href={option.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <option.Icon />
             {option.label}
-          </div>
+          </a>
         ))}
 
         {/* Render the dropdown only if there are more options */}
@@ -94,8 +100,16 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
             >
               <ul>
                 {moreOptions.map((option, index) => (
-                  <li key={index} className="block-footer-additional-menu-item">
-                    <option.Icon /> {option.label}
+                  <li key={index}>
+                    <a
+                      className="block-footer-additional-menu-item"
+                      href={option.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <option.Icon />
+                      {option.label}
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -52,6 +52,15 @@ import styles from "./sysDesignView.module.scss";
 import router from "@/shared/router";
 import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
 
+const IconsMap = {
+  FaCodeBranch,
+  FaRegPlayCircle,
+  FaTasks,
+  FaChartLine,
+  FaGithub,
+  FaChartPie,
+};
+
 const blockColorMap = {
   database: "#89439f",
   RPCEndpoint: "#799351",
@@ -312,32 +321,32 @@ const SysDesignView = () => {
           pipeline_status,
           projectOptions: [
             {
-              Icon: FaCodeBranch,
+              Icon: IconsMap["FaCodeBranch"],
               label: "Pull Requests",
               link: "https://google.com",
             },
             {
-              Icon: FaRegPlayCircle,
+              Icon: IconsMap["FaRegPlayCircle"],
               label: "Pipelines",
               link: "https://google.com",
             },
             {
-              Icon: FaTasks,
+              Icon: IconsMap["FaTasks"],
               label: "Jira board",
               link: "https://google.com",
             },
             {
-              Icon: FaChartLine,
+              Icon: IconsMap["FaChartLine"],
               label: "Grafana Dashboard",
               link: "https://google.com",
             },
             {
-              Icon: FaGithub,
+              Icon: IconsMap["FaGithub"],
               label: "Browse Repo",
               link: "https://google.com",
             },
             {
-              Icon: FaChartPie,
+              Icon: IconsMap["FaChartPie"],
               label: "Coverage Report",
               link: "https://google.com",
             },
