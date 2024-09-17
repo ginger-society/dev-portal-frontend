@@ -14,6 +14,7 @@ import {
   FaChartLine,
   FaGithub,
   FaChartPie,
+  FaRegFileAlt,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -59,6 +60,7 @@ const IconsMap = {
   FaChartLine,
   FaGithub,
   FaChartPie,
+  FaRegFileAlt,
 };
 
 const blockColorMap = {
@@ -348,6 +350,11 @@ const SysDesignView = () => {
             {
               Icon: IconsMap["FaChartPie"],
               label: "Coverage Report",
+              link: "https://google.com",
+            },
+            {
+              Icon: IconsMap["FaRegFileAlt"],
+              label: "Documentation",
               link: "https://google.com",
             },
           ],

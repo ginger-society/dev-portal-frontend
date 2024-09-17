@@ -22,42 +22,42 @@ export function calculatePath(
     // rect1 is to the left of rect2
     if (fromRow === -1) {
       // Start from center-right of rect1
-      x1 = rect1.right;
+      x1 = rect1.right + window.scrollX;
       y1 = rect1.top + rect1.height / 2 + window.scrollY;
     } else {
       // Start from row position in rect1
-      x1 = rect1.right;
+      x1 = rect1.right + window.scrollX;
       y1 = rect1.top + headerRowHeight + rowHeight1 * fromRow + window.scrollY;
     }
 
     if (toRow === -1) {
       // End at center-left of rect2
-      x2 = rect2.left;
+      x2 = rect2.left + window.scrollX;
       y2 = rect2.top + rect2.height / 2 + window.scrollY;
     } else {
       // End at row position in rect2
-      x2 = rect2.left;
+      x2 = rect2.left + window.scrollX;
       y2 = rect2.top + headerRowHeight + rowHeight2 * toRow + window.scrollY;
     }
   } else {
     // rect1 is to the right of rect2
     if (fromRow === -1) {
       // Start from center-left of rect1
-      x1 = rect1.left;
+      x1 = rect1.left + window.scrollX;
       y1 = rect1.top + rect1.height / 2 + window.scrollY;
     } else {
       // Start from row position in rect1
-      x1 = rect1.left;
+      x1 = rect1.left + window.scrollX;
       y1 = rect1.top + headerRowHeight + rowHeight1 * fromRow + window.scrollY;
     }
 
     if (toRow === -1) {
       // End at center-right of rect2
-      x2 = rect2.right;
+      x2 = rect2.right + window.scrollX;
       y2 = rect2.top + rect2.height / 2 + window.scrollY;
     } else {
       // End at row position in rect2
-      x2 = rect2.right;
+      x2 = rect2.right + window.scrollX;
       y2 = rect2.top + headerRowHeight + rowHeight2 * toRow + window.scrollY;
     }
   }
