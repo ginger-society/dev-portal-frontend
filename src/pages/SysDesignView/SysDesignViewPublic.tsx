@@ -334,6 +334,10 @@ const SysDesignViewPublic = () => {
           gap: "10px",
           alignItems: "center",
           padding: "10px",
+          position: "fixed",
+          width: "100%",
+          zIndex: "1000",
+          background: "white",
         }}
       >
         <Text>Organization ID : {org_id}</Text>

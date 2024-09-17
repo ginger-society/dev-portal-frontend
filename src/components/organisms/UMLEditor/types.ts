@@ -85,6 +85,7 @@ export interface UMLEditorProps {
   BlockEditor: FunctionComponent<EditorProps>
   RowRenderer?: FunctionComponent<{ rowData: Row }>
   HeadingRenderer?: FunctionComponent<{ blockData: Block }>
+  FooterRenderer?: FunctionComponent<{ blockData: Block }>
   allowEdit?: boolean
   allowDrag?: boolean
   EnumRowRenderer?: FunctionComponent<{ blockData: Block }>

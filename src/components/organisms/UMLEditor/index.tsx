@@ -45,6 +45,9 @@ const UMLEditor = ({
   HeadingRenderer = ({ blockData }) => {
     return blockData.id;
   },
+  FooterRenderer = ({ blockData }) => {
+    return <></>;
+  },
   allowEdit = true,
   allowDrag = true,
   RowRenderer = ({ rowData }) => {
@@ -112,7 +115,6 @@ const UMLEditor = ({
   const handleDrag = useCallback(() => {
     const newPaths = connections.map(
       ({ block1Id, fromRow, block2Id, toRow }) => {
-        console.log(fromRow, toRow);
         const rect1 = blocks[block1Id]?.ref.current?.getBoundingClientRect();
         const rect2 = blocks[block2Id]?.ref.current?.getBoundingClientRect();
         const { d, midX, midY, angle } = calculatePath(
@@ -290,49 +292,7 @@ const UMLEditor = ({
                   <EnumRowRenderer blockData={block} />
                 </div>
               )}
-              <div className="row-content block-footer-container">
-                <div className="block-footer-action">
-                  <FaCodeBranch />
-                  Pull Requests
-                </div>
-                <div className="block-footer-action">
-                  <FaRegPlayCircle />
-                  Pipelines
-                </div>
-                <div className="block-footer-action">
-                  <FaTasks />
-                  Jira board
-                </div>
-                <div className="block-footer-action">
-                  <Dropdown
-                    label={
-                      <button
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <FaEllipsisV />
-                        More
-                      </button>
-                    }
-                    align="left"
-                  >
-                    <ul>
-                      <li className="block-footer-additional-menu-item">
-                        <FaChartLine /> Grafana Dashboard
-                      </li>
-                      <li className="block-footer-additional-menu-item">
-                        <FaGithub /> Browse Repo
-                      </li>
-                      <li className="block-footer-additional-menu-item">
-                        <FaChartPie /> Coverage Report
-                      </li>
-                    </ul>
-                  </Dropdown>
-                </div>
-              </div>
+              <FooterRenderer blockData={block} />
             </div>
           </Draggable>
         ))}

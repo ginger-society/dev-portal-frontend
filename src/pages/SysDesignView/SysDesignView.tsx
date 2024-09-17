@@ -7,6 +7,13 @@ import {
   FaBuilding,
   FaLock,
   FaLockOpen,
+  FaCodeBranch,
+  FaRegPlayCircle,
+  FaTasks,
+  FaEllipsisV,
+  FaChartLine,
+  FaGithub,
+  FaChartPie,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -303,6 +310,38 @@ const SysDesignView = () => {
                 (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
+          projectOptions: [
+            {
+              Icon: FaCodeBranch,
+              label: "Pull Requests",
+              link: "https://google.com",
+            },
+            {
+              Icon: FaRegPlayCircle,
+              label: "Pipelines",
+              link: "https://google.com",
+            },
+            {
+              Icon: FaTasks,
+              label: "Jira board",
+              link: "https://google.com",
+            },
+            {
+              Icon: FaChartLine,
+              label: "Grafana Dashboard",
+              link: "https://google.com",
+            },
+            {
+              Icon: FaGithub,
+              label: "Browse Repo",
+              link: "https://google.com",
+            },
+            {
+              Icon: FaChartPie,
+              label: "Coverage Report",
+              link: "https://google.com",
+            },
+          ],
         },
         rows: rows,
         type: BlockType.SystemBlock,

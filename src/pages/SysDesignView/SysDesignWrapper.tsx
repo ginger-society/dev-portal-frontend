@@ -14,6 +14,7 @@ import {
   Aside,
   Button,
   ButtonType,
+  Dropdown,
   Loader,
   SnackbarTimer,
   Text,
@@ -23,19 +24,88 @@ import {
 } from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
+  FaChartLine,
+  FaChartPie,
   FaCheckDouble,
+  FaCodeBranch,
   FaDatabase,
   FaDesktop,
+  FaEllipsisV,
+  FaGithub,
   FaInfoCircle,
   FaLayerGroup,
   FaPencilAlt,
+  FaRegPlayCircle,
   FaServer,
+  FaTasks,
   FaTerminal,
 } from "react-icons/fa";
 import router from "@/shared/router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import styles from "./sysDesignWrapper.module.scss";
+
+interface ProjectOption {
+  Icon: React.ComponentType;
+  label: string;
+  link: string;
+}
+
+interface FooterRendererProps {
+  blockData: Block;
+}
+
+const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
+  ({ blockData }) => {
+    const { projectOptions } = blockData.data;
+    if (!projectOptions) {
+      return;
+    }
+    const firstThreeOptions: ProjectOption[] = projectOptions.slice(0, 3);
+    const moreOptions: ProjectOption[] = projectOptions.slice(3);
+
+    return (
+      <div className="row-content block-footer-container">
+        {/* Render the first 3 options */}
+        {firstThreeOptions.map((option, index) => (
+          <div key={index} className="block-footer-action">
+            <option.Icon />
+            {option.label}
+          </div>
+        ))}
+
+        {/* Render the dropdown only if there are more options */}
+        {moreOptions.length > 0 && (
+          <div className="block-footer-action">
+            <Dropdown
+              label={
+                <button
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FaEllipsisV />
+                  More
+                </button>
+              }
+              align="left"
+            >
+              <ul>
+                {moreOptions.map((option, index) => (
+                  <li key={index} className="block-footer-additional-menu-item">
+                    <option.Icon /> {option.label}
+                  </li>
+                ))}
+              </ul>
+            </Dropdown>
+          </div>
+        )}
+      </div>
+    );
+  }
+);
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Circle]: {
@@ -238,6 +308,7 @@ const SysDesignWrapper = ({
         )}
         allowEdit={false}
         allowDrag={allowDrag}
+        FooterRenderer={FooterRenderer}
         HeadingRenderer={({ blockData }) => (
           <>
             {blockData.type === BlockType.SystemBlock && (
