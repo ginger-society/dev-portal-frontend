@@ -21,7 +21,17 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Aside, Dropdown } from "@ginger-society/ginger-ui";
 import { NEW_BLOCK_ID_PREFIX } from "./constants";
 import { ColumnType } from "../ColumnEditor/types";
-import { Fa500Px, FaEllipsisV, FaPencilAlt } from "react-icons/fa";
+import {
+  Fa500Px,
+  FaChartLine,
+  FaChartPie,
+  FaCodeBranch,
+  FaEllipsisV,
+  FaGithub,
+  FaPencilAlt,
+  FaRegPlayCircle,
+  FaTasks,
+} from "react-icons/fa";
 
 const UMLEditor = ({
   setBlocks,
@@ -102,6 +112,7 @@ const UMLEditor = ({
   const handleDrag = useCallback(() => {
     const newPaths = connections.map(
       ({ block1Id, fromRow, block2Id, toRow }) => {
+        console.log(fromRow, toRow);
         const rect1 = blocks[block1Id]?.ref.current?.getBoundingClientRect();
         const rect2 = blocks[block2Id]?.ref.current?.getBoundingClientRect();
         const { d, midX, midY, angle } = calculatePath(
@@ -281,15 +292,15 @@ const UMLEditor = ({
               )}
               <div className="row-content block-footer-container">
                 <div className="block-footer-action">
-                  <Fa500Px />
+                  <FaCodeBranch />
                   Pull Requests
                 </div>
                 <div className="block-footer-action">
-                  <Fa500Px />
+                  <FaRegPlayCircle />
                   Pipelines
                 </div>
                 <div className="block-footer-action">
-                  <Fa500Px />
+                  <FaTasks />
                   Jira board
                 </div>
                 <div className="block-footer-action">
@@ -310,13 +321,13 @@ const UMLEditor = ({
                   >
                     <ul>
                       <li className="block-footer-additional-menu-item">
-                        <Fa500Px /> Option 1
+                        <FaChartLine /> Grafana Dashboard
                       </li>
                       <li className="block-footer-additional-menu-item">
-                        <Fa500Px /> Option 2
+                        <FaGithub /> Browse Repo
                       </li>
                       <li className="block-footer-additional-menu-item">
-                        <Fa500Px /> Option 3
+                        <FaChartPie /> Coverage Report
                       </li>
                     </ul>
                   </Dropdown>

@@ -90,8 +90,8 @@ const SysDesignWrapper = ({
           connections.push({
             block1Id: key,
             block2Id: dependency.split("/")[1],
-            fromRow: 0,
-            toRow: 0,
+            fromRow: -1,
+            toRow: -1,
             label: ``,
           });
         });
@@ -100,8 +100,8 @@ const SysDesignWrapper = ({
         connections.push({
           block1Id: key,
           block2Id: block.data.dbSchemaId,
-          fromRow: 0,
-          toRow: 0,
+          fromRow: -1,
+          toRow: -1,
           label: ``,
         });
       }
@@ -109,8 +109,8 @@ const SysDesignWrapper = ({
         connections.push({
           block1Id: key,
           block2Id: block.data.cacheSchemaId,
-          fromRow: 0,
-          toRow: 0,
+          fromRow: -1,
+          toRow: -1,
           label: ``,
         });
       }
