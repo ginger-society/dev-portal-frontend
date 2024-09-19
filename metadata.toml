@@ -1,2 +1,20 @@
 lang = "TS"
 package_type = "static"
+
+[[links]]
+icon = "FaCodeBranch"
+internal = true
+label = "Pull Requests"
+link = "https://github.com/ginger-society/dev-portal-frontend/pulls"
+
+[[links]]
+icon = "FaRegPlayCircle"
+internal = true
+label = "Pipelines"
+link = "https://github.com/ginger-society/dev-portal-frontend/actions"
+
+[[links]]
+icon = "FaGithub"
+internal = true
+label = "Browse Repo"
+link = "https://github.com/ginger-society/dev-portal-frontend"

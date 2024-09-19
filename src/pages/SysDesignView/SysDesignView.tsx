@@ -52,6 +52,7 @@ import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";
 import router from "@/shared/router";
 import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
+import { IconType } from "react-icons";
 
 const IconsMap = {
   FaCodeBranch,
@@ -71,7 +72,7 @@ const blockColorMap = {
   Cache: "#6e46c0",
 };
 
-const shadowClassMap: { [key: string]: string } = {
+export const shadowClassMap: { [key: string]: string } = {
   running: "blink-orange",
   failed: "blink-red",
 };
@@ -321,43 +322,52 @@ const SysDesignView = () => {
                 (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
-          projectOptions: [
-            {
-              Icon: IconsMap["FaCodeBranch"],
-              label: "Pull Requests",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaRegPlayCircle"],
-              label: "Pipelines",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaTasks"],
-              label: "Jira board",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaChartLine"],
-              label: "Grafana Dashboard",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaGithub"],
-              label: "Browse Repo",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaChartPie"],
-              label: "Coverage Report",
-              link: "https://google.com",
-            },
-            {
-              Icon: IconsMap["FaRegFileAlt"],
-              label: "Documentation",
-              link: "https://google.com",
-            },
-          ],
+          projectOptions: service.quickLinks
+            ? JSON.parse(service.quickLinks).map((link: any) => {
+                return {
+                  ...link,
+                  Icon: IconsMap[link.icon as keyof IconType],
+                };
+              })
+            : null,
+
+          // [
+          //   {
+          //     Icon: IconsMap["FaCodeBranch"],
+          //     label: "Pull Requests",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaRegPlayCircle"],
+          //     label: "Pipelines",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaTasks"],
+          //     label: "Jira board",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaChartLine"],
+          //     label: "Grafana Dashboard",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaGithub"],
+          //     label: "Browse Repo",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaChartPie"],
+          //     label: "Coverage Report",
+          //     link: "https://google.com",
+          //   },
+          //   {
+          //     Icon: IconsMap["FaRegFileAlt"],
+          //     label: "Documentation",
+          //     link: "https://google.com",
+          //   },
+          // ],
         },
         rows: rows,
         type: BlockType.SystemBlock,

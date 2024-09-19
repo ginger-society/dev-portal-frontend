@@ -44,6 +44,7 @@ import router from "@/shared/router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import styles from "./sysDesignWrapper.module.scss";
+import { shadowClassMap } from "./SysDesignView";
 
 interface ProjectOption {
   Icon: React.ComponentType;
@@ -282,10 +283,10 @@ const SysDesignWrapper = ({
             blinkClass = "no-shaddow ";
           }
         } else {
-          blinkClass = "";
+          blinkClass = shadowClassMap[block.data.pipeline_status] || "";
         }
 
-        (accum as any)[blockKey] = {
+        (accum as { [key: string]: Block })[blockKey] = {
           ...block,
           data: { ...block.data, blinkClass },
         };
