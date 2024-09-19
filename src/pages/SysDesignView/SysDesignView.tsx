@@ -164,6 +164,14 @@ const SysDesignView = () => {
               : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
+          // projectOptions: pkg.quickLinks
+          //   ? JSON.parse(pkg.quickLinks).map((link: any) => {
+          //       return {
+          //         ...link,
+          //         Icon: IconsMap[link.icon as keyof IconType],
+          //       };
+          //     })
+          //   : null,
         },
         rows,
       };
@@ -190,6 +198,14 @@ const SysDesignView = () => {
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
+              projectOptions: schema.quickLinks
+                ? JSON.parse(schema.quickLinks).map((link: any) => {
+                    return {
+                      ...link,
+                      Icon: IconsMap[link.icon as keyof IconType],
+                    };
+                  })
+                : null,
             },
             rows: [
               {
@@ -216,6 +232,14 @@ const SysDesignView = () => {
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
+              projectOptions: schema.quickLinks
+                ? JSON.parse(schema.quickLinks).map((link: any) => {
+                    return {
+                      ...link,
+                      Icon: IconsMap[link.icon as keyof IconType],
+                    };
+                  })
+                : null,
             },
             rows: [],
             type: BlockType.SystemBlock,
@@ -330,44 +354,6 @@ const SysDesignView = () => {
                 };
               })
             : null,
-
-          // [
-          //   {
-          //     Icon: IconsMap["FaCodeBranch"],
-          //     label: "Pull Requests",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaRegPlayCircle"],
-          //     label: "Pipelines",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaTasks"],
-          //     label: "Jira board",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaChartLine"],
-          //     label: "Grafana Dashboard",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaGithub"],
-          //     label: "Browse Repo",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaChartPie"],
-          //     label: "Coverage Report",
-          //     link: "https://google.com",
-          //   },
-          //   {
-          //     Icon: IconsMap["FaRegFileAlt"],
-          //     label: "Documentation",
-          //     link: "https://google.com",
-          //   },
-          // ],
         },
         rows: rows,
         type: BlockType.SystemBlock,
