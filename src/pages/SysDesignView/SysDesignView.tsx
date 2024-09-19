@@ -164,14 +164,14 @@ const SysDesignView = () => {
               : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
-          // projectOptions: pkg.quickLinks
-          //   ? JSON.parse(pkg.quickLinks).map((link: any) => {
-          //       return {
-          //         ...link,
-          //         Icon: IconsMap[link.icon as keyof IconType],
-          //       };
-          //     })
-          //   : null,
+          projectOptions: pkg.quickLinks
+            ? JSON.parse(pkg.quickLinks).map((link: any) => {
+                return {
+                  ...link,
+                  Icon: IconsMap[link.icon as keyof IconType],
+                };
+              })
+            : null,
         },
         rows,
       };
