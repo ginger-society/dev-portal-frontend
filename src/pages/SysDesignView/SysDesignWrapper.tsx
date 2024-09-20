@@ -59,7 +59,8 @@ interface FooterRendererProps {
 const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
   ({ blockData }) => {
     const { projectOptions } = blockData.data;
-    if (!projectOptions) {
+
+    if (!projectOptions || projectOptions.length === 0) {
       return;
     }
     const firstThreeOptions: ProjectOption[] = projectOptions.slice(0, 3);
