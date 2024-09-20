@@ -21,10 +21,10 @@ RUN ginger-connector refer stage
 RUN ginger-connector connect stage
 
 # Install dependencies
-RUN yarn
+RUN pnpm i
 
 # Build the project
-RUN yarn build
+RUN pnpm build
 
 RUN aws s3 cp dist/ s3://dev-portal-fe-staging/ --recursive
 
