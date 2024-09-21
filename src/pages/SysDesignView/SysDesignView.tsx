@@ -16,6 +16,7 @@ import {
   FaChartPie,
   FaRegFileAlt,
   FaLink,
+  FaNpm,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -64,6 +65,7 @@ const IconsMap = {
   FaChartPie,
   FaRegFileAlt,
   FaLink,
+  FaNpm,
 };
 
 const blockColorMap = {
