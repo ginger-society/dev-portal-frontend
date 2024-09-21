@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";
 import router from "@/shared/router";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
+import { IconsMap } from "./SysDesignView";
+import { IconType } from "react-icons";
 
 const blockColorMap = {
   database: "#89439f",
@@ -80,6 +82,14 @@ const SysDesignViewPublic = () => {
               : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
+          projectOptions: pkg.quickLinks
+            ? JSON.parse(pkg.quickLinks).map((link: any) => {
+                return {
+                  ...link,
+                  Icon: IconsMap[link.icon as keyof IconType],
+                };
+              })
+            : null,
         },
         rows,
       };
@@ -111,6 +121,14 @@ const SysDesignViewPublic = () => {
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
+              projectOptions: schema.quickLinks
+                ? JSON.parse(schema.quickLinks).map((link: any) => {
+                    return {
+                      ...link,
+                      Icon: IconsMap[link.icon as keyof IconType],
+                    };
+                  })
+                : null,
             },
             rows: [
               {
@@ -138,6 +156,14 @@ const SysDesignViewPublic = () => {
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
+              projectOptions: schema.quickLinks
+                ? JSON.parse(schema.quickLinks).map((link: any) => {
+                    return {
+                      ...link,
+                      Icon: IconsMap[link.icon as keyof IconType],
+                    };
+                  })
+                : null,
             },
             rows: [],
             type: BlockType.SystemBlock,
@@ -244,6 +270,14 @@ const SysDesignViewPublic = () => {
                 (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
+          projectOptions: service.quickLinks
+            ? JSON.parse(service.quickLinks).map((link: any) => {
+                return {
+                  ...link,
+                  Icon: IconsMap[link.icon as keyof IconType],
+                };
+              })
+            : null,
         },
         rows: rows,
         type: BlockType.SystemBlock,

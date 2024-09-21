@@ -56,7 +56,7 @@ import router from "@/shared/router";
 import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
 import { IconType } from "react-icons";
 
-const IconsMap = {
+export const IconsMap = {
   FaCodeBranch,
   FaRegPlayCircle,
   FaTasks,

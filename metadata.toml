@@ -11,16 +11,16 @@ link = "https://dev-portal-staging.gingersociety.org"
 icon = "FaCodeBranch"
 internal = true
 label = "Pull Requests"
-link = "https://github.com/ginger-society/metadata-service-backend/pulls"
+link = "https://github.com/ginger-society/dev-portal-frontend/pulls"
 
 [[links]]
 icon = "FaRegPlayCircle"
 internal = true
 label = "Pipelines"
-link = "https://github.com/ginger-society/metadata-service-backend/actions"
+link = "https://github.com/ginger-society/dev-portal-frontend/actions"
 
 [[links]]
 icon = "FaGithub"
 internal = true
 label = "Browse Repo"
-link = "https://github.com/ginger-society/metadata-service-backend"
+link = "https://github.com/ginger-society/dev-portal-frontend"
