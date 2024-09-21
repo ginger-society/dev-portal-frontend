@@ -41,4 +41,7 @@ jobs:
       - name: Update pipeline to passing
         run: ginger-connector update-pipeline stage passing
 
+      - name: publish metadata
+        run: ginger-connector publish stage
+
       
