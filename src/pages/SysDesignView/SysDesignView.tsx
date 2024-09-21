@@ -18,6 +18,7 @@ import {
   FaLink,
   FaNpm,
   FaRust,
+  FaGlobe,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -68,6 +69,7 @@ export const IconsMap = {
   FaLink,
   FaNpm,
   FaRust,
+  FaGlobe,
 };
 
 const blockColorMap = {
