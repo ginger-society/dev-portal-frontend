@@ -2,7 +2,7 @@ lang = "TS"
 package_type = "static"
 
 [[links]]
-icon = "FaLink"
+icon = "FaGlobe"
 internal = true
 label = "Open"
 link = "https://dev-portal-staging.gingersociety.org"

@@ -138,7 +138,7 @@ const SysDesignView = () => {
     if (!env || !org_id) {
       return {};
     }
-    const packages = await MetadataService.metadataGetUserPackages({
+    const packages = await MetadataService.metadataGetUserPackagesUserLand({
       env,
       orgId: org_id,
     });
@@ -185,10 +185,11 @@ const SysDesignView = () => {
       };
     });
 
-    const dbSchemas = await MetadataService.metadataGetDbschemasAndTables({
-      env,
-      orgId: org_id,
-    });
+    const dbSchemas =
+      await MetadataService.metadataGetDbschemasAndTablesUserLand({
+        env,
+        orgId: org_id,
+      });
     // console.log(dbSchemas);
     dbSchemas.forEach((schema) => {
       if (schema.identifier) {
