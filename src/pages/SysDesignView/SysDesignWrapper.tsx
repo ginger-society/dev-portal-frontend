@@ -42,7 +42,6 @@ import {
 } from "react-icons/fa";
 import router from "@/shared/router";
 import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import styles from "./sysDesignWrapper.module.scss";
 import { shadowClassMap } from "./SysDesignView";
 
@@ -438,9 +437,9 @@ const SysDesignWrapper = ({
         <Text tag="h1" size={TextSize.Large}>
           {markdownViewerTitle}
         </Text>
-        <div className={styles["md-wrapper"]}>
+        <div className="md-wrapper">
           {markdownContent ? (
-            <Markdown remarkPlugins={[remarkGfm]}>{markdownContent}</Markdown>
+            <Markdown>{markdownContent}</Markdown>
           ) : (
             <Loader />
           )}

@@ -50,6 +50,12 @@ import {
   useSnackbar,
   Text,
   TextColor,
+  Aside,
+  TextSize,
+  Loader,
+  Accordion,
+  Section,
+  Table,
 } from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
@@ -57,6 +63,11 @@ import styles from "./sysDesignView.module.scss";
 import router from "@/shared/router";
 import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
 import { IconType } from "react-icons";
+import Markdown from "react-markdown";
+import {
+  SnapshotsResponse,
+  WorkspaceSummary,
+} from "@/services/MetadataService_client";
 
 export const IconsMap = {
   FaCodeBranch,
@@ -72,6 +83,27 @@ export const IconsMap = {
   FaGlobe,
 };
 
+interface Service {
+  identifier: string;
+  version: string;
+}
+
+interface Package {
+  identifier: string;
+  version: string;
+}
+
+interface Database {
+  name: string;
+  version: string;
+}
+
+interface SystemSnapshot {
+  services: Service[];
+  packages: Package[];
+  databases: Database[];
+}
+
 const blockColorMap = {
   database: "#89439f",
   RPCEndpoint: "#799351",
@@ -86,6 +118,13 @@ export const shadowClassMap: { [key: string]: string } = {
 };
 
 const SysDesignView = () => {
+  const [isMarkdownViewertOpen, setIsMarkdownViewerOpen] =
+    useState<boolean>(false);
+  const [markdownViewerTitle, setMarkdownViewerTitle] = useState<string>();
+  const [markdownContent, setMarkdownContent] = useState<string>();
+
+  const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
+
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
@@ -95,6 +134,14 @@ const SysDesignView = () => {
   const [pipeline_status_color, setPipeline_status_color] = useState<TextColor>(
     TextColor.Primary
   );
+
+  const [snapshots, setSnapshots] = useState<SnapshotsResponse[]>([]);
+  const [isSnapshotsViewertOpen, setIsSnapshotsViewerOpen] =
+    useState<boolean>(false);
+
+  const [snapshotDetails, setSnapshotDetails] = useState<{
+    [key: string]: SystemSnapshot;
+  }>({});
 
   const toggleLock = () => {
     setIsLocked((l) => {
@@ -432,6 +479,89 @@ const SysDesignView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [env, org_id]);
 
+  const fetchData = async () => {
+    try {
+      const response = await MetadataService.metadataGetWorkspaces();
+      setOrgs(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const openOrgChangelog = async () => {
+    const repoLink = orgs.find((o) => o.slug === org_id)?.infraRepoOrigin;
+    if (!repoLink) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
+    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
+    const response = await fetch(
+      `${repoLink.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/CHANGELOG.md`
+    );
+    const changelogTxt = await response.text();
+    setMarkdownContent(changelogTxt);
+  };
+
+  const navigateToSnapshots = async () => {
+    if (!org_id) return;
+    const snapshots = await MetadataService.metadataGetSnapshots({
+      orgId: org_id,
+    });
+    setSnapshots(snapshots);
+    setIsSnapshotsViewerOpen(true);
+    const details = await getSnapshotDetails(snapshots[0].version);
+    if (!details) {
+      return;
+    }
+    setSnapshotDetails((v) => {
+      return {
+        ...v,
+        [snapshots[0].version]: details,
+      };
+    });
+  };
+
+  const getSnapshotDetails = async (
+    version: string
+  ): Promise<SystemSnapshot | null> => {
+    const repoLink = orgs.find((o) => o.slug === org_id)?.infraRepoOrigin;
+    if (!repoLink) {
+      return null;
+    }
+    // https://github.com/ginger-society/infra-as-code-repo/blob/main/snapshots/0.10.0-nightly.0.json
+
+    const response = await fetch(
+      `${repoLink.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/snapshots/${version}.json`
+    );
+    const snapshotDetails = await response.json();
+    return snapshotDetails;
+  };
+
+  const fetchSnapshotDetails = async (version: string) => {
+    const details = await getSnapshotDetails(version);
+    if (!details) {
+      return;
+    }
+    setSnapshotDetails((v) => {
+      return { ...v, [version]: details };
+    });
+  };
+
   return (
     <UMLEditorProvider
       value={{
@@ -449,6 +579,8 @@ const SysDesignView = () => {
           <Text color={pipeline_status_color}>
             Pipeline Status : {pipeline_status}
           </Text>
+          <Button label="View changelog" onClick={openOrgChangelog} />
+          <Button label="View Snapshots" onClick={navigateToSnapshots} />
         </div>
       </HeaderContainer>
       <button className={styles["save-layout-btn"]} onClick={toggleLock}>
@@ -463,6 +595,107 @@ const SysDesignView = () => {
         )}
       </button>
       <SysDesignWrapper allowDrag={!isLocked} />
+      <Aside
+        isOpen={isMarkdownViewertOpen}
+        onClose={() => setIsMarkdownViewerOpen(false)}
+      >
+        <Text tag="h1" size={TextSize.Large}>
+          {markdownViewerTitle}
+        </Text>
+        <div className="md-wrapper">
+          {markdownContent ? (
+            <Markdown>{markdownContent}</Markdown>
+          ) : (
+            <Loader />
+          )}
+        </div>
+      </Aside>
+
+      <Aside
+        isOpen={isSnapshotsViewertOpen}
+        onClose={() => setIsSnapshotsViewerOpen(false)}
+      >
+        <div
+          style={{ height: "100vh", overflow: "auto", paddingBottom: "200px" }}
+        >
+          <Accordion>
+            {snapshots.map((s, i) => {
+              return (
+                <Section
+                  head={<Text>{s.version}</Text>}
+                  open={i === 0}
+                  onOpen={() => fetchSnapshotDetails(s.version)}
+                >
+                  <Text size={TextSize.Large}>Databases</Text>
+
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>Identifier</th>
+                        <th>Version</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {snapshotDetails[s.version] &&
+                        (snapshotDetails[s.version].databases.map((d) => {
+                          return (
+                            <tr>
+                              <td>{d.name}</td>
+                              <td>{d.version}</td>
+                            </tr>
+                          );
+                        }) as any)}
+                    </tbody>
+                  </Table>
+                  <Text size={TextSize.Large}>Services</Text>
+
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>Identifier</th>
+                        <th>Version</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {snapshotDetails[s.version] &&
+                        (snapshotDetails[s.version].services.map((s) => {
+                          return (
+                            <tr>
+                              <td>{s.identifier}</td>
+                              <td>{s.version}</td>
+                            </tr>
+                          );
+                        }) as any)}
+                    </tbody>
+                  </Table>
+
+                  <Text size={TextSize.Large}>Packages</Text>
+
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>Identifier</th>
+                        <th>Version</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {snapshotDetails[s.version] &&
+                        (snapshotDetails[s.version].packages.map((p) => {
+                          return (
+                            <tr>
+                              <td>{p.identifier}</td>
+                              <td>{p.version}</td>
+                            </tr>
+                          );
+                        }) as any)}
+                    </tbody>
+                  </Table>
+                </Section>
+              );
+            })}
+          </Accordion>
+        </div>
+      </Aside>
     </UMLEditorProvider>
   );
 };
