@@ -18,13 +18,47 @@ feat:
 	
  - [7f1f0fb982](https://github.com/ginger-society/dev-portal-frontend7f1f0fb98215e08a4029b1e0a22a9d6ef305b3d2) (Ginger Society Admin) feat: added quick links for pkg
 	
-chore:
- - [eb01ec8d2b](https://github.com/ginger-society/dev-portal-frontendeb01ec8d2be9d3954adc20320e9741ac47022518) (Ginger Society Admin) chore: minor cosmetic
-	
 fix:
  - [55033f110b](https://github.com/ginger-society/dev-portal-frontend55033f110b1f4074e3ec51e6f5deff99720f870d) (Ginger Society Admin) fix: changed yarn to pnpm
 	
+chore:
+ - [74966fed1c](https://github.com/ginger-society/dev-portal-frontend74966fed1cda360d126ee7b5ec4b534ac11d5689) (Ginger Society Admin) chore: version bump to 0.14.0-nightly.0
+	
+ - [eb01ec8d2b](https://github.com/ginger-society/dev-portal-frontendeb01ec8d2be9d3954adc20320e9741ac47022518) (Ginger Society Admin) chore: minor cosmetic
+	
 ## 0.13.0-nightly.0 - 2024-09-19
+chore:
+ - [57631ed8f0](https://github.com/ginger-society/dev-portal-frontend57631ed8f0a6ddad96ffddc5ada9ce4038a53e25) (Ginger Society Admin) chore: version bump to 0.13.0-nightly.0
+	
+ - [1529e1c5a1](https://github.com/ginger-society/dev-portal-frontend1529e1c5a11cc10ed17e51e4240851baaf75533f) (Ginger Society Admin) chore: minor css changes
+	
+ - [32f78be36d](https://github.com/ginger-society/dev-portal-frontend32f78be36d46388debfb935bc12379615b7f4895) (Ginger Society Admin) chore: minor cosmetic changes
+	
+fix:
+ - [2cc4187bfe](https://github.com/ginger-society/dev-portal-frontend2cc4187bfebb64e5c36ef479b998dfa8327d6e66) (Ginger Society Admin) fix: connector rendering issue when scrollx is present
+	
+ - [8345354437](https://github.com/ginger-society/dev-portal-frontend8345354437235468172227c4fa636a8c8a014d86) (Ginger Society Admin) fix: fixed calculated path
+	
+ - [d270fb4d00](https://github.com/ginger-society/dev-portal-frontendd270fb4d000bff52c075ce980b808aa6c1c2cca6) (Ginger Society Admin) fix: error handling while deleting the connection
+	
+ - [8bd8a9c2f9](https://github.com/ginger-society/dev-portal-frontend8bd8a9c2f94690bb78b59c6732401e88619974ee) (Ginger Society Admin) fix: ci update
+	
+ - [01881f9431](https://github.com/ginger-society/dev-portal-frontend01881f9431a4448acde2b70a6af68b6241a10509) (Ginger Society Admin) fix: minor theme fixes
+	
+ - [de209e3c24](https://github.com/ginger-society/dev-portal-frontendde209e3c242423d4d9e0ad2696fea999ee6f4ca3) (Ginger Society Admin) fix: api update
+	
+ - [7b967db4fb](https://github.com/ginger-society/dev-portal-frontend7b967db4fbb02fb8fccb82b14f0e3503da505333) (Ginger Society Admin) fix: dockerfile
+	
+ - [2584332ef7](https://github.com/ginger-society/dev-portal-frontend2584332ef7b51dd75a24d024c78cd723cb3ac545) (Ginger Society Admin) fix: error handling when switching the workspace
+	
+ - [ed86d8683b](https://github.com/ginger-society/dev-portal-frontended86d8683b18cce31ac82e3dea6254ba52224385) (Ginger Society Admin) fix: pipeline fixes
+	
+ - [ecd014375c](https://github.com/ginger-society/dev-portal-frontendecd014375c27c39fa7a12054c1cd5b3f6b190325) (Ginger Society Admin) fix: minor changes
+	
+ - [39ebfddc53](https://github.com/ginger-society/dev-portal-frontend39ebfddc53099b2b93f40244ea35b3fbab882189) (Ginger Society Admin) fix: build
+	
+ - [ee3b16b61e](https://github.com/ginger-society/dev-portal-frontendee3b16b61ed93194751c4635d30f1f71fd556d86) (Ginger Society Admin) fix: updated logic to navigate to home
+	
 feat:
  - [9719a241c2](https://github.com/ginger-society/dev-portal-frontend9719a241c2eb098227e912e9494bf568c5461066) (Ginger Society Admin) feat: added quick links for db schema
 	
@@ -88,38 +122,6 @@ feat:
 	
  - [e83da3a409](https://github.com/ginger-society/dev-portal-frontende83da3a40958d365cd24fbac020b78bd8741dd8d) (Ginger Society Admin) feat: added workspace switcher, manager and settings components
 	
-chore:
- - [57631ed8f0](https://github.com/ginger-society/dev-portal-frontend57631ed8f0a6ddad96ffddc5ada9ce4038a53e25) (Ginger Society Admin) chore: version bump to 0.13.0-nightly.0
-	
- - [1529e1c5a1](https://github.com/ginger-society/dev-portal-frontend1529e1c5a11cc10ed17e51e4240851baaf75533f) (Ginger Society Admin) chore: minor css changes
-	
- - [32f78be36d](https://github.com/ginger-society/dev-portal-frontend32f78be36d46388debfb935bc12379615b7f4895) (Ginger Society Admin) chore: minor cosmetic changes
-	
-fix:
- - [2cc4187bfe](https://github.com/ginger-society/dev-portal-frontend2cc4187bfebb64e5c36ef479b998dfa8327d6e66) (Ginger Society Admin) fix: connector rendering issue when scrollx is present
-	
- - [8345354437](https://github.com/ginger-society/dev-portal-frontend8345354437235468172227c4fa636a8c8a014d86) (Ginger Society Admin) fix: fixed calculated path
-	
- - [d270fb4d00](https://github.com/ginger-society/dev-portal-frontendd270fb4d000bff52c075ce980b808aa6c1c2cca6) (Ginger Society Admin) fix: error handling while deleting the connection
-	
- - [8bd8a9c2f9](https://github.com/ginger-society/dev-portal-frontend8bd8a9c2f94690bb78b59c6732401e88619974ee) (Ginger Society Admin) fix: ci update
-	
- - [01881f9431](https://github.com/ginger-society/dev-portal-frontend01881f9431a4448acde2b70a6af68b6241a10509) (Ginger Society Admin) fix: minor theme fixes
-	
- - [de209e3c24](https://github.com/ginger-society/dev-portal-frontendde209e3c242423d4d9e0ad2696fea999ee6f4ca3) (Ginger Society Admin) fix: api update
-	
- - [7b967db4fb](https://github.com/ginger-society/dev-portal-frontend7b967db4fbb02fb8fccb82b14f0e3503da505333) (Ginger Society Admin) fix: dockerfile
-	
- - [2584332ef7](https://github.com/ginger-society/dev-portal-frontend2584332ef7b51dd75a24d024c78cd723cb3ac545) (Ginger Society Admin) fix: error handling when switching the workspace
-	
- - [ed86d8683b](https://github.com/ginger-society/dev-portal-frontended86d8683b18cce31ac82e3dea6254ba52224385) (Ginger Society Admin) fix: pipeline fixes
-	
- - [ecd014375c](https://github.com/ginger-society/dev-portal-frontendecd014375c27c39fa7a12054c1cd5b3f6b190325) (Ginger Society Admin) fix: minor changes
-	
- - [39ebfddc53](https://github.com/ginger-society/dev-portal-frontend39ebfddc53099b2b93f40244ea35b3fbab882189) (Ginger Society Admin) fix: build
-	
- - [ee3b16b61e](https://github.com/ginger-society/dev-portal-frontendee3b16b61ed93194751c4635d30f1f71fd556d86) (Ginger Society Admin) fix: updated logic to navigate to home
-	
 ## 0.12.0-nightly.0 - 2024-08-21
 chore:
  - [4297899756](https://github.com/ginger-society/dev-portal-frontend4297899756fa4179cfd6b2ca69d36bbdfb4c5fc2) (Ginger Society Admin) chore: version bump to 0.12.0-nightly.0
@@ -132,15 +134,15 @@ chore:
  - [37f681510d](https://github.com/ginger-society/dev-portal-frontend37f681510d4434f906e4b482468724f4dba4a634) (Ginger Society Admin) chore: version bump to 0.11.0-nightly.0
 	
 ## 0.10.0-nightly.0 - 2024-08-20
+chore:
+ - [c757fe9cac](https://github.com/ginger-society/dev-portal-frontendc757fe9cacdb5f047c59768b97ab86df9e4a5685) (Ginger Society Admin) chore: version bump to 0.10.0-nightly.0
+	
 feat:
  - [887ca4953f](https://github.com/ginger-society/dev-portal-frontend887ca4953fa2a4117e9eb48f1b3d3da4a45ceff9) (Ginger Society Admin) feat: danger color for the failed pipeline block
 	
  - [431f208cb5](https://github.com/ginger-society/dev-portal-frontend431f208cb57623c75acf5cf316e2959fae910b9c) (Ginger Society Admin) feat: added pipeline status
 	
  - [88144add68](https://github.com/ginger-society/dev-portal-frontend88144add6810ed75f9907958cdaa5cfde83725cd) (Ginger Society Admin) feat: added pkg_version model changes and sample changelog
-	
-chore:
- - [c757fe9cac](https://github.com/ginger-society/dev-portal-frontendc757fe9cacdb5f047c59768b97ab86df9e4a5685) (Ginger Society Admin) chore: version bump to 0.10.0-nightly.0
 	
 ## 0.9.0-nightly.0 - 2024-08-15
 chore:
@@ -149,6 +151,42 @@ chore:
  - [3170872fa8](https://github.com/ginger-society/dev-portal-frontend3170872fa8d09bfc86f24de5a0131377980743ed) (Ginger Society Admin) chore: cleanup
 	
 ## 0.8.0-nightly.0 - 2024-08-15
+chore:
+ - [0bad136f8b](https://github.com/ginger-society/dev-portal-frontend0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
+	
+ - [562bbb7bc7](https://github.com/ginger-society/dev-portal-frontend562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
+	
+ - [e5ed93702a](https://github.com/ginger-society/dev-portal-frontende5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
+	
+ - [f169156d18](https://github.com/ginger-society/dev-portal-frontendf169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
+	
+ - [b0464ac2c1](https://github.com/ginger-society/dev-portal-frontendb0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
+	
+fix:
+ - [0648d5a120](https://github.com/ginger-society/dev-portal-frontend0648d5a120d9008ea641115dd0943b337b29c4a4) (Ginger Society Admin) fix: build fixes
+	
+ - [7ab74644e4](https://github.com/ginger-society/dev-portal-frontend7ab74644e4562a81703ca949e07559e17639cc5b) (Ginger Society Admin) fix: linting issue
+	
+ - [e7f0fe1c32](https://github.com/ginger-society/dev-portal-frontende7f0fe1c327bdff5cc013a696334a93ffd6ff3ac) (Ginger Society Admin) fix: config update
+	
+ - [622acd92a9](https://github.com/ginger-society/dev-portal-frontend622acd92a9ec9a86bb31ffb3c0f8670bb23a91af) (Ginger Society Admin) fix: updated dbschema modal window title for edit mode
+	
+ - [e2797ed034](https://github.com/ginger-society/dev-portal-frontende2797ed034e73c29de68e6c13e1fd3bebcae82a2) (Ginger Society Admin) fix: pipeline fixes - added connector in the docker image
+	
+ - [4f707e6d59](https://github.com/ginger-society/dev-portal-frontend4f707e6d593fd7e83ec78c120e41751e2ea6aebc) (Ginger Society Admin) fix: url fixes
+	
+ - [2bb97b9557](https://github.com/ginger-society/dev-portal-frontend2bb97b95570c7d89c1abf6d77478a866be8a0730) (Ginger Society Admin) fix: workflow
+	
+ - [75365db6f2](https://github.com/ginger-society/dev-portal-frontend75365db6f2056b98f4c0516905390ccad0a9713c) (Ginger Society Admin) fix: workflow
+	
+ - [4020ade610](https://github.com/ginger-society/dev-portal-frontend4020ade610a9f13d1136444d1d80ee6f50aa6ae2) (Ginger Society Admin) fix: workflow fixes
+	
+ - [09a8fd9575](https://github.com/ginger-society/dev-portal-frontend09a8fd9575fb54e9db76848ba9572783dbc7d679) (Ginger Society Admin) fix: navigation
+	
+ - [6b8f8779eb](https://github.com/ginger-society/dev-portal-frontend6b8f8779ebbd31ad0650b68f6816aeea34effd45) (Ginger Society Admin) fix: legend label correction
+	
+ - [e6ea2148a5](https://github.com/ginger-society/dev-portal-frontende6ea2148a5e3101000a4571136b78c7f25e212d3) (Ginger Society Admin) fix: minor css fixes
+	
 feat:
  - [4a06c74c3b](https://github.com/ginger-society/dev-portal-frontend4a06c74c3bb4b0999bb9ca871b2ca66c50d4a51d) (Ginger Society Admin) feat: cleanup
 	
@@ -206,53 +244,7 @@ feat:
 	
  - [efdb6ee10c](https://github.com/ginger-society/dev-portal-frontendefdb6ee10c5107b2eb5ce7b231b60eceed3b4954) (Ginger Society Admin) feat: icons change
 	
-fix:
- - [0648d5a120](https://github.com/ginger-society/dev-portal-frontend0648d5a120d9008ea641115dd0943b337b29c4a4) (Ginger Society Admin) fix: build fixes
-	
- - [7ab74644e4](https://github.com/ginger-society/dev-portal-frontend7ab74644e4562a81703ca949e07559e17639cc5b) (Ginger Society Admin) fix: linting issue
-	
- - [e7f0fe1c32](https://github.com/ginger-society/dev-portal-frontende7f0fe1c327bdff5cc013a696334a93ffd6ff3ac) (Ginger Society Admin) fix: config update
-	
- - [622acd92a9](https://github.com/ginger-society/dev-portal-frontend622acd92a9ec9a86bb31ffb3c0f8670bb23a91af) (Ginger Society Admin) fix: updated dbschema modal window title for edit mode
-	
- - [e2797ed034](https://github.com/ginger-society/dev-portal-frontende2797ed034e73c29de68e6c13e1fd3bebcae82a2) (Ginger Society Admin) fix: pipeline fixes - added connector in the docker image
-	
- - [4f707e6d59](https://github.com/ginger-society/dev-portal-frontend4f707e6d593fd7e83ec78c120e41751e2ea6aebc) (Ginger Society Admin) fix: url fixes
-	
- - [2bb97b9557](https://github.com/ginger-society/dev-portal-frontend2bb97b95570c7d89c1abf6d77478a866be8a0730) (Ginger Society Admin) fix: workflow
-	
- - [75365db6f2](https://github.com/ginger-society/dev-portal-frontend75365db6f2056b98f4c0516905390ccad0a9713c) (Ginger Society Admin) fix: workflow
-	
- - [4020ade610](https://github.com/ginger-society/dev-portal-frontend4020ade610a9f13d1136444d1d80ee6f50aa6ae2) (Ginger Society Admin) fix: workflow fixes
-	
- - [09a8fd9575](https://github.com/ginger-society/dev-portal-frontend09a8fd9575fb54e9db76848ba9572783dbc7d679) (Ginger Society Admin) fix: navigation
-	
- - [6b8f8779eb](https://github.com/ginger-society/dev-portal-frontend6b8f8779ebbd31ad0650b68f6816aeea34effd45) (Ginger Society Admin) fix: legend label correction
-	
- - [e6ea2148a5](https://github.com/ginger-society/dev-portal-frontende6ea2148a5e3101000a4571136b78c7f25e212d3) (Ginger Society Admin) fix: minor css fixes
-	
-chore:
- - [0bad136f8b](https://github.com/ginger-society/dev-portal-frontend0bad136f8b0b89da39e02c88fcd646072095ff12) (Ginger Society Admin) chore: version bump to 0.8.0-nightly.0
-	
- - [562bbb7bc7](https://github.com/ginger-society/dev-portal-frontend562bbb7bc7adc38214521708a5c7bb90b595722a) (Ginger Society Admin) chore: cleanup and updated app id
-	
- - [e5ed93702a](https://github.com/ginger-society/dev-portal-frontende5ed93702af798bf4af9e4d93eb5a2261ae8def0) (Ginger Society Admin) chore: testing different arc for executable for ginger-connector
-	
- - [f169156d18](https://github.com/ginger-society/dev-portal-frontendf169156d18152dc1cb540abbed7bb08908647786) (Ginger Society Admin) chore: updated urls in services.toml
-	
- - [b0464ac2c1](https://github.com/ginger-society/dev-portal-frontendb0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
-	
 ## 0.7.0-nightly.0 - 2024-07-10
-feat:
- - [f8d08db5e1](https://github.com/ginger-society/dev-portal-frontendf8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
-	
- - [530cab5177](https://github.com/ginger-society/dev-portal-frontend530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
-	
-chore:
- - [57ee5255ae](https://github.com/ginger-society/dev-portal-frontend57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
-	
- - [a432fe66f5](https://github.com/ginger-society/dev-portal-frontenda432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
-	
 fix:
  - [d3448bfbe0](https://github.com/ginger-society/dev-portal-frontendd3448bfbe0a16bb0e4424ce73505a35e14a68593) (Ginger Society Admin) fix: CI script
 	
@@ -260,24 +252,34 @@ fix:
 	
  - [067f1ca9bf](https://github.com/ginger-society/dev-portal-frontend067f1ca9bf30a3fdf4a0770cc2c915b4ac3ea713) (Ginger Society Admin) fix: CI script
 	
+chore:
+ - [57ee5255ae](https://github.com/ginger-society/dev-portal-frontend57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
+	
+ - [a432fe66f5](https://github.com/ginger-society/dev-portal-frontenda432fe66f5d2cf994817a6d8f1f57356f1244917) (Ginger Society Admin) chore: added lint and test in CI
+	
+feat:
+ - [f8d08db5e1](https://github.com/ginger-society/dev-portal-frontendf8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
+	
+ - [530cab5177](https://github.com/ginger-society/dev-portal-frontend530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
+	
 ## 0.6.0-nightly.0 - 2024-07-10
 feat:
  - [54a9646870](https://github.com/ginger-society/dev-portal-frontend54a9646870d64f9ef869ebb6578da772f60af5a1) (Ginger Society Admin) feat: basic css fixex
 	
  - [58ce52c989](https://github.com/ginger-society/dev-portal-frontend58ce52c989b89d65c21183270e8bfd5f49078102) (Ginger Society Admin) feat: code cleanup
 	
-chore:
- - [683a41e68b](https://github.com/ginger-society/dev-portal-frontend683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
-	
 fix:
  - [444ace41d0](https://github.com/ginger-society/dev-portal-frontend444ace41d0e78c360937f19c731837b443307a3a) (Ginger Society Admin) fix: ci branch name change
 	
-## 0.5.0-nightly.0 - 2024-07-10
 chore:
- - [b914ca46db](https://github.com/ginger-society/dev-portal-frontendb914ca46dbb38acfaec8fb1f168db155dfae8467) (Ginger Society Admin) chore: version bump to 0.5.0-nightly.0
+ - [683a41e68b](https://github.com/ginger-society/dev-portal-frontend683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
 	
+## 0.5.0-nightly.0 - 2024-07-10
 fix:
  - [f1ae27a659](https://github.com/ginger-society/dev-portal-frontendf1ae27a65958f9ab5b2f9c33a15319df81006118) (Ginger Society Admin) fix: login page bg color
+	
+chore:
+ - [b914ca46db](https://github.com/ginger-society/dev-portal-frontendb914ca46dbb38acfaec8fb1f168db155dfae8467) (Ginger Society Admin) chore: version bump to 0.5.0-nightly.0
 	
 ## 0.4.0-nightly.0 - 2024-07-10
 chore:
@@ -300,15 +302,6 @@ chore:
  - [0973d65703](https://github.com/ginger-society/dev-portal-frontend0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
-fix:
- - [3c36444e32](https://github.com/ginger-society/dev-portal-frontend3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
-	
- - [ca64399aed](https://github.com/ginger-society/dev-portal-frontendca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
-	
- - [d7700cd1b5](https://github.com/ginger-society/dev-portal-frontendd7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
-	
- - [f9d8110f78](https://github.com/ginger-society/dev-portal-frontendf9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
-	
 chore:
  - [6b7c787df3](https://github.com/ginger-society/dev-portal-frontend6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
 	
@@ -334,4 +327,13 @@ feat:
  - [e73dba3f18](https://github.com/ginger-society/dev-portal-frontende73dba3f1853b731f1388054eae51981defc3d86) (Ginger Society Admin) feat: added erorr message in login page
 	
  - [a4b5a9a038](https://github.com/ginger-society/dev-portal-frontenda4b5a9a038c776a808a38bc0d6aa5d8442f2e183) (Ginger Society Admin) feat: updated seo title
+	
+fix:
+ - [3c36444e32](https://github.com/ginger-society/dev-portal-frontend3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
+	
+ - [ca64399aed](https://github.com/ginger-society/dev-portal-frontendca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
+	
+ - [d7700cd1b5](https://github.com/ginger-society/dev-portal-frontendd7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
+	
+ - [f9d8110f78](https://github.com/ginger-society/dev-portal-frontendf9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
 	
