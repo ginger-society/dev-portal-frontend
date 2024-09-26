@@ -1,3 +1,29 @@
+## 0.14.0-nightly.0 - 2024-09-26
+feat:
+ - [5d36135e0d](https://github.com/ginger-society/dev-portal-frontend5d36135e0dcc13cd4fb4a4c5a920367ec87541b9) (Ginger Society Admin) feat: added snapshot and changelog at org level
+	
+ - [f37a2db32a](https://github.com/ginger-society/dev-portal-frontendf37a2db32af06073876e5bc166ac9c206df50df2) (Ginger Society Admin) feat: updated apis to use user land versions
+	
+ - [c0113abfde](https://github.com/ginger-society/dev-portal-frontendc0113abfde17a0ed94769444441ba3eee61efe7a) (Ginger Society Admin) feat: added globe icon
+	
+ - [f9c77018db](https://github.com/ginger-society/dev-portal-frontendf9c77018dbdf7581b8c17678eecf4ee291a05f35) (Ginger Society Admin) feat: added rust icon
+	
+ - [6ae22d99c7](https://github.com/ginger-society/dev-portal-frontend6ae22d99c73404f830170ebcbac2b2d6c9b79849) (Ginger Society Admin) feat: added links for on public view of sys design
+	
+ - [4f78355b3b](https://github.com/ginger-society/dev-portal-frontend4f78355b3b7b7884a7e945fbdaee290bc24ba51d) (Ginger Society Admin) feat: added npm icon
+	
+ - [02dfcfef07](https://github.com/ginger-society/dev-portal-frontend02dfcfef07bfddd2fb92ea326921aefeea790240) (Ginger Society Admin) feat: added link in metadata and updated icons
+	
+ - [97b26f362c](https://github.com/ginger-society/dev-portal-frontend97b26f362c7cf8d2a08de067715eff9b228d81a7) (Ginger Society Admin) feat: version fix for saas
+	
+ - [7f1f0fb982](https://github.com/ginger-society/dev-portal-frontend7f1f0fb98215e08a4029b1e0a22a9d6ef305b3d2) (Ginger Society Admin) feat: added quick links for pkg
+	
+chore:
+ - [eb01ec8d2b](https://github.com/ginger-society/dev-portal-frontendeb01ec8d2be9d3954adc20320e9741ac47022518) (Ginger Society Admin) chore: minor cosmetic
+	
+fix:
+ - [55033f110b](https://github.com/ginger-society/dev-portal-frontend55033f110b1f4074e3ec51e6f5deff99720f870d) (Ginger Society Admin) fix: changed yarn to pnpm
+	
 ## 0.13.0-nightly.0 - 2024-09-19
 feat:
  - [9719a241c2](https://github.com/ginger-society/dev-portal-frontend9719a241c2eb098227e912e9494bf568c5461066) (Ginger Society Admin) feat: added quick links for db schema
@@ -63,6 +89,8 @@ feat:
  - [e83da3a409](https://github.com/ginger-society/dev-portal-frontende83da3a40958d365cd24fbac020b78bd8741dd8d) (Ginger Society Admin) feat: added workspace switcher, manager and settings components
 	
 chore:
+ - [57631ed8f0](https://github.com/ginger-society/dev-portal-frontend57631ed8f0a6ddad96ffddc5ada9ce4038a53e25) (Ginger Society Admin) chore: version bump to 0.13.0-nightly.0
+	
  - [1529e1c5a1](https://github.com/ginger-society/dev-portal-frontend1529e1c5a11cc10ed17e51e4240851baaf75533f) (Ginger Society Admin) chore: minor css changes
 	
  - [32f78be36d](https://github.com/ginger-society/dev-portal-frontend32f78be36d46388debfb935bc12379615b7f4895) (Ginger Society Admin) chore: minor cosmetic changes
@@ -215,6 +243,11 @@ chore:
  - [b0464ac2c1](https://github.com/ginger-society/dev-portal-frontendb0464ac2c176f062cd711e671baf8550422014c3) (Ginger Society Admin) chore: readme revert
 	
 ## 0.7.0-nightly.0 - 2024-07-10
+feat:
+ - [f8d08db5e1](https://github.com/ginger-society/dev-portal-frontendf8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
+	
+ - [530cab5177](https://github.com/ginger-society/dev-portal-frontend530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
+	
 chore:
  - [57ee5255ae](https://github.com/ginger-society/dev-portal-frontend57ee5255ae73977770722f0bbef405ff2ca82042) (Ginger Society Admin) chore: version bump to 0.7.0-nightly.0
 	
@@ -227,29 +260,24 @@ fix:
 	
  - [067f1ca9bf](https://github.com/ginger-society/dev-portal-frontend067f1ca9bf30a3fdf4a0770cc2c915b4ac3ea713) (Ginger Society Admin) fix: CI script
 	
-feat:
- - [f8d08db5e1](https://github.com/ginger-society/dev-portal-frontendf8d08db5e1f1138bf7637b3722a22bda823d0351) (Ginger Society Admin) feat: icon change and minor css changes
-	
- - [530cab5177](https://github.com/ginger-society/dev-portal-frontend530cab517724da87fd5a0dcf719d6414357d26ab) (Ginger Society Admin) feat: updated field type icons
-	
 ## 0.6.0-nightly.0 - 2024-07-10
-fix:
- - [444ace41d0](https://github.com/ginger-society/dev-portal-frontend444ace41d0e78c360937f19c731837b443307a3a) (Ginger Society Admin) fix: ci branch name change
-	
-chore:
- - [683a41e68b](https://github.com/ginger-society/dev-portal-frontend683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
-	
 feat:
  - [54a9646870](https://github.com/ginger-society/dev-portal-frontend54a9646870d64f9ef869ebb6578da772f60af5a1) (Ginger Society Admin) feat: basic css fixex
 	
  - [58ce52c989](https://github.com/ginger-society/dev-portal-frontend58ce52c989b89d65c21183270e8bfd5f49078102) (Ginger Society Admin) feat: code cleanup
 	
-## 0.5.0-nightly.0 - 2024-07-10
-fix:
- - [f1ae27a659](https://github.com/ginger-society/dev-portal-frontendf1ae27a65958f9ab5b2f9c33a15319df81006118) (Ginger Society Admin) fix: login page bg color
+chore:
+ - [683a41e68b](https://github.com/ginger-society/dev-portal-frontend683a41e68b970c059a4cb57febb0f3be5843e610) (Ginger Society Admin) chore: version bump to 0.6.0-nightly.0
 	
+fix:
+ - [444ace41d0](https://github.com/ginger-society/dev-portal-frontend444ace41d0e78c360937f19c731837b443307a3a) (Ginger Society Admin) fix: ci branch name change
+	
+## 0.5.0-nightly.0 - 2024-07-10
 chore:
  - [b914ca46db](https://github.com/ginger-society/dev-portal-frontendb914ca46dbb38acfaec8fb1f168db155dfae8467) (Ginger Society Admin) chore: version bump to 0.5.0-nightly.0
+	
+fix:
+ - [f1ae27a659](https://github.com/ginger-society/dev-portal-frontendf1ae27a65958f9ab5b2f9c33a15319df81006118) (Ginger Society Admin) fix: login page bg color
 	
 ## 0.4.0-nightly.0 - 2024-07-10
 chore:
@@ -259,11 +287,11 @@ chore:
 chore:
  - [8ab70b9060](https://github.com/ginger-society/dev-portal-frontend8ab70b906018cb09f4b6e76d879a8f1dad11f312) (Ginger Society Admin) chore: version bump to 0.3.0-nightly.0
 	
-fix:
- - [c74494cc0b](https://github.com/ginger-society/dev-portal-frontendc74494cc0b9da538aafe2d9088edbd038a7a0fe9) (Ginger Society Admin) fix: dark and light theme for login page
-	
 feat:
  - [951c148cf8](https://github.com/ginger-society/dev-portal-frontend951c148cf8cef65b2588bf046769578fc694722c) (Ginger Society Admin) feat: updated login page to use ginger-ui and removed form control classes
+	
+fix:
+ - [c74494cc0b](https://github.com/ginger-society/dev-portal-frontendc74494cc0b9da538aafe2d9088edbd038a7a0fe9) (Ginger Society Admin) fix: dark and light theme for login page
 	
 ## 0.2.0-nightly.0 - 2024-07-08
 chore:
@@ -272,6 +300,22 @@ chore:
  - [0973d65703](https://github.com/ginger-society/dev-portal-frontend0973d657036f55a35a66b8e4cec0887eb66fc303) (Ginger Society Admin) chore: adding changelog to git
 	
 ## 0.1.0-nightly.0 - 2024-07-08
+fix:
+ - [3c36444e32](https://github.com/ginger-society/dev-portal-frontend3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
+	
+ - [ca64399aed](https://github.com/ginger-society/dev-portal-frontendca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
+	
+ - [d7700cd1b5](https://github.com/ginger-society/dev-portal-frontendd7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
+	
+ - [f9d8110f78](https://github.com/ginger-society/dev-portal-frontendf9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
+	
+chore:
+ - [6b7c787df3](https://github.com/ginger-society/dev-portal-frontend6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
+	
+ - [e1b3c7f90e](https://github.com/ginger-society/dev-portal-frontende1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
+	
+ - [d7594d12a8](https://github.com/ginger-society/dev-portal-frontendd7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
+	
 feat:
  - [3f63f4983e](https://github.com/ginger-society/dev-portal-frontend3f63f4983e70ea21f152ed1299fad8e3482569f9) (Ginger Society Admin) feat: added releaser support
 	
@@ -290,20 +334,4 @@ feat:
  - [e73dba3f18](https://github.com/ginger-society/dev-portal-frontende73dba3f1853b731f1388054eae51981defc3d86) (Ginger Society Admin) feat: added erorr message in login page
 	
  - [a4b5a9a038](https://github.com/ginger-society/dev-portal-frontenda4b5a9a038c776a808a38bc0d6aa5d8442f2e183) (Ginger Society Admin) feat: updated seo title
-	
-fix:
- - [3c36444e32](https://github.com/ginger-society/dev-portal-frontend3c36444e329dd59aab80e45a51c0a9b713734db3) (Ginger Society Admin) fix: dark theme fix for create schema modal
-	
- - [ca64399aed](https://github.com/ginger-society/dev-portal-frontendca64399aed472db6e9338c62be9438a91ed2d09b) (Ginger Society Admin) fix: logout button in header
-	
- - [d7700cd1b5](https://github.com/ginger-society/dev-portal-frontendd7700cd1b5a0333dd9d9ea0180eb769b145edc4d) (Ginger Society Admin) fix: updated error message
-	
- - [f9d8110f78](https://github.com/ginger-society/dev-portal-frontendf9d8110f78c289cb2e137ed045860e7465799d9d) (Ginger Society Admin) fix: build fixes
-	
-chore:
- - [6b7c787df3](https://github.com/ginger-society/dev-portal-frontend6b7c787df35247f6878bbe4151f997d4250780ee) (Ginger Society Admin) chore: version bump to 0.1.0-nightly.0
-	
- - [e1b3c7f90e](https://github.com/ginger-society/dev-portal-frontende1b3c7f90ee8366bbf2fc910742885d07279d390) (Ginger Society Admin) chore: updated favicon
-	
- - [d7594d12a8](https://github.com/ginger-society/dev-portal-frontendd7594d12a8fec807eb25f4e4e12b53956d0bd93e) (Ginger Society Admin) chore: first commit
 	

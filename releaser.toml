@@ -1,7 +1,11 @@
+[settings]
+git_url_prefix = "https://github.com/ginger-society/dev-portal-frontend"
+take_snapshots = false
+
 [version]
 channel = "Nightly"
 major = 0
-minor = 13
+minor = 14
 patch = 0
 revision = 0
 
@@ -14,6 +18,3 @@ variable = "version"
 file_name = "src/shared/version.json"
 output_type = "String"
 variable = "version"
-
-[settings]
-git_url_prefix = "https://github.com/ginger-society/dev-portal-frontend"
