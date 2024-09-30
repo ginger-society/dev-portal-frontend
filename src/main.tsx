@@ -7,6 +7,7 @@ import { AuthProvider } from "./shared/AuthContext";
 import router from "./shared/router";
 import { SnackbarProvider } from "@ginger-society/ginger-ui";
 import { WorkspaceProvider } from "./components/organisms/WorkspaceSwitcher/WorkspaceContext";
+import { NotificationProvider } from "./shared/NotificationContext";
 
 const rootElement = document.querySelector('[data-js="root"]') as HTMLElement;
 
@@ -17,10 +18,12 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 root.render(
   <AuthProvider>
-    <WorkspaceProvider>
-      <SnackbarProvider>
-        <RouterProvider router={router} />
-      </SnackbarProvider>
-    </WorkspaceProvider>
+    <NotificationProvider>
+      <WorkspaceProvider>
+        <SnackbarProvider>
+          <RouterProvider router={router} />
+        </SnackbarProvider>
+      </WorkspaceProvider>
+    </NotificationProvider>
   </AuthProvider>
 );

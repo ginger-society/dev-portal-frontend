@@ -11,6 +11,8 @@ import {
   WorkspaceSettingsDeletePage,
 } from "@/pages/WorkspaceSettingsView";
 
+import ExampleComponent from "@/pages/ExamplePage";
+
 const AuthenticatedEditor = withAuthHOC(Editor);
 const AuthenticatedSwaggerViewPage = withAuthHOC(SwaggerViewPage);
 const AuthenticatedSysDesignView = withAuthHOC(SysDesignView);
@@ -71,6 +73,10 @@ const router = createHashRouter([
   {
     path: "/handle-auth/:access_token/:refresh_token",
     element: <HandleNavigation />,
+  },
+  {
+    path: "/example",
+    element: <ExampleComponent />,
   },
 ]);
 
