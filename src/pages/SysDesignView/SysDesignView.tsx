@@ -1,4 +1,4 @@
-import React, { useEffect, useState, version } from "react";
+import React, { useContext, useEffect, useState, version } from "react";
 import {
   FaBox,
   FaServer,
@@ -68,6 +68,7 @@ import {
   SnapshotsResponse,
   WorkspaceSummary,
 } from "@/services/MetadataService_client";
+import { NotificationContext } from "@/shared/NotificationContext";
 
 export const IconsMap = {
   FaCodeBranch,
@@ -488,6 +489,15 @@ const SysDesignView = () => {
     }
   };
 
+  const { subscribeToTopic } = useContext(NotificationContext);
+  useEffect(() => {
+    subscribeToTopic("pipeline-update", (msg: any) => {
+      console.log("Received message for pipeline-update:", msg);
+      // Handle the message here
+      loadLayout();
+    });
+  }, [subscribeToTopic, loadLayout]);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -701,3 +711,6 @@ const SysDesignView = () => {
 };
 
 export default SysDesignView;
+function subscribeToTopic(arg0: string, arg1: (msg: any) => void) {
+  throw new Error("Function not implemented.");
+}
