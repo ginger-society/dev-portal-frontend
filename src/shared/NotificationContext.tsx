@@ -82,7 +82,7 @@ export const NotificationProvider = ({
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user, channel]);
 
   const subscribeToTopic = (topic: string, callback: (msg: any) => void) => {
     subscriptions.current[topic] = callback;
