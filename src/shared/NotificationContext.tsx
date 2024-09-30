@@ -81,7 +81,7 @@ export const NotificationProvider = ({
         ws.close();
       }
     };
-  }, [channel, user]);
+  }, [channel, isConnected, user]);
 
   const subscribeToTopic = (topic: string, callback: (msg: any) => void) => {
     subscriptions.current[topic] = callback;
