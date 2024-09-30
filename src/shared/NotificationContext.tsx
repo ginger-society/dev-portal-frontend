@@ -25,7 +25,6 @@ export const NotificationProvider = ({
 }: NotificationProviderProps) => {
   const { user } = useContext(AuthContext);
   const subscriptions = useRef<{ [topic: string]: (msg: any) => void }>({});
-  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     if (!user && !channel) {
@@ -33,7 +32,6 @@ export const NotificationProvider = ({
     }
 
     let ws: WebSocket | null = null;
-    let retryTimeout: number | null = null;
     const accessToken = localStorage.getItem("access_token");
     const websocketChannel = channel || user?.userId;
 
@@ -46,7 +44,6 @@ export const NotificationProvider = ({
 
         ws.onopen = () => {
           console.log("WebSocket connection established.");
-          setRetryCount(0); // Reset retry count on success
         };
 
         ws.onmessage = (event) => {
@@ -60,19 +57,16 @@ export const NotificationProvider = ({
 
         ws.onerror = (error) => {
           console.error("WebSocket error:", error);
-          if (retryTimeout) {
-            clearTimeout(retryTimeout);
-          }
+          setTimeout(() => {
+            connectWebSocket();
+          }, 5000); // Exponential backoff
         };
 
         ws.onclose = () => {
-          console.log("WebSocket connection closed. Retrying...");
-          if (retryCount < 5) {
-            retryTimeout = setTimeout(() => {
-              setRetryCount((prevCount) => prevCount + 1);
-              connectWebSocket();
-            }, 2000 * retryCount); // Exponential backoff
-          }
+          console.log("WebSocket connection closed. Retrying after 5 seconds");
+          setTimeout(() => {
+            connectWebSocket();
+          }, 5000); // Exponential backoff
         };
       }
     };
@@ -83,11 +77,8 @@ export const NotificationProvider = ({
       if (ws) {
         ws.close();
       }
-      if (retryTimeout) {
-        clearTimeout(retryTimeout);
-      }
     };
-  }, [channel, user, retryCount]);
+  }, [channel, user]);
 
   const subscribeToTopic = (topic: string, callback: (msg: any) => void) => {
     subscriptions.current[topic] = callback;
