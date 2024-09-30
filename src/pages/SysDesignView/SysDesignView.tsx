@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, version } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  version,
+} from "react";
 import {
   FaBox,
   FaServer,
@@ -179,7 +185,7 @@ const SysDesignView = () => {
     }
   };
 
-  const fetchAndProcessSystemDesign = async (): Promise<{
+  const fetchAndProcessSystemDesign = useCallback(async (): Promise<{
     [key: string]: Block;
   }> => {
     const blocks: { [key: string]: Block } = {};
@@ -437,9 +443,9 @@ const SysDesignView = () => {
     }
 
     return blocks;
-  };
+  }, [env, org_id]);
 
-  const loadLayout = async () => {
+  const loadLayout = useCallback(async () => {
     if (!org_id) {
       return;
     }
@@ -473,7 +479,7 @@ const SysDesignView = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [fetchAndProcessSystemDesign, org_id]);
 
   useEffect(() => {
     loadLayout();
