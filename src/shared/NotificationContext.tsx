@@ -36,7 +36,7 @@ export const NotificationProvider = ({
     const accessToken = localStorage.getItem("access_token");
     const websocketChannel = channel || user?.userId;
 
-    const connectWebSocket = () => {
+    function connectWebSocket() {
       if (websocketChannel && accessToken && !isConnected) {
         ws = new WebSocket(
           `wss://api-staging.gingersociety.org/notification/ws/${websocketChannel}?token=${accessToken}`
@@ -72,7 +72,7 @@ export const NotificationProvider = ({
           }, 5000);
         };
       }
-    };
+    }
 
     connectWebSocket();
 
@@ -81,7 +81,8 @@ export const NotificationProvider = ({
         ws.close();
       }
     };
-  }, [channel, isConnected, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const subscribeToTopic = (topic: string, callback: (msg: any) => void) => {
     subscriptions.current[topic] = callback;
