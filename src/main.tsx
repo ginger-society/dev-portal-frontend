@@ -18,7 +18,7 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 root.render(
   <AuthProvider>
-    <NotificationProvider>
+    <NotificationProvider channel="public-notifications">
       <WorkspaceProvider>
         <SnackbarProvider>
           <RouterProvider router={router} />
