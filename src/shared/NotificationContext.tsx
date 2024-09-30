@@ -25,6 +25,7 @@ export const NotificationProvider = ({
 }: NotificationProviderProps) => {
   const { user } = useContext(AuthContext);
   const subscriptions = useRef<{ [topic: string]: (msg: any) => void }>({});
+  const [isConnected, setIsConnected] = useState<boolean>(false);
 
   useEffect(() => {
     if (!user && !channel) {
@@ -36,14 +37,14 @@ export const NotificationProvider = ({
     const websocketChannel = channel || user?.userId;
 
     const connectWebSocket = () => {
-      if (websocketChannel && accessToken) {
-        console.log(ws);
+      if (websocketChannel && accessToken && !isConnected) {
         ws = new WebSocket(
           `wss://api-staging.gingersociety.org/notification/ws/${websocketChannel}?token=${accessToken}`
         );
 
         ws.onopen = () => {
           console.log("WebSocket connection established.");
+          setIsConnected(true);
         };
 
         ws.onmessage = (event) => {
@@ -56,17 +57,19 @@ export const NotificationProvider = ({
         };
 
         ws.onerror = (error) => {
-          console.error("WebSocket error:", error);
+          console.error("WebSocket error: ,  Retrying after 5 seconds", error);
+          setIsConnected(false);
           setTimeout(() => {
             connectWebSocket();
-          }, 5000); // Exponential backoff
+          }, 5000);
         };
 
         ws.onclose = () => {
           console.log("WebSocket connection closed. Retrying after 5 seconds");
+          setIsConnected(false);
           setTimeout(() => {
             connectWebSocket();
-          }, 5000); // Exponential backoff
+          }, 5000);
         };
       }
     };
