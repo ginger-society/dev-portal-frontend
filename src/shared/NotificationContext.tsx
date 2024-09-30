@@ -59,6 +59,9 @@ export const NotificationProvider = ({
 
         ws.onerror = (error) => {
           console.error("WebSocket error:", error);
+          if (retryTimeout) {
+            clearTimeout(retryTimeout);
+          }
         };
 
         ws.onclose = () => {

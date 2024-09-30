@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderI) => {
         setIsAuthenticated(true);
         setUser(userData);
         setLoading(false);
+        router.navigate("/manage-workspaces");
       } catch (e) {
         setUser(null);
         location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login`;
