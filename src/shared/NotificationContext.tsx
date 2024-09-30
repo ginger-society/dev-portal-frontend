@@ -39,6 +39,7 @@ export const NotificationProvider = ({
 
     const connectWebSocket = () => {
       if (websocketChannel && accessToken) {
+        console.log(ws);
         ws = new WebSocket(
           `wss://api-staging.gingersociety.org/notification/ws/${websocketChannel}?token=${accessToken}`
         );
