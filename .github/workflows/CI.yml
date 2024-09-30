@@ -36,7 +36,6 @@ jobs:
             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
             --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }} \
-            --load
 
       - name: Update pipeline to passing
         run: ginger-connector update-pipeline stage passing
