@@ -31,6 +31,7 @@ import {
   FaDatabase,
   FaDesktop,
   FaEllipsisV,
+  FaEnvelopeOpenText,
   FaGithub,
   FaInfoCircle,
   FaLayerGroup,
@@ -342,6 +343,9 @@ const SysDesignWrapper = ({
                     {blockData.data.type === "executable" && <FaTerminal />}
                     {blockData.data.type === "Portal" && <FaDesktop />}
                     {blockData.data.type === "cache" && <FaLayerGroup />}
+                    {blockData.data.type === "messageQueue" && (
+                      <FaEnvelopeOpenText />
+                    )}
                     <button
                       onClick={() => openReadme(blockData.data.repo_origin)}
                     >

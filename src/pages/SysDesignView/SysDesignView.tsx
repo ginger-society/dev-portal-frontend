@@ -117,6 +117,7 @@ const blockColorMap = {
   Portal: "#1A4870",
   library: "#1A4870",
   Cache: "#6e46c0",
+  MessageQueue: "#2E4053",
 };
 
 export const shadowClassMap: { [key: string]: string } = {
@@ -279,7 +280,7 @@ const SysDesignView = () => {
             type: BlockType.SystemBlock,
             position: { top: 100, left: 100 },
           };
-        } else {
+        } else if (schema.dbType === "cache") {
           blocks[schema.identifier] = {
             id: schema.identifier,
             ref: React.createRef(),
@@ -292,6 +293,34 @@ const SysDesignView = () => {
                 schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
 
               color: blockColorMap.Cache,
+              version: schema.version,
+              pipeline_status: schema.pipelineStatus,
+              repo_origin: schema.repoOrigin,
+              projectOptions: schema.quickLinks
+                ? JSON.parse(schema.quickLinks).map((link: any) => {
+                    return {
+                      ...link,
+                      Icon: IconsMap[link.icon as keyof IconType],
+                    };
+                  })
+                : null,
+            },
+            rows: [],
+            type: BlockType.SystemBlock,
+            position: { top: 100, left: 100 },
+          };
+        } else {
+          blocks[schema.identifier] = {
+            id: schema.identifier,
+            ref: React.createRef(),
+            data: {
+              name: schema.name,
+              type: "messagequeue",
+              description: schema.description,
+              blinkClass:
+                schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
+
+              color: blockColorMap.MessageQueue,
               version: schema.version,
               pipeline_status: schema.pipelineStatus,
               repo_origin: schema.repoOrigin,
@@ -717,6 +746,3 @@ const SysDesignView = () => {
 };
 
 export default SysDesignView;
-function subscribeToTopic(arg0: string, arg1: (msg: any) => void) {
-  throw new Error("Function not implemented.");
-}
