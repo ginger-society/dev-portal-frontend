@@ -200,6 +200,15 @@ const SysDesignWrapper = ({
           label: ``,
         });
       }
+      if (block.data.messageQueueSchemaId) {
+        connections.push({
+          block1Id: key,
+          block2Id: block.data.messageQueueSchemaId,
+          fromRow: -1,
+          toRow: -1,
+          label: ``,
+        });
+      }
     });
 
     setConnections(connections);

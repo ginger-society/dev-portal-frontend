@@ -413,6 +413,35 @@ const SysDesignView = () => {
           },
         });
       }
+      if (service.messageQueueSchemaId) {
+        rows.push({
+          id: `${service.messageQueueSchemaId}`,
+          data: {
+            heading: (
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <FaDatabase /> Message Queue
+              </div>
+            ),
+            list: [],
+            description: (
+              <div style={{ display: "flex", gap: "5px" }}>
+                Uses
+                <strong>
+                  {
+                    dbSchemas.find(
+                      (schema) =>
+                        schema.identifier === service.messageQueueSchemaId
+                    )?.name
+                  }
+                </strong>
+                as Message Queue
+              </div>
+            ),
+          },
+        });
+      }
 
       const pipeline_status = service.envs.find(
         (s) => s.envKey === env
@@ -428,6 +457,7 @@ const SysDesignView = () => {
           dependencies: service.dependencies,
           dbSchemaId: service.dbSchemaId,
           cacheSchemaId: service.cacheSchemaId,
+          messageQueueSchemaId: service.messageQueueSchemaId,
           org_id: service.organizationId,
           repo_origin: service.repoOrigin,
           blinkClass: pipeline_status && shadowClassMap[pipeline_status],
