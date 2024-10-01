@@ -148,6 +148,10 @@ const legendConfigs: LegendConfigs = {
     label: "Library",
     color: "#000",
   },
+  [MarkerType.Rectangle3]: {
+    label: "MessageQueue",
+    color: "#2E4053",
+  },
 };
 
 const SysDesignWrapper = ({
@@ -171,6 +175,7 @@ const SysDesignWrapper = ({
     const connections: Connection[] = [];
     Object.keys(blocks).forEach((key) => {
       const block = blocks[key];
+
       if (block.data.dependencies) {
         block.data.dependencies.forEach((dependency: string) => {
           connections.push({
