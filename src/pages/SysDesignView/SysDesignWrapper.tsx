@@ -343,7 +343,7 @@ const SysDesignWrapper = ({
                     {blockData.data.type === "executable" && <FaTerminal />}
                     {blockData.data.type === "Portal" && <FaDesktop />}
                     {blockData.data.type === "cache" && <FaLayerGroup />}
-                    {blockData.data.type === "messageQueue" && (
+                    {blockData.data.type === "messagequeue" && (
                       <FaEnvelopeOpenText />
                     )}
                     <button
