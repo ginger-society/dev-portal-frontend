@@ -482,7 +482,11 @@ const SysDesignView = () => {
         position: { top: 100, left: 100 },
       };
     });
+    updateOverallStatus(blocks);
+    return blocks;
+  }, [env, org_id]);
 
+  const updateOverallStatus = (blocks: { [key: string]: Block }) => {
     const statuses = Object.keys(blocks).reduce(
       (allStatuses: string[], key) => {
         return [...allStatuses, blocks[key].data.pipeline_status];
@@ -503,9 +507,7 @@ const SysDesignView = () => {
       setPipeline_status("Passing");
       setPipeline_status_color(TextColor.Success);
     }
-
-    return blocks;
-  }, [env, org_id]);
+  };
 
   const loadLayout = useCallback(async () => {
     if (!org_id) {
@@ -561,8 +563,21 @@ const SysDesignView = () => {
   useEffect(() => {
     subscribeToTopic("pipeline-update", (msg: any) => {
       console.log("Received message for pipeline-update:", msg);
-      // Handle the message here
-      loadLayout();
+      setBlocks((v) => {
+        const updatedBlocks = {
+          ...v,
+          [msg.identifier]: {
+            ...v[msg.identifier],
+            data: {
+              ...v[msg.identifier].data,
+              pipeline_status: msg.status,
+              blinkClass: shadowClassMap[msg.status],
+            },
+          },
+        };
+        updateOverallStatus(updatedBlocks);
+        return updatedBlocks;
+      });
     });
   }, [subscribeToTopic, loadLayout]);
 

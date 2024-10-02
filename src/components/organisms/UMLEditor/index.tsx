@@ -271,7 +271,7 @@ const UMLEditor = ({
                     row.data.type !== ColumnType.PK ? "hoverable" : ""
                   }`}
                 >
-                  <RowRenderer rowData={row} />
+                  <RowRenderer key={index} rowData={row} />
                 </div>
               ))}
               {block.type === BlockType.Table && allowEdit && (

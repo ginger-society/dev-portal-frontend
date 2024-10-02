@@ -320,6 +320,7 @@ const SysDesignWrapper = ({
         connections={connections}
         RowRenderer={({ rowData }) => (
           <div
+            key={rowData.id}
             style={{
               display: "flex",
               flexDirection: "column",
