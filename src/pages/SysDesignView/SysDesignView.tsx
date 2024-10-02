@@ -496,6 +496,9 @@ const SysDesignView = () => {
     } else if (statuses.includes("running")) {
       setPipeline_status("running...");
       setPipeline_status_color(TextColor.Warning);
+    } else if (statuses.includes("waiting")) {
+      setPipeline_status("Waiting...");
+      setPipeline_status_color(TextColor.Warning);
     } else {
       setPipeline_status("Passing");
       setPipeline_status_color(TextColor.Success);
