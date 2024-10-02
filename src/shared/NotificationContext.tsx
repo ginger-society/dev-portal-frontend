@@ -57,19 +57,13 @@ export const NotificationProvider = ({
         };
 
         ws.onerror = (error) => {
-          console.error("WebSocket error: ,  Retrying after 5 seconds", error);
+          console.error("WebSocket error:", error);
           setIsConnected(false);
-          setTimeout(() => {
-            connectWebSocket();
-          }, 5000);
         };
 
         ws.onclose = () => {
-          console.log("WebSocket connection closed. Retrying after 5 seconds");
+          console.log("WebSocket connection closed.");
           setIsConnected(false);
-          setTimeout(() => {
-            connectWebSocket();
-          }, 5000);
         };
       }
     }
