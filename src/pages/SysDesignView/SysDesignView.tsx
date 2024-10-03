@@ -630,6 +630,28 @@ const SysDesignView = () => {
     setMarkdownContent(changelogTxt);
   };
 
+  const openIACReadme = async () => {
+    const repoLink = orgs.find((o) => o.slug === org_id)?.infraRepoOrigin;
+    if (!repoLink) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
+    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
+    const response = await fetch(
+      `${repoLink.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/README.md`
+    );
+    const changelogTxt = await response.text();
+    setMarkdownContent(changelogTxt);
+  };
+
   const navigateToSnapshots = async () => {
     if (!org_id) return;
     const snapshots = await MetadataService.metadataGetSnapshots({
@@ -697,6 +719,7 @@ const SysDesignView = () => {
           </Text>
           <Button label="View changelog" onClick={openOrgChangelog} />
           <Button label="View Snapshots" onClick={navigateToSnapshots} />
+          <Button label="Day 0 handbook" onClick={openIACReadme} />
 
           <Dropdown
             label={
