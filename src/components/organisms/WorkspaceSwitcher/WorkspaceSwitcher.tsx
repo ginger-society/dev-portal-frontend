@@ -4,7 +4,7 @@ import { Button, Dropdown } from "@ginger-society/ginger-ui";
 import router from "@/shared/router";
 import { useParams } from "react-router-dom";
 import { useWorkspaces } from "./WorkspaceContext";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const WorkspaceSwitcher = () => {
   const { org_id } = useParams<{ org_id: string }>();
@@ -19,6 +19,10 @@ const WorkspaceSwitcher = () => {
     router.navigate(`/${workspaceId}/stage`);
   };
 
+  const org_selected = useMemo(() => {
+    return orgs.find((o) => o.slug === org_id);
+  }, [orgs, org_id]);
+
   return (
     <Dropdown
       label={
@@ -26,7 +30,7 @@ const WorkspaceSwitcher = () => {
           label={
             <>
               <FaBuilding />
-              {orgs.find((o) => o.slug === org_id)?.name}
+              {org_selected?.name} @ {org_selected?.version}
             </>
           }
         ></Button>
