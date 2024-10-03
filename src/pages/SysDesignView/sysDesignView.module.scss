@@ -13,3 +13,14 @@
   gap: 10px;
   z-index: 10;
 }
+
+.quick-link-item {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.quick-link-item:hover {
+  background: var(--primary-accent-color);
+}

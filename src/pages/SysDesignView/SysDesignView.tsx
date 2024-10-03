@@ -25,6 +25,12 @@ import {
   FaNpm,
   FaRust,
   FaGlobe,
+  FaCheck,
+  FaExternalLinkAlt,
+  FaDigitalOcean,
+  FaAws,
+  FaDocker,
+  FaPython,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -88,6 +94,10 @@ export const IconsMap = {
   FaNpm,
   FaRust,
   FaGlobe,
+  FaDigitalOcean,
+  FaAws,
+  FaDocker,
+  FaPython,
 };
 
 interface Service {
@@ -553,7 +563,20 @@ const SysDesignView = () => {
   const fetchData = async () => {
     try {
       const response = await MetadataService.metadataGetWorkspaces();
-      setOrgs(response);
+
+      setOrgs(
+        response.map((r) => {
+          return {
+            ...r,
+            quickLinks: JSON.parse(r.quickLinks || "[]").map((l: any) => {
+              return {
+                ...l,
+                icon: IconsMap[l.icon as keyof IconType],
+              };
+            }),
+          };
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -674,6 +697,39 @@ const SysDesignView = () => {
           </Text>
           <Button label="View changelog" onClick={openOrgChangelog} />
           <Button label="View Snapshots" onClick={navigateToSnapshots} />
+
+          <Dropdown
+            label={
+              <Button
+                label={
+                  <>
+                    <FaExternalLinkAlt />
+                    Quick Links
+                  </>
+                }
+              ></Button>
+            }
+            align="left"
+          >
+            <ul>
+              {(
+                (orgs.find((o) => o.slug === org_id)
+                  ?.quickLinks as unknown as any[]) || []
+              ).map((link: any, i: number) => {
+                const Icon = link.icon;
+                return (
+                  <li
+                    onClick={() => window.open(link.link, "_blank")}
+                    key={i}
+                    className={`${styles["quick-link-item"]}`}
+                  >
+                    {<Icon />}
+                    {link.label}
+                  </li>
+                );
+              })}
+            </ul>
+          </Dropdown>
         </div>
       </HeaderContainer>
       <button className={styles["save-layout-btn"]} onClick={toggleLock}>
