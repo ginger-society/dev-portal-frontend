@@ -31,6 +31,7 @@ import {
   FaAws,
   FaDocker,
   FaPython,
+  FaGoogle,
 } from "react-icons/fa";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import {
@@ -98,6 +99,7 @@ export const IconsMap = {
   FaAws,
   FaDocker,
   FaPython,
+  FaGoogle,
 };
 
 interface Service {
