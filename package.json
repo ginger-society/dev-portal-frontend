@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@ginger-society/ginger-ui": "0.47.0",
+    "@ginger-society/ginger-ui": "0.48.0",
     "@types/swagger-ui-react": "^4.18.3",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "^10.4.18",

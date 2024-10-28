@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ginger-society/ginger-ui':
-        specifier: 0.47.0
-        version: 0.47.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.48.0
+        version: 0.48.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/swagger-ui-react':
         specifier: ^4.18.3
         version: 4.18.3
@@ -564,8 +564,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@ginger-society/ginger-ui@0.47.0':
-    resolution: {integrity: sha512-f+w9cmatqnukaTkowinCU4TfRlfQ5QEvzKWlEUDAoM//pSK2NHq+sjZMByIjQ3jwSjdKC1Rm8tk5bQn//mMccg==}
+  '@ginger-society/ginger-ui@0.48.0':
+    resolution: {integrity: sha512-jf9CjSGBbl593ElDwdY8oSIUlbiUvJmUWu+SFRRCAMO7BKNTPioKGPr1Kyw4tIdbHyEuIErwAqMYHgW1I0f+OA==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -5348,7 +5348,7 @@ snapshots:
       - terser
       - typescript
 
-  '@ginger-society/ginger-ui@0.47.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui@0.48.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
