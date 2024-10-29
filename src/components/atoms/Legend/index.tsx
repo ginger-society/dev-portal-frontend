@@ -31,6 +31,8 @@ const LegendItem: React.FC<LegendItemProps> = ({ item, marker }) => {
         return <rect x="0" y="0" width="12" height="12" fill={item.color} />;
       case MarkerType.Rectangle3:
         return <rect x="0" y="0" width="12" height="12" fill={item.color} />;
+      case MarkerType.Rectangle4:
+        return <rect x="0" y="0" width="12" height="12" fill={item.color} />;
       default:
         return null;
     }

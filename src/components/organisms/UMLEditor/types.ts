@@ -9,6 +9,7 @@ export enum MarkerType {
   Pentagon = 'pentagon',
   Rectangle2 = 'rectangle2',
   Rectangle3 = 'rectangle3',
+  Rectangle4 = 'rectangle4',
 }
 
 export interface Row {

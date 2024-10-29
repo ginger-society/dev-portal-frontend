@@ -124,7 +124,7 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
 );
 
 const legendConfigs: LegendConfigs = {
-  [MarkerType.Circle]: {
+  [MarkerType.Rectangle4]: {
     label: "Executable",
     color: "#4793AF",
   },
@@ -178,13 +178,19 @@ const SysDesignWrapper = ({
 
       if (block.data.dependencies) {
         block.data.dependencies.forEach((dependency: string) => {
-          connections.push({
-            block1Id: key,
-            block2Id: dependency.split("/")[1],
-            fromRow: -1,
-            toRow: -1,
-            label: ``,
-          });
+          const existingReverseConnectionIndex = connections.findIndex(conn => conn.block1Id === dependency.split("/")[1] && conn.block2Id === key);
+          if (existingReverseConnectionIndex === -1) {
+            connections.push({
+              block1Id: key,
+              block2Id: dependency.split("/")[1],
+              fromRow: -1,
+              toRow: -1,
+              label: ``,
+            });
+          } else {
+            connections[existingReverseConnectionIndex].marker = MarkerType.Circle;
+            connections[existingReverseConnectionIndex].label = 'circular';
+          }
         });
       }
       if (block.data.dbSchemaId) {
@@ -271,7 +277,6 @@ const SysDesignWrapper = ({
     }
     setIsMarkdownViewerOpen(true);
     setMarkdownContent(undefined);
-    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
     const response = await fetch(
       `${repo_origin.replace(
         "github.com",
