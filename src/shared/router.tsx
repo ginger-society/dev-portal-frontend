@@ -10,7 +10,7 @@ import {
   WorkspaceSettingsMembersPage,
   WorkspaceSettingsDeletePage,
 } from "@/pages/WorkspaceSettingsView";
-
+import { SystemThemePreferred } from '@ginger-society/ginger-ui';
 import ExampleComponent from "@/pages/ExamplePage";
 
 const AuthenticatedEditor = withAuthHOC(Editor);
@@ -44,15 +44,15 @@ const router = createHashRouter([
   },
   {
     path: "/public/:org_id/:env",
-    element: <SysDesignViewPublic />,
+    element: <SystemThemePreferred><SysDesignViewPublic /></SystemThemePreferred>,
   },
   {
     path: "/public/services/swagger/:org_id/:service_identifier/:env_id",
-    element: <SwaggerViewPagePublic />,
+    element: <SystemThemePreferred><SwaggerViewPagePublic /></SystemThemePreferred>,
   },
   {
     path: "/public/editor/:docId/:branch",
-    element: <EditorPublic />,
+    element: <SystemThemePreferred><EditorPublic /></SystemThemePreferred>,
   },
   {
     path: "/manage-workspaces",
