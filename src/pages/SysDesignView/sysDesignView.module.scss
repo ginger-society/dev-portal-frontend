@@ -24,3 +24,14 @@
 .quick-link-item:hover {
   background: var(--primary-accent-color);
 }
+
+.public-view-header{
+  background: var(--primary-bg-color);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+  width:100%;
+  z-index: 1000;
+}

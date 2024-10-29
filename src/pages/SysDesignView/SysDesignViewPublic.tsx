@@ -78,17 +78,17 @@ const SysDesignViewPublic = () => {
             pkg.pipelineStatus === "failed"
               ? "red"
               : pkg.packageType != "library"
-              ? "#4793AF"
-              : null,
+                ? "#4793AF"
+                : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
           projectOptions: pkg.quickLinks
             ? JSON.parse(pkg.quickLinks).map((link: any) => {
-                return {
-                  ...link,
-                  Icon: IconsMap[link.icon as keyof IconType],
-                };
-              })
+              return {
+                ...link,
+                Icon: IconsMap[link.icon as keyof IconType],
+              };
+            })
             : null,
         },
         rows,
@@ -123,11 +123,11 @@ const SysDesignViewPublic = () => {
               repo_origin: schema.repoOrigin,
               projectOptions: schema.quickLinks
                 ? JSON.parse(schema.quickLinks).map((link: any) => {
-                    return {
-                      ...link,
-                      Icon: IconsMap[link.icon as keyof IconType],
-                    };
-                  })
+                  return {
+                    ...link,
+                    Icon: IconsMap[link.icon as keyof IconType],
+                  };
+                })
                 : null,
             },
             rows: [
@@ -158,11 +158,11 @@ const SysDesignViewPublic = () => {
               repo_origin: schema.repoOrigin,
               projectOptions: schema.quickLinks
                 ? JSON.parse(schema.quickLinks).map((link: any) => {
-                    return {
-                      ...link,
-                      Icon: IconsMap[link.icon as keyof IconType],
-                    };
-                  })
+                  return {
+                    ...link,
+                    Icon: IconsMap[link.icon as keyof IconType],
+                  };
+                })
                 : null,
             },
             rows: [],
@@ -267,16 +267,16 @@ const SysDesignViewPublic = () => {
             pipeline_status === "failed"
               ? "red"
               : service.serviceType &&
-                (blockColorMap as any)[service.serviceType],
+              (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
           projectOptions: service.quickLinks
             ? JSON.parse(service.quickLinks).map((link: any) => {
-                return {
-                  ...link,
-                  Icon: IconsMap[link.icon as keyof IconType],
-                };
-              })
+              return {
+                ...link,
+                Icon: IconsMap[link.icon as keyof IconType],
+              };
+            })
             : null,
         },
         rows: rows,
@@ -363,16 +363,7 @@ const SysDesignViewPublic = () => {
       }}
     >
       <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "center",
-          padding: "10px",
-          position: "fixed",
-          width: "100%",
-          zIndex: "1000",
-          background: "white",
-        }}
+        className={styles['public-view-header']}
       >
         <Text>Organization ID : {org_id}</Text>
         <Text color={pipeline_status_color}>
