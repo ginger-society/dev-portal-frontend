@@ -6,10 +6,10 @@ import React, {
   ReactNode,
 } from "react";
 import { MetadataService } from "@/services";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 
 interface WorkspaceContextProps {
-  orgs: WorkspaceSummary[];
+  orgs: WorkspaceSummaryResponse[];
   fetchWorkspaces: () => Promise<void>;
 }
 
@@ -20,7 +20,7 @@ const WorkspaceContext = createContext<WorkspaceContextProps | undefined>(
 export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
+  const [orgs, setOrgs] = useState<WorkspaceSummaryResponse[]>([]);
 
   const fetchWorkspaces = async () => {
     try {

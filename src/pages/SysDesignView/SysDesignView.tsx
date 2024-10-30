@@ -79,7 +79,7 @@ import { IconType } from "react-icons";
 import Markdown from "react-markdown";
 import {
   SnapshotsResponse,
-  WorkspaceSummary,
+  WorkspaceSummaryResponse,
 } from "@/services/MetadataService_client";
 import { NotificationContext } from "@/shared/NotificationContext";
 
@@ -143,7 +143,7 @@ const SysDesignView = () => {
   const [markdownViewerTitle, setMarkdownViewerTitle] = useState<string>();
   const [markdownContent, setMarkdownContent] = useState<string>();
 
-  const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
+  const [orgs, setOrgs] = useState<WorkspaceSummaryResponse[]>([]);
 
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
@@ -235,17 +235,17 @@ const SysDesignView = () => {
             pkg.pipelineStatus === "failed"
               ? "red"
               : pkg.packageType != "library"
-              ? "#4793AF"
-              : null,
+                ? "#4793AF"
+                : null,
           pipeline_status: pkg.pipelineStatus,
           repo_origin: pkg.repoOrigin,
           projectOptions: pkg.quickLinks
             ? JSON.parse(pkg.quickLinks).map((link: any) => {
-                return {
-                  ...link,
-                  Icon: IconsMap[link.icon as keyof IconType],
-                };
-              })
+              return {
+                ...link,
+                Icon: IconsMap[link.icon as keyof IconType],
+              };
+            })
             : null,
         },
         rows,
@@ -276,11 +276,11 @@ const SysDesignView = () => {
               repo_origin: schema.repoOrigin,
               projectOptions: schema.quickLinks
                 ? JSON.parse(schema.quickLinks).map((link: any) => {
-                    return {
-                      ...link,
-                      Icon: IconsMap[link.icon as keyof IconType],
-                    };
-                  })
+                  return {
+                    ...link,
+                    Icon: IconsMap[link.icon as keyof IconType],
+                  };
+                })
                 : null,
             },
             rows: [
@@ -310,11 +310,11 @@ const SysDesignView = () => {
               repo_origin: schema.repoOrigin,
               projectOptions: schema.quickLinks
                 ? JSON.parse(schema.quickLinks).map((link: any) => {
-                    return {
-                      ...link,
-                      Icon: IconsMap[link.icon as keyof IconType],
-                    };
-                  })
+                  return {
+                    ...link,
+                    Icon: IconsMap[link.icon as keyof IconType],
+                  };
+                })
                 : null,
             },
             rows: [],
@@ -338,11 +338,11 @@ const SysDesignView = () => {
               repo_origin: schema.repoOrigin,
               projectOptions: schema.quickLinks
                 ? JSON.parse(schema.quickLinks).map((link: any) => {
-                    return {
-                      ...link,
-                      Icon: IconsMap[link.icon as keyof IconType],
-                    };
-                  })
+                  return {
+                    ...link,
+                    Icon: IconsMap[link.icon as keyof IconType],
+                  };
+                })
                 : null,
             },
             rows: [],
@@ -477,16 +477,16 @@ const SysDesignView = () => {
             pipeline_status === "failed"
               ? "red"
               : service.serviceType &&
-                (blockColorMap as any)[service.serviceType],
+              (blockColorMap as any)[service.serviceType],
           version: service.envs.find((s) => s.envKey === env)?.version,
           pipeline_status,
           projectOptions: service.quickLinks
             ? JSON.parse(service.quickLinks).map((link: any) => {
-                return {
-                  ...link,
-                  Icon: IconsMap[link.icon as keyof IconType],
-                };
-              })
+              return {
+                ...link,
+                Icon: IconsMap[link.icon as keyof IconType],
+              };
+            })
             : null,
         },
         rows: rows,

@@ -19,7 +19,7 @@ import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
 import { useEffect, useState } from "react";
 import { IAMService, MetadataService } from "@/services";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 import {
   CreateApiTokenResponse,
   GroupApiTokenResponse,
@@ -32,7 +32,7 @@ const WorkspaceSettingsTokensPage = () => {
   const [tokenName, setTokenName] = useState<string>();
   const [tokenExpiresIn, setTokenExpiresIn] = useState<number>();
   const [tokens, setTokens] = useState<GroupApiTokenResponse[]>([]);
-  const [workspace, setWorkspace] = useState<WorkspaceSummary>();
+  const [workspace, setWorkspace] = useState<WorkspaceSummaryResponse>();
   const [tokenResponse, setTokenResponse] = useState<CreateApiTokenResponse>();
 
   const { show } = useSnackbar();

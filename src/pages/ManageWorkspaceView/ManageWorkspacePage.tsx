@@ -16,11 +16,11 @@ import { useEffect, useState } from "react";
 import NewOrgForm from "./NewOrgForm";
 import router from "@/shared/router";
 import { MetadataService } from "@/services";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 
 const ManageWorkspacePage = () => {
   const [isCreateOrgOpen, setIsCreateOrgOpen] = useState<boolean>(false);
-  const [orgs, setOrgs] = useState<WorkspaceSummary[]>([]);
+  const [orgs, setOrgs] = useState<WorkspaceSummaryResponse[]>([]);
   const [loading, setIsLoading] = useState<boolean>(false);
   const fetchData = async () => {
     try {

@@ -21,7 +21,7 @@ import Navigator from "./SettingsNavigator";
 import { useEffect, useState } from "react";
 import { IAMService, MetadataService } from "@/services";
 import { UserInfo } from "@/services/IAMService_client";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
 
 const WorkspaceSettingsMemberPage = () => {
@@ -36,7 +36,7 @@ const WorkspaceSettingsMemberPage = () => {
 
   const { show } = useSnackbar();
 
-  const [workspace, setWorkspace] = useState<WorkspaceSummary>();
+  const [workspace, setWorkspace] = useState<WorkspaceSummaryResponse>();
 
   const fetchUsers = async () => {
     if (!org_id) {

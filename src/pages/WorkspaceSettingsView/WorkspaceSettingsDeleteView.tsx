@@ -15,7 +15,7 @@ import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
 import { useEffect, useState } from "react";
 import { MetadataService } from "@/services";
-import { WorkspaceSummary } from "@/services/MetadataService_client";
+import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
 import { useWorkspaces } from "@/components/organisms/WorkspaceSwitcher/WorkspaceContext";
 
@@ -25,7 +25,7 @@ const WorkspaceSettingsDeletePage = () => {
   const { show } = useSnackbar();
   const { fetchWorkspaces } = useWorkspaces();
 
-  const [workspace, setWorkspace] = useState<WorkspaceSummary>();
+  const [workspace, setWorkspace] = useState<WorkspaceSummaryResponse>();
 
   const fetchWorkspace = async () => {
     if (!org_id) {
