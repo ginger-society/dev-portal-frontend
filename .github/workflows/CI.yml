@@ -1,10 +1,12 @@
 name: CI
+
 on:
   workflow_dispatch:
   push:
     branches: ['main']
   pull_request:
     branches: ['main']
+
 jobs:
   build:
     if: github.event.pull_request.draft == false
@@ -13,16 +15,28 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Report failure if checkout fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      - name: Report failure if Docker Buildx setup fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Install ginger-apps
         run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-pipeline-clis.sh)"
+      - name: Report failure if ginger-apps installation fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Authenticate with ginger-auth
         id: ginger-auth
         run: ginger-auth token-login ${{ secrets.GINGER_TOKEN }}
+      - name: Report failure if authentication fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Update pipeline to running
         run: ginger-connector update-pipeline stage running
@@ -36,12 +50,14 @@ jobs:
             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
-            --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }} \
+            --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }}
+      - name: Report failure if Docker build fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
 
       - name: Update pipeline to passing
+        if: success()
         run: ginger-connector update-pipeline stage passing
 
-      - name: publish metadata
+      - name: Publish metadata
         run: ginger-connector publish stage
-
-      
