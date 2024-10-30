@@ -20,7 +20,7 @@ import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
 import { useEffect, useState } from "react";
 import { IAMService, MetadataService } from "@/services";
-import { UserInfo } from "@/services/IAMService_client";
+import { UserInfoResponse } from "@/services/IAMService_client";
 import { WorkspaceSummaryResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
 
@@ -28,7 +28,7 @@ const WorkspaceSettingsMemberPage = () => {
   const { org_id } = useParams<{ org_id: string }>();
   const [isOpen, setIsOpen] = useState(false);
   const [userToAdd, setUserToAdd] = useState<string>();
-  const [members, setMembers] = useState<UserInfo[]>([]);
+  const [members, setMembers] = useState<UserInfoResponse[]>([]);
   const [memberTypeToAdd, setMemberTypeToAdd] = useState<Option>({
     value: "add-member",
     label: "Member",
