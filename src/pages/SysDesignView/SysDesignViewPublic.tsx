@@ -32,7 +32,6 @@ const SysDesignViewPublic = () => {
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
   const { env, org_id } = useParams<{ env: string; org_id: string }>();
-  const [isLocked, setIsLocked] = useState<boolean>(true);
   const [pipeline_status, setPipeline_status] = useState<string>("checking...");
   const [pipeline_status_color, setPipeline_status_color] = useState<TextColor>(
     TextColor.Primary

@@ -1,5 +1,4 @@
 import { LegendConfigs, LegendItemT } from "@/components/atoms/Legend/types";
-import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import UMLEditor from "@/components/organisms/UMLEditor";
 import { useUMLEditor } from "@/components/organisms/UMLEditor/context";
 import {
@@ -7,45 +6,34 @@ import {
   BlockType,
   Connection,
   MarkerType,
-  Row,
 } from "@/components/organisms/UMLEditor/types";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Aside,
-  Button,
-  ButtonType,
   Dropdown,
   Loader,
   SnackbarTimer,
   Text,
   TextSize,
-  TextWeight,
   useSnackbar,
 } from "@ginger-society/ginger-ui";
 import {
   FaBoxOpen,
-  FaChartLine,
-  FaChartPie,
   FaCheckDouble,
-  FaCodeBranch,
   FaDatabase,
   FaDesktop,
   FaEllipsisV,
   FaEnvelopeOpenText,
   FaFileAlt,
   FaGit,
-  FaGithub,
   FaInfoCircle,
   FaLayerGroup,
   FaPencilAlt,
-  FaRegPlayCircle,
   FaServer,
-  FaTasks,
   FaTerminal,
 } from "react-icons/fa";
 import router from "@/shared/router";
 import Markdown from "react-markdown";
-import styles from "./sysDesignWrapper.module.scss";
 import { shadowClassMap } from "./SysDesignView";
 
 interface ProjectOption {
@@ -430,19 +418,7 @@ const SysDesignWrapper = ({
                     {blockData.data.type === "messagequeue" && (
                       <FaEnvelopeOpenText />
                     )}
-                    {/* <button
-                      onClick={() => openReadme(blockData.data.repo_origin)}
-                    >
-                    </button> */}
                     {blockData.data.name}
-
-                    {/* {blockData.data.type === "RPCEndpoint" && (
-                      <FaInfoCircle
-                        onClick={() =>
-                          navigateToSwagger(blockData.id, blockData.data.org_id)
-                        }
-                      />
-                    )} */}
                   </span>
                   <span style={{ fontWeight: "normal", fontSize: "12px" }}>
                     {blockData.data.description}
@@ -457,16 +433,6 @@ const SysDesignWrapper = ({
                     <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                       Version: {blockData.data.version}
                     </span>
-                    {/* <button
-                      onClick={(e) => {
-                        openChangelog(blockData.data.repo_origin);
-                        e.stopPropagation();
-                      }}
-                    >
-                      <span style={{ fontWeight: "normal", fontSize: "13px" }}>
-                        View changelog
-                      </span>
-                    </button> */}
                   </div>
                   <div
                     style={{
