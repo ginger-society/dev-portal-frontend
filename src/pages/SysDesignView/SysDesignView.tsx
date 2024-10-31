@@ -6,17 +6,11 @@ import React, {
   version,
 } from "react";
 import {
-  FaBox,
-  FaServer,
-  FaDatabase,
-  FaCogs,
-  FaBuilding,
   FaLock,
   FaLockOpen,
   FaCodeBranch,
   FaRegPlayCircle,
   FaTasks,
-  FaEllipsisV,
   FaChartLine,
   FaGithub,
   FaChartPie,
@@ -25,7 +19,6 @@ import {
   FaNpm,
   FaRust,
   FaGlobe,
-  FaCheck,
   FaExternalLinkAlt,
   FaDigitalOcean,
   FaAws,
@@ -33,32 +26,19 @@ import {
   FaPython,
   FaGoogle,
 } from "react-icons/fa";
-import UMLEditor from "@/components/organisms/UMLEditor";
 import {
   UMLEditorProvider,
-  useUMLEditor,
 } from "@/components/organisms/UMLEditor/context";
 import {
   Block,
   Connection,
-  BlockType,
-  Row,
-  MarkerType,
   EditorData,
-  BlockData,
 } from "@/components/organisms/UMLEditor/types";
-import { PageLayout } from "@/shared/PageLayout";
-import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import SysDesignWrapper from "./SysDesignWrapper";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
 import {
   Button,
   Dropdown,
-  Input,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalSize,
   SnackbarTimer,
   useSnackbar,
   Text,
@@ -73,7 +53,6 @@ import {
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";
-import router from "@/shared/router";
 import WorkspaceSwitcher from "@/components/organisms/WorkspaceSwitcher";
 import { IconType } from "react-icons";
 import Markdown from "react-markdown";
