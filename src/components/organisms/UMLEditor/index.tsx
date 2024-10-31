@@ -45,9 +45,10 @@ const UMLEditor = ({
   HeadingRenderer = ({ blockData }) => {
     return blockData.id;
   },
-  FooterRenderer = ({ blockData }) => {
+  FooterRenderer = ({ blockData, allowEdit }) => {
     return <></>;
   },
+  staticOptionsHandler = () => { },
   allowEdit = true,
   allowDrag = true,
   RowRenderer = ({ rowData }) => {
@@ -224,18 +225,16 @@ const UMLEditor = ({
             position={{ x: block.position.left, y: block.position.top }}
           >
             <div
-              className={`card block-card ${block.data.blinkClass} ${
-                highlighted === block.id ? "bring-forward" : ""
-              }`}
+              className={`card block-card ${block.data.blinkClass} ${highlighted === block.id ? "bring-forward" : ""
+                }`}
               ref={block.ref}
             >
               {/* Header row */}
               <div
-                className={`${
-                  block.type === BlockType.Enum
-                    ? "options-header"
-                    : "table-header"
-                } block-header ${allowDrag ? "handle" : ""}`}
+                className={`${block.type === BlockType.Enum
+                  ? "options-header"
+                  : "table-header"
+                  } block-header ${allowDrag ? "handle" : ""}`}
                 style={{
                   backgroundColor: block.data.color,
                   borderTop: `solid 1px ${block.data.color}`,
@@ -267,9 +266,8 @@ const UMLEditor = ({
                     toggleSlider(EditorTypeEnum.ROW, block.id, index)
                   }
                   key={index}
-                  className={`row-content ${
-                    row.data.type !== ColumnType.PK ? "hoverable" : ""
-                  }`}
+                  className={`row-content ${row.data.type !== ColumnType.PK ? "hoverable" : ""
+                    }`}
                 >
                   <RowRenderer key={index} rowData={row} />
                 </div>
@@ -292,7 +290,7 @@ const UMLEditor = ({
                   <EnumRowRenderer blockData={block} />
                 </div>
               )}
-              <FooterRenderer blockData={block} />
+              <FooterRenderer blockData={block} allowEdit={allowEdit} staticOptionsHandler={staticOptionsHandler} />
             </div>
           </Draggable>
         ))}
@@ -325,40 +323,39 @@ const UMLEditor = ({
                     d={path}
                     stroke={
                       highlighted === connections[index].block1Id ||
-                      highlighted === connections[index].block2Id
+                        highlighted === connections[index].block2Id
                         ? "rgb(234 95 32)"
                         : "var(--primary-color)"
                     }
                     fill="transparent"
                     strokeWidth={
                       highlighted === connections[index].block1Id ||
-                      highlighted === connections[index].block2Id
+                        highlighted === connections[index].block2Id
                         ? "3px"
                         : "1px"
                     }
                     filter={
                       highlighted === connections[index].block1Id ||
-                      highlighted === connections[index].block2Id
+                        highlighted === connections[index].block2Id
                         ? "url(#highlight-shadow)"
                         : "none"
                     }
                   />
                   <g
-                    transform={`translate(${midX - 13}, ${midY - 13}) rotate(${
-                      angle - 90
-                    }, 13, 13)`}
+                    transform={`translate(${midX - 13}, ${midY - 13}) rotate(${angle - 90
+                      }, 13, 13)`}
                   >
                     {(() => {
                       const marker = connections[index].marker;
 
                       const color =
                         highlighted === connections[index].block1Id ||
-                        highlighted === connections[index].block2Id
+                          highlighted === connections[index].block2Id
                           ? "rgb(234 95 32)"
                           : marker
-                          ? legendConfigs[marker]?.color ||
+                            ? legendConfigs[marker]?.color ||
                             "var(--primary-color)"
-                          : "var(--primary-color)";
+                            : "var(--primary-color)";
 
                       if (!marker) {
                         return triangleIcon(color);
@@ -382,7 +379,7 @@ const UMLEditor = ({
                         textAnchor="middle"
                         fill={
                           highlighted === connections[index].block1Id ||
-                          highlighted === connections[index].block2Id
+                            highlighted === connections[index].block2Id
                             ? "var(--secondary-color)"
                             : "var(--primary-color)"
                         }

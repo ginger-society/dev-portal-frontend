@@ -9,7 +9,7 @@ import {
   MarkerType,
   Row,
 } from "@/components/organisms/UMLEditor/types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Aside,
   Button,
@@ -32,6 +32,8 @@ import {
   FaDesktop,
   FaEllipsisV,
   FaEnvelopeOpenText,
+  FaFileAlt,
+  FaGit,
   FaGithub,
   FaInfoCircle,
   FaLayerGroup,
@@ -54,71 +56,117 @@ interface ProjectOption {
 
 interface FooterRendererProps {
   blockData: Block;
+  allowEdit?: boolean;
+  staticOptionsHandler: (option: string, blockData: Block) => void
 }
 
 const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
-  ({ blockData }) => {
+  ({ blockData, allowEdit = false, staticOptionsHandler }) => {
+
     const { projectOptions } = blockData.data;
+
+    const optionStartIndex = useMemo(() => {
+      if (blockData.data.type === 'database' || blockData.data.type === 'RPCEndpoint') {
+        return 0;
+      }
+      return 1;
+    }, [blockData])
 
     if (!projectOptions || projectOptions.length === 0) {
       return;
     }
-    const firstThreeOptions: ProjectOption[] = projectOptions.slice(0, 3);
-    const moreOptions: ProjectOption[] = projectOptions.slice(3);
+
+
+    const firstThreeOptions: ProjectOption[] = projectOptions.slice(0, optionStartIndex);
+    const moreOptions: ProjectOption[] = projectOptions.slice(optionStartIndex);
+
 
     return (
-      <div className="row-content block-footer-container">
-        {/* Render the first 3 options */}
-        {firstThreeOptions.map((option, index) => (
-          <a
-            key={index}
-            className="block-footer-action"
-            href={option.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <option.Icon />
-            {option.label}
-          </a>
-        ))}
+      <>
+        <div className="row-content block-footer-container">
 
-        {/* Render the dropdown only if there are more options */}
-        {moreOptions.length > 0 && (
-          <div className="block-footer-action">
-            <Dropdown
-              label={
-                <button
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
-                >
-                  <FaEllipsisV />
-                  More
-                </button>
-              }
-              align="left"
+          <button
+            className="block-footer-action"
+            onClick={() => staticOptionsHandler('readme', blockData)}
+          >
+            <FaFileAlt />
+            Readme
+          </button>
+
+          <button
+            className="block-footer-action"
+            onClick={() => staticOptionsHandler('changelog', blockData)}
+          >
+            <FaGit />
+            Changelog
+          </button>
+
+          {blockData.data.type === "database" && (
+            <button className="block-footer-action" onClick={() => staticOptionsHandler('db-studio', blockData)}>
+              <FaPencilAlt />
+              DB Designer
+            </button>
+          )}
+
+          {blockData.data.type === "RPCEndpoint" && (
+            <button className="block-footer-action" onClick={() => staticOptionsHandler('swagger', blockData)}>
+              <FaInfoCircle />
+              Swagger
+            </button>
+          )}
+
+          {/* Render the first 3 options */}
+          {firstThreeOptions.map((option, index) => (
+            <a
+              key={index}
+              className="block-footer-action"
+              href={option.link}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ul>
-                {moreOptions.map((option, index) => (
-                  <li key={index}>
-                    <a
-                      className="block-footer-additional-menu-item"
-                      href={option.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <option.Icon />
-                      {option.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Dropdown>
-          </div>
-        )}
-      </div>
+              <option.Icon />
+              {option.label}
+            </a>
+          ))}
+
+          {/* Render the dropdown only if there are more options */}
+          {moreOptions.length > 0 && (
+            <div className="block-footer-action">
+              <Dropdown
+                label={
+                  <button
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <FaEllipsisV />
+                    More
+                  </button>
+                }
+                align="left"
+              >
+                <ul>
+                  {moreOptions.map((option, index) => (
+                    <li key={index}>
+                      <a
+                        className="block-footer-additional-menu-item"
+                        href={option.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <option.Icon />
+                        {option.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Dropdown>
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 );
@@ -164,12 +212,69 @@ const SysDesignWrapper = ({
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
 
+  const { show } = useSnackbar();
   const [isMarkdownViewertOpen, setIsMarkdownViewerOpen] =
     useState<boolean>(false);
   const [markdownViewerTitle, setMarkdownViewerTitle] = useState<string>();
   const [markdownContent, setMarkdownContent] = useState<string>();
 
-  const { show } = useSnackbar();
+  const navigateToDBEditor = (id: string) => {
+    if (!isPublicView) {
+      router.navigate(`/editor/${id}/stage`);
+    } else {
+      router.navigate(`/public/editor/${id}/stage`);
+    }
+  };
+
+  const navigateToSwagger = (id: string, org_id: string) => {
+    if (!isPublicView) {
+      router.navigate(`/services/swagger/${org_id}/${id}/stage`);
+    } else {
+      router.navigate(`/public/services/swagger/${org_id}/${id}/stage`);
+    }
+  };
+
+  const openChangelog = async (repo_origin: string) => {
+    if (!repo_origin) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
+    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
+    const response = await fetch(
+      `${repo_origin.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/CHANGELOG.md`
+    );
+    const changelogTxt = await response.text();
+    setMarkdownContent(changelogTxt);
+  };
+
+  const openReadme = async (repo_origin: string) => {
+    if (!repo_origin) {
+      show(
+        <>No repo URL found, please check the releaser settings</>,
+        SnackbarTimer.Short
+      );
+      return;
+    }
+    setIsMarkdownViewerOpen(true);
+    setMarkdownContent(undefined);
+    const response = await fetch(
+      `${repo_origin.replace(
+        "github.com",
+        "raw.githubusercontent.com"
+      )}/main/README.md`
+    );
+    const changelogTxt = await response.text();
+    setMarkdownContent(changelogTxt);
+  };
+
 
   const updateConnections = () => {
     const connections: Connection[] = [];
@@ -230,62 +335,7 @@ const SysDesignWrapper = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
 
-  const navigateToDBEditor = (id: string) => {
-    if (!isPublicView) {
-      router.navigate(`/editor/${id}/stage`);
-    } else {
-      router.navigate(`/public/editor/${id}/stage`);
-    }
-  };
 
-  const navigateToSwagger = (id: string, org_id: string) => {
-    if (!isPublicView) {
-      router.navigate(`/services/swagger/${org_id}/${id}/stage`);
-    } else {
-      router.navigate(`/public/services/swagger/${org_id}/${id}/stage`);
-    }
-  };
-
-  const openChangelog = async (repo_origin: string) => {
-    if (!repo_origin) {
-      show(
-        <>No repo URL found, please check the releaser settings</>,
-        SnackbarTimer.Short
-      );
-      return;
-    }
-    setIsMarkdownViewerOpen(true);
-    setMarkdownContent(undefined);
-    // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
-    const response = await fetch(
-      `${repo_origin.replace(
-        "github.com",
-        "raw.githubusercontent.com"
-      )}/main/CHANGELOG.md`
-    );
-    const changelogTxt = await response.text();
-    setMarkdownContent(changelogTxt);
-  };
-
-  const openReadme = async (repo_origin: string) => {
-    if (!repo_origin) {
-      show(
-        <>No repo URL found, please check the releaser settings</>,
-        SnackbarTimer.Short
-      );
-      return;
-    }
-    setIsMarkdownViewerOpen(true);
-    setMarkdownContent(undefined);
-    const response = await fetch(
-      `${repo_origin.replace(
-        "github.com",
-        "raw.githubusercontent.com"
-      )}/main/README.md`
-    );
-    const changelogTxt = await response.text();
-    setMarkdownContent(changelogTxt);
-  };
 
   const handleLegendClick = (item?: LegendItemT) => {
     setBlocks((existingBlocks) => {
@@ -314,6 +364,19 @@ const SysDesignWrapper = ({
       }, {});
     });
   };
+
+  const handleStaticOptionsClick = (option: string, blockData: Block) => {
+    if (option === 'readme') {
+      openReadme(blockData.data.repo_origin)
+    } else if (option === 'changelog') {
+      openChangelog(blockData.data.repo_origin);
+    } else if (option === 'db-studio') {
+      navigateToDBEditor(blockData.id)
+    } else if (option === 'swagger') {
+      navigateToSwagger(blockData.id, blockData.data.org_id)
+    }
+  }
+
 
   return (
     <>
@@ -345,6 +408,7 @@ const SysDesignWrapper = ({
         allowEdit={false}
         allowDrag={allowDrag}
         FooterRenderer={FooterRenderer}
+        staticOptionsHandler={handleStaticOptionsClick}
         HeadingRenderer={({ blockData }) => (
           <>
             {blockData.type === BlockType.SystemBlock && (
@@ -366,23 +430,19 @@ const SysDesignWrapper = ({
                     {blockData.data.type === "messagequeue" && (
                       <FaEnvelopeOpenText />
                     )}
-                    <button
+                    {/* <button
                       onClick={() => openReadme(blockData.data.repo_origin)}
                     >
-                      {blockData.data.name}
-                    </button>
-                    {blockData.data.type === "database" && (
-                      <FaPencilAlt
-                        onClick={() => navigateToDBEditor(blockData.id)}
-                      />
-                    )}
-                    {blockData.data.type === "RPCEndpoint" && (
+                    </button> */}
+                    {blockData.data.name}
+
+                    {/* {blockData.data.type === "RPCEndpoint" && (
                       <FaInfoCircle
                         onClick={() =>
                           navigateToSwagger(blockData.id, blockData.data.org_id)
                         }
                       />
-                    )}
+                    )} */}
                   </span>
                   <span style={{ fontWeight: "normal", fontSize: "12px" }}>
                     {blockData.data.description}
@@ -397,7 +457,7 @@ const SysDesignWrapper = ({
                     <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                       Version: {blockData.data.version}
                     </span>
-                    <button
+                    {/* <button
                       onClick={(e) => {
                         openChangelog(blockData.data.repo_origin);
                         e.stopPropagation();
@@ -406,7 +466,7 @@ const SysDesignWrapper = ({
                       <span style={{ fontWeight: "normal", fontSize: "13px" }}>
                         View changelog
                       </span>
-                    </button>
+                    </button> */}
                   </div>
                   <div
                     style={{
