@@ -8,6 +8,7 @@ import { ColumnType } from "../ColumnEditor/types";
 import {
   Button,
   ButtonType,
+  ConfirmationButton,
   Input,
   Text,
   TextArea,
@@ -81,17 +82,15 @@ const TableEditor = ({ close }: EditorProps) => {
           {block?.type === BlockType.Table ? "Table" : "Enum"} Editor :
           <strong>{data?.name}</strong>
         </Text>
-        <Button
+        <ConfirmationButton
           onClick={handleDelete}
           type={ButtonType.Tertiary}
           label={<Text color={TextColor.Danger}>Delete</Text>}
-          confirmConfig={{
-            title: "Are you sure ?",
-            description: "This is not reversible",
-            confirmButtonLabel: "Yes, I am sure",
-            okBtnType: ButtonType.Danger,
-          }}
-        ></Button>
+          title = "Are you sure ?"
+          description = "This is not reversible"
+          confirmButtonLabel= "Yes, I am sure"
+          okBtnType = {ButtonType.Danger}
+        ></ConfirmationButton>
       </div>
       {/* {JSON.stringify(blocks[editorData?.blockId]?.data)} */}
       <Input

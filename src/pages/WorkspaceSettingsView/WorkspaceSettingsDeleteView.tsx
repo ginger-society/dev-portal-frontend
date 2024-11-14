@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   Button,
   ButtonType,
+  ConfirmationButton,
   Input,
   Text,
   TextColor,
@@ -104,13 +105,11 @@ const WorkspaceSettingsDeletePage = () => {
               onChange={(e) => setConfirmSlug(e.target.value)}
             />
             <br />
-            <Button
-              confirmConfig={{
-                title: "Are you sure ?",
-                description: "This is not reversible",
-                confirmButtonLabel: "Yes, I am sure",
-                okBtnType: ButtonType.Danger,
-              }}
+            <ConfirmationButton
+              title = "Are you sure ?"
+              description = "This is not reversible"
+              confirmButtonLabel= "Yes, I am sure"
+              okBtnType = {ButtonType.Danger}
               onClick={deleteWorkspace}
               disabled={confirmSlug !== workspace?.slug}
               label={<Text color={TextColor.Danger}>Delete</Text>}

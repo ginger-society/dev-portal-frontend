@@ -1,4 +1,5 @@
 import { NotificationContext } from "@/shared/NotificationContext";
+import { Input } from "@ginger-society/ginger-ui";
 import React, { useContext, useEffect } from "react";
 
 const ExampleComponent = () => {
@@ -13,6 +14,7 @@ const ExampleComponent = () => {
   return (
     <div>
       <p>Listening for messages on "my_topic"</p>
+      <Input />
     </div>
   );
 };

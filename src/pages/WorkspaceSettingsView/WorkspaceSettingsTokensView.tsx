@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   Button,
   ButtonType,
+  ConfirmationButton,
   Input,
   Modal,
   ModalBody,
@@ -168,15 +169,13 @@ const WorkspaceSettingsTokensPage = () => {
                     Created on: {token.createdAt.toLocaleDateString()}
                   </Text>
                   {token.isActive && (
-                    <Button
+                    <ConfirmationButton
                       onClick={() => deactivateToken(token.pk, index)}
                       label={"Deactivate"}
-                      confirmConfig={{
-                        title: "Are you sure ?",
-                        description: "This is not reversible",
-                        confirmButtonLabel: "Yes, I am sure",
-                        okBtnType: ButtonType.Danger,
-                      }}
+                      title = "Are you sure ?"
+                      description = "This is not reversible"
+                      confirmButtonLabel= "Yes, I am sure"
+                      okBtnType = {ButtonType.Danger}
                     />
                   )}
                 </div>

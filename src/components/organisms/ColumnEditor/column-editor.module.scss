@@ -21,6 +21,7 @@
   transition: background-color 0.3s ease;
   flex-direction: column; /* Align items vertically */
   color: var(--primary-color);
+  box-sizing: border-box;
 }
 
 .option:hover {

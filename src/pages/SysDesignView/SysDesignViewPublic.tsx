@@ -14,19 +14,6 @@ import styles from "./sysDesignView.module.scss";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 import { processAndBuildBlocks } from "./utils";
 
-const blockColorMap = {
-  database: "#89439f",
-  RPCEndpoint: "#799351",
-  Portal: "#1A4870",
-  library: "#1A4870",
-  Cache: "#6e46c0",
-};
-
-const shadowClassMap: { [key: string]: string } = {
-  running: "blink-orange",
-  failed: "blink-red",
-};
-
 const SysDesignViewPublic = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);

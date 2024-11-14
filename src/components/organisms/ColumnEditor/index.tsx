@@ -18,6 +18,7 @@ import {
   Option,
   LoadingPage,
   TextColor,
+  ConfirmationButton,
 } from "@ginger-society/ginger-ui";
 
 const ColumnEditor = ({ close }: EditorProps): ReactNode => {
@@ -98,16 +99,14 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
         <Text>
           Column Editor :<strong>{data?.name || row.id}</strong>
         </Text>
-        <Button
+        <ConfirmationButton
           onClick={handleDelete}
           type={ButtonType.Tertiary}
           label={<Text color={TextColor.Danger}>Delete</Text>}
-          confirmConfig={{
-            title: "Are you sure ?",
-            description: "This is not reversible",
-            confirmButtonLabel: "Yes, I am sure",
-            okBtnType: ButtonType.Danger,
-          }}
+          title = "Are you sure ?"
+          description = "This is not reversible"
+          confirmButtonLabel= "Yes, I am sure"
+          okBtnType = {ButtonType.Danger}
         />
       </div>
       <Input

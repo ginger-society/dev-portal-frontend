@@ -123,6 +123,7 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
               <Dropdown
                 label={
                   <button
+                    className="block-footer-action"
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -135,9 +136,9 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
                 }
                 align="left"
               >
-                <ul>
+                <ul style={{listStyle: 'none', paddingInlineStart: '0', marginBlockStart: 0 , marginBlockEnd: 0}}>
                   {moreOptions.map((option, index) => (
-                    <li key={index}>
+                    <li  key={index}>
                       <a
                         className="block-footer-additional-menu-item"
                         href={option.link}
@@ -230,6 +231,7 @@ const SysDesignWrapper = ({
       );
       return;
     }
+    setMarkdownViewerTitle("Changelog")
     setIsMarkdownViewerOpen(true);
     setMarkdownContent(undefined);
     // https://raw.githubusercontent.com/ginger-society/dev-portal-frontend
@@ -251,6 +253,7 @@ const SysDesignWrapper = ({
       );
       return;
     }
+    setMarkdownViewerTitle("Readme")
     setIsMarkdownViewerOpen(true);
     setMarkdownContent(undefined);
     const response = await fetch(

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   Button,
   ButtonType,
+  ConfirmationButton,
   Input,
   Modal,
   ModalBody,
@@ -160,17 +161,14 @@ const WorkspaceSettingsMemberPage = () => {
                   <Text>
                     {member.emailId} ({member.isAdmin ? "Admin" : "Member"})
                   </Text>
-                  <Button
+                  <ConfirmationButton
                     label={"Remove"}
                     onClick={() => removeMember(member.emailId)}
-                    confirmConfig={{
-                      title: "Are you sure ?",
-                      description:
-                        "Dont worry, you can add them back if needed.",
-                      confirmButtonLabel: "Yes, I am sure",
-                      okBtnType: ButtonType.Danger,
-                    }}
-                  ></Button>
+                    title = "Are you sure ?"
+                    description = "This is not reversible"
+                    confirmButtonLabel= "Yes, I am sure"
+                    okBtnType = {ButtonType.Danger}
+                  ></ConfirmationButton>
                   {member.isAdmin ? (
                     <Button
                       label="Change to a member"
