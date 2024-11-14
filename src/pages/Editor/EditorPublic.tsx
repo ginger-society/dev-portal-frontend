@@ -17,10 +17,9 @@ import {
   BlockType,
   Row,
 } from "@/components/organisms/UMLEditor/types";
-import { AuthContext } from "@/shared/AuthContext";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType, Tooltip } from "@ginger-society/ginger-ui";
+import { Tooltip } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";
@@ -46,8 +45,6 @@ const EditorPublic = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
-  const { user } = useContext(AuthContext);
-  const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const { docId, branch } = useParams<{ docId: string; branch: string }>();
   const [branchData, setBranchData] = useState<GetDbschemaByIdResponse>();
 

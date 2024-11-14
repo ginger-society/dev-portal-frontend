@@ -46,7 +46,6 @@ const Editor = () => {
   const [blocks, setBlocks] = useState<{ [key: string]: Block }>({});
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
-  const { user } = useContext(AuthContext);
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const { docId, branch } = useParams<{ docId: string; branch: string }>();
   const [branchData, setBranchData] = useState<GetDbschemaByIdResponse>();

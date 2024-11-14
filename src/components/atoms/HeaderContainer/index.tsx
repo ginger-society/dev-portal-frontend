@@ -7,7 +7,7 @@ import {
 import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
-import { AuthContext } from "@/shared/AuthContext";
+import { AuthContext, AuthContextInterface } from "@/shared/AuthContext";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 import version from "@/shared/version.json";
 import {
@@ -15,6 +15,7 @@ import {
   WorkspaceProvider,
 } from "@/components/organisms/WorkspaceSwitcher/WorkspaceContext";
 import router from "@/shared/router";
+import { ValidateTokenResponse } from "@/services/IAMService_client";
 
 interface HeaderContainerProps {
   children?: React.ReactNode;
@@ -29,7 +30,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
   }>();
   const { orgs, fetchWorkspaces } = useWorkspaces();
 
-  const { user } = useContext(AuthContext);
+  const { user } = useContext<AuthContextInterface<ValidateTokenResponse>>(AuthContext);
 
   const logOut = async () => {
     try {

@@ -5,7 +5,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext, AuthContextInterface } from "./AuthContext";
+import { ValidateTokenResponse } from "@/services/IAMService_client";
 
 export const NotificationContext = createContext<any>(null);
 
@@ -23,7 +24,7 @@ export const NotificationProvider = ({
   channel,
   children,
 }: NotificationProviderProps) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext<AuthContextInterface<ValidateTokenResponse>>(AuthContext);
   const subscriptions = useRef<{ [topic: string]: (msg: any) => void }>({});
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [ws, setWs] = useState<WebSocket | null>(null);
