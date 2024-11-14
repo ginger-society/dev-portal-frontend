@@ -431,13 +431,14 @@ html[data-theme="dark"] {
     font-weight: 700;
     margin-top: 20px;
     text-decoration: underline;
+    font-size: 1.1em;
   }
   p {
     font-size: 14px;
   }
   a {
     font-weight: 600;
-    width: 115px;
     display: inline-block;
+    color: var(--primary-color);
   }
 }
