@@ -446,7 +446,7 @@ const SysDesignView = () => {
             }
             align="left"
           >
-            <ul>
+            <ul style={{paddingInlineStart: 0}}>
               {(
                 (orgs.find((o) => o.slug === org_id)
                   ?.quickLinks as unknown as any[]) || []
