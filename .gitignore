@@ -7,6 +7,7 @@ coverage
 tsconfig.tsbuildinfo
 src/services/IAMService_client
 src/services/MetadataService_client
+src/services/NotificationService_client
 .ginger.tmp
 src/shared/references.ts
 *.lock
