@@ -1,8 +1,13 @@
 dir = "src/services"
 lang = "TS"
 organization_id = "ginger-society"
-portal_refs_file = "src/shared/references.ts"
+refs_file = "src/shared/references.ts"
 service_type = "Portal"
+
+[services."@ginger-society/NotificationService"]
+dev = "http://localhost:3030"
+stage = "https://api-staging.gingersociety.org"
+stage_k8 = "http://notification-service-service"
 
 [services."@ginger-society/IAMService"]
 dev = "http://localhost:8080/iam"
@@ -18,7 +23,14 @@ stage_k8 = "http://metadata-service-api-service/metadata"
 dev = "http://localhost:3001"
 stage = "https://iam-staging.gingersociety.org"
 
+[ws_refs."@ginger-society/NotificationService"]
+dev = "ws://localhost:3030/notification"
+stage = "wss://api-staging.gingersociety.org/notification"
+stage_k8 = "ws://notification-service-service/notification"
+
 [urls]
 dev = "http://localhost:3000"
 prod = "http://localhost:8081"
 stage = "https://dev-portal-staging.gingersociety.org"
+
+[urls_ws]

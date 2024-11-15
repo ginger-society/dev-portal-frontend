@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { AuthContext, AuthContextInterface } from "./AuthContext";
 import { ValidateTokenResponse } from "@/services/IAMService_client";
+import { GINGER_SOCIETY_NOTIFICATIONSERVICE_WS } from "./references";
 
 export const NotificationContext = createContext<any>(null);
 
@@ -46,7 +47,7 @@ export const NotificationProvider = ({
       }
       if (websocketChannel && accessToken && !isConnected) {
         const newWs = new WebSocket(
-          `wss://api-staging.gingersociety.org/notification/ws/${websocketChannel}?token=${accessToken}`
+          `${GINGER_SOCIETY_NOTIFICATIONSERVICE_WS}/ws/${websocketChannel}?token=${accessToken}`
         );
 
         newWs.onopen = () => {
