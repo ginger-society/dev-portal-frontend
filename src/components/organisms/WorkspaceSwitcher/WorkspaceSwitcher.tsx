@@ -1,6 +1,6 @@
 import { FaBuilding, FaCheck } from "react-icons/fa";
 import styles from "./workspaceSwitcher.module.scss";
-import { Button, Dropdown } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Dropdown } from "@ginger-society/ginger-ui";
 import router from "@/shared/router";
 import { useParams } from "react-router-dom";
 import { useWorkspaces } from "./WorkspaceContext";
@@ -37,7 +37,7 @@ const WorkspaceSwitcher = () => {
       }
       align="left"
     >
-      <ul>
+      <ul style={{listStyleType: 'none', paddingInlineStart: 0}}>
         {orgs.map((org) => (
           <li
             key={org.slug}
@@ -52,12 +52,15 @@ const WorkspaceSwitcher = () => {
             {org.slug === org_id && <FaCheck />}
           </li>
         ))}
-        <button
-          className={styles["new-org-btn"]}
-          onClick={navigateToManageWorkspace}
-        >
-          Manage workspaces
-        </button>
+        
+        <div style={{padding: '10px', paddingBottom: 0}}>
+          <Button
+            label={"Manage workspaces"}
+            onClick={navigateToManageWorkspace}
+            fullWidth
+            type={ButtonType.Primary}>
+          </Button>
+        </div>
       </ul>
     </Dropdown>
   );
