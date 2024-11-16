@@ -9,6 +9,7 @@
   cursor: pointer;
   box-shadow: 2px 5px 5px var(--secondary-bg-color);
   border-radius: 15px;
+  box-sizing: border-box;
 }
 
 .org-item-container:hover {
