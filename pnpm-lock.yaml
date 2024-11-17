@@ -12,8 +12,8 @@ importers:
         specifier: 0.56.0
         version: 0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ginger-society/ginger-ui-uml':
-        specifier: ^0.2.0-nightly.0
-        version: 0.2.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.0-nightly.0
+        version: 0.3.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@types/swagger-ui-react':
         specifier: ^4.18.3
         version: 4.18.3
@@ -68,9 +68,6 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
-      react-draggable:
-        specifier: ^4.4.6
-        version: 4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.2.0)
@@ -560,13 +557,14 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@ginger-society/ginger-ui-uml@0.2.0-nightly.0':
-    resolution: {integrity: sha512-tksIDzwinxUioiwIcFnP9W/+bOuotFqAYWLfPx3LXxG46ftw+VPgjb4hjqvvrN25Hc0yCFkUUAltta0YcRiJrQ==}
+  '@ginger-society/ginger-ui-uml@0.3.0-nightly.0':
+    resolution: {integrity: sha512-JGnIZwag7PgJdgX+VLoKoTz6SzP2lmoLe1b1JqIwInnd6WzdG4anq0f4phbLG9uTOKIzYifKLUlTRvHQaNdpzQ==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
+      react-draggable: ^4.4.6
 
   '@ginger-society/ginger-ui@0.56.0':
     resolution: {integrity: sha512-BbJTa5qehGRn+DJxWdZqNCbgsP2713RtJgnWTCy0q2+w2/LFhA3wOL5c38uwliMsYEsJ5cNMSpdsXr/dhF4RJg==}
@@ -5215,11 +5213,12 @@ snapshots:
       - terser
       - typescript
 
-  '@ginger-society/ginger-ui-uml@0.2.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui-uml@0.3.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@ginger-society/ginger-ui': 0.57.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      react-draggable: 4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-icons: 5.2.1(react@18.2.0)
 
   '@ginger-society/ginger-ui@0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
