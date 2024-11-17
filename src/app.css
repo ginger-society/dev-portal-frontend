@@ -134,3 +134,8 @@ code {
 .block-footer-additional-menu-item:hover {
   background: var(--primary-bg-color);
 }
+
+.swagger-ui {
+  background: white;
+  padding-top: 20px;
+}
