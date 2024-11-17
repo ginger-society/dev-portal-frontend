@@ -24,7 +24,7 @@ dev = "http://localhost:3001"
 stage = "https://iam-staging.gingersociety.org"
 
 [ws_refs."@ginger-society/NotificationService"]
-dev = "ws://localhost:3030/notification"
+dev = "wss://api-staging.gingersociety.org/notification"
 stage = "wss://api-staging.gingersociety.org/notification"
 stage_k8 = "ws://notification-service-service/notification"
 
