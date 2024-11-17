@@ -128,7 +128,7 @@ const WorkspaceSettingsMemberPage = () => {
   };
 
   return (
-    <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--secondary-bg-color)", minHeight: "100vh" }}>
       <HeaderContainer />
       <div className="workspace-container">
         <Text tag="h2" size={TextSize.XLarge}>
@@ -153,7 +153,7 @@ const WorkspaceSettingsMemberPage = () => {
             <div style={{ display: "flex" }}>
               <Text size={TextSize.Large}>Members</Text>
 
-              <Button onClick={openMemberForm} label={"Add member"}></Button>
+              <Button onClick={openMemberForm} type={ButtonType.Primary} label={"Add member"}></Button>
             </div>
             {members.map((member) => {
               return (

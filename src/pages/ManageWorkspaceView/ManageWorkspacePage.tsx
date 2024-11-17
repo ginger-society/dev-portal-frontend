@@ -49,7 +49,7 @@ const ManageWorkspacePage = () => {
   };
 
   return (
-    <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--primary-accent-color)", minHeight: "100vh" }}>
       <HeaderContainer />
       <div className="workspace-container">
         <div style={{ display: "flex", justifyContent: "space-between" }}>

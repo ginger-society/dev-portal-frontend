@@ -18,7 +18,7 @@ const SettingsNavigator = ({
 
   return (
     <div style={{ width }} className={styles["container"]}>
-      <ul>
+      <ul style={{listStyle: 'none', paddingInlineStart: 0}}>
         <li
           className={`${styles["item"]}  ${
             active === "members" ? styles["active"] : ""

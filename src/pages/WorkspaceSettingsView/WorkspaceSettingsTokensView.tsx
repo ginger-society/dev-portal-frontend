@@ -118,7 +118,7 @@ const WorkspaceSettingsTokensPage = () => {
     router.navigate("/manage-workspaces");
   };
   return (
-    <div style={{ background: "var(--primary-bg-color)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--secondary-bg-color)", minHeight: "100vh" }}>
       <HeaderContainer />
       <div className="workspace-container">
         <Text tag="h2" size={TextSize.XLarge}>
@@ -146,6 +146,7 @@ const WorkspaceSettingsTokensPage = () => {
               <Button
                 onClick={openCreateTokenForm}
                 label="Create token"
+                type={ButtonType.Primary}
               ></Button>
             </div>
             {tokens.map((token, index) => {
