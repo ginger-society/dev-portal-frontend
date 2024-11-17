@@ -11,6 +11,16 @@ const ExampleComponent = () => {
     });
   }, [subscribeToTopic]);
 
+  const fetchData = async() => {
+    const response = await fetch('/api/value')
+    const data = await response.json();
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
   return (
     <div>
       <p>Listening for messages on "my_topic"</p>

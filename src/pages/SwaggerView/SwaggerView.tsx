@@ -41,7 +41,6 @@ const SwaggerViewPage = () => {
             orgId: org_id,
           }
         );
-        console.log(data);
         setSpec({
           ...removeSecurityKey(JSON.parse(data.spec)),
           servers: [
