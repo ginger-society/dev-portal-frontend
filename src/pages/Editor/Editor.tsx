@@ -11,10 +11,9 @@ import ColumnEditor from "@/components/organisms/ColumnEditor";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import TableEditor from "@/components/organisms/TableEditor";
 
-import { AuthContext } from "@/shared/AuthContext";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType, Tooltip } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Tooltip, AuthContext } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";

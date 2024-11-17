@@ -1,5 +1,4 @@
 import { createHashRouter } from "react-router-dom";
-import { withAuthHOC } from "./WithAuthHOC";
 import { Editor, EditorPublic } from "@/pages/Editor";
 import HandleNavigation from "@/pages/HandleAuth";
 import { SwaggerViewPage, SwaggerViewPagePublic } from "@/pages/SwaggerView";
@@ -10,7 +9,7 @@ import {
   WorkspaceSettingsMembersPage,
   WorkspaceSettingsDeletePage,
 } from "@/pages/WorkspaceSettingsView";
-import { SystemThemePreferred } from '@ginger-society/ginger-ui';
+import { SystemThemePreferred, withAuthHOC } from '@ginger-society/ginger-ui';
 import ExampleComponent from "@/pages/ExamplePage";
 
 const AuthenticatedEditor = withAuthHOC(Editor);

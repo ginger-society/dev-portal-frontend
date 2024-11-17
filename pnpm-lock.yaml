@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ginger-society/ginger-ui':
-        specifier: 0.56.0
-        version: 0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.59.0
+        version: 0.59.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ginger-society/ginger-ui-uml':
         specifier: ^0.3.0-nightly.0
         version: 0.3.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
@@ -546,18 +546,17 @@ packages:
       react-dom: ^16.8.0 || ^17 || ^18
       react-draggable: ^4.4.6
 
-  '@ginger-society/ginger-ui@0.56.0':
-    resolution: {integrity: sha512-BbJTa5qehGRn+DJxWdZqNCbgsP2713RtJgnWTCy0q2+w2/LFhA3wOL5c38uwliMsYEsJ5cNMSpdsXr/dhF4RJg==}
+  '@ginger-society/ginger-ui@0.57.0':
+    resolution: {integrity: sha512-oy5DT6VxDrzRvTptKWINMyaSk9DpSMr1pdlf6lhSqjTERa27IYG5uOdhC35tm486gC7nKY7eAbz4WzvsbpJ9ow==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
 
-  '@ginger-society/ginger-ui@0.57.0':
-    resolution: {integrity: sha512-oy5DT6VxDrzRvTptKWINMyaSk9DpSMr1pdlf6lhSqjTERa27IYG5uOdhC35tm486gC7nKY7eAbz4WzvsbpJ9ow==}
+  '@ginger-society/ginger-ui@0.59.0':
+    resolution: {integrity: sha512-Kc34XGGsj3baUDLYw3cMKu+iemIny0m+hd6k6ZJ+P/6cpmqTJSeTyckTNBFjDKmc/Hjp9L4fqGpjWc7yRr69JQ==}
     engines: {node: '>=16'}
-    hasBin: true
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
@@ -4521,13 +4520,13 @@ snapshots:
       react-draggable: 4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-icons: 5.2.1(react@18.2.0)
 
-  '@ginger-society/ginger-ui@0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui@0.57.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-icons: 5.2.1(react@18.2.0)
 
-  '@ginger-society/ginger-ui@0.57.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui@0.59.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

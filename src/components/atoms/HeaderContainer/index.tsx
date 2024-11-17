@@ -3,11 +3,11 @@ import {
   Header,
   AuthHeartBeat,
   HeaderPositionEnum,
+  AuthContext, AuthContextInterface
 } from "@ginger-society/ginger-ui";
 import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";
-import { AuthContext, AuthContextInterface } from "@/shared/AuthContext";
 import { GINGER_SOCIETY_IAM_FRONTEND_USERS } from "@/shared/references";
 import version from "@/shared/version.json";
 import {

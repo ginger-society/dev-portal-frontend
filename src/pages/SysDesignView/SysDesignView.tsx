@@ -48,6 +48,7 @@ import {
   Accordion,
   Section,
   Table,
+  NotificationContext
 } from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
@@ -59,7 +60,6 @@ import {
   SnapshotsResponse,
   WorkspaceSummaryResponse,
 } from "@/services/MetadataService_client";
-import { NotificationContext } from "@/shared/NotificationContext";
 import { processAndBuildBlocks } from "./utils";
 
 export const IconsMap = {
@@ -295,7 +295,7 @@ const SysDesignView = () => {
 
   const { subscribeToTopic } = useContext(NotificationContext);
   useEffect(() => {
-    subscribeToTopic("pipeline-update", (msg: any) => {
+    subscribeToTopic("pipeline-update", (msg: {identifier: string , status : string}) => {
       console.log("Received message for pipeline-update:", msg);
       setBlocks((v) => {
         const updatedBlocks = {
