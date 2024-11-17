@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
-import { useUMLEditor } from "../UMLEditor/context";
-import { EditorProps, Row } from "../UMLEditor/types";
+import { EditorProps, Row, useUMLEditor } from "@ginger-society/ginger-ui-uml";
 import styles from "./column-editor.module.scss";
 import { slugGenerator } from "@/shared/utils";
 import CustomSelect from "./typeSelector";

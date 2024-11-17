@@ -28,12 +28,11 @@ import {
 } from "react-icons/fa";
 import {
   UMLEditorProvider,
-} from "@/components/organisms/UMLEditor/context";
-import {
   Block,
   Connection,
   EditorData,
-} from "@/components/organisms/UMLEditor/types";
+} from "@ginger-society/ginger-ui-uml";
+
 import SysDesignWrapper from "./SysDesignWrapper";
 import HeaderContainer from "@/components/atoms/HeaderContainer";
 import {

@@ -1,12 +1,7 @@
-import { LegendConfigs, LegendItemT } from "@/components/atoms/Legend/types";
-import UMLEditor from "@/components/organisms/UMLEditor";
-import { useUMLEditor } from "@/components/organisms/UMLEditor/context";
-import {
-  Block,
+import { LegendConfigs, LegendItemT, UMLEditor, useUMLEditor, Block,
   BlockType,
   Connection,
-  MarkerType,
-} from "@/components/organisms/UMLEditor/types";
+  MarkerType, } from "@ginger-society/ginger-ui-uml";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Aside,

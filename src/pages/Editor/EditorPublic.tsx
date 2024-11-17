@@ -1,22 +1,15 @@
 import HeaderContainer from "@/components/atoms/HeaderContainer";
-import { LegendConfigs } from "@/components/atoms/Legend/types";
-import ColumnEditor from "@/components/organisms/ColumnEditor";
-import { ColumnType } from "@/components/organisms/ColumnEditor/types";
-import TableEditor from "@/components/organisms/TableEditor";
-import UMLEditor from "@/components/organisms/UMLEditor";
-import {
-  UMLEditorProvider,
-  useUMLEditor,
-} from "@/components/organisms/UMLEditor/context";
-import {
-  Block,
+import { LegendConfigs, UMLEditor, useUMLEditor , UMLEditorProvider,  Block,
   Connection,
   BlockData,
   MarkerType,
   EditorData,
   BlockType,
-  Row,
-} from "@/components/organisms/UMLEditor/types";
+  Row,} from "@ginger-society/ginger-ui-uml";
+import ColumnEditor from "@/components/organisms/ColumnEditor";
+import { ColumnType } from "@/components/organisms/ColumnEditor/types";
+import TableEditor from "@/components/organisms/TableEditor";
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tooltip } from "@ginger-society/ginger-ui";

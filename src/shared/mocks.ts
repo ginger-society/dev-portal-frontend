@@ -1,4 +1,4 @@
-import { BlockData, BlockType, Connection, MarkerType } from "@/components/organisms/UMLEditor/types";
+import { BlockData, BlockType, Connection, MarkerType } from "@ginger-society/ginger-ui-uml";
 
 export const mockBlocks: BlockData[] = [
   { id: '1', rows: [{ id: 'row-1', data: {} }], position: { top: 100, left: 100 }, data: {}, type: BlockType.Table },

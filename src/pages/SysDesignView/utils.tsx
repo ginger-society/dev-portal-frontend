@@ -1,4 +1,4 @@
-import { Block, BlockType } from "@/components/organisms/UMLEditor/types";
+import { Block, BlockType } from "@ginger-society/ginger-ui-uml";
 import { GetDbschemaAndTablesResponse, PackageResponse, ServicesTrimmedResponse } from "@/services/MetadataService_client";
 import React from "react";
 import { blockColorMap, IconsMap, shadowClassMap } from "./SysDesignView";
@@ -18,7 +18,7 @@ export const processAndBuildBlocks = (services: ServicesTrimmedResponse[], packa
     if (pkg.dependencies.length > 0) {
       rows.push({
         id: `${pkg.identifier}-dependencies`,
-        data: { heading: "Dependns on", list: pkg.dependencies },
+        data: { heading: "Depends on", list: pkg.dependencies },
       });
     }
 

@@ -1,5 +1,4 @@
-import { useUMLEditor } from "../UMLEditor/context";
-import { BlockType, EditorProps } from "../UMLEditor/types";
+import { useUMLEditor, BlockType, EditorProps } from "@ginger-society/ginger-ui-uml";
 import styles from "./table-editor.module.scss";
 import { ChangeEventHandler } from "react";
 import { slugGenerator } from "@/shared/utils";

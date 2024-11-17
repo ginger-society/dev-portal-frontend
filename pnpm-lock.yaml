@@ -11,6 +11,9 @@ importers:
       '@ginger-society/ginger-ui':
         specifier: 0.56.0
         version: 0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@ginger-society/ginger-ui-uml':
+        specifier: ^0.2.0-nightly.0
+        version: 0.2.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/swagger-ui-react':
         specifier: ^4.18.3
         version: 4.18.3
@@ -65,9 +68,6 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
-      react-draggable:
-        specifier: ^4.4.6
-        version: 4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.2.0)
@@ -557,8 +557,24 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
+  '@ginger-society/ginger-ui-uml@0.2.0-nightly.0':
+    resolution: {integrity: sha512-tksIDzwinxUioiwIcFnP9W/+bOuotFqAYWLfPx3LXxG46ftw+VPgjb4hjqvvrN25Hc0yCFkUUAltta0YcRiJrQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
+
   '@ginger-society/ginger-ui@0.56.0':
     resolution: {integrity: sha512-BbJTa5qehGRn+DJxWdZqNCbgsP2713RtJgnWTCy0q2+w2/LFhA3wOL5c38uwliMsYEsJ5cNMSpdsXr/dhF4RJg==}
+    engines: {node: '>=16'}
+    hasBin: true
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
+
+  '@ginger-society/ginger-ui@0.57.0':
+    resolution: {integrity: sha512-oy5DT6VxDrzRvTptKWINMyaSk9DpSMr1pdlf6lhSqjTERa27IYG5uOdhC35tm486gC7nKY7eAbz4WzvsbpJ9ow==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -1736,10 +1752,6 @@ packages:
   cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
-
-  clsx@1.2.1:
-    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
-    engines: {node: '>=6'}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -3819,12 +3831,6 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  react-draggable@4.4.6:
-    resolution: {integrity: sha512-LtY5Xw1zTPqHkVmtM3X8MUOxNDOUhv/khTgBgrUvwaS064bwVvxT+q5El0uUFNx5IEPKXuRejr7UqLwBIg5pdw==}
-    peerDependencies:
-      react: '>= 16.3.0'
-      react-dom: '>= 16.3.0'
-
   react-hotkeys-hook@4.5.0:
     resolution: {integrity: sha512-Samb85GSgAWFQNvVt3PS90LPPGSf9mkH/r4au81ZP1yOIFayLC3QAvqTgGtJ8YEDMXtPmaVBs6NgipHO6h4Mug==}
     peerDependencies:
@@ -5196,7 +5202,20 @@ snapshots:
       - terser
       - typescript
 
+  '@ginger-society/ginger-ui-uml@0.2.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@ginger-society/ginger-ui': 0.57.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-icons: 5.2.1(react@18.2.0)
+
   '@ginger-society/ginger-ui@0.56.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-icons: 5.2.1(react@18.2.0)
+
+  '@ginger-society/ginger-ui@0.57.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -6836,8 +6855,6 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
-
-  clsx@1.2.1: {}
 
   clsx@2.1.1: {}
 
@@ -9646,13 +9663,6 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.2
-
-  react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      clsx: 1.2.1
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
 
   react-hotkeys-hook@4.5.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:

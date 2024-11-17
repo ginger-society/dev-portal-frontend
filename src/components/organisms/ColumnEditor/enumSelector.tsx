@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
-import { useUMLEditor } from "../UMLEditor/context";
-import { BlockType, Block } from "../UMLEditor/types";
+import { useUMLEditor,  BlockType, Block } from "@ginger-society/ginger-ui-uml";
 import styles from "./column-editor.module.scss";
 import { Select } from "@ginger-society/ginger-ui";
 

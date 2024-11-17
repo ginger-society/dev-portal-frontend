@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
-import { UMLEditorProvider } from "@/components/organisms/UMLEditor/context";
-import {
-  Block,
+import { UMLEditorProvider, Block,
   Connection,
-  EditorData,
-} from "@/components/organisms/UMLEditor/types";
+  EditorData, } from "@ginger-society/ginger-ui-uml";
+  
 import SysDesignWrapper from "./SysDesignWrapper";
 import { Button, ButtonType, Text, TextColor } from "@ginger-society/ginger-ui";
 import { MetadataService } from "@/services";
