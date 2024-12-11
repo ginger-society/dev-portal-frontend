@@ -48,7 +48,7 @@ const WorkspaceSettingsMemberPage = () => {
     });
 
     const members = await IAMService.identityGetMembers({
-      groupIdentifier: workspaceDetails.groupId,
+      groupParam: workspaceDetails.groupId,
     });
     setMembers(members);
     setWorkspace(workspaceDetails);
@@ -70,7 +70,7 @@ const WorkspaceSettingsMemberPage = () => {
     }
     try {
       const data = await IAMService.identityManageMembership({
-        groupIdentifier: workspace.groupId,
+        groupParam: workspace.groupId,
         userId: userToAdd,
         action: memberTypeToAdd.value,
       });
@@ -89,7 +89,7 @@ const WorkspaceSettingsMemberPage = () => {
       return;
     }
     await IAMService.identityManageMembership({
-      groupIdentifier: workspace.groupId,
+      groupParam: workspace.groupId,
       userId: userId,
       action: "remove",
     });
@@ -104,12 +104,12 @@ const WorkspaceSettingsMemberPage = () => {
 
     try {
       await IAMService.identityManageMembership({
-        groupIdentifier: workspace.groupId,
+        groupParam: workspace.groupId,
         userId: userId,
         action: "remove",
       });
       await IAMService.identityManageMembership({
-        groupIdentifier: workspace.groupId,
+        groupParam: workspace.groupId,
         userId: userId,
         action: actionType,
       });
@@ -164,10 +164,10 @@ const WorkspaceSettingsMemberPage = () => {
                   <ConfirmationButton
                     label={"Remove"}
                     onClick={() => removeMember(member.emailId)}
-                    title = "Are you sure ?"
-                    description = "This is not reversible"
-                    confirmButtonLabel= "Yes, I am sure"
-                    okBtnType = {ButtonType.Danger}
+                    title="Are you sure ?"
+                    description="This is not reversible"
+                    confirmButtonLabel="Yes, I am sure"
+                    okBtnType={ButtonType.Danger}
                   ></ConfirmationButton>
                   {member.isAdmin ? (
                     <Button
