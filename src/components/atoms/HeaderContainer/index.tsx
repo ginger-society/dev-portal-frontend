@@ -40,7 +40,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
       }
       localStorage.removeItem("refresh_token");
       localStorage.removeItem("access_token");
-      location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login`;
+      location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/logout`;
     } catch (err) {
       console.error(err);
     }
