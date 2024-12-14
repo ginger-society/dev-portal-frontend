@@ -3,7 +3,12 @@ import { HandleLoginRedirect } from "@ginger-society/ginger-ui";
 
 export const HandleNavigation = () => {
   const navigateToHome = () => {
-    router.navigate("/manage-workspaces");
+    const path = router.state.location.search.split('?returnUrl=')[1]
+    if (path) {
+      router.navigate(path);
+    } else {
+      router.navigate("/manage-workspaces");
+    }
   };
   return <HandleLoginRedirect handleNavigation={navigateToHome} />;
 };
