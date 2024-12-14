@@ -25,30 +25,29 @@ const validateToken = async (): Promise<ValidateTokenResponse> => {
 const App = () => {
   const { user } = useContext<AuthContextInterface<ValidateTokenResponse>>(AuthContext);
   return <>
-    <AuthProvider<ValidateTokenResponse>
-
-      validateToken={validateToken}
-      navigateToLogin={() => {
-        window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
-      }
-      }
-      postLoginNavigate={() =>
-        router.navigate("/manage-workspaces")
-      }
-    >
-      <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} user={user}>
-        <WorkspaceProvider>
-          <SnackbarProvider>
-            <RouterProvider router={router} />
-          </SnackbarProvider>
-        </WorkspaceProvider>
-      </NotificationProvider>
-    </AuthProvider >
+    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} user={user}>
+      <WorkspaceProvider>
+        <SnackbarProvider>
+          <RouterProvider router={router} />
+        </SnackbarProvider>
+      </WorkspaceProvider>
+    </NotificationProvider>
   </>
 };
 
 
 const root = createRoot(rootElement);
 root.render(
-  <App />
+  <AuthProvider<ValidateTokenResponse>
+
+    validateToken={validateToken}
+    navigateToLogin={() =>
+      window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
+    }
+    postLoginNavigate={() =>
+      router.navigate("/manage-workspaces")
+    }
+  >
+    <App />
+  </AuthProvider>
 );

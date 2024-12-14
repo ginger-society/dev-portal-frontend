@@ -295,7 +295,7 @@ const SysDesignView = () => {
 
   const { subscribeToTopic } = useContext(NotificationContext);
   useEffect(() => {
-    subscribeToTopic("pipeline-update", (msg: {identifier: string , status : string}) => {
+    subscribeToTopic("pipeline-update", (msg: { identifier: string, status: string }) => {
       console.log("Received message for pipeline-update:", msg);
       setBlocks((v) => {
         const updatedBlocks = {
@@ -445,7 +445,7 @@ const SysDesignView = () => {
             }
             align="left"
           >
-            <ul style={{paddingInlineStart: 0}}>
+            <ul style={{ paddingInlineStart: 0 }}>
               {(
                 (orgs.find((o) => o.slug === org_id)
                   ?.quickLinks as unknown as any[]) || []
