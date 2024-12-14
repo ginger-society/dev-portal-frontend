@@ -34,3 +34,13 @@ prod = "http://localhost:8081"
 stage = "https://dev-portal-staging.gingersociety.org"
 
 [urls_ws]
+
+[portal_config]
+allow_registration = true
+auth_redirection_path = "/#/handle-auth/"
+disabled = false
+friendly_name = "Dev Portal"
+has_web_interface = true
+id = "dev-portal-staging"
+logo_url = "https://www.gingersociety.org/img/ginger-dev-portal-icon.png"
+tnc_url = "https://www.gingersociety.org/terms-of-use/"
