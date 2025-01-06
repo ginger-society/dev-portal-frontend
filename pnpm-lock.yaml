@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ginger-society/ginger-ui':
-        specifier: 0.72.0
-        version: 0.72.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.73.0
+        version: 0.73.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@ginger-society/ginger-ui-uml':
         specifier: ^0.3.0-nightly.0
         version: 0.3.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
@@ -554,8 +554,8 @@ packages:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
 
-  '@ginger-society/ginger-ui@0.72.0':
-    resolution: {integrity: sha512-tpseE3Hf1KWqgSufhUjW4C5TQRFiRxO5WEFdqZPslqgYG8uXzKnnt3RRbI0E8p3IuEcn6A+3s+gAowTZW0VAZQ==}
+  '@ginger-society/ginger-ui@0.73.0':
+    resolution: {integrity: sha512-23v5T8TxyXZ9DMQmCyDFbrFpOoCbSaJPVk5rAQBH9pKH9gp3qP1avodqbmy5vs3Ht5jPgKGy8RXpF1wZJma4dg==}
     engines: {node: '>=16'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
@@ -4526,7 +4526,7 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-icons: 5.2.1(react@18.2.0)
 
-  '@ginger-society/ginger-ui@0.72.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ginger-society/ginger-ui@0.73.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
