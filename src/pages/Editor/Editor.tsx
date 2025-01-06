@@ -1,19 +1,21 @@
 import HeaderContainer from "@/components/atoms/HeaderContainer";
-import { LegendConfigs, UMLEditor, UMLEditorProvider,
-  useUMLEditor,Block,
+import {
+  LegendConfigs, UMLEditor, UMLEditorProvider,
+  useUMLEditor, Block,
   Connection,
   BlockData,
   MarkerType,
   EditorData,
   BlockType,
-  Row, } from "@ginger-society/ginger-ui-uml";
+  Row,
+} from "@ginger-society/ginger-ui-uml";
 import ColumnEditor from "@/components/organisms/ColumnEditor";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import TableEditor from "@/components/organisms/TableEditor";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType, Tooltip, AuthContext } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";
@@ -42,8 +44,16 @@ const Editor = () => {
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
   const { docId, branch } = useParams<{ docId: string; branch: string }>();
   const [branchData, setBranchData] = useState<GetDbschemaByIdResponse>();
+  const { lookupPermission } = useContext(PermissionContext)
+  const [allowEdit, setAllowEdit] = useState<boolean>(false)
 
-  const [copiedToClipboard, setCopiedToClipboard] = useState<boolean>();
+  const updatePermission = async (groupId?: string) => {
+    if (!groupId || !lookupPermission) {
+      return;
+    }
+    const data = await lookupPermission(groupId, 'isMember')
+    setAllowEdit(data)
+  }
 
   const fetchData = async () => {
     if (!docId) {
@@ -57,6 +67,8 @@ const Editor = () => {
     });
 
     setBranchData(dbschema);
+
+    dbschema.groupId && updatePermission(dbschema.groupId)
 
     if (!dbschema.data) {
       return;
@@ -115,29 +127,6 @@ const Editor = () => {
     }
   };
 
-  function copyToClipboard(text: string) {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        setCopiedToClipboard(true);
-        setTimeout(() => {
-          setCopiedToClipboard(false);
-        }, 2500);
-      })
-      .catch((err) => {
-        console.error("Unable to copy to clipboard:", err);
-        // Handle error, such as showing an error message to the user
-      });
-  }
-
-  const handleSchemaCopy = () => {
-    const blocksStr = transformDataToSave();
-    copyToClipboard(JSON.stringify(blocksStr));
-  };
-
-  const goHome = () => {
-    router.navigate("/stage");
-  };
 
   return (
     <UMLEditorProvider
@@ -154,31 +143,23 @@ const Editor = () => {
         <HeaderContainer>
           <div className={styles["actions-container"]}>
             <FaDatabase /> {branchData?.orgId}/ {branchData?.name}
-            {/* <Button
-              onClick={goHome}
-              label={"Go home"}
-              type={ButtonType.Secondary}
-            ></Button> */}
-            <Button
-              onClick={handleSave}
-              label={saveLoading ? "Saving..." : "Save"}
-              loading={saveLoading}
-              type={ButtonType.Primary}
-            ></Button>
-            {/* <Button
-              onClick={handleSchemaCopy}
-              label={copiedToClipboard ? "Copied" : "Copy Schema to clipboard"}
-              type={ButtonType.Tertiary}
-            ></Button> */}
+            <Permission type={PermissionType.MEMBER} groupId={branchData?.groupId}>
+              <Button
+                onClick={handleSave}
+                label={saveLoading ? "Saving..." : "Save"}
+                loading={saveLoading}
+                type={ButtonType.Primary}
+              ></Button>
+            </Permission>
           </div>
         </HeaderContainer>
-        <UMLEditorWrapper />
+        <UMLEditorWrapper allowEdit={allowEdit} />
       </>
     </UMLEditorProvider>
   );
 };
 
-const UMLEditorWrapper = () => {
+const UMLEditorWrapper = ({ allowEdit }: { allowEdit: boolean }) => {
   const { blocks, setBlocks, connections, setConnections, setEditorData } =
     useUMLEditor();
 
@@ -372,7 +353,7 @@ const UMLEditorWrapper = () => {
       setEditorData={setEditorData}
       updateConnections={updateConnections}
       createNewBlock={createNewBlock}
-      allowEdit={true}
+      allowEdit={allowEdit}
     />
   );
 };

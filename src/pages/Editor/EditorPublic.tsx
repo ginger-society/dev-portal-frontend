@@ -1,11 +1,13 @@
 import HeaderContainer from "@/components/atoms/HeaderContainer";
-import { LegendConfigs, UMLEditor, useUMLEditor , UMLEditorProvider,  Block,
+import {
+  LegendConfigs, UMLEditor, useUMLEditor, UMLEditorProvider, Block,
   Connection,
   BlockData,
   MarkerType,
   EditorData,
   BlockType,
-  Row,} from "@ginger-society/ginger-ui-uml";
+  Row,
+} from "@ginger-society/ginger-ui-uml";
 import ColumnEditor from "@/components/organisms/ColumnEditor";
 import { ColumnType } from "@/components/organisms/ColumnEditor/types";
 import TableEditor from "@/components/organisms/TableEditor";
@@ -94,30 +96,6 @@ const EditorPublic = () => {
         type: block.type,
       };
     });
-  };
-
-  function copyToClipboard(text: string) {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        setCopiedToClipboard(true);
-        setTimeout(() => {
-          setCopiedToClipboard(false);
-        }, 2500);
-      })
-      .catch((err) => {
-        console.error("Unable to copy to clipboard:", err);
-        // Handle error, such as showing an error message to the user
-      });
-  }
-
-  const handleSchemaCopy = () => {
-    const blocksStr = transformDataToSave();
-    copyToClipboard(JSON.stringify(blocksStr));
-  };
-
-  const goHome = () => {
-    router.navigate("/stage");
   };
 
   return (
