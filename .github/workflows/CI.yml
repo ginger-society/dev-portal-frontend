@@ -1,57 +1,74 @@
-name: CI
+name: Build and Push Docker Image
 
 on:
   workflow_dispatch:
   push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+    branches:
+      - main
 
 jobs:
-  build:
-    if: github.event.pull_request.draft == false
+  build-and-push:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Report failure if checkout fails
-        if: failure()
-        run: ginger-connector update-pipeline stage failed
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Report failure if Docker Buildx setup fails
-        if: failure()
-        run: ginger-connector update-pipeline stage failed
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install OpenSSL 1.1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.23_amd64.deb
+          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.23_amd64.deb
 
       - name: Install ginger-apps
         run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-pipeline-clis.sh)"
-      - name: Report failure if ginger-apps installation fails
-        if: failure()
-        run: ginger-connector update-pipeline stage failed
 
       - name: Authenticate with ginger-auth
         id: ginger-auth
         run: ginger-auth token-login ${{ secrets.GINGER_TOKEN }}
-      - name: Report failure if authentication fails
-        if: failure()
-        run: ginger-connector update-pipeline stage failed
 
       - name: Update pipeline to running
         run: ginger-connector update-pipeline stage running
 
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - name: Report failure if Docker login fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
       - name: Build Docker image
         run: |
-          docker buildx build . \
-            -t deb-portal-builder \
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/dev-portal-prod-fe:latest \
             -f Dockerfile.build \
             --build-arg GINGER_TOKEN=${{ secrets.GINGER_TOKEN }} \
             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
             --build-arg AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
-            --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }}
+            --build-arg DISTRIBUTION_ID=${{ secrets.DISTRIBUTION_ID }} .
       - name: Report failure if Docker build fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/dev-portal-prod-fe:latest
+      - name: Report failure if Docker push fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
+      - name: Publish stage using ginger-connector
+        run: ginger-connector publish stage
+        env:
+          GINGER_TOKEN: ${{ secrets.GINGER_TOKEN }}
+      - name: Report failure if publish stage fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
+      - name: Publish stage using ginger-connector for k8
+        run: ginger-connector publish stage-k8
+        env:
+          GINGER_TOKEN: ${{ secrets.GINGER_TOKEN }}
+      - name: Report failure if publish stage-k8 fails
         if: failure()
         run: ginger-connector update-pipeline stage failed
 
@@ -59,5 +76,6 @@ jobs:
         if: success()
         run: ginger-connector update-pipeline stage passing
 
-      - name: Publish metadata
-        run: ginger-connector publish stage
+      - name: Trigger dependent pipelines
+        if: success()
+        run: ginger-connector trigger-dependent-pipelines ${{ secrets.GH_TOKEN }}

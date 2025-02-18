@@ -1,6 +1,5 @@
-FROM gingersociety/vite-react-builder:latest 
-
-COPY . .
+# Stage 1: Build the project
+FROM gingersociety/vite-react-builder:latest AS builder
 
 # Set environment variables using build arguments
 ARG GINGER_TOKEN
@@ -15,17 +14,30 @@ ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 ENV DISTRIBUTION_ID=$DISTRIBUTION_ID
 
-# Run the ginger-connector.debian commands
+# Copy project files
+COPY . .
+
+# Authenticate and connect
 RUN ginger-auth token-login ${GINGER_TOKEN}
 RUN ginger-connector refer stage
 RUN ginger-connector connect stage
 
-# Install dependencies
+# Install dependencies and build
 RUN pnpm i
-
-# Build the project
 RUN pnpm build
 
+# Upload build artifacts (optional)
 RUN aws s3 cp dist/ s3://dev-portal-fe-staging/ --recursive
-
 RUN aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+
+# Stage 2: Serve the built files with Nginx
+FROM nginx:alpine
+
+# Copy built files from previous stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
