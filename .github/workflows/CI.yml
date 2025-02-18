@@ -64,18 +64,6 @@ jobs:
         if: failure()
         run: ginger-connector update-pipeline stage failed
 
-      - name: Publish stage using ginger-connector for k8
-        run: ginger-connector publish stage-k8
-        env:
-          GINGER_TOKEN: ${{ secrets.GINGER_TOKEN }}
-      - name: Report failure if publish stage-k8 fails
-        if: failure()
-        run: ginger-connector update-pipeline stage failed
-
       - name: Update pipeline to passing
         if: success()
         run: ginger-connector update-pipeline stage passing
-
-      - name: Trigger dependent pipelines
-        if: success()
-        run: ginger-connector trigger-dependent-pipelines ${{ secrets.GH_TOKEN }}
