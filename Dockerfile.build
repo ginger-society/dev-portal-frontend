@@ -30,6 +30,11 @@ RUN pnpm build
 RUN aws s3 cp dist/ s3://dev-portal-fe-staging/ --recursive
 RUN aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
 
+RUN ginger-connector refer prod
+RUN ginger-connector connect prod
+
+# build
+RUN pnpm build
 # Stage 2: Serve the built files with Nginx
 FROM nginx:alpine
 
