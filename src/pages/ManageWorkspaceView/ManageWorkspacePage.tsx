@@ -56,12 +56,12 @@ const ManageWorkspacePage = () => {
           <Text tag="h1" size={TextSize.Large}>
             Manage workspaces
           </Text>
-         <div>
-          <Button
-            type={ButtonType.Primary}
-            onClick={() => setIsCreateOrgOpen(true)}
-            label={"Create new workspace"}
-          ></Button>
+          <div>
+            <Button
+              type={ButtonType.Primary}
+              onClick={() => setIsCreateOrgOpen(true)}
+              label={"Create new workspace"}
+            ></Button>
           </div>
         </div>
 

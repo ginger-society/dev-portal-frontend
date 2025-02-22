@@ -1,29 +1,29 @@
+dir = "src/services"
 lang = "TS"
 organization_id = "ginger-society"
-dir = "src/services"
 refs_file = "src/shared/references.ts"
 service_type = "Portal"
 
 [services."@ginger-society/NotificationService"]
-stage = "https://api-staging.gingersociety.org"
-stage_k8 = "http://notification-service-service"
 dev = "http://localhost:3030"
 prod = "https://api.gingersociety.org"
 prod_k8 = "http://notification-service-service"
+stage = "https://api-staging.gingersociety.org"
+stage_k8 = "http://notification-service-service"
 
 [services."@ginger-society/IAMService"]
-prod_k8 = "http://iam-service-api-service/iam"
-prod = "https://api.gingersociety.org/iam"
-stage_k8 = "http://iam-service-api-service/iam"
-stage = "https://api-staging.gingersociety.org/iam"
 dev = "http://localhost:8080/iam"
+prod = "https://api.gingersociety.org/iam"
+prod_k8 = "http://iam-service-api-service/iam"
+stage = "https://api-staging.gingersociety.org/iam"
+stage_k8 = "http://iam-service-api-service/iam"
 
 [services."@ginger-society/MetadataService"]
-stage_k8 = "http://metadata-service-api-service/metadata"
-prod_k8 = "http://metadata-service-api-service/metadata"
 dev = "http://localhost:8081/metadata"
 prod = "https://api.gingersociety.org/metadata"
+prod_k8 = "http://metadata-service-api-service/metadata"
 stage = "https://api-staging.gingersociety.org/metadata"
+stage_k8 = "http://metadata-service-api-service/metadata"
 
 [portals_refs."@ginger-society/iam-frontend-users"]
 dev = "http://localhost:3001"
@@ -31,38 +31,38 @@ prod = "https://iam.gingersociety.org"
 stage = "https://iam-staging.gingersociety.org"
 
 [ws_refs."@ginger-society/NotificationService"]
-dev = "ws://localhost:3030/notification"
-stage = "wss://api-staging.gingersociety.org/notification"
-prod_k8 = "ws://notification-service-service/notification"
+dev = "wss://api.gingersociety.org/notification"
 prod = "wss://api.gingersociety.org/notification"
+prod_k8 = "ws://notification-service-service/notification"
+stage = "wss://api-staging.gingersociety.org/notification"
 stage_k8 = "ws://notification-service-service/notification"
 
 [ws_refs."@ginger-society/IAMService"]
-stage_k8 = ""
-stage = ""
+dev = ""
 prod = ""
 prod_k8 = ""
-dev = ""
+stage = ""
+stage_k8 = ""
 
 [ws_refs."@ginger-society/MetadataService"]
+prod = ""
+prod_k8 = ""
 stage = ""
 stage_k8 = ""
-prod_k8 = ""
-prod = ""
 
 [urls]
 dev = "http://localhost:3000"
-stage = "https://dev-portal-staging.gingersociety.org"
 prod = "https://dev-portal.gingersociety.org"
+stage = "https://dev-portal-staging.gingersociety.org"
 
 [urls_ws]
 
 [portal_config]
-id = "dev-portal-staging"
-logo_url = "https://www.gingersociety.org/img/ginger-dev-portal-icon.png"
-disabled = false
-tnc_url = "https://www.gingersociety.org/terms-of-use/"
 allow_registration = true
 auth_redirection_path = "/#/handle-auth/"
-has_web_interface = true
+disabled = false
 friendly_name = "Dev Portal"
+has_web_interface = true
+id = "dev-portal-staging"
+logo_url = "https://www.gingersociety.org/img/ginger-dev-portal-icon.png"
+tnc_url = "https://www.gingersociety.org/terms-of-use/"

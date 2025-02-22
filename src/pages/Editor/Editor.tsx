@@ -86,6 +86,7 @@ const Editor = () => {
           rows: block.rows || [],
           ref: React.createRef(),
           data: block.data || {},
+          position: block.position || { top: 100, left: 200 },
           type: block.type || BlockType.Table,
         },
       };
