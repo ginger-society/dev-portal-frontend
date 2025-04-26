@@ -1,0 +1,84 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-image-and-push-to-container-registry
+
+  namespace: tasks-gingersociety-dev-portal-frontend
+  annotations:
+    x-ginger-task-namespace: "gingersociety-dev-portal-frontend" # Custom annotation
+    x-ginger-task-trigger-branch: '["refs/heads/main"]' # Allowed branches
+
+spec:
+  workspaces:
+    - name: source
+    - name: ssh-credentials # Store SSH keys
+    - name: ssh-config # Store SSH setup
+    - name: kubeconfig
+    - name: buildah-cache # Workspace for caching
+    - name: pipeline-secrets
+    - name: general-purpose-cache
+
+  steps:
+    - name: clone
+      image: containers.gingersociety.org/secure-git-task-runner:latest
+      script: |
+        #!/bin/sh
+        set -e  # Exit on error
+
+        /usr/local/bin/configurator.sh
+
+
+        git config --global init.defaultBranch main
+        git clone git@source.gingersociety.org:gingersociety-dev-portal-frontend.git /workspace/source/repo
+        echo "Repository cloned successfully."
+
+    - name: build
+      image: containers.gingersociety.org/enhanced-buildah:latest
+      script: |
+        #!/bin/sh
+        set -e  # Exit on error
+
+        /usr/local/bin/configurator_buildah.sh
+
+        echo "Loading secrets from workspace..."
+        export DOCKER_USERNAME=$(cat /workspace/pipeline-secrets/DOCKER_USERNAME)
+        export DOCKER_PASSWORD=$(cat /workspace/pipeline-secrets/DOCKER_PASSWORD)
+        export GINGER_TOKEN=$(cat /workspace/pipeline-secrets/GINGER_TOKEN)
+
+        echo "GINGER_TOKEN=$GINGER_TOKEN"
+
+        echo "Logging into container registry..."
+        echo "$DOCKER_PASSWORD" | buildah login --username "$DOCKER_USERNAME" --password-stdin containers.gingersociety.org
+
+
+        # ✅ Ensure PNPM and node_modules folders exist
+        mkdir -p /workspace/general-purpose-cache/pnpm
+        mkdir -p /workspace/general-purpose-cache/node_modules
+
+        cd /workspace/source/repo
+        echo "Building db runtime image with Buildah"
+        buildah bud \
+          --build-arg GINGER_TOKEN=$GINGER_TOKEN \
+          --isolation=chroot \
+          --storage-driver=vfs \
+          --volume /workspace/general-purpose-cache/pnpm:/pnpm-cache:Z \
+          --volume /workspace/general-purpose-cache/node_modules:/app/node_modules:Z \
+          -t containers.gingersociety.org/gingersociety/gingersociety-dev-portal-frontend \
+          --root=$CONTAINERS_STORAGE \
+          .
+
+        buildah push containers.gingersociety.org/gingersociety/gingersociety-dev-portal-frontend
+      securityContext:
+        privileged: true
+
+    - name: restart-deployment
+      image: containers.gingersociety.org/secure-git-task-runner:latest
+      script: |
+        #!/bin/sh
+        set -e
+        echo "🔹 Setting KUBECONFIG..."
+        cp -r /workspace/kubeconfig /keys
+        export KUBECONFIG=/workspace/kubeconfig/kubeconfig.gingersociety.prod.yml
+        echo "Rolling out restart"
+        kubectl rollout restart deployment dev-portal-frontend-deploy \
+          -n default
