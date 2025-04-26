@@ -1,68 +1,59 @@
-dir = "src/services"
 lang = "TS"
 organization_id = "ginger-society"
+dir = "src/services"
 refs_file = "src/shared/references.ts"
 service_type = "Portal"
 
-[services."@ginger-society/NotificationService"]
-dev = "http://localhost:3030"
-prod = "https://api.gingersociety.org"
-prod_k8 = "http://notification-service-service"
-stage = "https://api-staging.gingersociety.org"
-stage_k8 = "http://notification-service-service"
+[services."@ginger-society/MetadataService"]
+prod = "https://api.gingersociety.org/metadata"
 
 [services."@ginger-society/IAMService"]
-dev = "http://localhost:8080/iam"
 prod = "https://api.gingersociety.org/iam"
+stage = "https://api.gingersociety.org/iam"
 prod_k8 = "http://iam-service-api-service/iam"
-stage = "https://api-staging.gingersociety.org/iam"
 stage_k8 = "http://iam-service-api-service/iam"
 
-[services."@ginger-society/MetadataService"]
-dev = "http://localhost:8081/metadata"
-prod = "https://api.gingersociety.org/metadata"
-prod_k8 = "http://metadata-service-api-service/metadata"
-stage = "https://api-staging.gingersociety.org/metadata"
-stage_k8 = "http://metadata-service-api-service/metadata"
+[services."@ginger-society/NotificationService"]
+prod = "https://api.gingersociety.org"
+stage = "https://api-staging.gingersociety.org"
+
+[services."@ginger-society/GingerKubeService"]
+prod = "https://api.gingersociety.org/kube"
+stage = "https://api.gingersociety.org/kube"
 
 [portals_refs."@ginger-society/iam-frontend-users"]
-dev = "http://localhost:3001"
 prod = "https://iam.gingersociety.org"
-stage = "https://iam-staging.gingersociety.org"
 
 [ws_refs."@ginger-society/NotificationService"]
-dev = "wss://api.gingersociety.org/notification"
 prod = "wss://api.gingersociety.org/notification"
-prod_k8 = "ws://notification-service-service/notification"
 stage = "wss://api-staging.gingersociety.org/notification"
-stage_k8 = "ws://notification-service-service/notification"
 
 [ws_refs."@ginger-society/IAMService"]
-dev = ""
-prod = ""
-prod_k8 = ""
 stage = ""
 stage_k8 = ""
+prod = ""
+prod_k8 = ""
+
+[ws_refs."@ginger-society/GingerKubeService"]
+stage = ""
+prod = ""
 
 [ws_refs."@ginger-society/MetadataService"]
 prod = ""
-prod_k8 = ""
-stage = ""
-stage_k8 = ""
 
 [urls]
-dev = "http://localhost:3000"
 prod = "https://dev-portal.gingersociety.org"
+dev = "http://localhost:3000"
 stage = "https://dev-portal-staging.gingersociety.org"
 
 [urls_ws]
 
 [portal_config]
-allow_registration = true
-auth_redirection_path = "/#/handle-auth/"
-disabled = false
-friendly_name = "Dev Portal"
-has_web_interface = true
 id = "dev-portal-staging"
 logo_url = "https://www.gingersociety.org/img/ginger-dev-portal-icon.png"
+disabled = false
 tnc_url = "https://www.gingersociety.org/terms-of-use/"
+allow_registration = true
+auth_redirection_path = "/#/handle-auth/"
+has_web_interface = true
+friendly_name = "Dev Portal"

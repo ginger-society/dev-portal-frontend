@@ -15,12 +15,22 @@ import TableEditor from "@/components/organisms/TableEditor";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext, Text, TextSize, Aside, TextArea, useSnackbar, SnackbarTimer } from "@ginger-society/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
-import { MetadataService } from "@/services";
+import { GingerKubeService, MetadataService } from "@/services";
 import { GetDbschemaByIdResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
+// import AceEditor from "react-ace";
+
+
+// Import a theme and a mode (required)
+// import "ace-builds/src-noconflict/mode-python";
+// import "ace-builds/src-noconflict/theme-solarized_dark";
+// import "ace-builds/src-noconflict/theme-solarized_light";
+// import "ace-builds/src-noconflict/mode-javascript";
+
+
 
 const legendConfigs: LegendConfigs = {
   [MarkerType.Rectangle]: {
@@ -42,6 +52,13 @@ const Editor = () => {
   const [connections, setConnections] = useState<Connection[]>([]);
   const [editorData, setEditorData] = useState<EditorData>();
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
+  const [isSliderOpen, setIsSliderOpen] = useState<boolean>(false)
+  const [logs, setLogs] = useState<string>()
+  const [isLogLoading, setIsLogLoading] = useState<boolean>(false)
+  const { show } = useSnackbar();
+  const [commitMessage, setCommitMessage] = useState<string>();
+
+
   const { docId, branch } = useParams<{ docId: string; branch: string }>();
   const [branchData, setBranchData] = useState<GetDbschemaByIdResponse>();
   const { lookupPermission } = useContext(PermissionContext)
@@ -129,6 +146,80 @@ const Editor = () => {
   };
 
 
+  const handleValidate = async () => {
+    const blocksStr = JSON.stringify(transformDataToSave());
+    handleSave();
+    if (!branchData?.repoOrigin) {
+      show("No repo found", SnackbarTimer.Medium)
+      return;
+    }
+
+    const response = await GingerKubeService.routesKubectlCommand({
+      kubectlRequest: {
+        modelsPyContent: blocksStr,
+        commit: false,
+        repoName: branchData?.repoOrigin,
+        dbName: branchData.name
+      }
+    })
+
+    setIsSliderOpen(true);
+    setLogs(undefined);
+
+    console.log(response);
+    setIsLogLoading(true);
+
+    setTimeout(async () => {
+      if (!response.taskrunName) {
+        return;
+      }
+
+      const statusAndLogs = await GingerKubeService.routesKubectlLogs({
+        logRequest: {
+          taskrunName: response.taskrunName,
+          stepName: "step-dry-run"
+        }
+      })
+
+      console.log(statusAndLogs.status)
+      console.log(statusAndLogs.logs)
+      setIsSliderOpen(true)
+      setLogs(statusAndLogs.logs)
+      setIsLogLoading(false);
+
+
+    }, 15000)
+
+  }
+
+  const handleMigrate = async () => {
+    const blocksStr = JSON.stringify(transformDataToSave());
+
+    if (!branchData?.repoOrigin) {
+      return;
+    }
+
+    const response = await GingerKubeService.routesKubectlCommand({
+      kubectlRequest: {
+        modelsPyContent: blocksStr,
+        commit: true,
+        commitMessage,
+        repoName: branchData?.repoOrigin,
+        dbName: branchData.name
+      }
+    })
+
+    setIsSliderOpen(false);
+    setCommitMessage(undefined);
+    setLogs(undefined);
+    show(<>Migration started.. Esitated time 3 minutes</>, SnackbarTimer.Medium)
+
+  }
+
+  const onCodeEditorDataChange = (newValue: string) => {
+    console.log(newValue);
+  }
+
   return (
     <UMLEditorProvider
       value={{
@@ -145,18 +236,74 @@ const Editor = () => {
           <div className={styles["actions-container"]}>
             <FaDatabase /> {branchData?.orgId}/ {branchData?.name}
             <Permission type={PermissionType.MEMBER} groupId={branchData?.groupId}>
-              <Button
-                onClick={handleSave}
-                label={saveLoading ? "Saving..." : "Save"}
-                loading={saveLoading}
-                type={ButtonType.Primary}
-              ></Button>
+              <>
+                <Button
+                  onClick={handleSave}
+                  label={saveLoading ? "Saving..." : "Save"}
+                  loading={saveLoading}
+                  type={ButtonType.Primary}
+                ></Button>
+                <Button
+                  onClick={handleValidate}
+                  label={"Make Migrations"}
+                  type={ButtonType.Primary}
+                ></Button>
+              </>
             </Permission>
           </div>
         </HeaderContainer>
         <UMLEditorWrapper allowEdit={allowEdit} />
+        <Aside
+          isOpen={isSliderOpen}
+          onClose={() => setIsSliderOpen(false)}
+        >
+          <div style={{ height: '100vh', overflow: 'auto' }}>
+            <div style={{ display: 'flex' }}>
+              <Text tag="h1" size={TextSize.Large}>
+                Logs
+              </Text>
+            </div>
+            <Text>
+              {isLogLoading ? 'Loading......' : ''}
+              <pre style={{
+                whiteSpace: "pre-wrap",
+                fontFamily: "monospace",
+                fontSize: "0.875rem", // optional: make it a bit smaller
+                overflowY: "auto",
+                background: "var(--primary-bg-color)", // optional: light background
+                padding: "1rem",
+                borderRadius: "0.5rem"
+              }}>{logs}</pre>
+            </Text>
+            <div>
+              {!isLogLoading ? <>
+                {/* <Text>Pre Migration Script</Text>
+                <AceEditor
+                  mode="python"
+                  theme="solarized_dark"
+                  onChange={onCodeEditorDataChange}
+                  name="pre_migration_script"
+                  editorProps={{ $blockScrolling: true }}
+                  width="100%"
+                />
+                <Text>Post Migration Script</Text>
+                <AceEditor
+                  mode="python"
+                  theme="solarized_dark"
+                  onChange={onCodeEditorDataChange}
+                  name="post_migration_script"
+                  editorProps={{ $blockScrolling: true }}
+                  width="100%"
+                /> */}
+                <TextArea label="Commit Message" value={commitMessage} onChange={({ target: { value } }) => setCommitMessage(value)} />
+                <Button onClick={handleMigrate} type={ButtonType.Primary} fullWidth label="Migrate"></Button>
+              </> : <></>}
+            </div>
+          </div>
+        </Aside>
       </>
-    </UMLEditorProvider>
+    </UMLEditorProvider >
+
   );
 };
 

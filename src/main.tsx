@@ -4,6 +4,8 @@ import "./app.css";
 import "../node_modules/@ginger-society/ginger-ui/dist/esm/index.css";
 import "../node_modules/@ginger-society/ginger-ui-uml/dist/esm/index.css";
 
+
+
 import router from "./shared/router";
 import { SnackbarProvider, NotificationProvider, AuthContext, AuthContextInterface, AuthProvider, PermissionProvider } from "@ginger-society/ginger-ui";
 import { WorkspaceProvider } from "./components/organisms/WorkspaceSwitcher/WorkspaceContext";
