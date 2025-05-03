@@ -190,7 +190,7 @@ const legendConfigs: LegendConfigs = {
     color: "#4793AF",
   },
   [MarkerType.Hexagon]: {
-    label: "SQL Database",
+    label: "database",
     color: "#89439f",
   },
   [MarkerType.Triangle]: {

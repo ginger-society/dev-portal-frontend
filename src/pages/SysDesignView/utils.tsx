@@ -65,7 +65,7 @@ export const processAndBuildBlocks = (services: ServicesTrimmedResponse[], packa
           ref: React.createRef(),
           data: {
             name: schema.name,
-            type: "SQL Database",
+            type: "database",
             description: schema.description,
             blinkClass:
               schema.pipelineStatus && shadowClassMap[schema.pipelineStatus],
