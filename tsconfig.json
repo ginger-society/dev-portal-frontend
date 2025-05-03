@@ -34,4 +34,7 @@
   "include": [
     "./src"
   ],
+  "exclude": [
+    "src/services/NotificationService_client"
+  ],
 }
