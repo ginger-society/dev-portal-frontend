@@ -1,12 +1,19 @@
-import { LegendConfigs, LegendItemT, UMLEditor, useUMLEditor, Block,
+import {
+  LegendConfigs, LegendItemT, UMLEditor, useUMLEditor, Block,
   BlockType,
   Connection,
-  MarkerType, } from "@ginger-society/ginger-ui-uml";
+  MarkerType,
+} from "@ginger-society/ginger-ui-uml";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Aside,
   Dropdown,
+  Input,
   Loader,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalSize,
   SnackbarTimer,
   Text,
   TextSize,
@@ -30,6 +37,28 @@ import {
 import router from "@/shared/router";
 import Markdown from "react-markdown";
 import { shadowClassMap } from "./SysDesignView";
+
+const mockCatalog = [
+  {
+    id: 1,
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/919/919836.png', // Rust logo
+    title: 'Rust Backend',
+    description: 'Starter project for building APIs with Rust and Actix Web.',
+  },
+  {
+    id: 2,
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/919/919825.png', // Next.js logo (close)
+    title: 'Next.js Frontend',
+    description: 'A production-ready frontend template using Next.js and Tailwind CSS.',
+  },
+  {
+    id: 3,
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/919/919830.png', // Go logo
+    title: 'Go Microservice',
+    description: 'Lightweight Go template for scalable microservices.',
+  },
+];
+
 
 interface ProjectOption {
   Icon: React.ComponentType;
@@ -131,9 +160,9 @@ const FooterRenderer: React.FC<FooterRendererProps> = React.memo(
                 }
                 align="left"
               >
-                <ul style={{listStyle: 'none', paddingInlineStart: '0', marginBlockStart: 0 , marginBlockEnd: 0}}>
+                <ul style={{ listStyle: 'none', paddingInlineStart: '0', marginBlockStart: 0, marginBlockEnd: 0 }}>
                   {moreOptions.map((option, index) => (
-                    <li  key={index}>
+                    <li key={index}>
                       <a
                         className="block-footer-additional-menu-item"
                         href={option.link}
@@ -202,6 +231,9 @@ const SysDesignWrapper = ({
   const [markdownViewerTitle, setMarkdownViewerTitle] = useState<string>();
   const [markdownContent, setMarkdownContent] = useState<string>();
 
+  const [isCatalogOpen, setIsCatalogOpen] = useState<boolean>(false);
+  const [catalogSearchTxt, setCatalogSearchTxt] = useState<string>('');
+
   const navigateToDBEditor = (id: string) => {
     if (!isPublicView) {
       router.navigate(`/editor/${id}/stage`);
@@ -209,6 +241,7 @@ const SysDesignWrapper = ({
       router.navigate(`/public/editor/${id}/stage`);
     }
   };
+
 
   const navigateToSwagger = (id: string, org_id: string) => {
     if (!isPublicView) {
@@ -363,9 +396,69 @@ const SysDesignWrapper = ({
     }
   }
 
+  const yourDoubleClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    console.log(event);
+    setIsCatalogOpen(true);
+  }
+
+
+  const filteredCatalog = mockCatalog.filter(item =>
+    item.title.toLowerCase().includes(catalogSearchTxt.toLowerCase()) ||
+    item.description.toLowerCase().includes(catalogSearchTxt.toLowerCase())
+  );
+
+
 
   return (
-    <>
+    <div onDoubleClick={yourDoubleClickHandler}>
+      <Modal
+        size={ModalSize.XLarge}
+        isOpen={isCatalogOpen}
+        onClose={() => setIsCatalogOpen(false)}
+      >
+        <ModalHeader>Software Inventory</ModalHeader>
+        <ModalBody>
+          <div style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
+            <Input
+              label="Search"
+              value={catalogSearchTxt}
+              onChange={({ target: { value } }) => setCatalogSearchTxt(value)}
+              style={{ marginBottom: '16px' }}
+            />
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              {filteredCatalog.map(item => (
+                <div
+                  key={item.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '12px',
+                    borderBottom: '1px solid #eee',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => router.navigate(`/genesis/ginger-society/i`)}
+                >
+                  <img
+                    src={item.iconUrl}
+                    alt={item.title}
+                    style={{ width: '40px', height: '40px', marginRight: '12px', borderRadius: '6px', objectFit: 'cover' }}
+                  />
+                  <div>
+                    <div style={{ fontWeight: 'bold', fontSize: '16px' }}>{item.title}</div>
+                    <div style={{ fontSize: '14px', color: '#777' }}>{item.description}</div>
+                  </div>
+                </div>
+              ))}
+              {filteredCatalog.length === 0 && (
+                <div style={{ padding: '20px', textAlign: 'center', color: '#aaa' }}>
+                  No matching templates found.
+                </div>
+              )}
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
+
       <UMLEditor
         handleLegendClick={handleLegendClick}
         setBlocks={setBlocks}
@@ -493,7 +586,7 @@ const SysDesignWrapper = ({
           )}
         </div>
       </Aside>
-    </>
+    </div>
   );
 };
 

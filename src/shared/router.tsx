@@ -11,6 +11,7 @@ import {
 } from "@/pages/WorkspaceSettingsView";
 import { SystemThemePreferred, withAuthHOC } from '@ginger-society/ginger-ui';
 import ExampleComponent from "@/pages/ExamplePage";
+import Genesis from "@/pages/Genesis/Genesis";
 
 const AuthenticatedEditor = withAuthHOC(Editor);
 const AuthenticatedSwaggerViewPage = withAuthHOC(SwaggerViewPage);
@@ -26,6 +27,10 @@ const AuthenticatedWorkspaceSettingsMembersPage = withAuthHOC(
 
 const AuthenticatedWorkspaceSettingsDeletePage = withAuthHOC(
   WorkspaceSettingsDeletePage
+);
+
+const AuthenticatedGenesisPage = withAuthHOC(
+  Genesis
 );
 
 const router = createHashRouter([
@@ -64,6 +69,10 @@ const router = createHashRouter([
   {
     path: "/manage-workspaces/:org_id/members",
     element: <AuthenticatedWorkspaceSettingsMembersPage />,
+  },
+  {
+    path: "/genesis/:org_id/:template_id",
+    element: <AuthenticatedGenesisPage />,
   },
   {
     path: "/manage-workspaces/:org_id/delete",
