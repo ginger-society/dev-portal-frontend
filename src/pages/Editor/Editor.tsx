@@ -154,7 +154,7 @@ const Editor = () => {
       return;
     }
 
-    const response = await GingerKubeService.routesKubectlCommand({
+    const response = await GingerKubeService.routesTektonTaskrunCreate({
       kubectlRequest: {
         modelsPyContent: blocksStr,
         commit: false,
@@ -174,7 +174,7 @@ const Editor = () => {
         return;
       }
 
-      const statusAndLogs = await GingerKubeService.routesKubectlLogs({
+      const statusAndLogs = await GingerKubeService.routesTektonTaskrunLogs({
         logRequest: {
           taskrunName: response.taskrunName,
           stepName: "step-dry-run"
@@ -199,7 +199,7 @@ const Editor = () => {
       return;
     }
 
-    const response = await GingerKubeService.routesKubectlCommand({
+    const response = await GingerKubeService.routesTektonTaskrunCreate({
       kubectlRequest: {
         modelsPyContent: blocksStr,
         commit: true,
