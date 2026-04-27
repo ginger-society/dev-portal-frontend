@@ -1,0 +1,33 @@
+{
+  "FEAT1": {
+    "default": {
+      "val": 123
+    },
+    "exceptions": [
+      {
+        "criteria": {
+          "groupIds": ["group1", "group2"]
+        },
+        "value": {
+          "val": 456
+        }
+      }
+    ]
+  },
+  "FEAT2": {
+    "default": {
+      "val": 789
+    },
+    "exceptions": [
+      {
+        "criteria": {
+          "groupIds": ["group3"],
+          "audience": 50
+        },
+        "value": {
+          "val": 999
+        }
+      }
+    ]
+  }
+}
