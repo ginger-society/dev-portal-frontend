@@ -49,7 +49,7 @@ import {
   Section,
   Table,
   NotificationContext
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { MetadataService } from "@/services";
 import { useParams } from "react-router-dom";
 import styles from "./sysDesignView.module.scss";

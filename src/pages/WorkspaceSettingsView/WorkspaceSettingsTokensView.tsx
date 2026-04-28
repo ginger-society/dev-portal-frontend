@@ -14,7 +14,7 @@ import {
   TextColor,
   TextSize,
   useSnackbar,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { FaArrowLeft, FaCopy, FaRegBuilding } from "react-icons/fa";
 import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
@@ -173,10 +173,10 @@ const WorkspaceSettingsTokensPage = () => {
                     <ConfirmationButton
                       onClick={() => deactivateToken(token.pk, index)}
                       label={"Deactivate"}
-                      title = "Are you sure ?"
-                      description = "This is not reversible"
-                      confirmButtonLabel= "Yes, I am sure"
-                      okBtnType = {ButtonType.Danger}
+                      title="Are you sure ?"
+                      description="This is not reversible"
+                      confirmButtonLabel="Yes, I am sure"
+                      okBtnType={ButtonType.Danger}
                     />
                   )}
                 </div>

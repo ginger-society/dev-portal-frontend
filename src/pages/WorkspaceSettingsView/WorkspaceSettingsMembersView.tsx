@@ -15,7 +15,7 @@ import {
   Text,
   TextSize,
   useSnackbar,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { FaArrowLeft, FaRegBuilding } from "react-icons/fa";
 import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";

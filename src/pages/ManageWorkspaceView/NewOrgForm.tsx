@@ -7,7 +7,7 @@ import {
   Text,
   TextColor,
   useSnackbar,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { useState } from "react";
 
 function toSlug(input: string): string {
@@ -67,8 +67,8 @@ const NewOrgForm = ({ onCancel }: { onCancel: () => void }) => {
           setName(e.target.value);
         }}
         value={name}
-        // state="danger"
-        // info="This username is already taken."
+      // state="danger"
+      // info="This username is already taken."
       />
       <Text>Slug : {slug}</Text>
       <Text color={TextColor.Danger}>{errorTxt}</Text>

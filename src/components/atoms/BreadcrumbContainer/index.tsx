@@ -1,4 +1,4 @@
-import { Breadcrumb } from "@ginger-society/ginger-ui";
+import { Breadcrumb } from "@gingersociety/ginger-ui";
 
 const paths = [
   { path: "home", label: "Home" },

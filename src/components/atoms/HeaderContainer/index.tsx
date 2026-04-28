@@ -4,7 +4,7 @@ import {
   AuthHeartBeat,
   HeaderPositionEnum,
   AuthContext, AuthContextInterface
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import styles from "./header.module.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IAMService } from "@/services";

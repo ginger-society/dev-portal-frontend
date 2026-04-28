@@ -15,7 +15,7 @@ import TableEditor from "@/components/organisms/TableEditor";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext, Text, TextSize, Aside, TextArea, useSnackbar, SnackbarTimer } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext, Text, TextSize, Aside, TextArea, useSnackbar, SnackbarTimer } from "@gingersociety/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { GingerKubeService, MetadataService } from "@/services";

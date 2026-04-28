@@ -4,7 +4,7 @@ import React from "react";
 import { blockColorMap, IconsMap, shadowClassMap } from "./SysDesignView";
 import { IconType } from "react-icons";
 import { FaDatabase } from "react-icons/fa";
-import { TextColor } from "@ginger-society/ginger-ui";
+import { TextColor } from "@gingersociety/ginger-ui";
 
 export const processAndBuildBlocks = (services: ServicesTrimmedResponse[], packages: PackageResponse[], dbSchemas: GetDbschemaAndTablesResponse[], env: string): {
   blocks: {

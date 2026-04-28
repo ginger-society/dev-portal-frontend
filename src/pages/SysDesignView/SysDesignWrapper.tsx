@@ -18,7 +18,7 @@ import {
   Text,
   TextSize,
   useSnackbar,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import {
   FaBoxOpen,
   FaCheckDouble,

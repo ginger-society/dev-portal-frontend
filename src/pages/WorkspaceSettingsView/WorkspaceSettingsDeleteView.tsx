@@ -10,7 +10,7 @@ import {
   TextSize,
   TextWeight,
   useSnackbar,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { FaArrowLeft, FaRegBuilding } from "react-icons/fa";
 import styles from "./workspaceSettingsView.module.scss";
 import Navigator from "./SettingsNavigator";
@@ -106,10 +106,10 @@ const WorkspaceSettingsDeletePage = () => {
             />
             <br />
             <ConfirmationButton
-              title = "Are you sure ?"
-              description = "This is not reversible"
-              confirmButtonLabel= "Yes, I am sure"
-              okBtnType = {ButtonType.Danger}
+              title="Are you sure ?"
+              description="This is not reversible"
+              confirmButtonLabel="Yes, I am sure"
+              okBtnType={ButtonType.Danger}
               onClick={deleteWorkspace}
               disabled={confirmSlug !== workspace?.slug}
               label={<Text color={TextColor.Danger}>Delete</Text>}

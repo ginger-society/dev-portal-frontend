@@ -9,7 +9,7 @@ import {
   ModalSize,
   Text,
   TextSize,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 import { FaRegBuilding, FaWrench } from "react-icons/fa";
 import styles from "./manageWorkspacePage.module.scss";
 import { useEffect, useState } from "react";

@@ -13,7 +13,7 @@ import {
   TextArea,
   TextColor,
   TextWeight,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 
 const TableEditor = ({ close }: EditorProps) => {
   const {
@@ -85,10 +85,10 @@ const TableEditor = ({ close }: EditorProps) => {
           onClick={handleDelete}
           type={ButtonType.Tertiary}
           label={<Text color={TextColor.Danger}>Delete</Text>}
-          title = "Are you sure ?"
-          description = "This is not reversible"
-          confirmButtonLabel= "Yes, I am sure"
-          okBtnType = {ButtonType.Danger}
+          title="Are you sure ?"
+          description="This is not reversible"
+          confirmButtonLabel="Yes, I am sure"
+          okBtnType={ButtonType.Danger}
         ></ConfirmationButton>
       </div>
       {/* {JSON.stringify(blocks[editorData?.blockId]?.data)} */}

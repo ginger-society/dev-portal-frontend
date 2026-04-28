@@ -18,7 +18,7 @@ import {
   LoadingPage,
   TextColor,
   ConfirmationButton,
-} from "@ginger-society/ginger-ui";
+} from "@gingersociety/ginger-ui";
 
 const ColumnEditor = ({ close }: EditorProps): ReactNode => {
   const { blocks, setBlocks, editorData } = useUMLEditor();
@@ -102,10 +102,10 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
           onClick={handleDelete}
           type={ButtonType.Tertiary}
           label={<Text color={TextColor.Danger}>Delete</Text>}
-          title = "Are you sure ?"
-          description = "This is not reversible"
-          confirmButtonLabel= "Yes, I am sure"
-          okBtnType = {ButtonType.Danger}
+          title="Are you sure ?"
+          description="This is not reversible"
+          confirmButtonLabel="Yes, I am sure"
+          okBtnType={ButtonType.Danger}
         />
       </div>
       <Input
@@ -138,38 +138,38 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
         data.type === ColumnType.DateTimeField ||
         data.type === ColumnType.Boolean ||
         data.type === ColumnType.FloatField) && (
-        <Checkbox
-          label="Can be null ?"
-          onChange={(checked) => {
-            updateRow({ null: checked });
-          }}
-          checked={data.null}
-        />
-      )}
+          <Checkbox
+            label="Can be null ?"
+            onChange={(checked) => {
+              updateRow({ null: checked });
+            }}
+            checked={data.null}
+          />
+        )}
 
       {(data.type === ColumnType.DateField ||
         data.type === ColumnType.DateTimeField) && (
-        <>
-          {!data.auto_now && (
-            <Checkbox
-              label="Auto now add"
-              onChange={(checked) => {
-                updateRow({ auto_now_add: checked });
-              }}
-              checked={data.auto_now_add}
-            />
-          )}
-          {!data.auto_now_add && (
-            <Checkbox
-              label="Auto now"
-              onChange={(checked) => {
-                updateRow({ auto_now: checked });
-              }}
-              checked={data.auto_now}
-            />
-          )}
-        </>
-      )}
+          <>
+            {!data.auto_now && (
+              <Checkbox
+                label="Auto now add"
+                onChange={(checked) => {
+                  updateRow({ auto_now_add: checked });
+                }}
+                checked={data.auto_now_add}
+              />
+            )}
+            {!data.auto_now_add && (
+              <Checkbox
+                label="Auto now"
+                onChange={(checked) => {
+                  updateRow({ auto_now: checked });
+                }}
+                checked={data.auto_now}
+              />
+            )}
+          </>
+        )}
 
       {data.type === ColumnType.PositiveIntegerField && (
         <Input
@@ -196,70 +196,70 @@ const ColumnEditor = ({ close }: EditorProps): ReactNode => {
 
       {(data.type === ColumnType.TextField ||
         data.type === ColumnType.String) && (
-        <>
-          {data.type === ColumnType.String && (
+          <>
+            {data.type === ColumnType.String && (
+              <Input
+                label="Default"
+                type="text"
+                onChange={({ target: { value } }) => {
+                  updateRow({ default: value });
+                }}
+                value={data.default}
+              />
+            )}
+            {data.type === ColumnType.TextField && (
+              <TextArea
+                label="Default"
+                onChange={({ target: { value } }) => {
+                  updateRow({ default: value });
+                }}
+                rows={10}
+                value={data.default}
+              />
+            )}
+            {data.type === ColumnType.String && (
+              <EnumSelector
+                value={data.options_target}
+                onChange={(options_target) => {
+                  updateRow({ options_target });
+                }}
+              />
+            )}
             <Input
-              label="Default"
-              type="text"
+              type="number"
+              label="Max Length"
               onChange={({ target: { value } }) => {
-                updateRow({ default: value });
+                const strippedValue =
+                  value === "" ? "" : parseInt(value, 10).toString();
+                updateRow({ max_length: strippedValue });
               }}
-              value={data.default}
+              step={1}
+              value={data.max_length || 0}
             />
-          )}
-          {data.type === ColumnType.TextField && (
-            <TextArea
-              label="Default"
-              onChange={({ target: { value } }) => {
-                updateRow({ default: value });
-              }}
-              rows={10}
-              value={data.default}
-            />
-          )}
-          {data.type === ColumnType.String && (
-            <EnumSelector
-              value={data.options_target}
-              onChange={(options_target) => {
-                updateRow({ options_target });
-              }}
-            />
-          )}
-          <Input
-            type="number"
-            label="Max Length"
-            onChange={({ target: { value } }) => {
-              const strippedValue =
-                value === "" ? "" : parseInt(value, 10).toString();
-              updateRow({ max_length: strippedValue });
-            }}
-            step={1}
-            value={data.max_length || 0}
-          />
-        </>
-      )}
+          </>
+        )}
 
       {(data.type === ColumnType.ManyToManyField ||
         data.type === ColumnType.ForeignKey ||
         data.type === ColumnType.OneToOneField) && (
-        <>
-          <TableSelector
-            value={data.target}
-            onChange={(target) => {
-              updateRow({ target });
-            }}
-          />
-          <Input
-            label="Related Name"
-            type="text"
-            id="name"
-            value={data?.related_name || ""}
-            onChange={({ target: { value } }) => {
-              updateRow({ related_name: value });
-            }}
-          />
-        </>
-      )}
+          <>
+            <TableSelector
+              value={data.target}
+              onChange={(target) => {
+                updateRow({ target });
+              }}
+            />
+            <Input
+              label="Related Name"
+              type="text"
+              id="name"
+              value={data?.related_name || ""}
+              onChange={({ target: { value } }) => {
+                updateRow({ related_name: value });
+              }}
+            />
+          </>
+        )}
       {data.type === ColumnType.ForeignKey && (
         <Select
           label="What should happen when deleted"

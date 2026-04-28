@@ -14,7 +14,7 @@ import TableEditor from "@/components/organisms/TableEditor";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Tooltip } from "@ginger-society/ginger-ui";
+import { Tooltip } from "@gingersociety/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
 import { MetadataService } from "@/services";

@@ -1,7 +1,7 @@
 import React from "react";
 import { ColumnType } from "./types";
 import styles from "./column-editor.module.scss";
-import { Text, TextWeight } from "@ginger-society/ginger-ui";
+import { Text, TextWeight } from "@gingersociety/ginger-ui";
 
 import {
   FaTextHeight,
@@ -32,9 +32,8 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ value, onChange }) => {
         {options.map((option) => (
           <div
             key={option}
-            className={`${styles["option"]} ${
-              option === value ? styles["selected"] : ""
-            }`}
+            className={`${styles["option"]} ${option === value ? styles["selected"] : ""
+              }`}
             onClick={() => handleOptionClick(option)}
           >
             {getOptionIcon(option)} {/* Render the icon based on the option */}

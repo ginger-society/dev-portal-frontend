@@ -1,4 +1,4 @@
-import { Button, ButtonType, Input, NotificationContext, Select, TextArea } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Input, NotificationContext, Select, TextArea } from "@gingersociety/ginger-ui";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./genesis.module.scss";
 

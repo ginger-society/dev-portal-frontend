@@ -1,13 +1,13 @@
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "./app.css";
-import "../node_modules/@ginger-society/ginger-ui/dist/esm/index.css";
+import "../node_modules/@gingersociety/ginger-ui/dist/esm/index.css";
 import "../node_modules/@ginger-society/ginger-ui-uml/dist/esm/index.css";
 
 
 
 import router from "./shared/router";
-import { SnackbarProvider, NotificationProvider, AuthContext, AuthContextInterface, AuthProvider, PermissionProvider } from "@ginger-society/ginger-ui";
+import { SnackbarProvider, NotificationProvider, AuthContext, AuthContextInterface, AuthProvider, PermissionProvider } from "@gingersociety/ginger-ui";
 import { WorkspaceProvider } from "./components/organisms/WorkspaceSwitcher/WorkspaceContext";
 import { ValidateTokenResponse } from "./services/IAMService_client";
 import { IAMService } from "./services";
@@ -31,8 +31,10 @@ const checkPermission = async (groupId: string) => {
 
 const App = () => {
   const { user } = useContext<AuthContextInterface<ValidateTokenResponse>>(AuthContext);
+
   return <>
-    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} channel={`dev_portal_${user?.userId}`} user={user}>
+    {/* TODO: remove the user prop after testing as its marked optional in the latest release of ginger UI */}
+    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} channelPrefix={`dev_portal`} user={user}>
       <PermissionProvider checkPermission={checkPermission}>
         <WorkspaceProvider>
           <SnackbarProvider>

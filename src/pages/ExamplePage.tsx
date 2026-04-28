@@ -1,4 +1,4 @@
-import { Input, NotificationContext } from "@ginger-society/ginger-ui";
+import { Input, NotificationContext } from "@gingersociety/ginger-ui";
 import React, { useContext, useEffect } from "react";
 
 const ExampleComponent = () => {
@@ -10,7 +10,7 @@ const ExampleComponent = () => {
     });
   }, [subscribeToTopic]);
 
-  const fetchData = async() => {
+  const fetchData = async () => {
     const response = await fetch('/api/value')
     const data = await response.json();
     console.log(data);

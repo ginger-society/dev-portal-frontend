@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import { useUMLEditor,  BlockType, Block } from "@ginger-society/ginger-ui-uml";
+import { useUMLEditor, BlockType, Block } from "@ginger-society/ginger-ui-uml";
 import styles from "./column-editor.module.scss";
-import { Select } from "@ginger-society/ginger-ui";
+import { Select } from "@gingersociety/ginger-ui";
 
 interface EnumSelectorProps {
   value: string;

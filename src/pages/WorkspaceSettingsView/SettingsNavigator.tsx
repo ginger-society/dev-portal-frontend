@@ -1,7 +1,7 @@
 import router from "@/shared/router";
 import { useParams } from "react-router-dom";
 import styles from "./seiingsNavigation.module.scss";
-import { Button, ButtonType, Text } from "@ginger-society/ginger-ui";
+import { Button, ButtonType, Text } from "@gingersociety/ginger-ui";
 import { FaArrowLeft, FaKey, FaTrash, FaUsersCog } from "react-icons/fa";
 
 const SettingsNavigator = ({
@@ -18,11 +18,10 @@ const SettingsNavigator = ({
 
   return (
     <div style={{ width }} className={styles["container"]}>
-      <ul style={{listStyle: 'none', paddingInlineStart: 0}}>
+      <ul style={{ listStyle: 'none', paddingInlineStart: 0 }}>
         <li
-          className={`${styles["item"]}  ${
-            active === "members" ? styles["active"] : ""
-          } `}
+          className={`${styles["item"]}  ${active === "members" ? styles["active"] : ""
+            } `}
           onClick={() => navigateToWorkspaceSettings("members")}
         >
           <Text>
@@ -33,9 +32,8 @@ const SettingsNavigator = ({
           </Text>
         </li>
         <li
-          className={`${styles["item"]}  ${
-            active === "tokens" ? styles["active"] : ""
-          } `}
+          className={`${styles["item"]}  ${active === "tokens" ? styles["active"] : ""
+            } `}
           onClick={() => navigateToWorkspaceSettings("tokens")}
         >
           <Text>
@@ -46,9 +44,8 @@ const SettingsNavigator = ({
           </Text>
         </li>
         <li
-          className={`${styles["item"]}  ${
-            active === "delete" ? styles["active"] : ""
-          } `}
+          className={`${styles["item"]}  ${active === "delete" ? styles["active"] : ""
+            } `}
           onClick={() => navigateToWorkspaceSettings("delete")}
         >
           <Text>

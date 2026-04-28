@@ -9,7 +9,7 @@ import {
   WorkspaceSettingsMembersPage,
   WorkspaceSettingsDeletePage,
 } from "@/pages/WorkspaceSettingsView";
-import { SystemThemePreferred, withAuthHOC } from '@ginger-society/ginger-ui';
+import { SystemThemePreferred, withAuthHOC } from '@gingersociety/ginger-ui';
 import ExampleComponent from "@/pages/ExamplePage";
 import Genesis from "@/pages/Genesis/Genesis";
 
