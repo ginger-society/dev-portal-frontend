@@ -28,7 +28,7 @@ stage = "https://iam.gingersociety.org"
 
 [ws_refs."@ginger-society/NotificationService"]
 prod = "wss://api.gingersociety.org/notification"
-stage = "wss://api-staging.gingersociety.org/notification"
+stage = "wss://api.gingersociety.org/notification"
 
 [ws_refs."@ginger-society/IAMService"]
 prod = ""
