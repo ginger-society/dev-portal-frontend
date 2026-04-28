@@ -15,7 +15,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install ginger-apps
-        run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-pipeline-clis.sh)"
+        run: bash -c "$(curl -fsSL
+          https://raw.githubusercontent.com/ginger-society/infra-as-code-repo/main/rust-helpers/install-pipeline-clis.sh)"
 
       - name: Authenticate with ginger-auth
         id: ginger-auth
@@ -25,7 +26,8 @@ jobs:
         run: ginger-connector update-pipeline stage running
 
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{
+          secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       - name: Report failure if Docker login fails
         if: failure()
         run: ginger-connector update-pipeline stage failed
@@ -51,8 +53,28 @@ jobs:
 
       - name: Publish stage using ginger-connector
         run: ginger-connector publish stage
-        env:
-          GINGER_TOKEN: ${{ secrets.GINGER_TOKEN }}
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+      - name: Report failure if kubectl installation fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
+      - name: Set up Kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.STAGING_K8_CONFIG }}" > $HOME/.kube/config
+
+      - name: Restart Kubernetes deployment
+        run: kubectl rollout restart deployment dev-portal-frontend-deploy
+
+      - name: Report failure if Kubernetes restart fails
+        if: failure()
+        run: ginger-connector update-pipeline stage failed
+
       - name: Report failure if publish stage fails
         if: failure()
         run: ginger-connector update-pipeline stage failed

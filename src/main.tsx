@@ -32,7 +32,7 @@ const checkPermission = async (groupId: string) => {
 const App = () => {
   const { user } = useContext<AuthContextInterface<ValidateTokenResponse>>(AuthContext);
   return <>
-    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} user={user}>
+    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} channel={`dev_portal_${user?.userId}`} user={user}>
       <PermissionProvider checkPermission={checkPermission}>
         <WorkspaceProvider>
           <SnackbarProvider>
