@@ -9,28 +9,28 @@ importers:
   .:
     dependencies:
       '@ginger-society/ginger-ui-uml':
-        specifier: 0.3.0-nightly.0
+        specifier: ^0.3.0-nightly.0
         version: 0.3.0-nightly.0(react-dom@18.2.0(react@18.2.0))(react-draggable@4.4.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@gingersociety/ginger-ui':
-        specifier: 0.125.0
-        version: 0.125.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.126.0
+        version: 0.126.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/swagger-ui-react':
-        specifier: ^4.19.0
+        specifier: ^4.18.3
         version: 4.19.0
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.2.0(@types/node@25.6.0)(sass@1.75.0))
       ace-builds:
-        specifier: ^1.43.6
+        specifier: ^1.40.0
         version: 1.43.6
       autoprefixer:
-        specifier: ^10.5.0
+        specifier: ^10.4.18
         version: 10.5.0(postcss@8.5.12)
       babel-eslint:
         specifier: 10.1.0
         version: 10.1.0(eslint@8.57.1)
       eslint:
-        specifier: ^8.57.1
+        specifier: ^8.0.1
         version: 8.57.1
       eslint-config-standard:
         specifier: 17.1.0
@@ -42,16 +42,16 @@ importers:
         specifier: ^13.0.0
         version: 13.0.0(eslint-plugin-react-hooks@4.6.2(eslint@8.57.1))(eslint-plugin-react@7.37.5(eslint@8.57.1))(eslint@8.57.1)
       eslint-plugin-import:
-        specifier: ^2.32.0
+        specifier: ^2.25.2
         version: 2.32.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@6.0.3))(eslint@8.57.1)
       eslint-plugin-n:
-        specifier: ^16.6.2
+        specifier: '^15.0.0 || ^16.0.0 '
         version: 16.6.2(eslint@8.57.1)
       eslint-plugin-promise:
-        specifier: ^6.6.0
+        specifier: ^6.0.0
         version: 6.6.0(eslint@8.57.1)
       eslint-plugin-react:
-        specifier: ^7.37.5
+        specifier: ^7.34.1
         version: 7.37.5(eslint@8.57.1)
       husky:
         specifier: 9.0.11
@@ -63,7 +63,7 @@ importers:
         specifier: ^6.3.4
         version: 6.3.4
       postcss:
-        specifier: ^8.5.12
+        specifier: ^8.4.38
         version: 8.5.12
       react:
         specifier: 18.2.0
@@ -75,31 +75,31 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-icons:
-        specifier: ^5.6.0
+        specifier: ^5.2.1
         version: 5.6.0(react@18.2.0)
       react-markdown:
-        specifier: ^9.1.0
+        specifier: ^9.0.1
         version: 9.1.0(@types/react@18.2.79)(react@18.2.0)
       react-router-dom:
-        specifier: ^6.30.3
+        specifier: ^6.22.3
         version: 6.30.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-test-renderer:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-toastify:
-        specifier: ^10.0.6
+        specifier: ^10.0.5
         version: 10.0.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       sass:
         specifier: 1.75.0
         version: 1.75.0
       swagger-ui-react:
-        specifier: ^5.32.5
+        specifier: ^5.17.14
         version: 5.32.5(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@25.6.0)(typescript@6.0.3)
       typescript:
-        specifier: ^6.0.3
+        specifier: '*'
         version: 6.0.3
       vite:
         specifier: 5.2.0
@@ -115,10 +115,10 @@ importers:
         version: 4.3.2(typescript@6.0.3)(vite@5.2.0(@types/node@25.6.0)(sass@1.75.0))
     devDependencies:
       '@eslint/eslintrc':
-        specifier: ^3.3.5
+        specifier: ^3.0.2
         version: 3.3.5
       '@eslint/js':
-        specifier: ^9.39.4
+        specifier: ^9.0.0
         version: 9.39.4
       '@testing-library/jest-dom':
         specifier: 6.4.2
@@ -136,25 +136,25 @@ importers:
         specifier: 18.2.25
         version: 18.2.25
       '@typescript-eslint/eslint-plugin':
-        specifier: ^6.21.0
+        specifier: ^6.4.0
         version: 6.21.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@6.0.3))(eslint@8.57.1)(typescript@6.0.3)
       '@typescript-eslint/parser':
-        specifier: ^7.18.0
+        specifier: ^7.7.0
         version: 7.18.0(eslint@8.57.1)(typescript@6.0.3)
       eslint-config-standard-with-typescript:
         specifier: ^43.0.1
         version: 43.0.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@6.0.3))(eslint@8.57.1)(typescript@6.0.3))(eslint-plugin-import@2.32.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@6.0.3))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))(eslint@8.57.1)(typescript@6.0.3)
       eslint-plugin-jsx-a11y:
-        specifier: ^6.10.2
+        specifier: ^6.8.0
         version: 6.10.2(eslint@8.57.1)
       eslint-plugin-react-hooks:
-        specifier: ^4.6.2
+        specifier: ^4.6.0
         version: 4.6.2(eslint@8.57.1)
       eslint-plugin-react-refresh:
-        specifier: ^0.4.26
+        specifier: ^0.4.6
         version: 0.4.26(eslint@8.57.1)
       globals:
-        specifier: ^15.15.0
+        specifier: ^15.0.0
         version: 15.15.0
       jest:
         specifier: 29.7.0
@@ -169,7 +169,7 @@ importers:
         specifier: 29.0.2
         version: 29.0.2(@babel/core@7.29.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest@29.7.0(@types/node@25.6.0)(ts-node@10.9.1(@types/node@25.6.0)(typescript@6.0.3)))(typescript@6.0.3)
       typescript-eslint:
-        specifier: ^7.18.0
+        specifier: ^7.7.0
         version: 7.18.0(eslint@8.57.1)(typescript@6.0.3)
 
 packages:
@@ -551,8 +551,8 @@ packages:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
 
-  '@gingersociety/ginger-ui@0.125.0':
-    resolution: {integrity: sha512-DpXUWAVbWAvFYZ7qH3cV/aVkTbbUqJzA7Czs0UeqMsiWVBPoq4yaa2LGhOT0Ti1y/yFL03RjP0g9XuKTNCMmvg==}
+  '@gingersociety/ginger-ui@0.126.0':
+    resolution: {integrity: sha512-3TThl4LCO9Ez2gDkQ8P5q3o+Xof8Y+TROeuhPKSJz3eEw8ThQSPza4q0GnrdfB345JBja8ZghCRFXAGczOZBuw==}
     engines: {node: '>=16'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
@@ -4488,7 +4488,7 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-icons: 5.6.0(react@18.2.0)
 
-  '@gingersociety/ginger-ui@0.125.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@gingersociety/ginger-ui@0.126.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
