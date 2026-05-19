@@ -25,9 +25,6 @@ RUN ginger-auth token-login ${GINGER_TOKEN}
 RUN ginger-connector refer stage
 RUN ginger-connector connect stage
 
-ENV HUSKY=0
-RUN pnpm i --ignore-scripts=false
-
 # # Install dependencies and build
 RUN pnpm i
 RUN pnpm build
