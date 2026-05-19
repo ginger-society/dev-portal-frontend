@@ -49,30 +49,31 @@ const App = () => {
 const fetchConfig = async () => {
   try {
     const response = await fetch("/config.json");
-    if (!response.ok) {
-      throw new Error(`Failed to fetch config: ${response.statusText}`);
-    }
-    const config = await response.json();
-    (window as any).CONFIG = config;
+    if (!response.ok) throw new Error(`Failed to fetch config: ${response.statusText}`);
+    (window as any).CONFIG = await response.json();
   } catch (error) {
     console.error("Error fetching config:", error);
     (window as any).CONFIG = {};
   }
 }
 
-await fetchConfig();
+const init = async () => {
+  await fetchConfig();
 
-const root = createRoot(rootElement);
-root.render(
-  <AuthProvider<ValidateTokenResponse>
-    validateToken={validateToken}
-    navigateToLogin={() =>
-      window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS()}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
-    }
-    postLoginNavigate={() =>
-      router.navigate("/manage-workspaces")
-    }
-  >
-    <App />
-  </AuthProvider>
-);
+  const root = createRoot(rootElement);
+  root.render(
+    <AuthProvider<ValidateTokenResponse>
+      validateToken={validateToken}
+      navigateToLogin={() =>
+        window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS()}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
+      }
+      postLoginNavigate={() =>
+        router.navigate("/manage-workspaces")
+      }
+    >
+      <App />
+    </AuthProvider>
+  );
+};
+
+init();
