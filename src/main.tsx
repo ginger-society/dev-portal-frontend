@@ -34,7 +34,7 @@ const App = () => {
 
   return <>
     {/* TODO: remove the user prop after testing as its marked optional in the latest release of ginger UI */}
-    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS} channelPrefix={`dev_portal`} user={user}>
+    <NotificationProvider url={GINGER_SOCIETY_NOTIFICATIONSERVICE_WS()} channelPrefix={`dev_portal`} user={user}>
       <PermissionProvider checkPermission={checkPermission}>
         <WorkspaceProvider>
           <SnackbarProvider>
@@ -46,13 +46,28 @@ const App = () => {
   </>
 };
 
+const fetchConfig = async () => {
+  try {
+    const response = await fetch("/config.json");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch config: ${response.statusText}`);
+    }
+    const config = await response.json();
+    (window as any).CONFIG = config;
+  } catch (error) {
+    console.error("Error fetching config:", error);
+    (window as any).CONFIG = {};
+  }
+}
+
+await fetchConfig();
 
 const root = createRoot(rootElement);
 root.render(
   <AuthProvider<ValidateTokenResponse>
     validateToken={validateToken}
     navigateToLogin={() =>
-      window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
+      window.location.href = `${GINGER_SOCIETY_IAM_FRONTEND_USERS()}#dev-portal-staging/login?returnUrl=${router.state.location.pathname}`
     }
     postLoginNavigate={() =>
       router.navigate("/manage-workspaces")

@@ -13,3 +13,5 @@ src/services/GingerKubeService_client
 src/shared/references.ts
 *.lock
 openapitools.json
+public/config.json
+*.timestamp-*
