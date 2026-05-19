@@ -23,8 +23,8 @@ RUN ginger-connector refer stage
 RUN ginger-connector connect stage
 
 ENV HUSKY=0
-# Install dependencies and build
-RUN pnpm i --ignore-scripts=false
+RUN pnpm i || pnpm approve-builds --all && pnpm i
+
 RUN pnpm build
 
 # Upload build artifacts (optional)
