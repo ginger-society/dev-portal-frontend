@@ -19,8 +19,8 @@ COPY . .
 
 # Authenticate and connect
 RUN ginger-auth token-login ${GINGER_TOKEN}
-RUN ginger-connector refer stage
-RUN ginger-connector connect stage
+RUN ginger-connector refer prod
+RUN ginger-connector connect prod
 
 ENV HUSKY=0
 RUN pnpm i || pnpm approve-builds --all && pnpm i
