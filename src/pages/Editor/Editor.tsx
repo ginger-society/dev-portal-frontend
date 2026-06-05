@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import { Button, ButtonType, Tooltip, AuthContext, Permission, PermissionType, PermissionContext, Text, TextSize, Aside, TextArea, useSnackbar, SnackbarTimer } from "@gingersociety/ginger-ui";
 import styles from "./editor.module.scss";
 import { FaDatabase, FaList, FaLock, FaTable } from "react-icons/fa";
-import { GingerKubeService, MetadataService } from "@/services";
+import { GingerGitter, MetadataService } from "@/services";
 import { GetDbschemaByIdResponse } from "@/services/MetadataService_client";
 import router from "@/shared/router";
 // import AceEditor from "react-ace";
@@ -149,17 +149,17 @@ const Editor = () => {
   const handleValidate = async () => {
     const blocksStr = JSON.stringify(transformDataToSave());
     handleSave();
-    if (!branchData?.repoOrigin) {
+    if (!branchData?.repoOrigin || !branchData.orgId) {
       show("No repo found", SnackbarTimer.Medium)
       return;
     }
 
-    const response = await GingerKubeService.routesKubectlCommand({
-      kubectlRequest: {
+    const response = await GingerGitter.handleCreateDbTaskrun({
+      createDbTaskRunRequest: {
         modelsPyContent: blocksStr,
         commit: false,
-        repoName: branchData?.repoOrigin,
-        dbName: branchData.name
+        dbName: branchData.name,
+        workspaceId: branchData.orgId,
       }
     })
 
@@ -174,10 +174,10 @@ const Editor = () => {
         return;
       }
 
-      const statusAndLogs = await GingerKubeService.routesKubectlLogs({
-        logRequest: {
+      const statusAndLogs = await GingerGitter.handleDbTaskrunLogs({
+        dbTaskRunLogsRequest: {
           taskrunName: response.taskrunName,
-          stepName: "step-dry-run"
+          stepName: "migrate"
         }
       })
 
@@ -195,17 +195,17 @@ const Editor = () => {
   const handleMigrate = async () => {
     const blocksStr = JSON.stringify(transformDataToSave());
 
-    if (!branchData?.repoOrigin) {
+    if (!branchData?.repoOrigin || !branchData.orgId) {
       return;
     }
 
-    const response = await GingerKubeService.routesKubectlCommand({
-      kubectlRequest: {
+    const response = await GingerGitter.handleCreateDbTaskrun({
+      createDbTaskRunRequest: {
         modelsPyContent: blocksStr,
         commit: true,
         commitMessage,
-        repoName: branchData?.repoOrigin,
-        dbName: branchData.name
+        dbName: branchData.name,
+        workspaceId: branchData.orgId
       }
     })
 

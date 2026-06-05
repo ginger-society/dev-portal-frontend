@@ -5,10 +5,7 @@ dist-ssr
 *.local
 coverage
 tsconfig.tsbuildinfo
-src/services/IAMService_client
-src/services/MetadataService_client
-src/services/NotificationService_client
-src/services/GingerKubeService_client
+src/services
 .ginger.tmp
 src/shared/references.ts
 *.lock
