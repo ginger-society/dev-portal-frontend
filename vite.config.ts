@@ -17,7 +17,7 @@ export default defineConfig(configEnv => ({
   ],
   server: {
     host: true,
-    port: 3000,
+    port: 80,
   },
   preview: {
     port: 8080,

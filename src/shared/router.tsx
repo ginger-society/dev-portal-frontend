@@ -12,6 +12,7 @@ import {
 import { SystemThemePreferred, withAuthHOC } from '@gingersociety/ginger-ui';
 import ExampleComponent from "@/pages/ExamplePage";
 import Genesis from "@/pages/Genesis/Genesis";
+import DifferPage from "@/pages/differ";
 
 const AuthenticatedEditor = withAuthHOC(Editor);
 const AuthenticatedSwaggerViewPage = withAuthHOC(SwaggerViewPage);
@@ -72,7 +73,11 @@ const router = createHashRouter([
   },
   {
     path: "/genesis/:org_id/:template_id",
-    element: <AuthenticatedGenesisPage />,
+    element: <SystemThemePreferred><AuthenticatedGenesisPage /></SystemThemePreferred>,
+  },
+  {
+    path: "/differ/:org_id/:branch_name",
+    element: <SystemThemePreferred><DifferPage /></SystemThemePreferred>,
   },
   {
     path: "/manage-workspaces/:org_id/delete",

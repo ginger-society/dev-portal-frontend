@@ -1,11 +1,12 @@
 .genesisContainer {
-  background: var(--primary-bg-color);
+  background: var(--primary-accent-color);
   min-height: 100vh;
   width: 50%;
   padding: 50px 150px;
   display: flex;
   flex-direction: column;
   font-family: 'Orbitron', sans-serif;
+  color: var(--primary-color)
 }
 
 .formGroup{

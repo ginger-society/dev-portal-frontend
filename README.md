@@ -51,5 +51,5 @@ All files you have to deploy will be located at the `dist` directory.
 To check if everything will be ok in production before the deployment, you can run this command after `yarn build`:
 
 ```sh
-yarn preview - another
+yarn preview #-edited
 ```

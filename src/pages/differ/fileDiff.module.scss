@@ -1,0 +1,409 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// fileDiff.module.scss  —  styles scoped to a single FileDiffBlock
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Outer block ───────────────────────────────────────────────────────────────
+
+.diffBlock {
+  border: 1px solid var(--secondary-bg-color);
+  border-radius: 8px;
+  scroll-margin-top: 16px;
+  overflow: hidden;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.diffHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--primary-accent-color);
+  border-bottom: 1px solid var(--secondary-bg-color);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--hover-bg-color);
+  }
+}
+
+.diffHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.diffPath {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-size: 13px;
+  min-width: 0;
+}
+
+.diffDir {
+  color: var(--muted-color);
+  font-size: 12px;
+}
+
+.diffFile {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.diffStats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.statAdded   { color: #3fb950; }
+.statRemoved { color: #f85149; }
+
+// ── Header right-side controls ────────────────────────────────────────────────
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.conflictHeaderBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warning-dark-color);
+  background: var(--warning-bg-dark-color);
+  border: 1px solid var(--warning-dark-color);
+  border-radius: 4px;
+  padding: 2px 7px;
+  letter-spacing: 0.04em;
+}
+
+// ── View-full-file button ─────────────────────────────────────────────────────
+
+.viewFileBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--secondary-color);
+  background: var(--secondary-bg-color);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    color: var(--primary-color);
+    border-color: var(--loader-bg-color);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.viewFileBtnActive {
+  color: var(--primary-color);
+  border-color: var(--loader-bg-color);
+  background: var(--hover-bg-color);
+}
+
+// ── Chevron toggle ────────────────────────────────────────────────────────────
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--muted-color);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+// ── Diff body — position anchor for overlay ───────────────────────────────────
+
+.diffBody {
+  position: relative;
+}
+
+// ── Diff table ────────────────────────────────────────────────────────────────
+
+.diffTable {
+  display: flex;
+  flex-direction: column;
+  font-size: 12.5px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.diffRow {
+  display: flex;
+  align-items: stretch;
+  min-height: 22px;
+
+  &.added {
+    background: rgba(63, 185, 80, 0.12);
+    .lineSign { color: #3fb950; }
+  }
+
+  &.removed {
+    background: rgba(248, 81, 73, 0.12);
+    .lineSign { color: #f85149; }
+  }
+
+  &.context {
+    background: transparent;
+    .lineSign { color: var(--muted-color); }
+  }
+
+  &:hover {
+    background: var(--hover-bg-color);
+    &.added   { background: rgba(63, 185, 80, 0.2); }
+    &.removed { background: rgba(248, 81, 73, 0.2); }
+  }
+}
+
+.lineNum {
+  flex-shrink: 0;
+  width: 44px;
+  padding: 0 10px;
+  text-align: right;
+  color: var(--muted-color);
+  font-size: 11px;
+  user-select: none;
+  border-right: 1px solid var(--secondary-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.lineSign {
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  user-select: none;
+}
+
+.lineContent {
+  flex: 1;
+  padding: 0 12px;
+  white-space: pre;
+  overflow: visible;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+// ── Hunk separator row ────────────────────────────────────────────────────────
+
+.hunkRow {
+  align-items: center;
+  background: rgba(88, 166, 255, 0.08);
+  border-top: 1px solid var(--secondary-bg-color);
+  border-bottom: 1px solid var(--secondary-bg-color);
+  min-height: 22px;
+}
+
+.hunkText {
+  flex: 1;
+  padding: 0 12px;
+  font-size: 11px;
+  color: var(--info-color);
+  font-style: italic;
+  user-select: none;
+  white-space: pre;
+}
+
+// ── Full-file overlay (unified diff+file view) ────────────────────────────────
+// Shown IN PLACE of the diff table (not stacked on top); the diff table is
+// unmounted when the overlay is active, so no z-index layering needed.
+
+.fullFileOverlay {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary-bg-color);
+  border-top: 1px solid var(--secondary-bg-color);
+  // Constrain height so large files don't blow out the page
+  max-height: 600px;
+}
+
+.fullFileToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background: var(--primary-accent-color);
+  border-bottom: 1px solid var(--secondary-bg-color);
+  flex-shrink: 0;
+}
+
+.fullFileLabel {
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10px;
+}
+
+.fullFileClose {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--secondary-color);
+  background: none;
+  border: 1px solid var(--secondary-bg-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: var(--primary-color);
+    border-color: var(--secondary-color);
+  }
+}
+
+.fullFileScroll {
+  overflow-y: auto;
+  overflow-x: auto;
+  flex: 1;
+
+  &::-webkit-scrollbar { width: 5px; height: 5px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--secondary-bg-color);
+    border-radius: 3px;
+  }
+}
+
+// ── Lines inside the unified overlay ─────────────────────────────────────────
+
+.fullFileLine {
+  display: flex;
+  align-items: stretch;
+  min-height: 22px;
+  font-size: 12.5px;
+  line-height: 1.6;
+
+  // Diff colouring — reuse the same palette as .diffRow
+  &.added {
+    background: rgba(63, 185, 80, 0.12);
+    .lineSign { color: #3fb950; }
+  }
+
+  &.removed {
+    background: rgba(248, 81, 73, 0.12);
+    .lineSign { color: #f85149; }
+  }
+
+  &:hover {
+    background: var(--hover-bg-color);
+    &.added   { background: rgba(63, 185, 80, 0.2); }
+    &.removed { background: rgba(248, 81, 73, 0.2); }
+  }
+}
+
+.fullFileLineNum {
+  flex-shrink: 0;
+  width: 44px;
+  padding: 0 10px;
+  text-align: right;
+  color: var(--muted-color);
+  font-size: 11px;
+  user-select: none;
+  border-right: 1px solid var(--secondary-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fullFileLineContent {
+  flex: 1;
+  padding: 0 12px;
+  white-space: pre;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+// ── Loading / error states ────────────────────────────────────────────────────
+
+.fullFileLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px;
+  color: var(--muted-color);
+  font-size: 13px;
+}
+
+.fullFileError {
+  padding: 20px 24px;
+  font-size: 12px;
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.06);
+  border-top: 1px solid rgba(248, 81, 73, 0.2);
+}
+
+.miniSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--secondary-bg-color);
+  border-top-color: var(--loader-bg-color);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Badges ────────────────────────────────────────────────────────────────────
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+  font-family: 'Fira Code', monospace;
+}
+
+.badgeModified { background: rgba(210, 153, 34, 0.25); color: #d29922; }
+.badgeAdded    { background: rgba(63, 185, 80, 0.25);  color: #3fb950; }
+.badgeDeleted  { background: rgba(248, 81, 73, 0.25);  color: #f85149; }
+.badgeRenamed  { background: rgba(173, 216, 230, 0.2); color: var(--info-color); }

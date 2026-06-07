@@ -1,0 +1,64 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--secondary-bg-color);
+  background: var(--primary-accent-color);
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+
+  &:hover:not(:disabled) {
+    background: var(--hover-bg-color);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--secondary-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success {
+  font-size: 13px;
+  color: var(--success-color);
+
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+  }
+}
+
+.error {
+  font-size: 13px;
+  color: var(--danger-color);
+}
+
+.warning {
+  font-size: 13px;
+  color: var(--warning-color);
+}

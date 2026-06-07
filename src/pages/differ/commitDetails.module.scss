@@ -1,0 +1,411 @@
+// ── RepoBranchCommits.module.scss ─────────────────────────────────────────────
+//
+// Theme tokens mirror the project palette exactly, following the same
+// pattern as RepoTree.module.scss:
+//   Light → local fallback values
+//   Dark  → html[data-theme=dark] mapped to --primary-color etc.
+// ─────────────────────────────────────────────────────────────────────────────
+
+.commits {
+  // ── light defaults ──
+  --bc-surface:         #f8fafc;
+  --bc-surface-raised:  #ffffff;
+  --bc-border:          #e2e8f0;
+  --bc-border-subtle:   #f1f5f9;
+  --bc-text:            #1e293b;
+  --bc-text-muted:      #64748b;
+  --bc-text-faint:      #94a3b8;
+  --bc-hover:           #f1f5f9;
+  --bc-accent:          #6366f1;
+  --bc-accent-bg:       #eff6ff;
+  --bc-accent-muted:    #e2e8f0;
+  --bc-hash:            #7c3aed;
+  --bc-hash-bg:         #f5f3ff;
+  --bc-dot:             #6366f1;
+  --bc-line:            #e2e8f0;
+  --bc-squash-bg:       #fafbff;
+  --bc-squash-border:   #c7d2fe;
+  --bc-input-bg:        #ffffff;
+  --bc-input-border:    #cbd5e1;
+  --bc-input-focus:     #6366f1;
+  --bc-btn-bg:          #6366f1;
+  --bc-btn-hover:       #4f46e5;
+  --bc-btn-text:        #ffffff;
+  --bc-shadow:          0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --bc-shadow-raised:   0 4px 12px rgba(99,102,241,0.12);
+
+  // ── dark overrides ──
+  html[data-theme=dark] & {
+    --bc-surface:         var(--primary-bg-color,      #000);
+    --bc-surface-raised:  var(--secondary-bg-color,    #111);
+    --bc-border:          var(--secondary-bg-color,    #333);
+    --bc-border-subtle:   #1a1a1a;
+    --bc-text:            var(--primary-color,         #fff);
+    --bc-text-muted:      var(--muted-color,           #aaa);
+    --bc-text-faint:      #666;
+    --bc-hover:           var(--hover-bg-color,        #1c1c1c);
+    --bc-accent:          var(--info-color,            #add8e6);
+    --bc-accent-bg:       #0d1f2d;
+    --bc-accent-muted:    var(--secondary-bg-color,    #222);
+    --bc-hash:            var(--info-color,            #add8e6);
+    --bc-hash-bg:         #0d1a22;
+    --bc-dot:             var(--info-color,            #add8e6);
+    --bc-line:            #2a2a2a;
+    --bc-squash-bg:       #0d1520;
+    --bc-squash-border:   var(--info-color,            #add8e6);
+    --bc-input-bg:        var(--secondary-bg-color,    #111);
+    --bc-input-border:    #333;
+    --bc-input-focus:     var(--info-color,            #add8e6);
+    --bc-btn-bg:          var(--info-color,            #add8e6);
+    --bc-btn-hover:       #8ec8d8;
+    --bc-btn-text:        #000;
+    --bc-shadow:          0 1px 3px rgba(0,0,0,0.4);
+    --bc-shadow-raised:   0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  margin-bottom: 0;
+  border: 1px solid var(--bc-border);
+  border-radius: 8px;
+  background: var(--bc-surface);
+  overflow: hidden;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+// ── header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--bc-border);
+  background: var(--bc-surface-raised);
+  gap: 8px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--bc-text-muted);
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+
+  &:hover {
+    background: var(--bc-hover);
+    color: var(--bc-text);
+  }
+}
+
+.chevron {
+  transition: transform 0.18s ease;
+  transform: rotate(-90deg);
+}
+
+.chevronOpen {
+  transform: rotate(0deg);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--bc-accent);
+}
+
+.title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--bc-text);
+  white-space: nowrap;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: var(--bc-accent-muted);
+  color: var(--bc-text-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+// ── timeline list ─────────────────────────────────────────────────────────────
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 4px;
+  position: relative;
+}
+
+// vertical spine running through all commits
+.spine {
+  position: absolute;
+  left: 27px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: var(--bc-line);
+  pointer-events: none;
+}
+
+// ── single commit row ─────────────────────────────────────────────────────────
+
+.commitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 5px 14px 5px 14px;
+  position: relative;
+  transition: background 0.1s ease;
+
+  &:hover {
+    background: var(--bc-hover);
+  }
+}
+
+// dot on the spine
+.dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bc-dot);
+  margin-top: 6px;
+  margin-left: 23px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 2px var(--bc-surface);
+  transition: box-shadow 0.2s ease;
+
+  .commitItem:hover & {
+    box-shadow: 0 0 0 2px var(--bc-hover);
+  }
+}
+
+.commitBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.commitMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.hash {
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--bc-hash);
+  background: var(--bc-hash-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.12s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.author {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--bc-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.separator {
+  font-size: 11px;
+  color: var(--bc-text-faint);
+}
+
+.date {
+  font-size: 10.5px;
+  color: var(--bc-text-muted);
+  white-space: nowrap;
+}
+
+.message {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--bc-text);
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.body {
+  font-size: 11px;
+  color: var(--bc-text-muted);
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 2px 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+// ── squash panel ──────────────────────────────────────────────────────────────
+
+.squashPanel {
+  margin: 8px 14px 12px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: var(--bc-squash-bg);
+  border: 1px solid var(--bc-squash-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.squashLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--bc-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.squashLabelIcon {
+  color: var(--bc-accent);
+  flex-shrink: 0;
+}
+
+.squashInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--bc-input-border);
+  background: var(--bc-input-bg);
+  color: var(--bc-text);
+  font-size: 12.5px;
+  font-family: inherit;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 70px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: var(--bc-text-faint);
+  }
+
+  &:focus {
+    border-color: var(--bc-input-focus);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--bc-input-focus) 15%, transparent);
+  }
+}
+
+.squashFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.squashHint {
+  font-size: 10.5px;
+  color: var(--bc-text-muted);
+  line-height: 1.4;
+}
+
+.squashBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: none;
+  background: var(--bc-btn-bg);
+  color: var(--bc-btn-text);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: var(--bc-shadow);
+
+  &:hover:not(:disabled) {
+    background: var(--bc-btn-hover);
+    box-shadow: var(--bc-shadow-raised);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--bc-shadow);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.squashBtnIcon {
+  flex-shrink: 0;
+}
+
+// ── spinner (for loading state inside btn) ────────────────────────────────────
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

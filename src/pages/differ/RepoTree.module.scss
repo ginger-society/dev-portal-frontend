@@ -1,0 +1,420 @@
+// ── RepoTree.module.scss ──────────────────────────────────────────────────────
+//
+// Light theme uses local fallback values.
+// Dark theme maps every token to the project's html[data-theme=dark] palette:
+//   --primary-color, --primary-bg-color, --secondary-color,
+//   --secondary-bg-color, --hover-bg-color, --muted-color,
+//   --warning-dark-color, --warning-bg-dark-color,
+//   --success-dark-color, --success-bg-dark-color,
+//   --danger-dark-color, --danger-bg-dark-color, --info-color
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── local design tokens (light defaults + dark overrides) ─────────────────────
+
+:local {
+  // injected as CSS custom properties on .sidebar so all children inherit them
+}
+
+.sidebar {
+  // ── light defaults ──
+  --rt-surface:        #f8fafc;
+  --rt-border:         #e2e8f0;
+  --rt-text:           #1e293b;
+  --rt-text-muted:     #64748b;
+  --rt-hover:          #e8edf3;
+  --rt-active-bg:      #eff6ff;
+  --rt-accent:         #6366f1;
+  --rt-accent-muted:   #e2e8f0;
+  --rt-warning:        #d97706;
+  --rt-warning-bg:     #fffbeb;
+  --rt-warning-border: #fde68a;
+  --rt-muted-bg:       #f1f5f9;
+  --rt-added:          #16a34a;
+  --rt-added-bg:       #dcfce7;
+  --rt-modified:       #2563eb;
+  --rt-modified-bg:    #dbeafe;
+  --rt-deleted:        #dc2626;
+  --rt-deleted-bg:     #fee2e2;
+  --rt-renamed:        #d97706;
+  --rt-renamed-bg:     #fef3c7;
+  --rt-skeleton-from:  #e2e8f0;
+  --rt-skeleton-to:    #f1f5f9;
+  --rt-scrollbar:      #cbd5e1;
+  --rt-tree-line:      #e2e8f0;
+
+  // ── dark overrides (maps to the project palette) ──
+  html[data-theme=dark] & {
+    --rt-surface:        var(--primary-bg-color,      #000);
+    --rt-border:         var(--secondary-bg-color,    #333);
+    --rt-text:           var(--primary-color,         #fff);
+    --rt-text-muted:     var(--muted-color,           #aaa);
+    --rt-hover:          var(--hover-bg-color,        #444);
+    --rt-active-bg:      #1a1f2e;           // deep navy tint, readable on black
+    --rt-accent:         var(--info-color,            #add8e6);
+    --rt-accent-muted:   var(--secondary-bg-color,    #333);
+    --rt-warning:        var(--warning-dark-color,    #ff8c00);
+    --rt-warning-bg:     var(--warning-bg-dark-color, #4e342e);
+    --rt-warning-border: var(--warning-dark-color,    #ff8c00);
+    --rt-muted-bg:       var(--primary-accent-color,  #212121);
+    --rt-added:          #4ade80;           // bright green readable on black
+    --rt-added-bg:       var(--success-bg-dark-color, #1b5e20);
+    --rt-modified:       var(--info-color,            #add8e6);
+    --rt-modified-bg:    #0d2a3a;           // dark blue tint
+    --rt-deleted:        #f87171;           // soft red readable on black
+    --rt-deleted-bg:     var(--danger-bg-dark-color,  #5c1a1a);
+    --rt-renamed:        var(--warning-dark-color,    #ff8c00);
+    --rt-renamed-bg:     var(--warning-bg-dark-color, #4e342e);
+    --rt-skeleton-from:  var(--secondary-bg-color,    #333);
+    --rt-skeleton-to:    var(--primary-accent-color,  #212121);
+    --rt-scrollbar:      #555;
+    --rt-tree-line:      #444;
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid var(--rt-border);
+  background: var(--rt-surface);
+  min-width: 240px;
+  max-width: 300px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+// ── header ────────────────────────────────────────────────────────────────────
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--rt-border);
+  flex-shrink: 0;
+}
+
+.fileCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--rt-accent-muted);
+  color: var(--rt-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+// ── banners ───────────────────────────────────────────────────────────────────
+
+.conflictBanner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--rt-warning-bg);
+  border-bottom: 1px solid var(--rt-warning-border);
+  flex-shrink: 0;
+}
+
+.conflictIcon {
+  font-size: 12px;
+  color: var(--rt-warning);
+}
+
+.skippedBanner {
+  padding: 5px 14px;
+  background: var(--rt-muted-bg);
+  border-bottom: 1px solid var(--rt-border);
+  flex-shrink: 0;
+}
+
+// ── tree nav ──────────────────────────────────────────────────────────────────
+
+.tree {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0 16px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--rt-scrollbar);
+    border-radius: 4px;
+  }
+}
+
+// ── repo node ─────────────────────────────────────────────────────────────────
+
+.repoNode {
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.repoRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px 0 6px;
+}
+
+.collapseBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--rt-text-muted);
+  padding: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+
+  &:hover {
+    background: var(--rt-hover);
+    color: var(--rt-text);
+  }
+}
+
+.chevron {
+  transition: transform 0.18s ease;
+  transform: rotate(-90deg);
+}
+
+.chevronOpen {
+  transform: rotate(0deg);
+}
+
+.repoLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+
+  &:hover {
+    background: var(--rt-hover);
+  }
+}
+
+.repoIcon {
+  flex-shrink: 0;
+  color: var(--rt-accent);
+}
+
+.repoName {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--rt-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.repoFileCount {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--rt-text-muted);
+  background: var(--rt-accent-muted);
+  border-radius: 8px;
+  padding: 1px 6px;
+}
+
+// ── file list ─────────────────────────────────────────────────────────────────
+
+.fileList {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2px 0;
+}
+
+// vertical connector line running down through all children
+.treeLine {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 10px;
+  width: 1px;
+  background: var(--rt-tree-line);
+  pointer-events: none;
+}
+
+// ── file node ─────────────────────────────────────────────────────────────────
+
+.fileNode {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding-left: 28px;
+}
+
+// horizontal elbow connector
+.treeElbow {
+  position: absolute;
+  left: 23px;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--rt-tree-line);
+  pointer-events: none;
+}
+
+.fileNodeLast {
+  // no extra overrides needed; treeLine stops before this node visually
+}
+
+// ── file row button ───────────────────────────────────────────────────────────
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  padding: 3px 8px 3px 4px;
+  margin: 1px 6px 1px 0;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+
+  &:hover {
+    background: var(--rt-hover);
+  }
+}
+
+.fileRowActive {
+  background: var(--rt-active-bg) !important;
+
+  .fileNamePart {
+    color: var(--rt-accent);
+    font-weight: 600;
+  }
+}
+
+.fileIcon {
+  flex-shrink: 0;
+  color: var(--rt-text-muted);
+}
+
+.fileLabel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.fileDirPart {
+  font-size: 10px;
+  color: var(--rt-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileNamePart {
+  font-size: 12px;
+  color: var(--rt-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 450;
+}
+
+// ── badges ────────────────────────────────────────────────────────────────────
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.badgeAdded {
+  background: var(--rt-added-bg);
+  color: var(--rt-added);
+}
+
+.badgeModified {
+  background: var(--rt-modified-bg);
+  color: var(--rt-modified);
+}
+
+.badgeDeleted {
+  background: var(--rt-deleted-bg);
+  color: var(--rt-deleted);
+}
+
+.badgeRenamed {
+  background: var(--rt-renamed-bg);
+  color: var(--rt-renamed);
+}
+
+// ── conflict dot ──────────────────────────────────────────────────────────────
+
+.conflictDot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--rt-warning);
+  color: var(--primary-bg-color, #fff);
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+// ── skeleton ──────────────────────────────────────────────────────────────────
+
+.skeletonItem {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--rt-skeleton-from) 25%,
+    var(--rt-skeleton-to)   50%,
+    var(--rt-skeleton-from) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  margin: 6px 14px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
