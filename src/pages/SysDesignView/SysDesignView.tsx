@@ -196,6 +196,7 @@ const SysDesignView = () => {
 
     const services = await MetadataService.metadataGetServicesAndEnvsUserLand({
       orgId: org_id,
+      pageSize: '30'
     });
 
     const { blocks, statusTxt, statusColor } = processAndBuildBlocks(services, packages, dbSchemas, env)
