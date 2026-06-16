@@ -9,6 +9,5 @@ src/services
 .ginger.tmp
 src/shared/references.ts
 *.lock
-openapitools.json
 public/config.json
 *.timestamp-*
