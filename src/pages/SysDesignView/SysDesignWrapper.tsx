@@ -243,7 +243,7 @@ const SysDesignWrapper = ({
     }
   };
 
-  const openFile = async (blockId: string, filePath: string, title: string) => {
+  const openFile = async (org_id: string, blockId: string, filePath: string, title: string) => {
     setMarkdownViewerTitle(title);
     setIsMarkdownViewerOpen(true);
     setFileViewerContent(undefined);
@@ -251,7 +251,7 @@ const SysDesignWrapper = ({
     try {
       const response = await GingerGitter.handleFileContent({
         fileContentRequest: {
-          repo: `org-${blockId}`,
+          repo: `${org_id}-${blockId}`,
           path: filePath,
           highlight: true,
           branch: "main",
@@ -264,12 +264,12 @@ const SysDesignWrapper = ({
     }
   };
 
-  const openChangelog = (blockId: string) => {
-    openFile(blockId, "CHANGELOG.md", "Changelog");
+  const openChangelog = (org_id: string, blockId: string) => {
+    openFile(org_id, blockId, "CHANGELOG.md", "Changelog");
   };
 
-  const openReadme = (blockId: string) => {
-    openFile(blockId, "README.md", "Readme");
+  const openReadme = (org_id: string, blockId: string) => {
+    openFile(org_id, blockId, "README.md", "Readme");
   };
 
   const updateConnections = () => {
@@ -363,9 +363,9 @@ const SysDesignWrapper = ({
 
   const handleStaticOptionsClick = (option: string, blockData: Block) => {
     if (option === 'readme') {
-      openReadme(blockData.id);
+      openReadme(blockData.data.org_id, blockData.id);
     } else if (option === 'changelog') {
-      openChangelog(blockData.id);
+      openChangelog(blockData.data.org_id, blockData.id);
     } else if (option === 'db-studio') {
       navigateToDBEditor(blockData.id);
     } else if (option === 'swagger') {
